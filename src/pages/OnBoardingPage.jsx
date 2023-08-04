@@ -9,7 +9,11 @@ import logo from "../assets/logo.svg";
 import CustomContainer from "../components/structure/CustomContainer";
 import SimpleTextField from "../components/textfield/SimpleTextField";
 import CustomAllTypography from "../components/typography/CustomTypograpgy";
-import CustomButton from "../components/button/CustomButoon";
+import CustomButton, {
+  CustomInputButton,
+} from "../components/button/CustomButoon";
+import CommonTextInput from "../components/textfield/CommonTextInput";
+import PhoneIcon from "../components/icons/PhoneIcon";
 
 const OnBoardingPage = () => {
   const responsive = useResponsiveStyles();
@@ -68,7 +72,7 @@ const OnBoardingPage = () => {
           >
             <div
               style={{
-                width: responsive.isMobile?"95%":"40%",
+                width: responsive.isMobile ? "95%" : "40%",
                 height: "80%",
                 display: "flex",
                 justifyContent: "center",
@@ -76,16 +80,50 @@ const OnBoardingPage = () => {
                 position: "relative",
               }}
             >
-              <CustomCard sx={{padding:'4rem', marginTop:'0.78rem', width:'100%'}}>
-                <CustomAllTypography name={'Let us know about you'} variant={'h3'}/>
-                <div style={{marginTop:'3rem'}}>
-                <SimpleTextField placeHolder={'Full Name'}/>
-                <SimpleTextField placeHolder={'Full Name'}/>
-                <SimpleTextField placeHolder={'Full Name'}/>
-                <SimpleTextField placeHolder={'Full Name'}/>
+              <CustomCard
+                sx={{
+                  padding: responsive.isMobile?"1rem": "4rem",
+                  borderRadius: "1.125rem",
+                  marginTop: "0.78rem",
+                  width: "100%",
+                  // height:'max-content'
+                }}
+              >
+                <CustomAllTypography
+                  name={"Let us know about you"}
+                  variant={"h3"}
+                />
+                <div style={{ marginTop: "3rem" }}>
+                  <CommonTextInput
+                    style={{ margin: "1.5rem 0rem" }}
+                    placeholder="Full Name"
+                  />
+                  <CommonTextInput
+                    style={{ margin: "1.5rem 0rem" }}
+                    startIcon={<PhoneIcon />}
+                    extraText={"+91"}
+                    placeholder="Mobile no."
+                  />
+                  <CommonTextInput
+                    style={{ margin: "1.5rem 0rem" }}
+                    placeholder="Company name"
+                  />
+                  <CommonTextInput
+                    style={{ margin: "1.5rem 0rem" }}
+                    type="dropdown"
+                    placeholder="Your Profession"
+                  />
                 </div>
-                <div style={{marginTop:'3.5rem'}}>
-                  <CustomButton name={'Proceed'}/>
+                <div style={{ marginTop: "3.5rem" }}>
+                  <CustomInputButton
+                    width={"100%"}
+                    variant="contained"
+                    size="large"
+                    responsive
+                    onClick={() => {}}
+                  >
+                    Proceed
+                  </CustomInputButton>
                 </div>
               </CustomCard>
             </div>

@@ -66,7 +66,7 @@ const CustomButton = (props) => {
   };
   return (
     <div>
-      <CustomInputButton variant={props.variant?props.variant:"contained"} color="primary" responsive={responsive} onClick={handleButtonClick}>
+      <CustomInputButton width={props?.width} variant={props.variant?props.variant:"contained"} color="primary" responsive={responsive} onClick={handleButtonClick}>
         {props.name}
       </CustomInputButton>
     </div>

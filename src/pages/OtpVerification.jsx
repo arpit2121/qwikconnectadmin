@@ -1,13 +1,11 @@
 import React,{useState} from 'react';
-import CustomButton, { CustomInputButton } from '../components/button/CustomButoon';
+import { CustomInputButton } from '../components/button/CustomButoon';
 import OTPInput from '../components/otp';
 import CustomAllTypography from '../components/typography/CustomTypograpgy';
-import { TextDescription } from '../components/typography/Fields';
 import useResponsiveStyles from '../utils/MediaQuery';
 import useNavigation from '../utils/NaivigateTo';
 
 const OtpVerification = () => {
-    const responsive = useResponsiveStyles();
     const [newUser, setNewUser] = useState(true)
    const [otp,setOtp] = useState('');
    const navigation = useNavigation();
@@ -32,9 +30,8 @@ const OtpVerification = () => {
           onChangeOTP={(otp) => setOtp(otp)}
         />
         <div style={{ height: "10%", width:'100%',marginTop:'1rem'}}>
-        {/* <CustomInputButton variant="contained" responsive onClick={handleButtonClick}
-        >verify</CustomInputButton> */}
-        <CustomInputButton variant='contained' size='large' responsive onClick={handleButtonClick}>
+        <CustomInputButton variant='contained' size='large' responsive onClick={handleButtonClick}
+        width={'100%'}>
         Verify
             </CustomInputButton>
         <div style={{display:'flex', gap:'10px',marginTop:'1rem',}}> 
