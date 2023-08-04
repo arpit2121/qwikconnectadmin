@@ -123,7 +123,6 @@ const Sidebar = () => {
             onClick={(e) => {
               setOpenSettings(e.target);
               setActiveTab(3);
-              navigate("");
             }}
             className={
               activeTab === 3 ? classes.iconDivActive : classes.iconDiv
@@ -140,10 +139,8 @@ const Sidebar = () => {
         </div>
         <div className={classes.iconDiv}>
           <div
-            onClick={(e) => {
-              setOpenSettings(e.target);
+            onClick={() => {
               setActiveTab(4);
-              navigate("");
             }}
             className={classes.iconDiv}
             style={{ background: activeTab == 4 ? "#E5E0FF" : "none" }}
