@@ -10,6 +10,7 @@ import ExistingUser from "./ExistingUser";
 import { Outlet } from "react-router-dom";
 import UserIcon from "../../components/icons/UserIcon";
 import UserPlusIcon from "../../components/icons/UserplusIcon";
+import StatsTopBar from "./StatsTopBar";
 
 const DashboardHome = () => {
   const responsive = useResponsiveStyles();
@@ -37,8 +38,8 @@ const DashboardHome = () => {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              alignItems: responsive.isMobile?'center': "flex-start",
-              marginTop:responsive.isMobile?5:0
+              alignItems: responsive.isMobile ? "center" : "flex-start",
+              marginTop: responsive.isMobile ? 5 : 0,
             }}
           >
             <CustomAllTypography
@@ -51,46 +52,7 @@ const DashboardHome = () => {
             />
           </div>
         </div>
-        <div
-          style={{
-            display: !responsive.isMobile ? "flex" : "",
-            gap: "2rem",
-            justifyContent: "space-between",
-            alignItems: "center",
-            paddingTop: !responsive.isMobile ? "" : "2rem",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: !responsive.isMobile ? "space-around" : "center",
-            }}
-          >
-            <UserIcon style={{ marginRight: "0.9rem" }} />
-            <CustomAllTypography
-              sx={{ marginRight: "0.94rem" }}
-              name={"23"}
-              variant={"h4"}
-            />
-            <CustomAllTypography name={"Applications"} variant={"body1"} />
-          </div>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <UserPlusIcon style={{ marginRight: "0.9rem" }} />
-            <CustomAllTypography
-              sx={{ marginRight: "0.94rem" }}
-              name={"3"}
-              variant={"h4"}
-            />
-            <CustomAllTypography name={"Shortlisted"} variant={"body1"} />
-          </div>
-        </div>
+        <StatsTopBar />
       </div>
       {/* <NonExisting/> */}
       {/* <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}> */}

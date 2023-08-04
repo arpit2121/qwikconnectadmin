@@ -1,14 +1,14 @@
 import { Menu, MenuItem } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import React from "react";
-import ProfileIcon from "../../icons/ProfileIcon";
-import CreditCardIcon from "../../icons/CreditCardIcon";
-import SettingsIcon from "../../icons/SettingsIcon";
-import UserPlusIcon from "../../icons/UserplusIcon";
-import PasswordIcon from "../../icons/PasswordIcon";
-import SupportIcon from "../../icons/SupportIcon";
 import APIIcon from "../../icons/APIIcon";
+import CreditCardIcon from "../../icons/CreditCardIcon";
 import LogoutIcon from "../../icons/LogoutIcon";
+import PasswordKeyIcon from "../../icons/PasswordKey";
+import ProfileIcon from "../../icons/ProfileIcon";
+import SettingsIcon from "../../icons/SettingsIcon";
+import SupportIcon from "../../icons/SupportIcon";
+import UserPlusIcon from "../../icons/UserplusIcon";
 import CustomAllTypography from "../../typography/CustomTypograpgy";
 
 const useStyles = makeStyles({
@@ -38,7 +38,7 @@ const SettingMenu = ({ open, setOpen }) => {
       title: "Invite colleagues",
     },
     {
-      icon: <PasswordIcon />,
+      icon: <PasswordKeyIcon />,
       title: "Change password",
     },
     {
