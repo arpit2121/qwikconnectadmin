@@ -86,6 +86,7 @@ const OnBoardingPage = () => {
                   borderRadius: "1.125rem",
                   marginTop: "0.78rem",
                   width: "100%",
+                  // height:'max-content'
                 }}
               >
                 <CustomAllTypography

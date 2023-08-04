@@ -3,92 +3,100 @@ import {styled} from '@mui/material';
 import useResponsiveStyles from '../../utils/MediaQuery';
 import { Typography } from '@mui/material';
 
-export const CustomTypography = styled(Typography)(({ responsive,fontStyle }) => ({
+
+export const CustomTypography = styled(Typography)(({theme, responsive,fontStyle }) => ({
   '&.MuiTypography-h1': {
-    fontWeight: 'bold',
+    fontFamily: 'Nunito',
+    fontWeight: 700,
     fontSize: responsive.isMobile
-    ? '24px'
+    ? '1.5rem'
     : responsive.isTablet
-    ? '48px'
-    : '56px',
+    ? '3rem'
+    : '3.5rem',
+    lineHeight: responsive.isMobile?'120%':'110%'
   },
   '&.MuiTypography-h2': {
-    fontWeight: 'bold',
+    fontFamily: 'Nunito',
+    fontWeight: 700,
     fontSize: responsive.isMobile
-      ? '20px'
+      ? '1.25rem'
       : responsive.isTablet
-      ? '32px'
-      : '48px',
+      ? '2rem'
+      : '3rem',
+      lineHeight: '120%'
   },
   '&.MuiTypography-h3': {
-    fontWeight: fontStyle?'normal':'bold',
+    fontFamily: 'Nunito',
+    fontWeight: 700,
     fontSize: responsive.isMobile
-      ? '18px'
+      ? '1.125rempx'
       : responsive.isTablet
-      ? '24px'
-      : '32px',
+      ? '1.5rem'
+      : '2rem',
+      lineHeight:'120%'
   },
   '&.MuiTypography-h4': {
-    fontWeight: 'bold',
+    fontFamily: 'Nunito',
+    fontWeight: 700,
     fontSize: responsive.isMobile
-      ? '16px'
+      ? '1rem'
       : responsive.isTablet
-      ? '18px'
-      : '24px',
+      ? '1.125rem'
+      : '1.5rem',
+    lineHeight: '120%'
   },
   '&.MuiTypography-h5': {
-    fontWeight: 'bold',
+    fontFamily: 'Nunito',
+    fontWeight: 700,
     fontSize: responsive.isMobile
-      ? '14px'
+      ? '0.875rem'
       : responsive.isTablet
-      ? '16px'
-      : '18px',
-  },
-  '&.MuiTypography-h6': {
-    fontWeight: 'bold',
-    fontSize: responsive.isMobile
-      ? '12px'
-      : responsive.isTablet
-      ? '14px'
-      : '16px',
+      ? '1rem'
+      : '1.125rem',
+    lineHeight: '120%',
   },
   '&.MuiTypography-body1': {
-    fontWeight: 'regular',
+    fontFamily: 'Nunito',
+    fontWeight: 400,
     fontSize: responsive.isMobile
-      ? '16px'
+      ? '1rem'
       : responsive.isTablet
-      ? '16px'
-      : '18px',
+      ? '1rem'
+      : '1.125rem',
+      lineHeight: responsive.isMobile?'130%':responsive.isTablet?'130%':'140%'
   },
   '&.MuiTypography-body2': {
-    fontWeight: 'regular',
-    fontSize: responsive.isMobile
-      ? '14px'
-      : responsive.isTablet
-      ? '14px'
-      : '16px',
-  },
-  '&:hover': {
-    cursor: 'pointer',
-  },
-  '&.MuiTypography-body3': {
-    fontWeight: 'regular',
-    fontColor: 'grey',
+    fontFamily: 'Nunito',
+    fontWeight: 400,
     fontSize: responsive.isMobile
       ? '0.875rem'
       : responsive.isTablet
       ? '0.875rem'
-      : '0.875rem',
+      : '1rem',
+      lineHeight: responsive.isMobile?'130%':responsive.isTablet?'130%':'140%'
   },
-  '&:hover': {
-    cursor: 'pointer',
-  },
+  // '&:hover': {
+  //   cursor: 'pointer',
+  // },
+  // '&.MuiTypography-body3': {
+  //   fontWeight: 'regular',
+  //   fontColor: 'grey',
+  //   fontSize: responsive.isMobile
+  //     ? '0.875rem'
+  //     : responsive.isTablet
+  //     ? '0.875rem'
+  //     : '0.875rem',
+  // },
+  // '&:hover': {
+  //   cursor: 'pointer',
+  // },
 }));
 
 const CustomAllTypography = (props) => {
   const responsive = useResponsiveStyles();
+  console.log(responsive)
   return (
-      <CustomTypography sx={props?.sx }variant={props.variant} responsive={responsive} color={props.color} fontStyle={props.fontStyle}>
+      <CustomTypography variant={props.variant} responsive={responsive} fontStyle={props.fontStyle} sx={{lineHeight:props.lineHeightx}}>
         {props.name}
       </CustomTypography>
   );

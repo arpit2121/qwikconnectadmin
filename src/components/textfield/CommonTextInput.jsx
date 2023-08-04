@@ -88,10 +88,10 @@ const CommonTextInput = ({
   style = {},
   width,
   extraText,
-  options = ["name", "age"],
+  options = [ "Software Engineer", "Doctor", "Teacher", "Designer", "Accountant", "Writer", "Chef", "Electrician", "Mechanic", "Artist", "Photographer", "Lawyer", "Marketing Manager", "Sales Representative", "Nurse", "Architect", "Police Officer", "Pilot", "Financial Analyst", "Data Scientist", "Other", ],
   type,
   startIcon,
-  endIcon,
+  endIcon ,
   placeholder = "Write here",
   title,
   value = "",
@@ -99,6 +99,8 @@ const CommonTextInput = ({
   searchInput,
   status,
   curvedBorder = true,
+  onClick = () =>{},
+  type1,
 }) => {
   const inputRef = React.createRef();
 
@@ -165,7 +167,7 @@ const CommonTextInput = ({
           {type != "dropdown" ? (
             <input
               onChange={handleChange}
-              type="text"
+              type= {type1 ? type1 : "text" }
               label={title}
               value={value}
               placeholder={placeholder}
@@ -205,7 +207,7 @@ const CommonTextInput = ({
           )}
         </div>
         {endIcon && (
-          <div className={classes.iconStyles} style={{ marginLeft: "0.62rem" }}>
+          <div className={classes.iconStyles} style={{ marginLeft: "0.62rem" }} onClick={onClick}>
             {endIcon}
           </div>
         )}

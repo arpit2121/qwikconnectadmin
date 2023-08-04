@@ -7,9 +7,6 @@ import Dashboard from "./components/structure/admin/dashboard";
 import OtpVerification from "./pages/OtpVerification";
 import { Routes, Route } from "react-router-dom";
 import JobPostingStepOne from "./pages/dashboard/jobposting/JobPostingStepOne";
-import Toggle from "./components/selectedcontrols/Toggle";
-import Checkbox from "./components/selectedcontrols/CheckBox";
-import RadioButton from "./components/selectedcontrols/RadioButton";
 import DashboardHome from "./pages/dashboard/DashboardHome";
 import ExistingUser from "./pages/dashboard/ExistingUser";
 import NonExisting from "./pages/dashboard/NonExisting";
@@ -19,7 +16,7 @@ import PlansBilling from "./pages/dashboard/profile/PlansBilling";
 import MyProfile from "./pages/dashboard/profile/MyProfile";
 import ChangePassword from "./pages/dashboard/profile/ChangePassword";
 import CandiatateReview from "./pages/dashboard/jobposting/CandiatateReview";
-import Player from "./components/videoplayer/Player";
+import Error404 from "./pages/error404/Error404";
 
 const App = () => {
   return (
@@ -48,6 +45,7 @@ const App = () => {
         element={<JobPostingDetailsPage />}
       ></Route>
       <Route path="/candidatereview" element={<CandiatateReview />} />
+      <Route path="*" element={<Error404/>}/>
     </Routes>
     // <Player/>
   );
