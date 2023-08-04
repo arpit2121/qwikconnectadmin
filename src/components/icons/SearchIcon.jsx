@@ -1,9 +1,10 @@
 import React from "react";
 
-const SearchIcon = ({height=24,width=24,className}) => {
+const SearchIcon = ({height=24,width=24,className,onClick}) => {
   return (
     <svg
       width={height}
+      onClick={onClick}
       height={width}
       className={className}
       viewBox="0 0 24 24"
