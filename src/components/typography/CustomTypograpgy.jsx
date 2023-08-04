@@ -103,6 +103,7 @@ export const CustomTypography = styled(Typography)(
 
 const CustomAllTypography = ({ name, variant, sx={}, fontStyle }) => {
   const responsive = useResponsiveStyles();
+  // console.log(responsive)
   return (
     <CustomTypography
       variant={variant}

@@ -2,14 +2,17 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 
 export const authApi = createApi({
     reducerPath: "authApi",
-    baseQuery: fetchBaseQuery({baseUrl: "http://localhost:3000"}),
+    baseQuery: fetchBaseQuery({baseUrl: "http://localhost:3000/admin"}),
+    tagTypes: [],
+    //invalidateTags, proivdeTags
     endpoints: (builder) => ({
         signinUser: builder.mutation({
-            query: (body) => {
+            query: (email) => {
+                // console.log("reducer",email)
                 return{
                     url: "/login",
-                    method: "post",
-                    body,
+                    method: "POST",
+                    body: {email:email},
                 }
             }
         }),
