@@ -72,8 +72,9 @@ const OnBoardingPage = () => {
           >
             <div
               style={{
+                marginTop: '2rem',
                 width: responsive.isMobile ? "95%" : "40%",
-                height: "80%",
+                // height: "80%",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -82,9 +83,9 @@ const OnBoardingPage = () => {
             >
               <CustomCard
                 sx={{
-                  padding: responsive.isMobile?"1rem": "4rem",
+                  padding: responsive.isMobile || responsive.isTablet ?"1.5rem": "4rem",
                   borderRadius: "1.125rem",
-                  marginTop: "0.78rem",
+                  marginTop: responsive.isTablet?'':"0.78rem",
                   width: "100%",
                   // height:'max-content'
                 }}
@@ -93,7 +94,7 @@ const OnBoardingPage = () => {
                   name={"Let us know about you"}
                   variant={"h3"}
                 />
-                <div style={{ marginTop: "3rem" }}>
+                <div style={{ marginTop: responsive.isTablet?'0rem':'3rem' }}>
                   <CommonTextInput
                     style={{ margin: "1.5rem 0rem" }}
                     placeholder="Full Name"

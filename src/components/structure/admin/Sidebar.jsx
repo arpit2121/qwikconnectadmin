@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import SettingsIcon from "../../icons/SettingsIcon";
 import SearchIcon from "../../icons/SearchIcon";
+import SettingMenu from "./SettingMenu";
+import UsersComponent from "../../admin/UsersComponent";
+import user1 from "../../../assets/svg/user1.svg";
 
 const useStyles = makeStyles({
   main: {
@@ -28,7 +31,7 @@ const useStyles = makeStyles({
     width: "2.375rem",
     height: "2.375rem",
   },
-  iconDivActive:{
+  iconDivActive: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -37,7 +40,8 @@ const useStyles = makeStyles({
     height: "2.375rem",
     boxShadow:
       " 1px 2px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(230, 129, 255, 0.5)",
-    background:"radial-gradient(circle, rgba(230,129,255,1) 0%, rgba(61,58,206,1) 100%)"
+    background:
+      "radial-gradient(circle, rgba(230,129,255,1) 0%, rgba(61,58,206,1) 100%)",
   },
   iconContainer: {
     display: "flex",
@@ -52,7 +56,7 @@ const useStyles = makeStyles({
     background: "#3D3ACE",
     marginTop: "0.25rem",
     opacity: 0,
-    transition: "opacity 800ms",
+    transition: "opacity 1500ms",
   },
   container2: {
     minHeight: "35%",
@@ -62,10 +66,13 @@ const useStyles = makeStyles({
     alignItems: "center",
   },
 });
+
 const Sidebar = () => {
+  const classes = useStyles();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState(1);
-  const classes = useStyles();
+  const [openSettings, setOpenSettings] = useState(false);
+
   return (
     <div className={classes.main}>
       <div className={classes.container2}>
@@ -75,7 +82,9 @@ const Sidebar = () => {
               setActiveTab(1);
               navigate("/dashboard/home/existinguser");
             }}
-            className={activeTab === 1 ?classes.iconDivActive:classes.iconDiv}
+            className={
+              activeTab === 1 ? classes.iconDivActive : classes.iconDiv
+            }
           >
             <HomeIcon
               color={activeTab == 1 ? "white" : "#25282B"}
@@ -95,8 +104,9 @@ const Sidebar = () => {
               setActiveTab(2);
               navigate("/dashboard/myJobPost");
             }}
-            className={activeTab === 2 ?classes.iconDivActive:classes.iconDiv}
-
+            className={
+              activeTab === 2 ? classes.iconDivActive : classes.iconDiv
+            }
           >
             <InboxIcon color={activeTab == 2 ? "white" : "#25282B"} />
           </div>
@@ -111,24 +121,33 @@ const Sidebar = () => {
       <div className={classes.container2}>
         <div className={classes.iconContainer}>
           <div
-            onClick={() => {
+            onClick={(e) => {
+              setOpenSettings(e.target);
               setActiveTab(3);
-              navigate("");
             }}
-            className={activeTab === 3?classes.iconDivActive:classes.iconDiv}
-
+            className={
+              activeTab === 3 ? classes.iconDivActive : classes.iconDiv
+            }
           >
             <SettingsIcon color={activeTab == 3 ? "white" : "#25282B"} />
-          </div>{" "}
-          {
-            <div
-              style={{ opacity: activeTab == 3 ? 1 : 0 }}
-              className={classes.dot}
-            ></div>
-          }
+          </div>
+          <SettingMenu open={openSettings} setOpen={setOpenSettings} />
+
+          <div
+            style={{ opacity: activeTab == 3 ? 1 : 0 }}
+            className={classes.dot}
+          ></div>
         </div>
         <div className={classes.iconDiv}>
-          <SearchIcon />
+          <div
+            onClick={() => {
+              setActiveTab(4);
+            }}
+            className={classes.iconDiv}
+            style={{ background: activeTab == 4 ? "#E5E0FF" : "none" }}
+          >
+            <UsersComponent style={{ height: "2.3rem" }} image={user1} />
+          </div>
         </div>
       </div>
     </div>
