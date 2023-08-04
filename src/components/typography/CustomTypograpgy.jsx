@@ -29,7 +29,7 @@ export const CustomTypography = styled(Typography)(
       fontFamily: "Nunito",
       fontWeight: 700,
       fontSize: responsive.isMobile
-        ? "1.125rempx"
+        ? "1.125rem"
         : responsive.isTablet
         ? "1.5rem"
         : "2rem",
