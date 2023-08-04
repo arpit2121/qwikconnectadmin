@@ -87,9 +87,8 @@ export const CustomTypography = styled(Typography)(({ responsive,fontStyle }) =>
 
 const CustomAllTypography = (props) => {
   const responsive = useResponsiveStyles();
-  console.log(responsive)
   return (
-      <CustomTypography variant={props.variant} responsive={responsive} color={props.color} fontStyle={props.fontStyle}>
+      <CustomTypography sx={props?.sx }variant={props.variant} responsive={responsive} color={props.color} fontStyle={props.fontStyle}>
         {props.name}
       </CustomTypography>
   );

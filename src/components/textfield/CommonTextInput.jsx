@@ -5,33 +5,48 @@ import SuccessIcon from "../../assets/cancel.svg";
 import LoadingIcon from "../../assets/cancel.svg";
 import CustomAllTypography from "../typography/CustomTypograpgy";
 import { makeStyles } from "@mui/styles";
+import { MenuItem, Select } from "@mui/material";
+import { styled } from "@mui/material";
 
 import _ from "lodash";
 import SearchIcon from "../icons/SearchIcon";
 
+const CustomSelect = styled(Select)(({ theme }) => ({
+  width: "100%",
+  height: "3.5rem",
+  borderRadius: "1rem",
+  fontSize: "16px",
+  padding:'16px',
+  "&:focus": {
+    border: 'none',
+  },
+}));
 const useStyles = makeStyles({
   mainContainer: {
-    width:props=>props?.width?props?.width:'100%',
+    width: (props) => (props?.width ? props?.width : "100%"),
     display: "flex",
     flexDirection: "column",
+    pointerEvents: (props) => (props?.disabled ? "none" : "auto"),
   },
-  searchIcon:{
-    marginRight:'0.62rem'
+  searchIcon: {
+    marginRight: "0.62rem",
   },
   containerStyles: {
-    padding: "1rem 1.25rem",
+    padding: (props) => (props?.type == "dropdown" ? "0rem" : "1rem 1.25rem"),
     display: "flex",
     justifyContent: "start",
     alignItems: "center",
     outline: "none",
-    backgroundColor: (props) => props?.getStatusColor(props?.status),
+    backgroundColor: (props) =>
+      props?.status ? props?.getStatusColor(props?.status) : "#F7F7FD",
     "&:hover": {
       border: "1px solid #E8E6F8",
     },
     "&:focus-within": {
       border: "1px solid #605DEC",
     },
-    border: (props) => `1px solid ${props?.getStatusColor(props?.status)}`,
+    border: (props) =>
+      `1px solid ${props?.status ? props?.getStatusColor(props?.status) : "#F7F7FD"}`,
     borderRadius: (props) => (props?.curvedBorder ? "1.125rem" : "unset"),
   },
   iconStyles: {
@@ -46,12 +61,13 @@ const useStyles = makeStyles({
     width: "100%",
     border: "none",
     outline: "none",
-    color: "#212121",
+    color: (props) => (props?.disabled ? "#F7F7FD" : "#212121"),
     fontSize: "1rem",
     fontStyle: "normal",
     fontWeight: 400,
     lineHeight: "1.5rem",
-    backgroundColor: (props) => props?.getStatusColor(props?.status),
+    backgroundColor: (props) =>
+      props?.status ? props?.getStatusColor(props?.status) : "#F7F7FD",
   },
   inputdiv: {
     display: "flex",
@@ -68,17 +84,21 @@ const useStyles = makeStyles({
   },
 });
 
-const CommonTextInput= ({
+const CommonTextInput = ({
+  style = {},
   width,
+  extraText,
+  options = ["name", "age"],
+  type,
   startIcon,
-  endIcon=ErrorIcon ,
+  endIcon,
   placeholder = "Write here",
-  title ,
+  title,
   value = "",
   setValue = () => {},
-  searchInput=true,
-  status ='error',
-  curvedBorder =true,
+  searchInput,
+  status,
+  curvedBorder = true,
 }) => {
   const inputRef = React.createRef();
 
@@ -105,56 +125,89 @@ const CommonTextInput= ({
   const handleChange = (e) => {
     setValue(e.target.value);
   };
+  const handleChangeSelect = (e) => {
+    setValue(e);
+  };
 
   const handleClick = () => {
     inputRef.current.focus();
   };
-  const classes = useStyles({ getStatusColor, status, curvedBorder });
+  const classes = useStyles({ getStatusColor, status, curvedBorder, type });
 
   return (
-    <div className={classes.mainContainer}>
+    <div className={classes.mainContainer} style={style}>
       <div className={classes.containerStyles} onClick={handleClick}>
         {startIcon && (
-          <img
+          <div
             className={classes.iconStyles}
             style={{ marginRight: "0.62rem" }}
-            src={startIcon}
-            alt="Start Icon"
-            width="15px"
-            height="15px"
+          >
+            {startIcon}
+          </div>
+        )}
+        {extraText && (
+          <CustomAllTypography
+            sx={{ marginRight: "0.62rem" }}
+            name={extraText}
+            variant="body2"
+            color="#9D99AC"
           />
         )}
-        {searchInput && (
-         <SearchIcon className={classes.searchIcon}/>
-        )}
+        {searchInput && <SearchIcon className={classes.searchIcon} />}
         <div className={classes.inputdiv}>
-         {title && <CustomAllTypography
-            name={_.startCase(_.toLower(title))}
-            variant="caption"
-            color="#AAAAAA"
-          />}
-          <input
-            onChange={handleChange}
-            type="text"
-            label={title}
-            // value={value}
-            placeholder={placeholder}
-            ref={inputRef}
-            className={classes.textBoxStyles}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            autoComplete="true"
-          />
+          {title && (
+            <CustomAllTypography
+              name={_.startCase(_.toLower(title))}
+              variant="caption"
+              color="#AAAAAA"
+            />
+          )}
+          {type != "dropdown" ? (
+            <input
+              onChange={handleChange}
+              type="text"
+              label={title}
+              value={value}
+              placeholder={placeholder}
+              ref={inputRef}
+              className={classes.textBoxStyles}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              autoComplete="true"
+            />
+          ) : (
+
+            <CustomSelect
+              value={value}
+              displayEmpty
+              renderValue={(selected) => {
+                if (selected.length === 0) {
+                  return (
+                    <CustomAllTypography
+                      name={placeholder}
+                      variant="body1"
+                      color="#AAAAAA"
+                    />
+                  );
+                }
+
+                return selected?.join(", ");
+              }}
+              onChange={handleChangeSelect}
+              sx={{ background: "none",border:'none' }}
+            >
+              {options.map((menuItem, index) => (
+                <MenuItem key={index} value={MenuItem}>
+                  {menuItem}
+                </MenuItem>
+              ))}
+            </CustomSelect>
+          )}
         </div>
         {endIcon && (
-          <img
-            className={classes.iconStyles}
-            src={endIcon}
-            style={{ marginLeft: "0.62rem" }}
-            alt="End Icon"
-            width="15px"
-            height="15px"
-          />
+          <div className={classes.iconStyles} style={{ marginLeft: "0.62rem" }}>
+            {endIcon}
+          </div>
         )}
       </div>
       {status && (
