@@ -3,9 +3,10 @@ import CustomAllTypography from "../components/typography/CustomTypograpgy";
 import { TextDescription } from "../components/typography/Fields";
 import useResponsiveStyles from "../utils/MediaQuery";
 import { CustomInputButton } from "../components/button/CustomButoon";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import CommonTextInput from "../components/textfield/CommonTextInput";
-import PasswordIcon from '../components/icons/PasswordIcon'
+import PasswordIcon from '../components/icons/PasswordIcon';
+import { useVerifyPasswordMutation } from "../services/auth";
 
 
 
@@ -16,12 +17,32 @@ const Password = () => {
   const responsive = useResponsiveStyles();
   const navigate = useNavigate();
   const [type,setCurrType] = useState(true);
+  const {state} = useLocation();
+  const [verifyPassword, {data}] = useVerifyPasswordMutation();
+
+  console.log(state)
 
   const changeType = () =>{
     setCurrType(!type)
   }
 
+  const handleClick = () =>{
+    verifyPassword(pass)
+    if(data.name)//name have something???then navigate to dashbaord page else navigate to onBoard page
+    {
+      navigate('dashbaord page')
+    }
+    else{
+      navigate('on-board page')
+    }
+  }
   
+  const forgetPassword = () =>{
+      navigate('/password/forgetpassword',{
+        state: {data: "forgetpassword"}
+      })
+  }
+
   return (
     <div
       style={{
@@ -52,11 +73,12 @@ const Password = () => {
           endIcon={<PasswordIcon/>}
         />
         <div style={{display:'flex', justifyContent:'flex-end', paddingTop:'4px'}}>
-        <TextDescription responsive={responsive} size={'9px'} color={'#605DEC'} onClick={()=>console.log("hi")}>{newUser?'':"Forgot Password?"}</TextDescription>
+        {/* <TextDescription responsive={responsive} size={'9px'} color={'#605DEC'} onClick={()=>console.log("hi")}>{newUser?'':"Forgot Password?"}</TextDescription> */}
+        <CustomInputButton variant="text" onClick={forgetPassword}>{newUser?'':"Forgot Password?"}</CustomInputButton>
         </div>
       </div>
       <div style={{marginTop:'4rem'}}>
-      <CustomInputButton variant='contained' width={'100%'} size='large' responsive onClick={()=>navigate('/dashboard/home/existinguser')}>Register</CustomInputButton>
+      <CustomInputButton variant='contained' width={'100%'} size='large' responsive onClick={handleClick}>{state.newUser?"Login":"Register"}</CustomInputButton>
       </div>
     </div>
   );
