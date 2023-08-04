@@ -27,7 +27,17 @@ const useStyles = makeStyles({
     borderRadius: "50%",
     width: "2.375rem",
     height: "2.375rem",
-
+  },
+  iconDivActive:{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: "50%",
+    width: "2.375rem",
+    height: "2.375rem",
+    boxShadow:
+      " 1px 2px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(230, 129, 255, 0.5)",
+    background:"radial-gradient(circle, rgba(230,129,255,1) 0%, rgba(61,58,206,1) 100%)"
   },
   iconContainer: {
     display: "flex",
@@ -55,8 +65,6 @@ const useStyles = makeStyles({
 const Sidebar = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState(1);
-  const gradient =
-    "radial-gradient(circle, rgba(230,129,255,1) 0%, rgba(61,58,206,1) 100%)";
   const classes = useStyles();
   return (
     <div className={classes.main}>
@@ -67,8 +75,7 @@ const Sidebar = () => {
               setActiveTab(1);
               navigate("/dashboard/home/existinguser");
             }}
-            style={{ background: activeTab === 1 ? gradient : "none" }}
-            className={classes.iconDiv}
+            className={activeTab === 1 ?classes.iconDivActive:classes.iconDiv}
           >
             <HomeIcon
               color={activeTab == 1 ? "white" : "#25282B"}
@@ -86,10 +93,10 @@ const Sidebar = () => {
           <div
             onClick={() => {
               setActiveTab(2);
-              navigate("/dashboard/home/existinguser");
+              navigate("/dashboard/myJobPost");
             }}
-            style={{ background: activeTab === 2 ? gradient : "none" }}
-            className={classes.iconDiv}
+            className={activeTab === 2 ?classes.iconDivActive:classes.iconDiv}
+
           >
             <InboxIcon color={activeTab == 2 ? "white" : "#25282B"} />
           </div>
@@ -106,10 +113,10 @@ const Sidebar = () => {
           <div
             onClick={() => {
               setActiveTab(3);
-              navigate("/dashboard/home/existinguser");
+              navigate("");
             }}
-            style={{ background: activeTab === 3 ? gradient : "none" }}
-            className={classes.iconDiv}
+            className={activeTab === 3?classes.iconDivActive:classes.iconDiv}
+
           >
             <SettingsIcon color={activeTab == 3 ? "white" : "#25282B"} />
           </div>{" "}

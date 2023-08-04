@@ -8,6 +8,8 @@ import useResponsiveStyles from "../../utils/MediaQuery";
 import NonExisting from "./NonExisting";
 import ExistingUser from "./ExistingUser";
 import { Outlet } from "react-router-dom";
+import UserIcon from "../../components/icons/UserIcon";
+import UserPlusIcon from "../../components/icons/UserplusIcon";
 
 const DashboardHome = () => {
   const responsive = useResponsiveStyles();
@@ -30,7 +32,15 @@ const DashboardHome = () => {
           <div style={{ display: "flex", justifyContent: "center" }}>
             <UsersComponent image={user1} />
           </div>
-          <div style={{display:'flex',flexDirection:'column', justifyContent:'center',alignItems:'center'}}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: responsive.isMobile?'center': "flex-start",
+              marginTop:responsive.isMobile?5:0
+            }}
+          >
             <CustomAllTypography
               name={"Good Morning, Vaibhav"}
               variant={"h3"}
@@ -57,13 +67,27 @@ const DashboardHome = () => {
               justifyContent: !responsive.isMobile ? "space-around" : "center",
             }}
           >
-            <img src={users} alt="users"></img>
-            <CustomAllTypography name={"23"} variant={"h4"} />
+            <UserIcon style={{ marginRight: "0.9rem" }} />
+            <CustomAllTypography
+              sx={{ marginRight: "0.94rem" }}
+              name={"23"}
+              variant={"h4"}
+            />
             <CustomAllTypography name={"Applications"} variant={"body1"} />
           </div>
-          <div style={{ display: "flex", alignItems: "center",justifyContent:'center' }}>
-            <img src={userPlus} alt="users"></img>
-            <CustomAllTypography name={"3"} variant={"h4"} />
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <UserPlusIcon style={{ marginRight: "0.9rem" }} />
+            <CustomAllTypography
+              sx={{ marginRight: "0.94rem" }}
+              name={"3"}
+              variant={"h4"}
+            />
             <CustomAllTypography name={"Shortlisted"} variant={"body1"} />
           </div>
         </div>
@@ -71,7 +95,7 @@ const DashboardHome = () => {
       {/* <NonExisting/> */}
       {/* <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}> */}
       {/* <ExistingUser/> */}
-      <Outlet/>
+      <Outlet />
       {/* </div> */}
     </div>
   );
