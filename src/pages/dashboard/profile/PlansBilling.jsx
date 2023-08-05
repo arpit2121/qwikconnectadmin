@@ -4,6 +4,7 @@ import CustomAllTypography from '../../../components/typography/CustomTypograpgy
 import { CustomCard } from '../../../components/card/CustomCard';
 import { Divider } from '@mui/material';
 import LinearWithValueLabel from '../../../components/admin/LinearProgress';
+import { CustomInputButton } from '../../../components/button/CustomButoon';
 
 
 const PlansBilling = () => {
@@ -27,7 +28,9 @@ const PlansBilling = () => {
                   <CustomAllTypography name={'Payment'} variant={'body2'}/>
                   <CustomAllTypography name={'Free'} variant={'h4'}/></div>
                 <div>
-                  button
+                  <CustomInputButton size='small' bgcolor='linear-gradient(180deg, #605DEC 0%, #A5F 100%)'>Upgrade subscription</CustomInputButton>
+                  {/* <CustomInputButton variant='contained' name='Upgrade subscription' bgColor='linear-gradient(180deg, #605DEC 0%, #A5F 100%)'/> */}
+                  {/* color='linear-gradient(180deg, #605DEC 0%, #A5F 100%)' */}
                 </div>
               </div>
               <Divider sx={{color:'#C9C8D3',marginTop:'2.38rem'}}/>

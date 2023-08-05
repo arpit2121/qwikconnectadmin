@@ -4,7 +4,9 @@ import useResponsiveStyles from '../../../utils/MediaQuery'
 import CustomizedTextField from '../../../components/textfield/CustomizedTextField';
 import Lock from '../../../assets/svg/Lock.svg'
 import CustomPassword from '../../../components/textfield/CustomPassword';
-import CustomButton from '../../../components/button/CustomButoon';
+import CustomButton, { CustomInputButton } from '../../../components/button/CustomButoon';
+import CommonTextInput from '../../../components/textfield/CommonTextInput';
+import PasswordIcon from '../../../components/icons/PasswordIcon';
 
 
 const ChangePassword = () => {
@@ -23,11 +25,29 @@ const ChangePassword = () => {
        <CustomAllTypography name={'Enter your password information'} variant={'h5'}/>
        </div>
           <div style={{display:'flex',flexDirection:'column',gap:'1.8rem'}}>
-          <CustomPassword/>
-          <CustomPassword/>
+          <CommonTextInput
+          // value={pass}
+          // setValue={setPass}
+          title="Password"
+          placeholder="Enter your password"
+          searchInput={false}
+          // type1={true ? "password" : "text"}
+          // onClick={changeType}
+          endIcon={<PasswordIcon />}
+        />
+         <CommonTextInput
+          // value={pass}
+          // setValue={setPass}
+          title="Password"
+          placeholder="Enter your password"
+          searchInput={false}
+          // type1={true ? "password" : "text"}
+          // onClick={changeType}
+          endIcon={<PasswordIcon />}
+        />
           </div>
           <div style={{marginTop:'2rem'}}>
-          <CustomButton name={'Register'}/>
+          <CustomInputButton name={'Register'} width={'100%'} size={'large'}>Change Password</CustomInputButton>
           </div>
         </div>
         {
