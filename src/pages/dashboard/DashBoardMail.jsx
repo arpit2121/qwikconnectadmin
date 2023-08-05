@@ -30,7 +30,7 @@ const DashBoardMail = () => {
           padding: '0px 50px',
         }}
       >
-        <CustomAllTypography name={"Overiview"} variant={"h3"} />
+        <CustomAllTypography name={"Overview"} variant={"h3"} />
 
         <StatsTopBar />
       </div>

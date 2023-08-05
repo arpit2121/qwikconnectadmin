@@ -20,16 +20,31 @@ const Login = () => {
   const handleButtonClick = () => {
     console.log(email)
     signinuser(email)
-    if(data=="alreadyExists")
+    if(true)//data=="alreadyExists"
     {
       // navigation.goTo(true ? "/password" : "/otp");
-      navigate(data === "alreadyExists" ? "/password/enterpass" : "/otp", {
-        state: { newUser: true}
+      //data === "alreadyExists"
+      navigate( true? "/password/enterpass" : "/otp", {
+        state: { newUser: true,
+        header: "Welcome Back!",
+        belowHeader: "Enter your password for youremail@example.com",
+        button: "Log in",
+        footer: ""
+        }
       })
     }
+    
     console.log("error",error, data)
   };
 
+  /*
+  {
+    h1: ""
+    h2: ""
+    button: ""
+    data: ""
+  }
+   */
 
 
   return (
