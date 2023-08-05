@@ -34,6 +34,7 @@ const JobCard = () => {
         name={"24 Applied • 2 Shortlisted • 1 Closed"}
         variant={"body2"}
         color={"#36BF76"}
+        textcolor={"#36BF76"}
       />
       <TrashIcon />
     </div>
