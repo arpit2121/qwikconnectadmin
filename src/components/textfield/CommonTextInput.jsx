@@ -7,7 +7,6 @@ import CustomAllTypography from "../typography/CustomTypograpgy";
 import { makeStyles } from "@mui/styles";
 import { MenuItem, Select } from "@mui/material";
 import { styled } from "@mui/material";
-
 import _ from "lodash";
 import SearchIcon from "../icons/SearchIcon";
 

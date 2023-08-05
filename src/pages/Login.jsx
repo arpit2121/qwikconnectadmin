@@ -6,8 +6,8 @@ import GoogleSocial from "../components/social/GoogleSocial";
 import useNavigation from "../utils/NaivigateTo";
 import CommonTextInput from "../components/textfield/CommonTextInput";
 import { useSigninUserMutation } from "../services/auth";
-import { message } from "antd";
 import { useNavigate } from "react-router-dom";
+
 
 const Login = () => {
   const responsive = useResponsiveStyles();
