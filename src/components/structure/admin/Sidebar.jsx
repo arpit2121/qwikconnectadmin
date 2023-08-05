@@ -56,7 +56,7 @@ const useStyles = makeStyles({
     background: "#3D3ACE",
     marginTop: "0.25rem",
     opacity: 0,
-    transition: "opacity 800ms",
+    transition: "opacity 1500ms",
   },
   container2: {
     minHeight: "35%",
@@ -66,6 +66,7 @@ const useStyles = makeStyles({
     alignItems: "center",
   },
 });
+
 const Sidebar = () => {
   const classes = useStyles();
   const navigate = useNavigate();

@@ -71,6 +71,7 @@ const SettingMenu = ({ open, setOpen }) => {
       anchorEl={open}
       sx={{ marginLeft: 7, padding: 0 }}
       open={openSetting}
+      onClose={handleClose}
       MenuListProps={{
         "aria-labelledby": "lock-button",
         role: "listbox",

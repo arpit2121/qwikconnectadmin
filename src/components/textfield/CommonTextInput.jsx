@@ -32,7 +32,7 @@ const useStyles = makeStyles({
     marginRight: "0.62rem",
   },
   containerStyles: {
-    padding: (props) => (props?.type == "dropdown" ? "0rem" : "1rem 1.25rem"),
+    padding: (props) => (props?.type == "dropdown" ? "0rem" : "0.5rem 1.25rem"),
     display: "flex",
     justifyContent: "start",
     alignItems: "center",

@@ -25,7 +25,7 @@ const App = () => {
       <Route path="/" element={<Home />}>
         <Route path="login" element={<Login />} />
         <Route path="otp" element={<OtpVerification />} />
-        <Route path="password" element={<Password />} />
+        <Route path="password/:name" element={<Password />} />
       </Route>
       <Route path="on-boarding" element={<OnBoardingPage />} />
       <Route path="dashboard" element={<Dashboard />}>

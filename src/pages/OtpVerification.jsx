@@ -4,16 +4,25 @@ import OTPInput from '../components/otp';
 import CustomAllTypography from '../components/typography/CustomTypograpgy';
 import useResponsiveStyles from '../utils/MediaQuery';
 import useNavigation from '../utils/NaivigateTo';
+import { useNavigate } from 'react-router-dom';
 
 const OtpVerification = () => {
     const [newUser, setNewUser] = useState(true)
    const [otp,setOtp] = useState('');
    const navigation = useNavigation();
+   const navigate = useNavigate();
    const handleButtonClick = () => {
-     console.log("hii")
-     navigation.goTo(true?'/password':'');
+    //  navigation.goTo(true?'/password':'');
+    navigate("password/setpassword", {
+      state: {
+        header: "Set Password",
+        belowHeader: "for youremail@example.com",
+        button: "Register",
+        footer: "By Continuing this I agree to the Terms & Conditions and Privacy Policy"
+      }
+    });
    };
-   console.log("haha", otp)
+
   return (
     <div style={{ width: "100%", height: "100%"}}>
         <div style={{marginTop:'2rem'}}>

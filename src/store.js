@@ -6,11 +6,10 @@ console.log(adminsApi)
 
 const store = configureStore({
     reducer: {
-        
-        [adminsApi.reducerPath]: adminsApi.reducer,
-        [adminsApi.reducerPath]: authApi.reducer,
+        // [adminsApi.reducerPath]: adminsApi.reducer,
+        [authApi.reducerPath]: authApi.reducer,
     },
-    middleware: (gDM) => gDM().concat(adminsApi.middleware, authApi.middleware)
+    middleware: (gDM) => gDM().concat(authApi.middleware)
 });
 
 
