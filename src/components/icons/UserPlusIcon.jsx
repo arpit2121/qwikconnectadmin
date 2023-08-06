@@ -1,6 +1,6 @@
 import React from "react";
 
-const UserPlusIcon = ({ height = 32, width = 32, className,color="#AA55FF",style,onClick }) => {
+const UserPlusIcon = ({ height = 32, width = 32, className,color="#AA55FF",style,onClick=()=>{} }) => {
   return (
     <svg
       onClick={onClick}
