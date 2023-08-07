@@ -3,7 +3,7 @@ import Home from "./components/structure/Home/Home";
 import OnBoardingPage from "./pages/OnBoardingPage";
 import Password from "./pages/Password";
 import Login from "./pages/Login";
-import Dashboard from "./components/structure/admin/dashboard";
+// import Dashboard from "./components/structure/admin/dashboard";
 import OtpVerification from "./pages/OtpVerification";
 import { Routes, Route } from "react-router-dom";
 import JobPostingStepOne from "./pages/dashboard/jobposting/JobPostingStepOne";
@@ -28,11 +28,11 @@ const App = () => {
         <Route path="password/:name" element={<Password />} />
       </Route>
       <Route path="on-boarding" element={<OnBoardingPage />} />
-      <Route path="dashboard" element={<Dashboard />}>
+      {/* <Route path="dashboard" element={<Dashboard />}> */}
         <Route path="home" element={<DashboardHome />}>
           <Route path="existinguser" element={<ExistingUser />} />
           <Route path="nonexisting" element={<NonExisting />} />
-        </Route>
+        {/* </Route> */}
         <Route path="changepass" element={<ChangePassword />} />
         <Route path="myprofile" element={<MyProfile />} />
         <Route path="myPlans" element={<PlansBilling />} />
