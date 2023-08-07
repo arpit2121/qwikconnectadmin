@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CustomContainer from "../CustomContainer";
-import Navbar from "../admin/Navbar";
-import Sidebar from "../admin/Sidebar";
+import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import { Outlet } from "react-router-dom";
 
