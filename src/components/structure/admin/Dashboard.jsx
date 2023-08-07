@@ -1,46 +1,12 @@
 import React, { useState } from "react";
+import { Outlet } from "react-router-dom";
+import useResponsiveStyles from "../../../utils/MediaQuery";
 import CustomContainer from "../CustomContainer";
 import Navbar from "../admin/Navbar";
 import Sidebar from "../admin/Sidebar";
-import useResponsiveStyles from "../../../utils/MediaQuery";
-import { Outlet } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
-
-// transform: translateX(-100%);
-
-// left: -50px
-
-const SidebarWrapper = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 0;
-  transform: translateX(-100%);
-  animation: ${(props) => (props.visible ? slideInFromLeft : "none")} 0.5s
-    ease-in-out;
-`;
-
-const Backdrop = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-`;
-
-const SidebarContent = styled.div`
-  padding: 16px;
-  background-color: #f0f0f0;
-  width: 300px;
-`;
 
 const Dashboard = () => {
   const responsive = useResponsiveStyles();
-  const [sidebar, setSideBar] = useState(false);
-  // const handleClick = () => {
-  // console.log("hii2");
-  //   setSideBar(!sidebar)
-  // };
   return (
     <CustomContainer>
       <div
@@ -96,9 +62,9 @@ const Dashboard = () => {
               display: "flex",
               justifyContent: "center",
               padding: "0rem 1rem",
+              marginBottom: "1rem",
             }}
           >
-          
             <Sidebar />
           </div>
         )}

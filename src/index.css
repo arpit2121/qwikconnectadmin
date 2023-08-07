@@ -6,4 +6,9 @@
 
 /* :root{
   font-family: 'Nunito Sans', sans-serif !important;
-} */
+/* } */
+#card_container_div::-webkit-scrollbar {
+  display: none;
+  height: 8px;
+  width: 8px;
+}

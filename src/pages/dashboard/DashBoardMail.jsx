@@ -1,20 +1,11 @@
 import React from "react";
-import CustomAllTypography from "../../components/typography/CustomTypograpgy";
-import CustomCardComponent, {
-  CustomCard,
-} from "../../components/card/CustomCard";
-import useResponsiveStyles from "../../utils/MediaQuery";
 import { useNavigate } from "react-router-dom";
-import user from "../../assets/svg/user.svg";
-import userplus from "../../assets/svg/userPlus.svg";
-import rejected from "../../assets/svg/rejected.svg";
-import JobCard from "./JobCard";
-import StatsTopBar from "./StatsTopBar";
+import useResponsiveStyles from "../../utils/MediaQuery";
+import CardContainerComponent from "./CardContainerComponent";
 import CommonProfileBar from "./CommonProfileBar";
 
 const DashBoardMail = () => {
   const responsive = useResponsiveStyles();
-  const navigate = useNavigate();
   return (
     <div
       style={{
@@ -24,10 +15,8 @@ const DashBoardMail = () => {
       }}
     >
       <CommonProfileBar  title={'Overview'} showProfile={false} />
-      <div style={{ marginTop: "4rem" }}>
-        <JobCard />
-        <JobCard />
-      </div>
+      <CardContainerComponent/>
+  
     </div>
   );
 };
