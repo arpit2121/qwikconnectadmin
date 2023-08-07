@@ -11,6 +11,7 @@ import { Outlet } from "react-router-dom";
 import UserIcon from "../../components/icons/UserIcon";
 import UserPlusIcon from "../../components/icons/UserplusIcon";
 import StatsTopBar from "./StatsTopBar";
+import CommonProfile from "./profile/CommonProfile";
 
 const DashboardHome = () => {
   const responsive = useResponsiveStyles();
@@ -18,12 +19,14 @@ const DashboardHome = () => {
     <div style={{ height: "100%", width: "100%" }}>
       <div
         style={{
-          padding:responsive.isMobile?'1rem': "50px",
+          padding: responsive.isMobile ? "1rem" : "50px",
           display: !responsive.isMobile ? "flex" : "",
           justifyContent: "space-between",
         }}
       >
-        <DashboardHome/>
+        <CommonProfile
+          style={{ marginBottom: responsive.isMobile ? "2rem" : 0 }}
+        />
         <StatsTopBar />
       </div>
       {/* <NonExisting/> */}

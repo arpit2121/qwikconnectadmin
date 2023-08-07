@@ -4,25 +4,9 @@ import Navbar from "../admin/Navbar";
 import Sidebar from "../admin/Sidebar";
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import { Outlet } from "react-router-dom";
-import styled, {keyframes} from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 // transform: translateX(-100%);
-const slideInFromRight = keyframes`
-  0% {
-    transform: translateX(900%);
-  }
-  100% {
-    transform: translateX(0);
-  }
-`;
-
-// Create a styled component using the defined keyframes animation
-const AnimatedSidebar = styled.div`
-  position: absolute;
-  top: 100px;
-  right: -20px;
-  animation: ${slideInFromRight} 1.5s ease-in-out;
-`;
 
 // left: -50px
 
@@ -31,7 +15,8 @@ const SidebarWrapper = styled.div`
   top: 50%;
   left: 0;
   transform: translateX(-100%);
-  animation: ${(props) => (props.visible ? slideInFromLeft : 'none')} 0.5s ease-in-out;
+  animation: ${(props) => (props.visible ? slideInFromLeft : "none")} 0.5s
+    ease-in-out;
 `;
 
 const Backdrop = styled.div`
@@ -52,10 +37,10 @@ const SidebarContent = styled.div`
 const Dashboard = () => {
   const responsive = useResponsiveStyles();
   const [sidebar, setSideBar] = useState(false);
-  const handleClick = () => {
-    // console.log("hii2");
-    setSideBar(!sidebar)
-  };
+  // const handleClick = () => {
+  // console.log("hii2");
+  //   setSideBar(!sidebar)
+  // };
   return (
     <CustomContainer>
       <div
@@ -63,6 +48,7 @@ const Dashboard = () => {
           height: "100%",
           width: "100vw",
           display: "flex",
+          flexDirection: responsive.isMobile ? "column" : "row",
           maxHeight: "862px",
         }}
       >
@@ -82,10 +68,10 @@ const Dashboard = () => {
               backgroundColor: "#fff",
             }}
           >
-            <Navbar onClick={handleClick} />
+            <Navbar />
           </div>
           <div style={{ height: "90%", display: "flex" }}>
-            {!responsive.isMobile ? (
+            {!responsive.isMobile && (
               <div
                 style={{
                   height: "90%",
@@ -97,27 +83,25 @@ const Dashboard = () => {
               >
                 <Sidebar />
               </div>
-            ) : 
-            (
-
-              // sidebar ? <div sx={{}}><Sidebar/></div> : ""
-            <div style={{ position: 'fixed', width: "50px",top: 50 }}>
-            {sidebar ? 
-            <div style={{ position: 'relative' }}>
-            {sidebar ? <AnimatedSidebar><Sidebar /></AnimatedSidebar> : null}
-            </div>
-            : (
-            ""
-            )
-      }
-    </div>
-
             )}
             <div style={{ backgroundColor: "", width: "100%" }}>
               <Outlet />
             </div>
           </div>
         </div>
+
+        {responsive.isMobile && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              padding: "0rem 1rem",
+            }}
+          >
+          
+            <Sidebar />
+          </div>
+        )}
       </div>
     </CustomContainer>
   );
@@ -125,18 +109,14 @@ const Dashboard = () => {
 
 export default Dashboard;
 
-
-
-
-
-
-
-{/* <>
+{
+  /* <>
       {visible && <Backdrop onClick={onClose} />}
       <SidebarWrapper visible={visible}>
         <SidebarContent>
-          {/* Sidebar content and functionality here */}
-    //       <button onClick={onClose}>Close Sidebar</button>
-    //     </SidebarContent>
-    //   </SidebarWrapper>
-    // </> */}
+          {/* Sidebar content and functionality here */
+}
+//       <button onClick={onClose}>Close Sidebar</button>
+//     </SidebarContent>
+//   </SidebarWrapper>
+// </> */}

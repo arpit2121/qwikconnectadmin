@@ -24,6 +24,7 @@ export const colors ={
     fieldform: '#F7F7FD',
     fieldtext: '#212121',
     bgerror: '#FFF5F5',
-    aliceBlue:'#ECF3FF'
+    aliceBlue:'#ECF3FF',
+    textGrey:'#8A8894'
 }
 
