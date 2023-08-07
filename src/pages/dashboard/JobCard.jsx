@@ -2,6 +2,7 @@ import React from 'react'
 import { CustomCard } from '../../components/card/CustomCard'
 import CustomAllTypography from '../../components/typography/CustomTypograpgy'
 import TrashIcon from '../../components/icons/TrashIcon'
+import { Body3 } from '../../components/typography/Fields'
 
 const JobCard = () => {
 
@@ -11,7 +12,8 @@ const JobCard = () => {
     onClick={() => navigate("/jobpostingdetailspage")}
   >
     <div style={{ display: "flex", justifyContent: "flex-end" }}>
-      <CustomAllTypography name={"1d ago"} variant={"body3"} />
+      {/* <CustomAllTypography name={"1d ago"} variant={"body3"} /> */}
+      <Body3 color={'#8A8894'}>{'1d Ago'}</Body3>
     </div>
     <div style={{ marginTop: "1.26rem" }}>
       <CustomAllTypography name={"UI/UX Developer / Lead"} variant={"h4"} />
