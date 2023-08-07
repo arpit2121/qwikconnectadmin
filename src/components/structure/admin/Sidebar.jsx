@@ -8,6 +8,7 @@ import SearchIcon from "../../icons/SearchIcon";
 import SettingMenu from "./SettingMenu";
 import UsersComponent from "../../admin/UsersComponent";
 import user1 from "../../../assets/svg/user1.svg";
+import useResponsiveStyles from "../../../utils/MediaQuery";
 
 const useStyles = makeStyles({
   main: {
@@ -22,6 +23,19 @@ const useStyles = makeStyles({
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
+  },
+  main2: {
+    width: "100%",
+    height: "max-content",
+    backgroundColor: "#ECF3FF",
+    borderTopRightRadius: "4rem",
+    borderTopLeftRadius: "4rem",
+    borderBottomLeftRadius: "4rem",
+    borderBottomRightRadius: "4rem",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "0.3rem 1.6rem",
   },
   iconDiv: {
     display: "flex",
@@ -50,13 +64,13 @@ const useStyles = makeStyles({
     minHeight: "30%",
   },
   dot: {
-    width: "0.5rem",
-    height: "0.5rem",
+    width: (props) => (props?.responsive.isMobile ? "0.2rem" : "0.5rem"),
+    height: (props) => (props?.responsive.isMobile ? "0.2rem" : "0.5rem"),
     borderRadius: "50%",
     background: "#3D3ACE",
     marginTop: "0.25rem",
     opacity: 0,
-    transition: "opacity 800ms",
+    transition: "opacity 1500ms",
   },
   container2: {
     minHeight: "35%",
@@ -66,15 +80,18 @@ const useStyles = makeStyles({
     alignItems: "center",
   },
 });
+
 const Sidebar = () => {
-  const classes = useStyles();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState(1);
   const [openSettings, setOpenSettings] = useState(false);
+  const responsive = useResponsiveStyles();
+  const classes = useStyles({ responsive });
 
+  const direction = { flexDirection: responsive.isMobile ? "row" : "column" };
   return (
-    <div className={classes.main}>
-      <div className={classes.container2}>
+    <div className={responsive.isMobile ? classes.main2 : classes.main}>
+      <div className={classes.container2} style={direction}>
         <div className={classes.iconContainer}>
           <div
             onClick={() => {
@@ -97,6 +114,29 @@ const Sidebar = () => {
             ></div>
           }
         </div>
+        {!responsive.isMobile && (
+          <div className={classes.iconContainer}>
+            <div
+              onClick={() => {
+                setActiveTab(2);
+                navigate("/dashboard/myJobPost");
+              }}
+              className={
+                activeTab === 2 ? classes.iconDivActive : classes.iconDiv
+              }
+            >
+              <InboxIcon color={activeTab == 2 ? "white" : "#25282B"} />
+            </div>
+            {
+              <div
+                style={{ opacity: activeTab == 2 ? 1 : 0 }}
+                className={classes.dot}
+              ></div>
+            }
+          </div>
+        )}
+      </div>
+      {responsive.isMobile && (
         <div className={classes.iconContainer}>
           <div
             onClick={() => {
@@ -116,27 +156,29 @@ const Sidebar = () => {
             ></div>
           }
         </div>
-      </div>
-      <div className={classes.container2}>
-        <div className={classes.iconContainer}>
-          <div
-            onClick={(e) => {
-              setOpenSettings(e.target);
-              setActiveTab(3);
-            }}
-            className={
-              activeTab === 3 ? classes.iconDivActive : classes.iconDiv
-            }
-          >
-            <SettingsIcon color={activeTab == 3 ? "white" : "#25282B"} />
-          </div>
-          <SettingMenu open={openSettings} setOpen={setOpenSettings} />
+      )}
+      <div className={classes.container2} style={direction}>
+        {!responsive.isMobile && (
+          <div className={classes.iconContainer}>
+            <div
+              onClick={(e) => {
+                setOpenSettings(e.target);
+                setActiveTab(3);
+              }}
+              className={
+                activeTab === 3 ? classes.iconDivActive : classes.iconDiv
+              }
+            >
+              <SettingsIcon color={activeTab == 3 ? "white" : "#25282B"} />
+            </div>
+            <SettingMenu open={openSettings} setOpen={setOpenSettings} />
 
-          <div
-            style={{ opacity: activeTab == 3 ? 1 : 0 }}
-            className={classes.dot}
-          ></div>
-        </div>
+            <div
+              style={{ opacity: activeTab == 3 ? 1 : 0 }}
+              className={classes.dot}
+            ></div>
+          </div>
+        )}
         <div className={classes.iconDiv}>
           <div
             onClick={() => {

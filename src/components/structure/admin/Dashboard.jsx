@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import { Outlet } from "react-router-dom";
+import useResponsiveStyles from "../../../utils/MediaQuery";
 import CustomContainer from "../CustomContainer";
 import Navbar from "../admin/Navbar";
 import Sidebar from "../admin/Sidebar";
-import useResponsiveStyles from "../../../utils/MediaQuery";
-import DashboardHome from "../../../pages/dashboard/DashboardHome";
-import { Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   const responsive = useResponsiveStyles();
@@ -15,14 +14,13 @@ const Dashboard = () => {
           height: "100%",
           width: "100vw",
           display: "flex",
+          flexDirection: responsive.isMobile ? "column" : "row",
           maxHeight: "862px",
-          backgroundColor: "",
-          // position:'fixed',//changes-1,
-          // top:0
         }}
       >
-        <div style={{ height: "100%", width: "100%", position:'sticky',
-              top:0 }}>
+        <div
+          style={{ height: "100%", width: "100%", position: "sticky", top: 0 }}
+        >
           <div
             style={{
               height: "10%",
@@ -31,15 +29,15 @@ const Dashboard = () => {
               justifyContent: "center",
               padding: "0 1rem 0 1rem",
               boxShadow: "0 2px 3px -1px rgba(0, 0, 0, 0.5)",
-              position:'sticky',
-              top:0,
-              backgroundColor:'#fff'
+              position: "sticky",
+              top: 0,
+              backgroundColor: "#fff",
             }}
           >
             <Navbar />
           </div>
           <div style={{ height: "90%", display: "flex" }}>
-            {!responsive.isMobile ? (
+            {!responsive.isMobile && (
               <div
                 style={{
                   height: "90%",
@@ -51,18 +49,40 @@ const Dashboard = () => {
               >
                 <Sidebar />
               </div>
-            ) : (
-              ""
             )}
             <div style={{ backgroundColor: "", width: "100%" }}>
-              {/* <DashboardHome /> */}
-              <Outlet/>
+              <Outlet />
             </div>
           </div>
         </div>
-        </div>
+
+        {responsive.isMobile && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              padding: "0rem 1rem",
+              marginBottom: "1rem",
+            }}
+          >
+            <Sidebar />
+          </div>
+        )}
+      </div>
     </CustomContainer>
   );
 };
 
 export default Dashboard;
+
+{
+  /* <>
+      {visible && <Backdrop onClick={onClose} />}
+      <SidebarWrapper visible={visible}>
+        <SidebarContent>
+          {/* Sidebar content and functionality here */
+}
+//       <button onClick={onClose}>Close Sidebar</button>
+//     </SidebarContent>
+//   </SidebarWrapper>
+// </> */}

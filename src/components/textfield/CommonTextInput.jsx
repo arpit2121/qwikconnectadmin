@@ -7,20 +7,27 @@ import CustomAllTypography from "../typography/CustomTypograpgy";
 import { makeStyles } from "@mui/styles";
 import { MenuItem, Select } from "@mui/material";
 import { styled } from "@mui/material";
-
 import _ from "lodash";
 import SearchIcon from "../icons/SearchIcon";
+import CountryList from "country-list-with-dial-code-and-flag";
 
 const CustomSelect = styled(Select)(({ theme }) => ({
   width: "100%",
-  height: "3.5rem",
+  height: "2.5rem",
   borderRadius: "1rem",
   fontSize: "16px",
-  padding:'16px',
-  "&:focus": {
-    border: 'none',
+  padding: "0.5rem",
+  fontFamily: "nunito",
+  // boxShadow: "none",
+  ".MuiOutlinedInput-notchedOutline": { border: 0 },
+  "&.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
+    border: 0,
+  },
+  "&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+    border: 0,
   },
 }));
+
 const useStyles = makeStyles({
   mainContainer: {
     width: (props) => (props?.width ? props?.width : "100%"),
@@ -32,7 +39,7 @@ const useStyles = makeStyles({
     marginRight: "0.62rem",
   },
   containerStyles: {
-    padding: (props) => (props?.type == "dropdown" ? "0rem" : "1rem 1.25rem"),
+    padding: (props) => (props?.type == "dropdown" ? "0rem" : "0.5rem 1.25rem"),
     display: "flex",
     justifyContent: "start",
     alignItems: "center",
@@ -46,7 +53,9 @@ const useStyles = makeStyles({
       border: "1px solid #605DEC",
     },
     border: (props) =>
-      `1px solid ${props?.status ? props?.getStatusColor(props?.status) : "#F7F7FD"}`,
+      `1px solid ${
+        props?.status ? props?.getStatusColor(props?.status) : "#F7F7FD"
+      }`,
     borderRadius: (props) => (props?.curvedBorder ? "1.125rem" : "unset"),
   },
   iconStyles: {
@@ -82,16 +91,44 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
   },
+  countryCode:{
+    display:'flex',
+    justifyContent:"space-between",
+    alignItems:'center',
+    gap:'0.5rem'
+  }
 });
 
 const CommonTextInput = ({
   style = {},
   width,
   extraText,
-  options = [ "Software Engineer", "Doctor", "Teacher", "Designer", "Accountant", "Writer", "Chef", "Electrician", "Mechanic", "Artist", "Photographer", "Lawyer", "Marketing Manager", "Sales Representative", "Nurse", "Architect", "Police Officer", "Pilot", "Financial Analyst", "Data Scientist", "Other", ],
+  options = [
+    "Software Engineer",
+    "Doctor",
+    "Teacher",
+    "Designer",
+    "Accountant",
+    "Writer",
+    "Chef",
+    "Electrician",
+    "Mechanic",
+    "Artist",
+    "Photographer",
+    "Lawyer",
+    "Marketing Manager",
+    "Sales Representative",
+    "Nurse",
+    "Architect",
+    "Police Officer",
+    "Pilot",
+    "Financial Analyst",
+    "Data Scientist",
+    "Other",
+  ],
   type,
   startIcon,
-  endIcon ,
+  endIcon,
   placeholder = "Write here",
   title,
   value = "",
@@ -99,12 +136,12 @@ const CommonTextInput = ({
   searchInput,
   status,
   curvedBorder = true,
-  onClick = () =>{},
+  onClick = () => {},
   type1,
 }) => {
   const inputRef = React.createRef();
-
   const [isFocused, setIsFocused] = useState(false);
+  const [countryCode, setCountryCode] = useState("+91");
 
   const statusMap = {
     error: { color: "#FFD8D8", icon: ErrorIcon },
@@ -130,7 +167,10 @@ const CommonTextInput = ({
   const handleChangeSelect = (e) => {
     setValue(e);
   };
-
+  const handleCountryChange = (e) => {
+    setCountryCode(e.target.value);
+  };
+  const allCountryList = CountryList.getAll();
   const handleClick = () => {
     inputRef.current.focus();
   };
@@ -148,12 +188,32 @@ const CommonTextInput = ({
           </div>
         )}
         {extraText && (
-          <CustomAllTypography
-            sx={{ marginRight: "0.62rem" }}
-            name={extraText}
-            variant="body2"
-            color="#9D99AC"
-          />
+          <div style={{ width: 'max-content',marginRight:"0.62rem" }}>
+            <CustomSelect
+              IconComponent={() => null}
+              inputProps={{ sx: { padding: "0 !important",color:'#9D99AC' } }}
+              sx={{ padding: 0 }}
+              renderValue={(selected) => selected}
+              value={countryCode}
+              onChange={handleCountryChange}
+              className={classes.countryList}
+              onClick={(e) => e.stopPropagation()}
+              native={false}
+            >
+              {allCountryList?.map((elem, index) => (
+                <MenuItem key={index} value={elem?.dialCode}>
+                  <div className={classes.countryCode}>
+                    <span>{elem?.flag}</span>
+                    <CustomAllTypography
+                      name={elem?.dial_code}
+                      variant="body3"
+                      color="#9D99AC"
+                    />
+                  </div>
+                </MenuItem>
+              ))}
+            </CustomSelect>
+          </div>
         )}
         {searchInput && <SearchIcon className={classes.searchIcon} />}
         <div className={classes.inputdiv}>
@@ -167,7 +227,7 @@ const CommonTextInput = ({
           {type != "dropdown" ? (
             <input
               onChange={handleChange}
-              type= {type1 ? type1 : "text" }
+              type={type1 ? type1 : "text"}
               label={title}
               value={value}
               placeholder={placeholder}
@@ -178,7 +238,6 @@ const CommonTextInput = ({
               autoComplete="true"
             />
           ) : (
-
             <CustomSelect
               value={value}
               displayEmpty
@@ -196,7 +255,7 @@ const CommonTextInput = ({
                 return selected?.join(", ");
               }}
               onChange={handleChangeSelect}
-              sx={{ background: "none",border:'none' }}
+              sx={{ background: "none", border: "none" }}
             >
               {options.map((menuItem, index) => (
                 <MenuItem key={index} value={MenuItem}>
@@ -207,7 +266,11 @@ const CommonTextInput = ({
           )}
         </div>
         {endIcon && (
-          <div className={classes.iconStyles} style={{ marginLeft: "0.62rem" }} onClick={onClick}>
+          <div
+            className={classes.iconStyles}
+            style={{ marginLeft: "0.62rem" }}
+            onClick={onClick}
+          >
             {endIcon}
           </div>
         )}

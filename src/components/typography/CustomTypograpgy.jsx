@@ -29,7 +29,7 @@ export const CustomTypography = styled(Typography)(
       fontFamily: "Nunito",
       fontWeight: 700,
       fontSize: responsive.isMobile
-        ? "1.125rempx"
+        ? "1.125rem"
         : responsive.isTablet
         ? "1.5rem"
         : "2rem",
@@ -87,15 +87,16 @@ export const CustomTypography = styled(Typography)(
   })
 );
 
-const CustomAllTypography = ({ name, variant, sx={}, fontStyle,textcolor }) => {
+const CustomAllTypography = ({ name, variant, sx={}, fontStyle, textcolor}) => {
   const responsive = useResponsiveStyles();
+  // console.log(responsive)
   return (
     <CustomTypography
       variant={variant}
       responsive={responsive}
       fontStyle={fontStyle}
-      // sx={sx}
-      sx={{color:textcolor}}
+      
+      sx={{...sx,color:textcolor}}
     >
       {name}
     </CustomTypography>
