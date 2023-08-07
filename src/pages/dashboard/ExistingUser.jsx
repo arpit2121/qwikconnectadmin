@@ -14,6 +14,10 @@ import JobCard from "./JobCard";
 
 const ExistingUser = () => {
   const responsvie = useResponsiveStyles();
+
+  const cardDivStyle={display:'flex',gap:'2rem',padding:'1rem',flexWrap:'wrap'}
+  const cardDivStyleMobile={display:'flex',gap:'2rem',minWidth:'100%' ,overflowX:'scroll',padding:'1rem'}
+  const cardStyle={minWidth:responsvie.isMobile?'90%':'31%'}
   return (
     <div style={{ padding: "2rem" }}>
       <div
@@ -39,7 +43,27 @@ const ExistingUser = () => {
           </CustomInputButton>
         </div>
       </div>
+      <div style={responsvie?.isMobile?cardDivStyleMobile:cardDivStyle}>
+
+  
+     <div style={cardStyle}>
       <JobCard/>
+      </div> 
+     <div style={cardStyle}>
+      <JobCard/>
+      </div> 
+     <div style={cardStyle}>
+      <JobCard/>
+      </div> 
+     <div style={cardStyle}>
+      <JobCard/>
+      </div> 
+     <div style={cardStyle}>
+      <JobCard/>
+      </div> 
+  
+    
+      </div>
     </div>
   );
 };

@@ -11,7 +11,7 @@ const useResponsiveStyles = () => {
   useEffect(() => {
     const handleResize = () => {
       const { innerWidth } = window;
-
+console.log('inner',innerWidth)
       setResponsive({
         isMobile: innerWidth < 640,
         isTablet: innerWidth >= 640 && innerWidth < 1280,

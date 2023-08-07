@@ -20,6 +20,7 @@ const CommonProfile = ({
         display:'flex',
         gap: "1rem",
         alignItems: "center",
+        marginBottom: responsive.isMobile ? "2rem" : 0 ,
         ...style
       }}
     >

@@ -10,6 +10,7 @@ import userplus from "../../assets/svg/userPlus.svg";
 import rejected from "../../assets/svg/rejected.svg";
 import JobCard from "./JobCard";
 import StatsTopBar from "./StatsTopBar";
+import CommonProfileBar from "./CommonProfileBar";
 
 const DashBoardMail = () => {
   const responsive = useResponsiveStyles();
@@ -22,19 +23,9 @@ const DashBoardMail = () => {
           : "0 0 3.94rem 0 3.94rem",
       }}
     >
-      <div
-        style={{
-          marginTop: "4.06rem",
-          display: responsive.isMobile ? "" : "flex",
-          justifyContent: "space-between",
-          padding: '0px 50px',
-        }}
-      >
-        <CustomAllTypography name={"Overview"} variant={"h3"} />
-
-        <StatsTopBar />
-      </div>
+      <CommonProfileBar  title={'Overview'} showProfile={false} />
       <div style={{ marginTop: "4rem" }}>
+        <JobCard />
         <JobCard />
       </div>
     </div>
