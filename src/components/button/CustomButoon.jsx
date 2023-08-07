@@ -4,7 +4,7 @@ import { Button } from '@mui/material';
 import useResponsiveStyles from '../../utils/MediaQuery';
 import useNavigation from '../../utils/NaivigateTo';
 
-export  const CustomInputButton = styled(Button)(({ theme, responsive, variant, size,width }) => {
+export  const CustomInputButton = styled(Button)(({ theme, responsive, variant, size,width,bgcolor }) => {
   let padding;
   switch (size) {
     case 'large':
@@ -66,7 +66,7 @@ const CustomButton = (props) => {
   };
   return (
     <div>
-      <CustomInputButton width={props?.width} variant={props.variant?props.variant:"contained"} color="primary" responsive={responsive} onClick={handleButtonClick}>
+      <CustomInputButton width={props?.width} variant={props.variant?props.variant:"contained"} color="primary" responsive={responsive} onClick={handleButtonClick} sx={{backgroundColor:props.bgcolor}}>
         {props.name}
       </CustomInputButton>
     </div>

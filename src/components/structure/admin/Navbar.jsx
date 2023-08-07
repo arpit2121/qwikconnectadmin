@@ -6,8 +6,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import CustomAllTypography from "../../typography/CustomTypograpgy";
-import CustomButton, { CustomInputButton } from "../../button/CustomButoon";
-// import CustomDrawer from './Drawer';
+import { CustomInputButton } from "../../button/CustomButoon";
 
 const Navbar = ({ job, onClick }) => {
   const responsive = useResponsiveStyles();

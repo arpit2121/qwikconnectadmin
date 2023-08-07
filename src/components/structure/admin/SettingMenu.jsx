@@ -10,6 +10,7 @@ import SettingsIcon from "../../icons/SettingsIcon";
 import SupportIcon from "../../icons/SupportIcon";
 import UserPlusIcon from "../../icons/UserplusIcon";
 import CustomAllTypography from "../../typography/CustomTypograpgy";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles({
   menuList: {
@@ -24,10 +25,12 @@ const SettingMenu = ({ open, setOpen }) => {
     {
       icon: <ProfileIcon />,
       title: "View profile",
+      url: "myprofile"
     },
     {
       icon: <CreditCardIcon />,
       title: "Plans & Billings",
+      url: "myPlans"
     },
     {
       icon: <SettingsIcon height={16} width={16} color="#344054" />,
@@ -40,6 +43,7 @@ const SettingMenu = ({ open, setOpen }) => {
     {
       icon: <PasswordKeyIcon />,
       title: "Change password",
+      url: "changepass"
     },
     {
       icon: <SupportIcon />,
@@ -56,9 +60,11 @@ const SettingMenu = ({ open, setOpen }) => {
   ];
   const classes = useStyles();
   const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const navigate = useNavigate();
   const openSetting = Boolean(open);
-  const handleMenuItemClick = (event, index) => {
+  const handleMenuItemClick = (event, index,url) => {
     setSelectedIndex(index);
+    navigate(url)
     setOpen(false);
   };
 
@@ -87,7 +93,7 @@ const SettingMenu = ({ open, setOpen }) => {
           className={classes.menuList}
           key={option}
           selected={index === selectedIndex}
-          onClick={(event) => handleMenuItemClick(event, index)}
+          onClick={(event) => handleMenuItemClick(event, index,option.url)}
         >
           <div
             style={{
