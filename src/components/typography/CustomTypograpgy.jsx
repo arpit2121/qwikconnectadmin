@@ -109,8 +109,8 @@ const CustomAllTypography = ({ name, variant, sx={}, fontStyle, textcolor}) => {
       variant={variant}
       responsive={responsive}
       fontStyle={fontStyle}
-      // sx={sx}
-      sx={{color:textcolor}}
+      
+      sx={{...sx,color:textcolor}}
     >
       {name}
     </CustomTypography>

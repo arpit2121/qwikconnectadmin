@@ -16,17 +16,17 @@ const SearchIcon = ({height=24,width=24,className,onClick}) => {
           id="Vector"
           d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z"
           stroke="#212121"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokelinejoin="round"
         />
         <path
           id="Vector_2"
           d="M21 21L16.65 16.65"
           stroke="#212121"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokelinejoin="round"
         />
       </g>
     </svg>
