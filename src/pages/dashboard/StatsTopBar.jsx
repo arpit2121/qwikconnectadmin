@@ -3,6 +3,7 @@ import useResponsiveStyles from "../../utils/MediaQuery";
 import CustomAllTypography from "../../components/typography/CustomTypograpgy";
 import UserPlusIcon from "../../components/icons/UserplusIcon";
 import UserIcon from "../../components/icons/UserIcon";
+import RejectedIcon from "../../components/icons/RejectedIcon";
 
 const StatsTopBar = ({ application = 23, shortlisted = 2, rejected = 3 }) => {
   const responsive = useResponsiveStyles();
@@ -18,7 +19,7 @@ const StatsTopBar = ({ application = 23, shortlisted = 2, rejected = 3 }) => {
       title: "Shortlisted",
     },
     {
-      icon: <UserPlusIcon style={{ marginRight: "0.9rem" }} />,
+      icon: <RejectedIcon style={{ marginRight: "0.9rem" }} />,
       count: rejected,
       title: "Rejected",
     },
