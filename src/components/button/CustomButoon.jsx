@@ -20,13 +20,15 @@ export  const CustomInputButton = styled(Button)(({ theme, responsive, variant, 
       padding = '0.75rem 1.5rem';
       break;
     case 'extra-small':
+      padding = '0.5rem 1.5rem';
+      break;
     default:
       padding = '0rem 1.5rem';
       break;
   }
 
   return {
-    display:'flex',
+    display:'flex', 
     // gap:'0.5rem',
     borderRadius: '1.125rem',
     width: width?'100%':'',

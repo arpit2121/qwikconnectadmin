@@ -1,7 +1,7 @@
 import React from "react";
 import useResponsiveStyles from "../../utils/MediaQuery";
 import CustomAllTypography from "../../components/typography/CustomTypograpgy";
-import UserPlusIcon from "../../components/icons/UserplusIcon";
+import UserPlusIcon from "../../components/icons/UserIcon";
 import UserIcon from "../../components/icons/UserIcon";
 
 const StatsTopBar = ({ application = 23, shortlisted = 2, rejected = 3 }) => {
