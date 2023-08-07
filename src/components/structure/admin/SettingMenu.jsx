@@ -8,7 +8,7 @@ import PasswordKeyIcon from "../../icons/PasswordKey";
 import ProfileIcon from "../../icons/ProfileIcon";
 import SettingsIcon from "../../icons/SettingsIcon";
 import SupportIcon from "../../icons/SupportIcon";
-import UserPlusIcon from "../../icons/UserplusIcon";
+import UserPlusIcon from "../../icons/SupportIcon";
 import CustomAllTypography from "../../typography/CustomTypograpgy";
 import { useNavigate } from "react-router-dom";
 

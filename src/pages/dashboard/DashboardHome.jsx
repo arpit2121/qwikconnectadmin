@@ -1,15 +1,9 @@
 import React from "react";
-import users from "../../assets/svg/user.svg";
-import userPlus from "../../assets/svg/userPlus.svg";
 import user1 from "../../assets/svg/user1.svg";
 import UsersComponent from "../../components/admin/UsersComponent";
 import CustomAllTypography from "../../components/typography/CustomTypograpgy";
 import useResponsiveStyles from "../../utils/MediaQuery";
-import NonExisting from "./NonExisting";
-import ExistingUser from "./ExistingUser";
 import { Outlet } from "react-router-dom";
-import UserIcon from "../../components/icons/UserIcon";
-import UserPlusIcon from "../../components/icons/UserplusIcon";
 import StatsTopBar from "./StatsTopBar";
 
 const DashboardHome = () => {
