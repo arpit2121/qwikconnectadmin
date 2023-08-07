@@ -6,7 +6,7 @@ import { Typography } from "@mui/material";
 export const CustomTypography = styled(Typography)(
   ({ theme, responsive, fontStyle }) => ({
     "&.MuiTypography-h1": {
-      fontFamily: "Nunito",
+      fontFamily: "Nunito Sans",
       fontWeight: 700,
       fontSize: responsive.isMobile
         ? "1.5rem"
@@ -16,7 +16,7 @@ export const CustomTypography = styled(Typography)(
       lineHeight: responsive.isMobile ? "120%" : "110%",
     },
     "&.MuiTypography-h2": {
-      fontFamily: "Nunito",
+      fontFamily: "Nunito Sans",
       fontWeight: 700,
       fontSize: responsive.isMobile
         ? "1.25rem"
@@ -26,7 +26,7 @@ export const CustomTypography = styled(Typography)(
       lineHeight: "120%",
     },
     "&.MuiTypography-h3": {
-      fontFamily: "Nunito",
+      fontFamily: "Nunito Sans",
       fontWeight: 700,
       fontSize: responsive.isMobile
         ? "1.125rem"
@@ -36,7 +36,7 @@ export const CustomTypography = styled(Typography)(
       lineHeight: "120%",
     },
     "&.MuiTypography-h4": {
-      fontFamily: "Nunito",
+      fontFamily: "Nunito Sans",
       fontWeight: 700,
       fontSize: responsive.isMobile
         ? "1rem"
@@ -46,7 +46,7 @@ export const CustomTypography = styled(Typography)(
       lineHeight: "120%",
     },
     "&.MuiTypography-h5": {
-      fontFamily: "Nunito",
+      fontFamily: "Nunito Sans",
       fontWeight: 700,
       fontSize: responsive.isMobile
         ? "0.875rem"
@@ -56,7 +56,7 @@ export const CustomTypography = styled(Typography)(
       lineHeight: "120%",
     },
     "&.MuiTypography-body1": {
-      fontFamily: "Nunito",
+      fontFamily: "Nunito Sans",
       fontWeight: 400,
       fontSize: responsive.isMobile
         ? "1rem"
@@ -70,7 +70,7 @@ export const CustomTypography = styled(Typography)(
         : "140%",
     },
     "&.MuiTypography-body2": {
-      fontFamily: "Nunito",
+      fontFamily: "Nunito Sans",
       fontWeight: 400,
       fontSize: responsive.isMobile
         ? "0.875rem"

@@ -5,8 +5,15 @@ import CustomContainer from "../CustomContainer";
 import Navbar from "../admin/Navbar";
 import Sidebar from "../admin/Sidebar";
 
+
+
+
 const Dashboard = () => {
   const responsive = useResponsiveStyles();
+  const [sidebar, setSideBar] = useState(false);
+  const handleClick = () => {
+    setSideBar(!sidebar)
+  };
   return (
     <CustomContainer>
       <div
@@ -34,7 +41,7 @@ const Dashboard = () => {
               backgroundColor: "#fff",
             }}
           >
-            <Navbar />
+            <Navbar onClick={handleClick} />
           </div>
           <div style={{ height: "90%", display: "flex" }}>
             {!responsive.isMobile && (

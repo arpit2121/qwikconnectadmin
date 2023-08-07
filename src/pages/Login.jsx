@@ -13,29 +13,37 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const navigation = useNavigation();
   const navigate = useNavigate();
-  const [signinuser, { data, isError, isSuccess, error }] =
-    useSigninUserMutation();
+  const [signinuser, {data,isError,isSuccess,error}] = useSigninUserMutation();
 
   // --- functions ---
   const handleButtonClick = () => {
-    console.log(email);
-    signinuser(email);
-    if (true) {
-      //data=="alreadyExists"
+    console.log(email)
+    signinuser(email)
+    if(true)//data=="alreadyExists"
+    {
       // navigation.goTo(true ? "/password" : "/otp");
       //data === "alreadyExists"
-      navigate(true ? "/password/enterpass" : "/otp", {
-        state: {
-          newUser: true,
-          header: "Welcome Back!",
-          belowHeader: "Enter your password for youremail@example.com",
-          button: "Log in",
-          footer: "",
-        },
-      });
+      navigate( true? "/password/enterpass" : "/otp", {
+        state: { newUser: true,
+        header: "Welcome Back!",
+        belowHeader: "Enter your password for youremail@example.com",
+        button: "Log in",
+        footer: ""
+        }
+      })
     }
-
+    
+    console.log("error",error, data)
   };
+
+  /*
+  {
+    h1: ""
+    h2: ""
+    button: ""
+    data: ""
+  }
+   */
 
 
   return (
