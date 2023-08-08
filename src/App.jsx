@@ -3,7 +3,7 @@ import Home from "./components/structure/Home/Home";
 import OnBoardingPage from "./pages/OnBoardingPage";
 import Password from "./pages/Password";
 import Login from "./pages/Login";
-import Dashboard from "./components/structure/admin/dashboard";
+import Dashboard from "./components/structure/admin/Dashboard";
 import OtpVerification from "./pages/OtpVerification";
 import { Routes, Route } from "react-router-dom";
 import JobPostingStepOne from "./pages/dashboard/jobposting/JobPostingStepOne";

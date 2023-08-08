@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Outlet } from "react-router-dom";
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import CustomContainer from "../CustomContainer";
@@ -74,15 +74,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
-{
-  /* <>
-      {visible && <Backdrop onClick={onClose} />}
-      <SidebarWrapper visible={visible}>
-        <SidebarContent>
-          {/* Sidebar content and functionality here */
-}
-//       <button onClick={onClose}>Close Sidebar</button>
-//     </SidebarContent>
-//   </SidebarWrapper>
-// </> */}

@@ -1,46 +1,56 @@
 import React from "react";
 
-const UserPlusIcon = ({ height = 32, width = 32, className,color="#AA55FF",style,onClick=()=>{} }) => {
+function UserPlusIcon() {
   return (
     <svg
-      onClick={onClick}
-      style={style}
-      className={className}
-      width={width}
-      height={height}
-      viewBox="0 0 32 32"
+      width="33"
+      height="33"
+      viewBox="0 0 33 33"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path
-        d="M21.3335 28V25.3333C21.3335 23.9188 20.7716 22.5623 19.7714 21.5621C18.7712 20.5619 17.4147 20 16.0002 20H6.66683C5.25234 20 3.89579 20.5619 2.89559 21.5621C1.8954 22.5623 1.3335 23.9188 1.3335 25.3333V28"
-        stroke={color}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokelinejoin="round"
-      />
-      <path
-        d="M11.3333 14.6667C14.2789 14.6667 16.6667 12.2789 16.6667 9.33333C16.6667 6.38781 14.2789 4 11.3333 4C8.38781 4 6 6.38781 6 9.33333C6 12.2789 8.38781 14.6667 11.3333 14.6667Z"
-        stroke={color}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokelinejoin="round"
-      />
-      <path
-        d="M26.6665 10.6667V18.6667"
-        stroke={color}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokelinejoin="round"
-      />
-      <path
-        d="M30.6665 14.6667H22.6665"
-        stroke={color}
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokelinejoin="round"
-      />
+      <g clip-path="url(#clip0_184_5101)">
+        <path
+          d="M21.6134 28.2422V25.5755C21.6134 24.161 21.0515 22.8045 20.0513 21.8043C19.0511 20.8041 17.6945 20.2422 16.28 20.2422H6.94669C5.53221 20.2422 4.17565 20.8041 3.17546 21.8043C2.17526 22.8045 1.61336 24.161 1.61336 25.5755V28.2422"
+          stroke="#AA55FF"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M11.6134 14.9089C14.5589 14.9089 16.9467 12.521 16.9467 9.57552C16.9467 6.63 14.5589 4.24219 11.6134 4.24219C8.66784 4.24219 6.28003 6.63 6.28003 9.57552C6.28003 12.521 8.66784 14.9089 11.6134 14.9089Z"
+          stroke="#AA55FF"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M26.9467 10.9089V18.9089"
+          stroke="#AA55FF"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M30.9467 14.9089H22.9467"
+          stroke="#AA55FF"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_184_5101">
+          <rect
+            width="32"
+            height="32"
+            fill="white"
+            transform="translate(0.280029 0.242188)"
+          />
+        </clipPath>
+      </defs>
     </svg>
   );
-};
+}
+
 export default UserPlusIcon;
