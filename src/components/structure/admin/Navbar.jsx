@@ -52,7 +52,7 @@ const Navbar = ({ job, onClick }) => {
               to="/jobposting/basicDaetails"
               endIcon={<ArrowForwardIcon />}
             >
-              Verify
+              New Job
             </CustomInputButton>
           )
         ) : (

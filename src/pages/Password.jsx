@@ -31,12 +31,13 @@ const Password = () => {
   };
 
   const handleClick = () => {
-    verifyPassword(pass);
-    if (data.name) {
+    console.log(state.goTO)
+    // verifyPassword(pass);
+    if (true) {
       //name have something???then navigate to dashbaord page else navigate to onBoard page
-      navigate("dashbaord page");
+      navigate("/dashboard/home/existinguser");
     } else {
-      navigate("on-board page");
+      navigate("/on-boarding");
     }
   };
 
@@ -75,14 +76,16 @@ const Password = () => {
       >
         <CustomAllTypography
           variant={"h1"}
-          name={newUser ? "Set Password" : "Welcome Back!"}
+          // name={newUser ? "Set Password" : "Welcome Back!"}
+          name= {state.header}
         />
         <CustomAllTypography
-          name={
-            newUser
-              ? "for youremail@example.com"
-              : "Enter your password for youremail@example.com"
-          }
+          // name={
+          //   newUser
+          //     ? "for youremail@example.com"
+          //     : "Enter your password for youremail@example.com"
+          // }
+          name= {state.belowHeader}
           variant={"h5"}
         />
       </div>
@@ -107,7 +110,7 @@ const Password = () => {
         >
           {/* <TextDescription responsive={responsive} size={'9px'} color={'#605DEC'} onClick={()=>console.log("hi")}>{newUser?'':"Forgot Password?"}</TextDescription> */}
           <CustomInputButton variant="text" onClick={forgetPassword}>
-            {newUser ? "" : "Forgot Password?"}
+            {state.header ==='Set Password' ? "" : "Forgot Password?"}
           </CustomInputButton>
         </div>
       </div>
@@ -119,7 +122,7 @@ const Password = () => {
           responsive
           onClick={handleClick}
         >
-          {state.newUser ? "Login" : "Register"}
+          {state.button}
         </CustomInputButton>
       </div>
     </div>

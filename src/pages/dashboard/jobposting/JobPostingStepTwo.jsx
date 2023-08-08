@@ -1,12 +1,16 @@
 import React from "react";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
-import { AiOutlineInfoCircle } from "react-icons/ai";
-import { FiEdit2 } from "react-icons/fi";
-import { RiDeleteBin6Line } from "react-icons/ri";
 import { CustomCard } from "../../../components/card/CustomCard";
 import useResponsiveStyles from "../../../utils/MediaQuery";
-import Notification from "../../../components/notification/Notification";
-import CustomButton from "../../../components/button/CustomButoon";
+import EditIcon from '../../../components/icons/EditIcon';
+import DeleteIcon from "../../../components/icons/DeleteIcon";
+import InfoIcon from "../../../components/icons/InfoIcon";
+import CommonTextInput from "../../../components/textfield/CommonTextInput";
+import { Body3 } from "../../../components/typography/Fields";
+import { CustomInputButton } from "../../../components/button/CustomButoon";
+import AddIcon from "../../../components/icons/AddIcon";
+import DbIcon from "../../../components/icons/DbIcon";
+
 
 const JobPostingStepTwo = () => {
   const responsive = useResponsiveStyles();
@@ -69,7 +73,7 @@ const JobPostingStepTwo = () => {
                 name={"Minimum passing per Parameter"}
                 variant={"h6"}
               />
-              <AiOutlineInfoCircle width={"1.5rem"} height={"1.5rem"} />
+              <InfoIcon />
             </div>
             <div>
               <CustomAllTypography variant={"body3"} name={"dropdown"} />
@@ -97,8 +101,8 @@ const JobPostingStepTwo = () => {
                             justifyContent: "space-between",
                           }}
                         >
-                          <FiEdit2 />
-                          <RiDeleteBin6Line />
+                          <EditIcon/>
+                          <DeleteIcon/>
                         </div>
                       </div>
                     </div>
@@ -116,8 +120,8 @@ const JobPostingStepTwo = () => {
               backgroundColor: "",
             }}
           >
-            <CustomAllTypography name={"Sample Ratings"} variant={"h4"} />
-            <CustomAllTypography name={"Add Parameter"} variant={"h4"} />
+            <Body3>Sample Ratings</Body3>
+            <CustomInputButton variant="outlined" size="medium" startIcon={<AddIcon/>} sx={{width:'30%'}}>Add Parameter</CustomInputButton>
           </div>
         </div>
         <div style={{ backgroundColor: "", paddingTop: "30px" }}>
@@ -129,12 +133,19 @@ const JobPostingStepTwo = () => {
                 alignItems: "center",
               }}
             >
-              <CustomAllTypography name={"Add Questions"} variant={"h1"} />
-              <div>
+              <CustomAllTypography name={"Add Questions"} variant={"h2"} />
+              <div style={{display:'flex',gap:'0.5rem',justifyContent:'center',alignItems:'center'}}>
+                <DbIcon/>
                 <CustomAllTypography
-                  name={"Questions Added"}
-                  variant={"body2"}
+                  name={"10"}
+                  variant={"h3"}
                 />
+               <div>
+               <Body3
+                >Questions</Body3>
+                <Body3
+                >Added</Body3>
+               </div>
               </div>
             </div>
             <div
@@ -152,10 +163,15 @@ const JobPostingStepTwo = () => {
                   name={"Display Questions"}
                   variant={"body1"}
                 />
-                <AiOutlineInfoCircle />
+                {/* <AiOutlineInfoCircle /> */}
+                <InfoIcon/>
               </div>
               <div>
-                <CustomAllTypography name={"Dropdown"} variant={"body2"} />
+                <CommonTextInput
+                    style={{ margin: "1.5rem 0rem" }}
+                    type="dropdown"
+                    placeholder="All"
+                  />
               </div>
             </div>
           </div>

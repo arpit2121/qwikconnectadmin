@@ -15,6 +15,7 @@ import user1 from '../../../assets/svg/user1.svg'
 import AwardIcon from '../../../components/icons/AwardIcon'
 import { Body3 } from '../../../components/typography/Fields'
 import StatusButton from '../../../components/button/StatusButton'
+import { useNavigate } from 'react-router-dom'
 
 const data = [
    {
@@ -52,6 +53,7 @@ const data = [
 
 const JobPostingDetailsPage = () => {
   const responsive = useResponsiveStyles();
+  const navigate = useNavigate();
   return (
     <CustomContainer>
       <div style={{ height: '100%', width: '100vw',maxHeight:'862px'}}>
@@ -128,7 +130,7 @@ const JobPostingDetailsPage = () => {
                 
                   data.map((users)=>{
                     return(
-                    <CustomCard sx={{paddingTop:'1.25rem',display:'flex',justifyContent:'space-between',alignItems:'center',marginTop:'2px'}}>
+                    <CustomCard sx={{paddingTop:'1.25rem',display:'flex',justifyContent:'space-between',alignItems:'center',marginTop:'2px'}} onClick={()=>navigate("/candidatereview")}>
                     <div style={{width:'10%'}}>{users.profileimage}</div>
                     <div style={{width:'70%',paddingLeft:'20px'}}>
                       <Body3>{users.name}</Body3>
