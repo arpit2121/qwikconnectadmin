@@ -32,14 +32,14 @@ console.log(responsive)
     <div
       style={{
         display: "flex",
-        gap: !responsive.isMobile ? "2rem" : "0.5rem",
+        gap: !responsive.isMobile || responsive.isTablet ? "2rem" : "0.5rem",
         justifyContent: "space-between",
         alignItems: "center",
-        padding: responsive.isMobile ? "1rem 1.5rem" : "0rem",
-        background: responsive.isMobile
+        padding: responsive.isMobile || responsive.isTablet ? "1rem 1.5rem" : "0rem",
+        background: responsive.isMobile || responsive.isTablet
           ? darkspacetheme.colorPallete.aliceBlue
           : "none",
-        borderRadius: responsive.isMobile ? "1.25rem" : "0rem",
+        borderRadius: responsive.isMobile || responsive.isTablet ? "1.25rem" : "0rem",
       }}
     >
       <div style={outerDiv}>

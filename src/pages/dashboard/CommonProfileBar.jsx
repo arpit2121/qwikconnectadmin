@@ -12,18 +12,62 @@ const CommonProfileBar = ({
 }) => {
   const responsive = useResponsiveStyles();
   return (
+    // <div
+    //   style={{
+    //     display: responsive.isMobile ? "" : "flex",
+    //     justifyContent: "space-between",
+    //   }}
+    // >
+    //   <div
+    //     style={{
+    //       marginTop: "2.38rem",
+    //       display: "flex",
+    //       flexDirection: "column",
+    //       gap: "1.5rem",
+    //     }}
+    //   >
+    //     {showProfile && <CommonProfile />}
+    //     {title && <CustomAllTypography name={title} variant={"h3"} />}
+    //   </div>
+    //   {showStatusBar && (
+    //     <div
+    //       style={{
+    //         display: "flex",
+    //         justifyContent: "center",
+    //         alignItems: "center",
+    //         marginTop: "1.5rem",
+    //       }}
+    //     >
+    //       <StatsTopBar />
+    //     </div>
+    //   )}
+    // </div>
     <div
       style={{
-        padding: responsive.isMobile ? "1rem" : "50px",
-        display: "flex",
-        flexDirection: !responsive.isMobile ? "row" : "column",
+        display: responsive.isMobile || responsive.isTablet ? "" : "flex",
         justifyContent: "space-between",
-        
       }}
     >
-      {showProfile && <CommonProfile />}
-      {title && <CustomAllTypography name={title} variant={"h3"} />}
-      {showStatusBar && <StatsTopBar />}
+      {/* <div
+        style={{
+          marginTop: "2.38rem",
+          display: "flex",
+          flexDirection: "column",
+          gap: "1.5rem",
+        }}
+      > */}
+   {showProfile && <CommonProfile />}
+      {/* </div> */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "1.5rem",
+        }}
+      >
+        <StatsTopBar />
+      </div>
     </div>
   );
 };
