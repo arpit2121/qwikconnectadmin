@@ -3,7 +3,6 @@ import CustomContainer from "../../../components/structure/CustomContainer";
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import CustomTabs from "../../../components/admin/Tabs";
 import Navbar from "../../../components/structure/admin/Navbar";
-import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 
 const JobPostingStepOne = () => {
   const responsive = useResponsiveStyles();
