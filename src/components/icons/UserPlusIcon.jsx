@@ -15,30 +15,30 @@ const UserPlusIcon = ({ height = 32, width = 32, className,color="#AA55FF",style
       <path
         d="M21.3335 28V25.3333C21.3335 23.9188 20.7716 22.5623 19.7714 21.5621C18.7712 20.5619 17.4147 20 16.0002 20H6.66683C5.25234 20 3.89579 20.5619 2.89559 21.5621C1.8954 22.5623 1.3335 23.9188 1.3335 25.3333V28"
         stroke={color}
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokelinejoin="round"
       />
       <path
         d="M11.3333 14.6667C14.2789 14.6667 16.6667 12.2789 16.6667 9.33333C16.6667 6.38781 14.2789 4 11.3333 4C8.38781 4 6 6.38781 6 9.33333C6 12.2789 8.38781 14.6667 11.3333 14.6667Z"
         stroke={color}
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokelinejoin="round"
       />
       <path
         d="M26.6665 10.6667V18.6667"
         stroke={color}
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokelinejoin="round"
       />
       <path
         d="M30.6665 14.6667H22.6665"
         stroke={color}
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokelinejoin="round"
       />
     </svg>
   );

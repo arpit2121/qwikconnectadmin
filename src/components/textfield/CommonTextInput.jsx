@@ -9,6 +9,7 @@ import { MenuItem, Select } from "@mui/material";
 import { styled } from "@mui/material";
 import _ from "lodash";
 import SearchIcon from "../icons/SearchIcon";
+import CountryList from "country-list-with-dial-code-and-flag";
 
 const CustomSelect = styled(Select)(({ theme }) => ({
   width: "100%",
@@ -90,6 +91,12 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
   },
+  countryCode:{
+    display:'flex',
+    justifyContent:"space-between",
+    alignItems:'center',
+    gap:'0.5rem'
+  }
 });
 
 const CommonTextInput = ({
@@ -133,8 +140,8 @@ const CommonTextInput = ({
   type1,
 }) => {
   const inputRef = React.createRef();
-
   const [isFocused, setIsFocused] = useState(false);
+  const [countryCode, setCountryCode] = useState("+91");
 
   const statusMap = {
     error: { color: "#FFD8D8", icon: ErrorIcon },
@@ -160,7 +167,10 @@ const CommonTextInput = ({
   const handleChangeSelect = (e) => {
     setValue(e);
   };
-
+  const handleCountryChange = (e) => {
+    setCountryCode(e.target.value);
+  };
+  const allCountryList = CountryList.getAll();
   const handleClick = () => {
     inputRef.current.focus();
   };
@@ -178,12 +188,32 @@ const CommonTextInput = ({
           </div>
         )}
         {extraText && (
-          <CustomAllTypography
-            sx={{ marginRight: "0.62rem" }}
-            name={extraText}
-            variant="body2"
-            color="#9D99AC"
-          />
+          <div style={{ width: 'max-content',marginRight:"0.62rem" }}>
+            <CustomSelect
+              IconComponent={() => null}
+              inputProps={{ sx: { padding: "0 !important",color:'#9D99AC' } }}
+              sx={{ padding: 0 }}
+              renderValue={(selected) => selected}
+              value={countryCode}
+              onChange={handleCountryChange}
+              className={classes.countryList}
+              onClick={(e) => e.stopPropagation()}
+              native={false}
+            >
+              {allCountryList?.map((elem, index) => (
+                <MenuItem key={index} value={elem?.dialCode}>
+                  <div className={classes.countryCode}>
+                    <span>{elem?.flag}</span>
+                    <CustomAllTypography
+                      name={elem?.dial_code}
+                      variant="body3"
+                      color="#9D99AC"
+                    />
+                  </div>
+                </MenuItem>
+              ))}
+            </CustomSelect>
+          </div>
         )}
         {searchInput && <SearchIcon className={classes.searchIcon} />}
         <div className={classes.inputdiv}>

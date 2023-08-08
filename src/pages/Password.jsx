@@ -7,6 +7,13 @@ import CommonTextInput from "../components/textfield/CommonTextInput";
 import PasswordIcon from "../components/icons/PasswordIcon";
 import { useVerifyPasswordMutation } from "../services/auth";
 
+/*
+3 conditon
+1 - come from existing user
+2 - come after otp
+3 - come after forget password
+*/
+
 const Password = () => {
   const [newUser, setNewUser] = useState(false);
   const [pass, setPass] = useState("");
@@ -25,6 +32,7 @@ const Password = () => {
   const handleClick = () => {
     verifyPassword(pass);
     if (data.name) {
+      //name have something???then navigate to dashbaord page else navigate to onBoard page
       navigate("dashbaord page");
     } else {
       navigate("on-board page");
@@ -96,6 +104,7 @@ const Password = () => {
             paddingTop: "4px",
           }}
         >
+          {/* <TextDescription responsive={responsive} size={'9px'} color={'#605DEC'} onClick={()=>console.log("hi")}>{newUser?'':"Forgot Password?"}</TextDescription> */}
           <CustomInputButton variant="text" onClick={forgetPassword}>
             {newUser ? "" : "Forgot Password?"}
           </CustomInputButton>

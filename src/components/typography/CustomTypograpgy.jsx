@@ -83,33 +83,20 @@ export const CustomTypography = styled(Typography)(
         ? "130%"
         : "140%",
     },
-    // '&:hover': {
-    //   cursor: 'pointer',
-    // },
-    // '&.MuiTypography-body3': {
-    //   fontWeight: 'regular',
-    //   fontColor: 'grey',
-    //   fontSize: responsive.isMobile
-    //     ? '0.875rem'
-    //     : responsive.isTablet
-    //     ? '0.875rem'
-    //     : '0.875rem',
-    // },
-    // '&:hover': {
-    //   cursor: 'pointer',
-    // },
+
   })
 );
 
 const CustomAllTypography = ({ name, variant, sx={}, fontStyle, textcolor}) => {
   const responsive = useResponsiveStyles();
+  // console.log(responsive)
   return (
     <CustomTypography
       variant={variant}
       responsive={responsive}
       fontStyle={fontStyle}
-      // sx={sx}
-      sx={{color:textcolor}}
+      
+      sx={{...sx,color:textcolor}}
     >
       {name}
     </CustomTypography>

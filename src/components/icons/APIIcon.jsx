@@ -20,9 +20,9 @@ const APIIcon = ({
       <path
         d="M10.6668 12L14.6668 8L10.6668 4M5.3335 4L1.3335 8L5.3335 12"
         stroke="#344054"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokelinejoin="round"
       />
     </svg>
   );

@@ -3,7 +3,6 @@ import Navbar from "../../../components/structure/admin/Navbar";
 import CustomContainer from "../../../components/structure/CustomContainer";
 import { CustomCard } from "../../../components/card/CustomCard";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
-import CustomizedTextField from "../../../components/textfield/CustomizedTextField";
 import RadioGroupRating from "../../../components/admin/RatingParameter";
 import UsersComponent from "../../../components/admin/UsersComponent";
 import user1 from "../../../assets/svg/user1.svg";
@@ -13,15 +12,16 @@ import { CustomInputButton } from "../../../components/button/CustomButoon";
 import DownloadIcon from "../../../components/icons/DownloadIcon";
 import CommonTextInput from "../../../components/textfield/CommonTextInput";
 import Review from "../../../components/structure/admin/Review";
+import useResponsiveStyles from "../../../utils/MediaQuery";
 
 const CandiatateReview = () => {
+  const responsive = useResponsiveStyles();
   return (
     <CustomContainer>
       <div
         style={{
           height: "100%",
           width: "100vw",
-          // display: "flex",
           maxHeight: "862px",
         }}
       >
@@ -34,21 +34,23 @@ const CandiatateReview = () => {
               justifyContent: "center",
               padding: "0 1rem 0 1rem",
               boxShadow: "0 2px 3px -1px rgba(0, 0, 0, 0.5)",
-              position: "sticky",
+              position:"sticky",
               top: 0,
               backgroundColor: "#fff",
+              zIndex:'1',
+
             }}
           >
             <Navbar />
           </div>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: responsive.isMobile?'':"flex" }}>
             <div
               style={{
-                width: "25%",
+                width: responsive.isMobile?'100%':"25%",
                 // backgroundColor: "red",
-                zIndex: "-1",
-                position: "sticky",
-                top: "10rem",
+                // zIndex: responsive.isMobile?'':"-1",
+                // position: "sticky",
+                // top: "10rem",
                 // border: "1px solid #EBEBEB",
               }}
             >
@@ -56,8 +58,8 @@ const CandiatateReview = () => {
                 style={{
                   border: "1px solid #EBEBEB",
                   padding: "0 1rem 3rem 2rem",
-                  position: "sticky",
-                  top: "5rem",
+                  // position: "sticky",
+                  // top: "5rem",
                 }}
               >
                 <div style={{ marginTop: "3.41rem" }}>
@@ -127,9 +129,9 @@ const CandiatateReview = () => {
             </div>
             <div
               style={{
-                width: "50%",
-                padding: "0 1.5rem 5rem 1.5rem",
-                overflow: "auto",
+                width: responsive.isMobile?'90%':"50%",
+                padding: responsive.isMobile?'0 1rem':"0 1.5rem 5rem 1.5rem",
+                // overflow: responsive.isMobile?'none':"auto",
               }}
             >
               <div style={{ marginTop: "1.66rem" }}>dashboard</div>
@@ -220,18 +222,16 @@ const CandiatateReview = () => {
             </div>
             <div
               style={{
-                width: "25%",
-                // backgroundColor: "",
-                // border: "1px solid #EBEBEB",
-                zIndex: "-1",
+                width: responsive.isMobile?'100%':"25%",
+                zIndex: responsive.isMobile?'':"-1",
               }}
             >
               <div
                 style={{
                   border: "1px solid #EBEBEB",
                   padding: "0 1rem 5rem 2rem",
-                  position: "sticky",
-                  top: "5rem",
+                  // position: responsive.isMobile?'':"sticky",
+                  // top: "5rem",
                 }}
               >
                 <div style={{ marginTop: "6rem" }}>

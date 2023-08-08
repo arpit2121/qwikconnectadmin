@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import CustomContainer from "../CustomContainer";
-import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
-import useResponsiveStyles from "../../../utils/MediaQuery";
 import { Outlet } from "react-router-dom";
+import useResponsiveStyles from "../../../utils/MediaQuery";
+import CustomContainer from "../CustomContainer";
+import Navbar from "../admin/Navbar";
+import Sidebar from "../admin/Sidebar";
 
 
 
@@ -21,6 +21,7 @@ const Dashboard = () => {
           height: "100%",
           width: "100vw",
           display: "flex",
+          flexDirection: responsive.isMobile ? "column" : "row",
           maxHeight: "862px",
         }}
       >
@@ -43,7 +44,7 @@ const Dashboard = () => {
             <Navbar onClick={handleClick} />
           </div>
           <div style={{ height: "90%", display: "flex" }}>
-            {!responsive.isMobile ? (
+            {!responsive.isMobile && (
               <div
                 style={{
                   height: "90%",
@@ -55,27 +56,25 @@ const Dashboard = () => {
               >
                 <Sidebar />
               </div>
-            ) : 
-            (
-
-              // sidebar ? <div sx={{}}><Sidebar/></div> : ""
-            <div style={{ position: 'fixed', width: "50px",top: 50 }}>
-            {sidebar ? 
-            <div style={{ position: 'relative' }}>
-            {/* {sidebar ? <AnimatedSidebar><Sidebar /></AnimatedSidebar> : null} */}
-            </div>
-            : (
-            ""
-            )
-      }
-    </div>
-
             )}
             <div style={{ backgroundColor: "", width: "100%" }}>
               <Outlet />
             </div>
           </div>
         </div>
+
+        {responsive.isMobile && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              padding: "0rem 1rem",
+              marginBottom: "1rem",
+            }}
+          >
+            <Sidebar />
+          </div>
+        )}
       </div>
     </CustomContainer>
   );
@@ -83,18 +82,14 @@ const Dashboard = () => {
 
 export default Dashboard;
 
-
-
-
-
-
-
-{/* <>
+{
+  /* <>
       {visible && <Backdrop onClick={onClose} />}
       <SidebarWrapper visible={visible}>
         <SidebarContent>
-          {/* Sidebar content and functionality here */}
-    //       <button onClick={onClose}>Close Sidebar</button>
-    //     </SidebarContent>
-    //   </SidebarWrapper>
-    // </> */}
+          {/* Sidebar content and functionality here */
+}
+//       <button onClick={onClose}>Close Sidebar</button>
+//     </SidebarContent>
+//   </SidebarWrapper>
+// </> */}

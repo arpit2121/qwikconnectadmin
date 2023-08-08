@@ -87,4 +87,5 @@ export const darkspacetheme={
         }
 
     },
+    colorPallete:colors
 }
