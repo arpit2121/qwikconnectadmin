@@ -20,9 +20,8 @@ import Error404 from "./pages/error404/Error404";
 
 const App = () => {
   return (
-    // <JobPostingStepOne/>
     <Routes>
-      <Route path="/" element={<Home />}>
+      <Route path="/" element={<Home /> || <Login />}>
         <Route path="login" element={<Login />} />
         <Route path="otp" element={<OtpVerification />} />
         <Route path="password/:name" element={<Password />} />
@@ -47,7 +46,6 @@ const App = () => {
       <Route path="/candidatereview" element={<CandiatateReview />} />
       <Route path="*" element={<Error404/>}/>
     </Routes>
-    // <Player/>
   );
 };
 
