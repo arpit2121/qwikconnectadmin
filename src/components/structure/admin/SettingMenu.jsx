@@ -8,7 +8,6 @@ import PasswordKeyIcon from "../../icons/PasswordKey";
 import ProfileIcon from "../../icons/ProfileIcon";
 import SettingsIcon from "../../icons/SettingsIcon";
 import SupportIcon from "../../icons/SupportIcon";
-import UserPlusIcon from "../../icons/UserplusIcon";
 import CustomAllTypography from "../../typography/CustomTypograpgy";
 import { useNavigate } from "react-router-dom";
 
@@ -37,7 +36,7 @@ const SettingMenu = ({ open, setOpen }) => {
       title: "Settings",
     },
     {
-      icon: <UserPlusIcon height={16} width={16} color="#344054" />,
+      icon: <SupportIcon height={16} width={16} color="#344054" />,
       title: "Invite colleagues",
     },
     {
