@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import useResponsiveStyles from "../../utils/MediaQuery";
 import CustomAllTypography from "../../components/typography/CustomTypograpgy";
 import UserPlusIcon from "../../components/icons/UserplusIcon";

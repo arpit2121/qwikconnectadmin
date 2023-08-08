@@ -1,10 +1,12 @@
 import React from "react";
 
-function UserPlusIcon() {
+function UserPlusIcon({ height = 32, width = 32, className,style }) {
   return (
     <svg
-      width="33"
-      height="33"
+    style={style}
+    width={height}
+    height={width}
+    className={className}
       viewBox="0 0 33 33"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
