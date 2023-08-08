@@ -7,9 +7,11 @@ import InboxIcon from "../../components/icons/InboxIcon";
 import CustomAllTypography from "../../components/typography/CustomTypograpgy";
 import useResponsiveStyles from "../../utils/MediaQuery";
 import CardContainerComponent from "./CardContainerComponent";
+import { useNavigate } from "react-router-dom";
 
 const ExistingUser = () => {
   const responsvie = useResponsiveStyles();
+  const navigate = useNavigate();
   return (
     <div style={{ padding: "2rem" }}>
       <div
@@ -25,11 +27,12 @@ const ExistingUser = () => {
         </div>
         <div>
           <CustomInputButton
-          sx={{padding:0}}
+          sx={{borderRadius:0}}
             variant="text"
-            size="small"
+            size="medium"
             responsvie
             endIcon={<ArrowForwardIcon />}
+            onClick={()=>navigate("/dashboard/myJobPost")}
           >
             View All
           </CustomInputButton>

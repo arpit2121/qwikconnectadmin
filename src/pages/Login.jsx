@@ -3,7 +3,6 @@ import CustomAllTypography from "../components/typography/CustomTypograpgy";
 import useResponsiveStyles from "../utils/MediaQuery";
 import { CustomInputButton } from "../components/button/CustomButoon";
 import GoogleSocial from "../components/social/GoogleSocial";
-import useNavigation from "../utils/NaivigateTo";
 import CommonTextInput from "../components/textfield/CommonTextInput";
 import { useSigninUserMutation } from "../services/auth";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const responsive = useResponsiveStyles();
   const [email, setEmail] = useState("");
-  const navigation = useNavigation();
   const navigate = useNavigate();
   const [signinuser, { data, isError, isSuccess, error }] =
     useSigninUserMutation();
@@ -21,22 +19,18 @@ const Login = () => {
     console.log(email);
     signinuser(email);
     if (true) {
-      //data=="alreadyExists"
-      // navigation.goTo(true ? "/password" : "/otp");
-      //data === "alreadyExists"
-      navigate(true ? "/password/enterpass" : "/otp", {
+      navigate(false ? "/password/enterpass" : "/otp", {
         state: {
           newUser: true,
           header: "Welcome Back!",
           belowHeader: "Enter your password for youremail@example.com",
           button: "Log in",
           footer: "",
+          goTo: "/dashboard/home/existinguser"
         },
       });
     }
-
   };
-
 
   return (
     <div

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../../../components/structure/admin/Navbar";
 import CustomContainer from "../../../components/structure/CustomContainer";
 import { CustomCard } from "../../../components/card/CustomCard";
@@ -16,6 +16,46 @@ import useResponsiveStyles from "../../../utils/MediaQuery";
 
 const CandiatateReview = () => {
   const responsive = useResponsiveStyles();
+  const [showMoreContent, setShowMoreContent] = useState(false);
+  const handleToggleContent = () => {
+    setShowMoreContent(!showMoreContent);
+  };
+
+  const containerStyle = {
+    width: "100%", // Set width to 100% for mobile view
+    // backgroundColor: "red",
+  };
+
+  const contentContainerStyle = {
+    border: "1px solid #EBEBEB",
+    padding: "0 1rem 3rem 2rem",
+  };
+
+  const initialContentStyle = {
+    overflow: "hidden",
+    transition: "max-height 3s ease-in-out",
+    maxHeight: showMoreContent ? "50%" : "100%", // Initial height to show half the content
+    marginTop: "3.41rem",
+    // display: responsive.isMobile?"flex":""
+  };
+
+  const moreContentStyle = {
+    overflow: "hidden",
+    transition: "max-height 3s ease-in-out",
+    maxHeight: showMoreContent ? "100%" : "0", // Max height to show all the content when open
+    marginTop: "2.50rem",
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.50rem",
+  };
+  const buttonContainerStyle = {
+    marginTop: "2.63rem",
+  };
+
+  const buttonStyle = {
+    borderRadius: 0,
+  };
+
   return (
     <CustomContainer>
       <div
@@ -34,41 +74,34 @@ const CandiatateReview = () => {
               justifyContent: "center",
               padding: "0 1rem 0 1rem",
               boxShadow: "0 2px 3px -1px rgba(0, 0, 0, 0.5)",
-              position:"sticky",
+              position: "sticky",
               top: 0,
               backgroundColor: "#fff",
-              zIndex:'1',
-
+              zIndex: "1",
             }}
           >
             <Navbar />
           </div>
-          <div style={{ display: responsive.isMobile?'':"flex" }}>
+          <div style={{ display: responsive.isMobile ? "" : "flex" }}>
             <div
               style={{
-                width: responsive.isMobile?'100%':"25%",
-                // backgroundColor: "red",
-                // zIndex: responsive.isMobile?'':"-1",
-                // position: "sticky",
-                // top: "10rem",
-                // border: "1px solid #EBEBEB",
+                width: responsive.isMobile ? "100%" : "25%",
+                // backgroundColor:'red'
               }}
             >
-              <div
-                style={{
-                  border: "1px solid #EBEBEB",
-                  padding: "0 1rem 3rem 2rem",
-                  // position: "sticky",
-                  // top: "5rem",
-                }}
-              >
-                <div style={{ marginTop: "3.41rem" }}>
-                <UsersComponent image={user1}/>
-                </div>
-                <div style={{ marginTop: "2.30rem" }}>
-                  <CustomAllTypography name={"Danish Shah"} variant={"h3"} />
-                </div>
-                <div style={{ marginTop: "0.75rem" }}>
+              <div style={containerStyle}>
+                <div style={contentContainerStyle}>
+                  <div style={initialContentStyle}>
+                    <div style={{display:responsive.isMobile?'flex':'',gap:'1rem'}}>
+                    <UsersComponent image={user1} />
+                    <div>
+                    <div style={{ marginTop: "2.30rem" }}>
+                      <CustomAllTypography
+                        name={"Danish Shah"}
+                        variant={"h3"}
+                      />
+                    </div>
+                    <div style={{ marginTop: "0.75rem" }}>
                   <CustomAllTypography
                     name={"email@emailexample.com"}
                     variant={"body2"}
@@ -77,6 +110,8 @@ const CandiatateReview = () => {
                     name={"+91 993 000 0000"}
                     variant={"body2"}
                   />
+                </div>
+                    </div>
                 </div>
                 <div style={{ marginTop: "1.44rem" }}>
                   <Body3 color={"#8A8894"}>{"1d ago"}</Body3>
@@ -91,7 +126,24 @@ const CandiatateReview = () => {
                   <CustomAllTypography name={"Status"} variant={"body2"} />{" "}
                   <StatusButton name={"Pending"} />{" "}
                 </div>
-                <div
+                  </div>
+                  {
+                  responsive.isMobile?
+                  <div style={{marginTop:'1.30rem',justifyContent:'center',display:'flex'}}>
+                    <CustomInputButton
+                    sx={{borderRadius:0}}
+                  variant="text"
+                  size="Large"
+                  onClick={handleToggleContent}
+                >
+                 More
+                </CustomInputButton>
+                  </div>
+
+                :""
+                }
+                  <div style={{ ...moreContentStyle, marginTop: "1.30rem" }}>
+                  <div
                   style={{
                     marginTop: "2.50rem",
                     display: "flex",
@@ -125,12 +177,16 @@ const CandiatateReview = () => {
                     View Resume
                   </CustomInputButton>
                 </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div
               style={{
-                width: responsive.isMobile?'90%':"50%",
-                padding: responsive.isMobile?'0 1rem':"0 1.5rem 5rem 1.5rem",
+                width: responsive.isMobile ? "90%" : "50%",
+                padding: responsive.isMobile
+                  ? "0 1rem"
+                  : "0 1.5rem 5rem 1.5rem",
                 // overflow: responsive.isMobile?'none':"auto",
               }}
             >
@@ -155,6 +211,7 @@ const CandiatateReview = () => {
                     <h1 style={{ color: "white" }}>Video</h1>
                   </div>
                   <div
+                    id={"card_container_div"}
                     style={{
                       display: "flex",
                       overflowX: "auto",
@@ -215,23 +272,28 @@ const CandiatateReview = () => {
                   type1={"email"}
                 />
               </div>
-              <div style={{display:'flex', flexDirection:'column', gap:'3rem',marginTop:'2.44rem'}}>
-              <Review/>
-              <Review/>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "3rem",
+                  marginTop: "2.44rem",
+                }}
+              >
+                <Review />
+                <Review />
               </div>
             </div>
             <div
               style={{
-                width: responsive.isMobile?'100%':"25%",
-                zIndex: responsive.isMobile?'':"-1",
+                width: responsive.isMobile ? "100%" : "25%",
+                zIndex: responsive.isMobile ? "" : "-1",
               }}
             >
               <div
                 style={{
                   border: "1px solid #EBEBEB",
                   padding: "0 1rem 5rem 2rem",
-                  // position: responsive.isMobile?'':"sticky",
-                  // top: "5rem",
                 }}
               >
                 <div style={{ marginTop: "6rem" }}>
@@ -310,3 +372,93 @@ const CandiatateReview = () => {
 };
 
 export default CandiatateReview;
+
+{
+  /* <div
+                style={{
+                  border: "1px solid #EBEBEB",
+                  padding: "0 1rem 3rem 2rem",
+                }}
+              >
+                <div style={initialContentStyle}>
+                <div style={{ marginTop: "3.41rem"}}>
+                <UsersComponent image={user1}/>
+                </div>
+                <div style={{ marginTop: "2.30rem" }}>
+                  <CustomAllTypography name={"Danish Shah"} variant={"h3"} />
+                </div>
+                </div>
+                <div style={{ marginTop: "0.75rem" }}>
+                  <CustomAllTypography
+                    name={"email@emailexample.com"}
+                    variant={"body2"}
+                  />
+                  <CustomAllTypography
+                    name={"+91 993 000 0000"}
+                    variant={"body2"}
+                  />
+                </div>
+                <div style={{ marginTop: "1.44rem" }}>
+                  <Body3 color={"#8A8894"}>{"1d ago"}</Body3>
+                </div>
+                <div
+                  style={{
+                    marginTop: "2.50rem",
+                    display: "flex",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <CustomAllTypography name={"Status"} variant={"body2"} />{" "}
+                  <StatusButton name={"Pending"} />{" "}
+                </div>
+                <div
+                  style={{
+                    marginTop: "2.50rem",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0.50rem",
+                  }}
+                >
+                  <CustomAllTypography
+                    name={"Current company: Flipmart"}
+                    variant={"body2"}
+                  />
+                  <CustomAllTypography
+                    name={"Exp.: 16 years"}
+                    variant={"body2"}
+                  />
+                  <CustomAllTypography
+                    name={"Profession: UI/UX Lead"}
+                    variant={"body2"}
+                  />
+                  <CustomAllTypography
+                    name={"Location: Remote"}
+                    variant={"body2"}
+                  />
+                </div>
+                <div style={{ marginTop: "2.63rem" }}>
+                  <CustomInputButton
+                    variant="outlined"
+                    size="small"
+                    width="100%"
+                  >
+                    View Resume
+                  </CustomInputButton>
+                </div>
+                {
+                  responsive.isMobile?
+                  <div style={{marginTop:'1.30rem',justifyContent:'center',display:'flex'}}>
+                    <CustomInputButton
+                    sx={{borderRadius:0}}
+                  variant="text"
+                  size="Large"
+                  onClick={handleToggleContent}
+                >
+                 More
+                </CustomInputButton>
+                  </div>
+
+                :""
+                }
+              </div> */
+}

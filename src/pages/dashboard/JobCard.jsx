@@ -2,9 +2,10 @@ import React from 'react'
 import { CustomCard } from '../../components/card/CustomCard'
 import CustomAllTypography from '../../components/typography/CustomTypograpgy'
 import TrashIcon from '../../components/icons/TrashIcon'
+import { useNavigate } from 'react-router-dom'
 
 const JobCard = () => {
-
+const navigate = useNavigate();
   return (
     <CustomCard
     sx={{ maxWidth: "23.65rem", padding: "1rem", borderRadius: "1.25rem" }}

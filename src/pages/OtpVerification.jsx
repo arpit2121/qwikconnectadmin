@@ -2,23 +2,21 @@ import React,{useState} from 'react';
 import { CustomInputButton } from '../components/button/CustomButoon';
 import OTPInput from '../components/otp';
 import CustomAllTypography from '../components/typography/CustomTypograpgy';
-import useResponsiveStyles from '../utils/MediaQuery';
-import useNavigation from '../utils/NaivigateTo';
 import { useNavigate } from 'react-router-dom';
 
 const OtpVerification = () => {
     const [newUser, setNewUser] = useState(true)
    const [otp,setOtp] = useState('');
-   const navigation = useNavigation();
    const navigate = useNavigate();
    const handleButtonClick = () => {
     //  navigation.goTo(true?'/password':'');
-    navigate("password/setpassword", {
+    navigate("/password/set-password", {
       state: {
         header: "Set Password",
         belowHeader: "for youremail@example.com",
         button: "Register",
-        footer: "By Continuing this I agree to the Terms & Conditions and Privacy Policy"
+        footer: "By Continuing this I agree to the Terms & Conditions and Privacy Policy",
+        goTo: "/dashboard/home/existinguser"
       }
     });
    };

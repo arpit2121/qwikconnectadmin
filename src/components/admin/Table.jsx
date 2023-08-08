@@ -8,6 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import StatusButton from '../button/StatusButton';
+import { useNavigate } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -42,7 +43,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 export default function CustomizedTables({data}) {
-  
+  const navigate = useNavigate();
   return (
     <TableContainer component={Paper} sx={{borderRadius:'1.25rem'}}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -58,7 +59,7 @@ export default function CustomizedTables({data}) {
         </TableHead>
         <TableBody>
           {data.map((row) => (
-            <StyledTableRow key={row.name}>
+            <StyledTableRow key={row.name} onClick={()=>navigate("/candidatereview")}>
               <StyledTableCell align="left">{row.no}</StyledTableCell>
               <StyledTableCell align="left"><div style={{display:'flex', alignItems:'center', gap:'.5rem'}}>{row.profileimage} {row.name}</div></StyledTableCell>
               <StyledTableCell align="left">{row.email}</StyledTableCell>
