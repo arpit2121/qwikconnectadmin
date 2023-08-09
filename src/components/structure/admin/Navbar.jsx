@@ -3,21 +3,20 @@ import React, { useState } from "react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import logo from "../../../assets/logo.svg";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import CustomAllTypography from "../../typography/CustomTypograpgy";
 import { CustomInputButton } from "../../button/CustomButoon";
+import StasTopbar from "../../../pages/dashboard/StatsTopBar";
 
-const Navbar = ({ job, onClick }) => {
+const Navbar = ({ job, onClick, showStatsBar = false }) => {
   const responsive = useResponsiveStyles();
+  const navigate=useNavigate()
   const [isOp, setIsOp] = useState(false);
 
-  const call = () => {
-    // <CustomDrawer isOpen={true}/>;
-    onClick()
-  };
-
-
+const onIconClick=()=>{
+navigate('/dashboard/home/existinguser')
+}
   return (
     <div
       style={{
@@ -31,7 +30,7 @@ const Navbar = ({ job, onClick }) => {
         backgroundColor: "#fff",
       }}
     >
-      <div style={{ width: "10%", display: "flex", alignItems: "center" }}>
+      <div style={{ width: "10%", display: "flex", alignItems: "center" }} onClick={onIconClick}>
         <img src={logo} alt="logo" width={"50%"}></img>
       </div>
       <div style={{ width: "55%" }}>
@@ -40,25 +39,21 @@ const Navbar = ({ job, onClick }) => {
       <div
         style={{ width: "25%", display: "flex", justifyContent: "flex-end" }}
       >
-        {!responsive.isMobile ? (
-          job ? (
-            ""
-          ) : (
-            <CustomInputButton
-              variant="outlined"
-              size="small"
-              responsive
-              component={Link}
-              to="/jobposting/basicDaetails"
-              endIcon={<ArrowForwardIcon />}
-            >
-              New Job
-            </CustomInputButton>
-          )
+        {job ? (
+          ""
+        ) : !showStatsBar ? (
+          <CustomInputButton
+            variant="outlined"
+            size="small"
+            responsive
+            component={Link}
+            to="/jobposting/basicDaetails"
+            endIcon={<ArrowForwardIcon />}
+          >
+            Verify
+          </CustomInputButton>
         ) : (
-          <MenuIcon
-          onClick={onClick}
-          />
+          <StasTopbar />
         )}
       </div>
     </div>

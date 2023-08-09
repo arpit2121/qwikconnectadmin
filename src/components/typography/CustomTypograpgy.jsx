@@ -87,7 +87,7 @@ export const CustomTypography = styled(Typography)(
   })
 );
 
-const CustomAllTypography = ({ name, variant, sx={}, fontStyle, textcolor}) => {
+const CustomAllTypography = ({ name, variant, sx={}, fontStyle, textcolor,onClick}) => {
   const responsive = useResponsiveStyles();
   // console.log(responsive)
   return (
@@ -95,6 +95,7 @@ const CustomAllTypography = ({ name, variant, sx={}, fontStyle, textcolor}) => {
       variant={variant}
       responsive={responsive}
       fontStyle={fontStyle}
+      onClick={onClick}
       
       sx={{...sx,color:textcolor}}
     >

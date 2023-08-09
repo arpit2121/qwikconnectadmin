@@ -15,6 +15,8 @@ import CustomButton, { CustomInputButton } from "../button/CustomButoon";
 import Notification from "../notification/Notification";
 import LeftArrowIcon from "../icons/LeftArrowIcon";
 import RightArrowIcon from "../icons/RightArrowIcon";
+import CustomButton from "../button/CustomButoon";
+import LinkBar from "../../pages/dashboard/jobposting/LinkBar";
 
 const StyledTab = styled(Tab)({
   "&.Mui-selected": {
@@ -84,25 +86,7 @@ const CustomTabs = () => {
           </div>
         </Box>
       ) : (
-        <Box
-          sx={{
-            height: "40px",
-            backgroundColor: "",
-            paddingTop: "20px",
-            paddingBottom: "20px",
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
-            <CustomAllTypography name="Home" variant="body2" />
-            <BsDot />
-            <CustomAllTypography name="My Job Post" variant="body2" />
-          </div>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <CustomAllTypography name="Step 2 of 4" variant="body2" />
-          </div>
-        </Box>
+        <LinkBar linkArray={[{title:'Home',path:'/dashboard/home'},{title:'My Job Post',path:'/jobposting/basicDaetails'}]} currentStep={value}  />
       )}
 
       <TabContext value={value}>
@@ -110,6 +94,8 @@ const CustomTabs = () => {
           <TabList
             onChange={handleChange}
             variant="scrollable"
+            //   scrollButtons
+            //   allowScrollButtonsMobile
             aria-label="scrollable force tabs example"
             TabIndicatorProps={{
               style: {
