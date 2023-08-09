@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import VideoBackIcon from "../../../components/icons/videoBackIcon";
-import VideoForwardIcon from "../../../components/icons/videoForwardIcon";
-import VideoPlayIcon from "../../../components/icons/videoPlayIcon";
+import VideoBackIcon from "../../../components/icons/VideoBackIcon";
+import VideoForwardIcon from "../../../components/icons/VideoForwardIcon";
+import VideoPlayIcon from "../../../components/icons/VideoPlayIcon";
 import "./videoPlayer.style.css";
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import { Slider } from "@mui/material";

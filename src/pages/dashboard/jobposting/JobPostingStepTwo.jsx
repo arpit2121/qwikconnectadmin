@@ -12,8 +12,7 @@ import AddIcon from "../../../components/icons/AddIcon";
 import DbIcon from "../../../components/icons/DbIcon";
 import QuestionCard from "../../../components/admin/QuestionCard";
 import Notification from "../../../components/notification/Notification";
-import IconButton, { CustomIconButton } from "../../../components/button/IconButton";
-
+import IconButton from "../../../components/button/IconButton";
 
 const JobPostingStepTwo = () => {
   const responsive = useResponsiveStyles();
@@ -110,7 +109,8 @@ const JobPostingStepTwo = () => {
                             justifyContent: "space-between",
                           }}
                         >
-                          {/* <IconButton icon={<EditIcon/>}/> */}
+                          {/* <IconButto icon={<EditIcon/>}/> */}
+                          {/* <IconButton variant="contained" icon={<EditIcon/>}/> */}
                           <EditIcon/>
                           <DeleteIcon/>
                         </div>
@@ -231,5 +231,3 @@ const JobPostingStepTwo = () => {
 };
 
 export default JobPostingStepTwo;
-
-// display:'flex', justifyContent:'space-between', alignItems:'center'
