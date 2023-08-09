@@ -56,6 +56,7 @@ const CommonProfileBar = ({
           gap: "1.5rem",
         }}
       > */}
+      {}
    {showProfile && <CommonProfile />}
       {/* </div> */}
       <div

@@ -15,6 +15,7 @@ import Review from "../../../components/structure/admin/Review";
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import Player from "../../../components/videoplayer/Player";
 import VideoPlayer from "./VideoPlayer";
+import LinkBar from "./LinkBar";
 
 const CandiatateReview = () => {
   const responsive = useResponsiveStyles();
@@ -94,91 +95,101 @@ const CandiatateReview = () => {
               <div style={containerStyle}>
                 <div style={contentContainerStyle}>
                   <div style={initialContentStyle}>
-                    <div style={{display:responsive.isMobile?'flex':'',gap:'1rem'}}>
-                    <UsersComponent image={user1} />
-                    <div>
-                    <div style={{ marginTop: "2.30rem" }}>
+                    <div
+                      style={{
+                        display: responsive.isMobile ? "flex" : "",
+                        gap: "1rem",
+                      }}
+                    >
+                      <UsersComponent image={user1} />
+                      <div>
+                        <div style={{ marginTop: "2.30rem" }}>
+                          <CustomAllTypography
+                            name={"Danish Shah"}
+                            variant={"h3"}
+                          />
+                        </div>
+                        <div style={{ marginTop: "0.75rem" }}>
+                          <CustomAllTypography
+                            name={"email@emailexample.com"}
+                            variant={"body2"}
+                          />
+                          <CustomAllTypography
+                            name={"+91 993 000 0000"}
+                            variant={"body2"}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div style={{ marginTop: "1.44rem" }}>
+                      <Body3 color={"#8A8894"}>{"1d ago"}</Body3>
+                    </div>
+                    <div
+                      style={{
+                        marginTop: "2.50rem",
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <CustomAllTypography name={"Status"} variant={"body2"} />{" "}
+                      <StatusButton name={"Pending"} />{" "}
+                    </div>
+                  </div>
+                  {responsive.isMobile ? (
+                    <div
+                      style={{
+                        marginTop: "1.30rem",
+                        justifyContent: "center",
+                        display: "flex",
+                      }}
+                    >
+                      <CustomInputButton
+                        sx={{ borderRadius: 0 }}
+                        variant="text"
+                        size="Large"
+                        onClick={handleToggleContent}
+                      >
+                        More
+                      </CustomInputButton>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+                  <div style={{ ...moreContentStyle, marginTop: "1.30rem" }}>
+                    <div
+                      style={{
+                        marginTop: "2.50rem",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "0.50rem",
+                      }}
+                    >
                       <CustomAllTypography
-                        name={"Danish Shah"}
-                        variant={"h3"}
+                        name={"Current company: Flipmart"}
+                        variant={"body2"}
+                      />
+                      <CustomAllTypography
+                        name={"Exp.: 16 years"}
+                        variant={"body2"}
+                      />
+                      <CustomAllTypography
+                        name={"Profession: UI/UX Lead"}
+                        variant={"body2"}
+                      />
+                      <CustomAllTypography
+                        name={"Location: Remote"}
+                        variant={"body2"}
                       />
                     </div>
-                    <div style={{ marginTop: "0.75rem" }}>
-                  <CustomAllTypography
-                    name={"email@emailexample.com"}
-                    variant={"body2"}
-                  />
-                  <CustomAllTypography
-                    name={"+91 993 000 0000"}
-                    variant={"body2"}
-                  />
-                </div>
+                    <div style={{ marginTop: "2.63rem" }}>
+                      <CustomInputButton
+                        variant="outlined"
+                        size="small"
+                        width="100%"
+                      >
+                        View Resume
+                      </CustomInputButton>
                     </div>
-                </div>
-                <div style={{ marginTop: "1.44rem" }}>
-                  <Body3 color={"#8A8894"}>{"1d ago"}</Body3>
-                </div>
-                <div
-                  style={{
-                    marginTop: "2.50rem",
-                    display: "flex",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <CustomAllTypography name={"Status"} variant={"body2"} />{" "}
-                  <StatusButton name={"Pending"} />{" "}
-                </div>
-                  </div>
-                  {
-                  responsive.isMobile?
-                  <div style={{marginTop:'1.30rem',justifyContent:'center',display:'flex'}}>
-                    <CustomInputButton
-                    sx={{borderRadius:0}}
-                  variant="text"
-                  size="Large"
-                  onClick={handleToggleContent}
-                >
-                 More
-                </CustomInputButton>
-                  </div>
-
-                :""
-                }
-                  <div style={{ ...moreContentStyle, marginTop: "1.30rem" }}>
-                  <div
-                  style={{
-                    marginTop: "2.50rem",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "0.50rem",
-                  }}
-                >
-                  <CustomAllTypography
-                    name={"Current company: Flipmart"}
-                    variant={"body2"}
-                  />
-                  <CustomAllTypography
-                    name={"Exp.: 16 years"}
-                    variant={"body2"}
-                  />
-                  <CustomAllTypography
-                    name={"Profession: UI/UX Lead"}
-                    variant={"body2"}
-                  />
-                  <CustomAllTypography
-                    name={"Location: Remote"}
-                    variant={"body2"}
-                  />
-                </div>
-                <div style={{ marginTop: "2.63rem" }}>
-                  <CustomInputButton
-                    variant="outlined"
-                    size="small"
-                    width="100%"
-                  >
-                    View Resume
-                  </CustomInputButton>
-                </div>
                   </div>
                 </div>
               </div>
@@ -192,18 +203,25 @@ const CandiatateReview = () => {
                 // overflow: responsive.isMobile?'none':"auto",
               }}
             >
-              <div style={{ marginTop: "1.66rem" }}>dashboard</div>
+              <div style={{ marginTop: "1.66rem" }}>
+                <LinkBar
+                  linkArray={[
+                    { title: "Home", path: "/dashboard/home" },
+                    { title: "My Job Post", path: "/jobposting/basicDaetails" },
+                    { title: "UI/UX Developer", path: "/jobposting/basicDaetails" },
+                  ]}
+                  showSteps={false}
+                />
+              </div>
               <div style={{ marginTop: "1.75rem" }}>
                 <CustomCard sx={{ borderRadius: "1.25rem" }}>
                   <CustomAllTypography
                     name={"Q1. What are your hobbies?"}
                     variant={"h5"}
                   />
-                 
-            <VideoPlayer/>
-                  
-                   
-                
+
+                  <VideoPlayer />
+
                   <div
                     id={"card_container_div"}
                     style={{

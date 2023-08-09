@@ -31,9 +31,9 @@ Main Container .app {
   bottom: 0;
   border-radius: 1rem;
   transition: opacity 2000ms;
-box-sizing: border-box;
+  box-sizing: border-box;
 
-  padding:1rem 1.37rem 0rem 1.37rem;
+  padding: 1rem 1.37rem 0rem 1.37rem;
 }
 
 .controls {
@@ -105,30 +105,28 @@ box-sizing: border-box;
   background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(5px);
   height: 35%;
-  width:3%;
+  width: 3%;
   position: absolute;
-  top:50%;
+  top: 50%;
   right: 1.37rem;
-  transform: translate(0%,-50%);
+  transform: translate(0%, -50%);
   display: flex;
   flex-direction: column;
   padding: 0.18rem;
-align-items: center;
-justify-content: space-around;
-transition: opacity 2000ms;
-z-index: 10;
-
-  
+  align-items: center;
+  justify-content: space-around;
+  transition: opacity 2000ms;
+  z-index: 10;
 }
-.timeForwardBackwardDiv{
+.timeForwardBackwardDiv {
   position: absolute;
   top: 50%;
+  transform: translate(0%, -50%);
   width: 100%;
   display: flex;
   justify-content: space-around;
 }
 .arrow {
-
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -180,33 +178,43 @@ z-index: 10;
 
 @keyframes animate {
   0% {
-      opacity: 0;
-      transform: rotate(45deg) translate(-20px, -20px);
+    opacity: 0;
+    transform: rotate(45deg) translate(-20px, -20px);
   }
   50% {
-      opacity: 1;
+    opacity: 1;
   }
   100% {
-      opacity: 0;
-      transform: rotate(45deg) translate(20px, 20px);
+    opacity: 0;
+    transform: rotate(45deg) translate(20px, 20px);
   }
 }
 @keyframes animate2 {
   0% {
-      opacity: 0;
-      transform: rotate(45deg) translate(20px, 20px);
+    opacity: 0;
+    transform: rotate(45deg) translate(20px, 20px);
   }
   50% {
-      opacity: 1;
+    opacity: 1;
   }
   100% {
-      opacity: 0;
-      transform: rotate(45deg) translate(20px, 20px);
+    opacity: 0;
+    transform: rotate(45deg) translate(20px, 20px);
   }
 }
-.arrowContainer{
+.arrowContainer {
   display: flex;
   flex-direction: column;
-  color:white;
+  color: white;
   justify-content: center;
 }
+.controllerIcon{
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.controllerIcon:active{
+box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px rgba(230, 129, 255, 0.5);
+}
+

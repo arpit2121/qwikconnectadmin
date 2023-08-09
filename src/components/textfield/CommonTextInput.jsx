@@ -10,6 +10,7 @@ import { styled } from "@mui/material";
 import _ from "lodash";
 import SearchIcon from "../icons/SearchIcon";
 import CountryList from "country-list-with-dial-code-and-flag";
+import { darkspacetheme } from "../../theme/theme";
 
 const CustomSelect = styled(Select)(({ theme }) => ({
   width: "100%",
@@ -39,11 +40,13 @@ const useStyles = makeStyles({
     marginRight: "0.62rem",
   },
   containerStyles: {
-    padding: (props) => (props?.type == "dropdown" ? "0rem" : "0.5rem 1.25rem"),
+    padding: (props) => (props?.type == "dropdown" ? "0rem" : "0rem 1.25rem"),
+    height: "3.5rem",
     display: "flex",
     justifyContent: "start",
     alignItems: "center",
     outline: "none",
+    position: "relative",
     backgroundColor: (props) =>
       props?.status ? props?.getStatusColor(props?.status) : "#F7F7FD",
     "&:hover": {
@@ -91,12 +94,16 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
   },
-  countryCode:{
-    display:'flex',
-    justifyContent:"space-between",
-    alignItems:'center',
-    gap:'0.5rem'
-  }
+  countryCode: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: "0.5rem",
+  },
+  title: {
+    position: "absolute",
+    left: "1.25rem",
+  },
 });
 
 const CommonTextInput = ({
@@ -174,7 +181,13 @@ const CommonTextInput = ({
   const handleClick = () => {
     inputRef.current.focus();
   };
-  const classes = useStyles({ getStatusColor, status, curvedBorder, type });
+  const classes = useStyles({
+    getStatusColor,
+    status,
+    curvedBorder,
+    type,
+    isFocused,
+  });
 
   return (
     <div className={classes.mainContainer} style={style}>
@@ -188,11 +201,11 @@ const CommonTextInput = ({
           </div>
         )}
         {extraText && (
-          <div style={{ width: 'max-content',marginRight:"0.62rem" }}>
+          <div style={{ width: "max-content", marginRight: "0.62rem" }}>
             <CustomSelect
               IconComponent={() => null}
-              inputProps={{ sx: { padding: "0 !important",color:'#9D99AC' } }}
-              sx={{ padding: 0 }}
+              inputProps={{ sx: { padding: "0 !important", color: "#9D99AC" } }}
+              sx={{ padding: 0, height: "max-content" }}
               renderValue={(selected) => selected}
               value={countryCode}
               onChange={handleCountryChange}
@@ -218,19 +231,26 @@ const CommonTextInput = ({
         {searchInput && <SearchIcon className={classes.searchIcon} />}
         <div className={classes.inputdiv}>
           {title && (
-            <CustomAllTypography
-              name={_.startCase(_.toLower(title))}
-              variant="caption"
-              color="#AAAAAA"
-            />
+            <div
+              className={classes.title}
+              style={{ position: isFocused ? "static" : "absolute" }}
+            >
+              <CustomAllTypography
+                name={_.startCase(_.toLower(title))}
+                variant="caption"
+                sx={{ fontSize: "0.75rem" }}
+                textcolor={darkspacetheme.pallete.fields.title}
+              />
+            </div>
           )}
+
           {type != "dropdown" ? (
             <input
               onChange={handleChange}
               type={type1 ? type1 : "text"}
               label={title}
-              value={value}
-              placeholder={placeholder}
+              // value={value}
+              placeholder={title ? "" : placeholder}
               ref={inputRef}
               className={classes.textBoxStyles}
               onFocus={handleFocus}
@@ -245,9 +265,10 @@ const CommonTextInput = ({
                 if (selected.length === 0) {
                   return (
                     <CustomAllTypography
+                      sx={{ fontSize: "0.875rem", fontWeight: 400 }}
                       name={placeholder}
-                      variant="body1"
-                      color="#AAAAAA"
+                      variant="body3"
+                      textcolor="#9D99AC"
                     />
                   );
                 }
@@ -257,7 +278,7 @@ const CommonTextInput = ({
               onChange={handleChangeSelect}
               sx={{ background: "none", border: "none" }}
             >
-              {options.map((menuItem, index) => (
+              {options?.map((menuItem, index) => (
                 <MenuItem key={index} value={MenuItem}>
                   {menuItem}
                 </MenuItem>
