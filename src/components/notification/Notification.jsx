@@ -6,7 +6,7 @@ import ImageClickable from '../icons/ImageClickable'
 
 const Notification = () => {
   return (
-    <div style={{width:'100%', height:'', borderRadius:'0.25',border:'1px solid #818181',padding:'1rem',display:'flex',justifyContent:'space-between'}}>
+    <div style={{ height:'', borderRadius:'0.25',border:'1px solid #818181',padding:'1rem',display:'flex',justifyContent:'space-between'}}>
         <div style={{display:'flex', gap:'1rem',width:'100%'}}>
         <ImageClickable src={info} alt={'info'}/>
         <div>

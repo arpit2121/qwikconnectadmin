@@ -1,100 +1,204 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { styled } from '@mui/material/styles';
-import Rating from '@mui/material/Rating';
-import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
-import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied';
-import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
-import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
-import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
+import React, { useState } from "react";
+import { CustomCard } from "../card/CustomCard";
+import CustomAllTypography from "../typography/CustomTypograpgy";
+import SmileIcon from "../icons/SmileIcon";
 
-const StyledRating = styled(Rating)(({ theme }) => ({
-  '& .MuiRating-iconEmpty .MuiSvgIcon-root': {
-    color: theme.palette.action.disabled,
-  },
-}));
+function RatingParameter() {
+  const data = [
+    "Concentration",
+    "Flexible",
+    "Competency",
+    "Skills",
+    "Aptitude",
+  ];
 
-const customIcons = {
-  1: {
-    icon: <SentimentVeryDissatisfiedIcon color="error" />,
-    label: 'Very Dissatisfied',
-  },
-  2: {
-    icon: <SentimentDissatisfiedIcon color="error" />,
-    label: 'Dissatisfied',
-  },
-  3: {
-    icon: <SentimentSatisfiedIcon color="warning" />,
-    label: 'Neutral',
-  },
-  4: {
-    icon: <SentimentSatisfiedAltIcon color="success" />,
-    label: 'Satisfied',
-  },
-  5: {
-    icon: <SentimentVerySatisfiedIcon color="success" />,
-    label: 'Very Satisfied',
-  },
-};
+  const [selectedSmileyIndex, setSelectedSmileyIndex] = useState(-1);
 
-function IconContainer(props) {
-  const { value, ...other } = props;
-  return <span {...other}>{customIcons[value].icon}</span>;
-}
+  const handleClick = (index) => {
+    setSelectedSmileyIndex(index);
+  };
 
-IconContainer.propTypes = {
-  value: PropTypes.number.isRequired,
-};
 
-export default function RadioGroupRating() {
   return (
-    <StyledRating
-      name="highlight-selected-only"
-      defaultValue={2}
-      IconContainerComponent={IconContainer}
-      getLabelText={(value) => customIcons[value].label}
-      highlightSelectedOnly  
-    />
+    <div>
+      <CustomCard
+        style={{
+          padding: "1.56rem 2rem 2.25rem 1.62rem",
+          width: "fit-content",
+        }}
+      >
+        <CustomAllTypography name="Rating Parameters" variant={"h6"} />
+        <div style={{ marginTop: "1.06rem" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "0.5rem",
+              justifyContent: "center",
+            }}
+          >
+            {data.map((item, outerIndex) => {
+              return (
+                <div
+                  style={{ display: "flex", alignItems: "center" }}
+                  key={outerIndex}
+                >
+                  <div
+                    style={{
+                      width: "fit-content",
+                      padding: "0.2rem 0.5rem",
+                    }}
+                  >
+                    {item}
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      padding: "0.2rem",
+                      marginLeft: "auto",
+                      gap: "0.75rem",
+                    }}
+                  >
+                    {[0, 1, 2, 3, 4].map((item, innerIndex) => {
+                      let smileyColor = "#AAAAAA"; // Default grey color
+
+                      if (selectedSmileyIndex >= 0) {
+                        smileyColor =
+                          selectedSmileyIndex === 0
+                            ? "#F93232"
+                            : selectedSmileyIndex === 1
+                            ? "#FFB82E"
+                            : "#605DEC";
+                      }
+
+                      if (innerIndex > selectedSmileyIndex) {
+                        smileyColor = "#AAAAAA"; // Grey color for smileys after the selected index
+                      }
+
+                      return (
+                        <div
+                          onClick={() => handleClick(innerIndex)}
+                          style={{ display: "flex" }}
+                          key={innerIndex}
+                        >
+                          <SmileIcon color={smileyColor} />
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </CustomCard>
+    </div>
   );
 }
 
+export default RatingParameter;
 
 
-// import * as React from 'react';
-// import { styled } from '@mui/material/styles';
-// import Box from '@mui/material/Box';
-// import Rating from '@mui/material/Rating';
-// import FavoriteIcon from '@mui/icons-material/Favorite';
-// import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-// import Typography from '@mui/material/Typography';
 
-// const StyledRating = styled(Rating)({
-//   '& .MuiRating-iconFilled': {
-//     color: '#ff6d75',
-//   },
-//   '& .MuiRating-iconHover': {
-//     color: '#ff3d47',
-//   },
-// });
 
-// export default function CustomizedRating() {
+// import React, { useState } from "react";
+// import { CustomCard } from "../card/CustomCard";
+// import CustomAllTypography from "../typography/CustomTypograpgy";
+// import SmileIcon from "../icons/SmileIcon";
+
+// function RatingParameter() {
+//   const data = [
+//     "Concentration",
+//     "Flexible",
+//     "Competency",
+//     "Skills",
+//     "Aptitude",
+//   ];
+
+//   const [selectedSmileyIndexes, setSelectedSmileyIndexes] = useState(
+//     Array(data.length).fill(-1)
+//   );
+
+//   const handleClick = (outerIndex, innerIndex) => {
+//     const newSelectedSmileyIndexes = [...selectedSmileyIndexes];
+//     newSelectedSmileyIndexes[outerIndex] = innerIndex;
+//     setSelectedSmileyIndexes(newSelectedSmileyIndexes);
+//   };
+
 //   return (
-//     <Box
-//       sx={{
-//         '& > legend': { mt: 2 },
-//       }}
-//     >
-//       <Typography component="legend">Custom icon and color</Typography>
-//       <StyledRating
-//         name="customized-color"
-//         defaultValue={2}
-//         getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`}
-//         precision={0.5}
-//         icon={<FavoriteIcon fontSize="inherit" />}
-//         emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
-//       />
-//       <Typography component="legend">10 stars</Typography>
-//       <Rating name="customized-10" defaultValue={2} max={10} />
-//     </Box>
+//     <div>
+//       <CustomCard
+//         style={{
+//           padding: "1.56rem 2rem 2.25rem 1.62rem",
+//           width: "fit-content",
+//         }}
+//       >
+//         <CustomAllTypography name="Rating Parameters" variant={"h6"} />
+//         <div style={{ marginTop: "1.06rem" }}>
+//           <div
+//             style={{
+//               display: "flex",
+//               flexDirection: "column",
+//               gap: "0.5rem",
+//               justifyContent: "center",
+//             }}
+//           >
+//             {data.map((item, outerIndex) => {
+//               return (
+//                 <div
+//                   style={{ display: "flex", alignItems: "center" }}
+//                   key={outerIndex}
+//                 >
+//                   <div
+//                     style={{
+//                       width: "fit-content",
+//                       padding: "0.2rem 0.5rem",
+//                     }}
+//                   >
+//                     {item}
+//                   </div>
+//                   <div
+//                     style={{
+//                       display: "flex",
+//                       alignItems: "center",
+//                       padding: "0.2rem",
+//                       marginLeft: "auto",
+//                       gap: "0.75rem",
+//                     }}
+//                   >
+//                     {[0, 1, 2, 3, 4].map((_, innerIndex) => {
+//                       let smileyColor = "#AAAAAA"; // Default grey color
+
+//                       if (selectedSmileyIndexes[outerIndex] >= 0) {
+//                         smileyColor =
+//                           selectedSmileyIndexes[outerIndex] === innerIndex
+//                             ? "#F93232"
+//                             : "#AAAAAA";
+//                       }
+
+//                       return (
+//                         <div
+//                           onClick={() => handleClick(outerIndex, innerIndex)}
+//                           style={{ display: "flex" }}
+//                           key={innerIndex}
+//                         >
+//                           <SmileIcon color={smileyColor} />
+//                         </div>
+//                       );
+//                     })}
+//                   </div>
+//                 </div>
+//               );
+//             })}
+//           </div>
+//         </div>
+//       </CustomCard>
+//     </div>
 //   );
 // }
+
+// export default RatingParameter;
+
+
+

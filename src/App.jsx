@@ -17,9 +17,12 @@ import MyProfile from "./pages/dashboard/profile/MyProfile";
 import ChangePassword from "./pages/dashboard/profile/ChangePassword";
 import CandiatateReview from "./pages/dashboard/jobposting/CandiatateReview";
 import Error404 from "./pages/error404/Error404";
+import RadioGroupRating from "./components/admin/RatingParameter";
+import CustomDropzone from "./components/dropzone/CustomDropzone";
 
 const App = () => {
   return (
+    // <CustomDropzone/>
     <Routes>
       <Route path="/" element={<Home />}>
         <Route path="login" element={<Login />} />
@@ -46,6 +49,7 @@ const App = () => {
       <Route path="/candidatereview" element={<CandiatateReview />} />
       <Route path="*" element={<Error404/>}/>
     </Routes>
+    // <RadioGroupRating/>
   );
 };
 

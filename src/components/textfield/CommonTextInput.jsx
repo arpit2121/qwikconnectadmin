@@ -138,6 +138,7 @@ const CommonTextInput = ({
   curvedBorder = true,
   onClick = () => {},
   type1,
+  borderStyle = {}
 }) => {
   const inputRef = React.createRef();
   const [isFocused, setIsFocused] = useState(false);
@@ -178,7 +179,7 @@ const CommonTextInput = ({
 
   return (
     <div className={classes.mainContainer} style={style}>
-      <div className={classes.containerStyles} onClick={handleClick}>
+      <div className={classes.containerStyles} onClick={handleClick} style={borderStyle}>
         {startIcon && (
           <div
             className={classes.iconStyles}
