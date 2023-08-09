@@ -2,8 +2,7 @@ import { Breadcrumbs } from "@mui/material";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
-import DotIcon from "../../../components/icons/dotIcon";
-
+import DotIcon from "../../../components/icons/DotIcon";
 const LinkBar = ({ linkArray = [],currentStep=1,totalStep=4,showSteps=true}) => {
   const navigate = useNavigate();
   const handleClick = (path) => {
