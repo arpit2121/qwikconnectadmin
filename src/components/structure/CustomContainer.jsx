@@ -11,8 +11,8 @@ const CustomContainer = ({ children}) => {
     // <Container maxWidth="lg" style={{ height: containerHeight, backgroundColor:'red'}}>
     //   {children}
     // </Container>
-
-    <Container maxWidth="xl" style={{ height: '100vh',  display: 'flex', justifyContent:'center',padding:'0', backgroundColor:''}}>
+    // height: '100vh'
+    <Container maxWidth="xl" style={{height: '100vh',  display: 'flex', justifyContent:'center',padding:'0', backgroundColor:''}}>
     {/* <div style={{ height: '100%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}> */}
       {children}
     {/* </div> */}

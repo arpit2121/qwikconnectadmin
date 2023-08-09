@@ -5,7 +5,7 @@ const Checkbox = ({  props}) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
-    const disabled = true
+    const disabled = false
   const toggleChecked = (e) => {
     e.preventDefault(); // Prevents default right-click menu
     if (!disabled) {

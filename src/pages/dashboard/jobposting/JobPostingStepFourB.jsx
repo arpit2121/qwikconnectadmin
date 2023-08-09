@@ -4,6 +4,7 @@ import useResponsiveStyles from '../../../utils/MediaQuery'
 import editicon from '../../../assets/svg/edit.svg'
 import RichTextEditor from '../../../components/textfield/RichTextEditor'
 import CustomizedTextField from '../../../components/textfield/CustomizedTextField'
+import CommonTextInput from '../../../components/textfield/CommonTextInput'
 
 const JobPostingStepFourB = () => {
   return (
@@ -13,10 +14,10 @@ const JobPostingStepFourB = () => {
         <div style={{marginTop:'2.19rem'}}>
         <CustomAllTypography name={'Job Description'} variant={'body2'}/>
         </div>
-        <div style={{disply:'flex',flexDirection:'column',gap:'2.63rem'}}>
+        <div>
         <RichTextEditor/>
-        <CustomizedTextField/>
-        <CustomizedTextField/>
+        <div style={{marginTop:'2.63rem'}}><CommonTextInput/></div>
+        <div style={{marginTop:'2.63rem'}}><CommonTextInput/></div>
         </div>
     </div>
   )

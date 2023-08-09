@@ -126,7 +126,7 @@ const IconButton = (props) => {
   return (
     <div>
       <CustomIconButton aria-label="delete" variant="text" size="extra-small" responsive>
-        <DeleteIcon />
+        {props.icon}
       </CustomIconButton>
     </div>
   );

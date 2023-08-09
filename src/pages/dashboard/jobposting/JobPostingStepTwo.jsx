@@ -10,6 +10,9 @@ import { Body3 } from "../../../components/typography/Fields";
 import { CustomInputButton } from "../../../components/button/CustomButoon";
 import AddIcon from "../../../components/icons/AddIcon";
 import DbIcon from "../../../components/icons/DbIcon";
+import QuestionCard from "../../../components/admin/QuestionCard";
+import Notification from "../../../components/notification/Notification";
+import IconButton, { CustomIconButton } from "../../../components/button/IconButton";
 
 
 const JobPostingStepTwo = () => {
@@ -25,7 +28,7 @@ const JobPostingStepTwo = () => {
     <div
       style={{
         backgroundColor: "",
-        height: "100vh",
+        // height: "100vh",
         width: "100%",
       }}
     >
@@ -76,7 +79,13 @@ const JobPostingStepTwo = () => {
               <InfoIcon />
             </div>
             <div>
-              <CustomAllTypography variant={"body3"} name={"dropdown"} />
+              {/* <CustomAllTypography variant={"body3"} name={"dropdown121"} /> */}
+              <CommonTextInput
+                    style={{ margin: "1.5rem 0rem"}}
+                    borderStyle = {{borderRadius:'0.25rem'}}
+                    type="dropdown"
+                    placeholder="All"
+                  />
             </div>
           </div>
           <div style={{ paddingTop: "30px" }}>
@@ -101,6 +110,7 @@ const JobPostingStepTwo = () => {
                             justifyContent: "space-between",
                           }}
                         >
+                          {/* <IconButton icon={<EditIcon/>}/> */}
                           <EditIcon/>
                           <DeleteIcon/>
                         </div>
@@ -117,7 +127,6 @@ const JobPostingStepTwo = () => {
               justifyContent: "space-between",
               paddingTop: "30px",
               paddingBottom: "30px",
-              backgroundColor: "",
             }}
           >
             <Body3>Sample Ratings</Body3>
@@ -168,9 +177,10 @@ const JobPostingStepTwo = () => {
               </div>
               <div>
                 <CommonTextInput
-                    style={{ margin: "1.5rem 0rem" }}
+                    style={{ margin: "1.5rem 0rem"}}
+                    borderStyle = {{borderRadius:'0.25rem'}}
                     type="dropdown"
-                    placeholder="All"
+                    placeholder="None"
                   />
               </div>
             </div>
@@ -201,31 +211,19 @@ const JobPostingStepTwo = () => {
               paddingTop: responsive.isMobile ? "1rem" : "",
             }}
           >
-            <CustomCard sx={{ backgroundColor: "red" }}>
-              hi
-              <br />
-              hello
-              <br />
-              <br />
-              <br />
-              hhh
-              <br />
-              shhsd
-              <br />
-            </CustomCard>
+            <QuestionCard/>
           </div>
         </div>
       </div>
       <div style={{padding:responsive.isMobile?'1rem':'2.5rem'}}>
       <div style={{width:'100%', backgroundColor:''}}>
         {/* <Notification/> */}
-        notifcatino
+        <Notification/>
         </div>
       </div>
       <div style={{paddingLeft:responsive.isMobile?'1rem':'2rem'}}>
-      <div style={{width:'100%'}}>
-            {/* <CustomButton name={'Add Questions'}/> */}
-            button
+      <div style={{width:'95%'}}>
+            <CustomInputButton size="medium" variant="outlined" startIcon={''} width="100%">Add Questions</CustomInputButton>
         </div>
       </div>
     </div>

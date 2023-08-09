@@ -16,6 +16,7 @@ import useResponsiveStyles from "../../../utils/MediaQuery";
 import Player from "../../../components/videoplayer/Player";
 import VideoPlayer from "./VideoPlayer";
 import LinkBar from "./LinkBar";
+import RatingParameter from "../../../components/admin/RatingParameter";
 
 const CandiatateReview = () => {
   const responsive = useResponsiveStyles();
@@ -329,36 +330,7 @@ const CandiatateReview = () => {
                     gap: "1.50rem",
                   }}
                 >
-                  <CustomAllTypography
-                    name={"Rating Parameters"}
-                    variant={"body3"}
-                  />
-                  <span style={{ gap: "2rem", display: "flex" }}>
-                    <CustomAllTypography
-                      name={"Concentration"}
-                      variant={"body3"}
-                    />{" "}
-                    <RadioGroupRating />
-                  </span>
-                  <span style={{ gap: "2rem", display: "flex" }}>
-                    <CustomAllTypography name={"Flexible"} variant={"body3"} />{" "}
-                    <RadioGroupRating />
-                  </span>
-                  <span style={{ gap: "2rem", display: "flex" }}>
-                    <CustomAllTypography
-                      name={"Competency"}
-                      variant={"body3"}
-                    />{" "}
-                    <RadioGroupRating />
-                  </span>
-                  <span style={{ gap: "2rem", display: "flex" }}>
-                    <CustomAllTypography name={"Skills"} variant={"body3"} />{" "}
-                    <RadioGroupRating />
-                  </span>
-                  <span style={{ gap: "2rem", display: "flex" }}>
-                    <CustomAllTypography name={"Aptitude"} variant={"body3"} />{" "}
-                    <RadioGroupRating />
-                  </span>
+                  <RatingParameter/>
                 </div>
                 <div style={{ marginTop: "2.50rem" }}>
                   <CustomInputButton size="small" width="100%">
