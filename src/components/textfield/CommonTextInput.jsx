@@ -234,7 +234,7 @@ const CommonTextInput = ({
           {title && (
             <div
               className={classes.title}
-              style={{ position: isFocused ? "static" : "absolute" }}
+              style={{ position: isFocused || !!value ? "static" : "absolute" }}
             >
               <CustomAllTypography
                 name={_.startCase(_.toLower(title))}

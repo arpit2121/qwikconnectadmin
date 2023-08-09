@@ -12,10 +12,13 @@ function RatingParameter() {
     "Aptitude",
   ];
 
+  // const [selectedSmileyIndex, setSelectedSmileyIndex] = useState(-1);
   const [selectedSmileyIndex, setSelectedSmileyIndex] = useState(-1);
+  const [selectedOuterIndex, setSelectedOuterIndex] = useState(-1);
 
-  const handleClick = (index) => {
-    setSelectedSmileyIndex(index);
+  const handleClick = (innerIndex,outerIndex) => {
+    setSelectedSmileyIndex(innerIndex);
+    setSelectedOuterIndex(outerIndex)
   };
 
 
@@ -78,11 +81,11 @@ function RatingParameter() {
 
                       return (
                         <div
-                          onClick={() => handleClick(innerIndex)}
+                          onClick={() => handleClick(innerIndex,outerIndex)}
                           style={{ display: "flex" }}
                           key={innerIndex}
                         >
-                          <SmileIcon color={smileyColor} />
+                          <SmileIcon color={selectedOuterIndex===outerIndex?smileyColor:"#AAAAAA"} />
                         </div>
                       );
                     })}

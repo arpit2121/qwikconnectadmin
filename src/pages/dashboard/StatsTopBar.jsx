@@ -1,7 +1,6 @@
 import React from "react";
 import useResponsiveStyles from "../../utils/MediaQuery";
 import CustomAllTypography from "../../components/typography/CustomTypograpgy";
-// import UserPlusIcon from "../../components/icons/UserplusIcon";
 import UserIcon from "../../components/icons/UserIcon";
 import RejectedIcon from "../../components/icons/RejectedIcon";
 import { darkspacetheme } from "../../theme/theme";

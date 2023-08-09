@@ -4,18 +4,16 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import CustomAllTypography from "../typography/CustomTypograpgy";
 import { styled } from "@mui/material";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { BsDot } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import useResponsiveStyles from "../../utils/MediaQuery";
 import JobPostingStepTwo from "../../pages/dashboard/jobposting/JobPostingStepTwo";
 import JobPostingStepThree from "../../pages/dashboard/jobposting/JobPostingStepThree";
 import JobPostingStepFourA from "../../pages/dashboard/jobposting/JobPostingStepFourA";
 import JobPostingStepFourB from "../../pages/dashboard/jobposting/JobPostingStepFourB";
-import CustomButton, { CustomInputButton } from "../button/CustomButoon";
+import { CustomInputButton } from "../button/CustomButoon";
 import Notification from "../notification/Notification";
 import LeftArrowIcon from "../icons/LeftArrowIcon";
 import RightArrowIcon from "../icons/RightArrowIcon";
-import CustomButton from "../button/CustomButoon";
 import LinkBar from "../../pages/dashboard/jobposting/LinkBar";
 
 const StyledTab = styled(Tab)({

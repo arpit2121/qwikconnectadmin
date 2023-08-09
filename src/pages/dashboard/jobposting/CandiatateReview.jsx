@@ -16,6 +16,7 @@ import useResponsiveStyles from "../../../utils/MediaQuery";
 import Player from "../../../components/videoplayer/Player";
 import VideoPlayer from "./VideoPlayer";
 import LinkBar from "./LinkBar";
+import RatingParameter from "../../../components/admin/RatingParameter";
 
 const CandiatateReview = () => {
   const responsive = useResponsiveStyles();
