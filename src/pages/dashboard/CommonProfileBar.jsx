@@ -45,9 +45,10 @@ const CommonProfileBar = ({
     <div
       style={{
         display: responsive.isMobile || responsive.isTablet ? "" : "flex",
-        justifyContent: "space-between",
+        justifyContent: "space-between",alignItems:'center',marginTop:'2rem'
       }}
     >
+      {title && <CustomAllTypography name={title} variant={"h3"} />}
       {/* <div
         style={{
           marginTop: "2.38rem",
