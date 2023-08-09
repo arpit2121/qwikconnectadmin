@@ -8,6 +8,7 @@ import { Slider } from "@mui/material";
 import VolumeIcon from "../../../components/icons/VolumeIcon";
 import styled from "styled-components";
 import thumbnail from "../../../assets/videoThumbnail.png";
+import { Forward5Rounded, Replay5Rounded } from "@mui/icons-material";
 
 const CustomSoundBar = styled(Slider)(({ theme }) => ({
   "& .MuiSlider-thumb": {
@@ -51,12 +52,14 @@ const CustomTimeBar = styled(Slider)(({ theme }) => ({
 }));
 const VideoPlayer = () => {
   const [playing, setPlaying] = useState(false);
+  const [play, setPlay] = useState(false);
   const [videoTime, setVideoTime] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [showControlers, setShowControllers] = useState(true);
   const [showBackArrow, setShowBackArrow] = useState(false);
   const [showFwdArrow, setShowFwdArrow] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [drag, setDrag] = useState(false);
   const [volume, setVolume] = useState(100);
   const responsive = useResponsiveStyles();
   const vid = document.getElementById("video1");
@@ -90,22 +93,27 @@ const VideoPlayer = () => {
       setPlaying(false);
     }
   };
-  const interval=window.setInterval(function () {
+  const interval = window.setInterval(function () {
     setCurrentTime(videoRef.current?.currentTime);
   }, 1000);
 
   useEffect(() => {
     if (progress == 100) {
-      window.clearInterval();
+      window.clearInterval(interval);
     }
   }, [progress]);
 
   useEffect(() => {
-    setProgress((videoRef.current?.currentTime / videoTime) * 100);
-  }, [currentTime]);
+    !drag && setProgress((videoRef.current?.currentTime / videoTime) * 100);
+  }, [currentTime, drag]);
+
   useEffect(() => {
-   window.clearInterval(interval)
+    window.clearInterval(interval);
   }, []);
+  useEffect(() => {
+    if (!playing) setPlay(true);
+    else setPlay(false);
+  }, [playing]);
 
   const handleVolumeChange = (vol) => {
     setVolume(vol.target.value);
@@ -122,7 +130,7 @@ const VideoPlayer = () => {
     setShowControllers(true);
   };
   const onVideoMouseLeave = () => {
-    setShowControllers(false);
+    if (!play) setShowControllers(false);
   };
   const onClickVolume = () => {
     setVolume(0);
@@ -155,6 +163,8 @@ const VideoPlayer = () => {
           </p>
 
           <CustomTimeBar
+            onDragEnd={() => setDrag(false)}
+            onDrag={() => setDrag(true)}
             sx={{
               width: "80%",
               padding: "0px !important",
@@ -172,13 +182,19 @@ const VideoPlayer = () => {
           </p>
         </div>
         <div className="controls">
-          <VideoBackIcon onClick={revert} />
+          <VideoBackIcon className="controllerIcon" onClick={revert} />
           {playing ? (
-            <VideoPlayIcon onClick={() => videoHandler("pause")} />
+            <VideoPlayIcon
+              className="controllerIcon"
+              onClick={() => videoHandler("pause")}
+            />
           ) : (
-            <VideoPlayIcon onClick={() => videoHandler("play")} />
+            <VideoPlayIcon
+              className="controllerIcon"
+              onClick={() => videoHandler("play")}
+            />
           )}
-          <VideoForwardIcon onClick={fastForward} />
+          <VideoForwardIcon className="controllerIcon" onClick={fastForward} />
         </div>
       </div>
       )
@@ -207,23 +223,25 @@ const VideoPlayer = () => {
           className="arrowContainer"
           style={{ opacity: showBackArrow ? 1 : 0 }}
         >
-          <div class="arrow">
+          {/* <div class="arrow">
             <span></span>
             <span></span>
             <span></span>
           </div>
-          -5
+          -5 */}
+          <Replay5Rounded sx={{ fontSize: "3rem", color: "white" }} />
         </div>
         <div
           className="arrowContainer"
           style={{ opacity: showFwdArrow ? 1 : 0 }}
         >
-          <div class="arrow2">
+          {/* <div class="arrow2">
             <span></span>
             <span></span>
             <span></span>
           </div>
-          +5
+          +5 */}
+          <Forward5Rounded sx={{ fontSize: "3rem", color: "white" }} />
         </div>
       </div>
     </div>

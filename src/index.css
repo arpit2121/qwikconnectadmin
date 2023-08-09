@@ -12,3 +12,8 @@
   height: 8px;
   width: 8px;
 }
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #9D99AC;
+  font-size: 0.875rem;
+  font-weight:400 ;
+}
