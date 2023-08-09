@@ -1,9 +1,9 @@
-import { useRef, useState } from "react";
-import '../videoplayer/Player.style.css'
-import backward from '../../assets/svg/Videos/backward.svg'
-import forward from '../../assets/svg/Videos/forward.svg'
-import play from '../../assets/svg/Videos/play.svg'
-import pause from '../../assets/svg/Videos/pause.svg'
+import { useEffect, useRef, useState } from "react";
+import "../videoplayer/Player.style.css";
+import backward from "../../assets/svg/Videos/backward.svg";
+import forward from "../../assets/svg/Videos/forward.svg";
+import play from "../../assets/svg/Videos/play.svg";
+import pause from "../../assets/svg/Videos/pause.svg";
 
 function Player() {
   const videoRef = useRef(null);
@@ -33,10 +33,14 @@ function Player() {
   };
 
   window.setInterval(function () {
-    setCurrentTime(videoRef.current?.currentTime);
     setProgress((videoRef.current?.currentTime / videoTime) * 100);
+    setCurrentTime(videoRef.current?.currentTime);
   }, 1000);
 
+  useEffect(() => {
+    // setProgress((videoRef.current?.currentTime / videoTime) * 100);
+    console.log(progress)
+  }, [currentTime]);
   return (
     <div className="app">
       <video

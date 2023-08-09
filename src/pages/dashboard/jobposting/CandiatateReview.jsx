@@ -13,6 +13,8 @@ import DownloadIcon from "../../../components/icons/DownloadIcon";
 import CommonTextInput from "../../../components/textfield/CommonTextInput";
 import Review from "../../../components/structure/admin/Review";
 import useResponsiveStyles from "../../../utils/MediaQuery";
+import Player from "../../../components/videoplayer/Player";
+import VideoPlayer from "./VideoPlayer";
 
 const CandiatateReview = () => {
   const responsive = useResponsiveStyles();
@@ -197,19 +199,11 @@ const CandiatateReview = () => {
                     name={"Q1. What are your hobbies?"}
                     variant={"h5"}
                   />
-                  <div
-                    style={{
-                      marginTop: "0.5rem",
-                      height: "21rem",
-                      backgroundColor: "black",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      overflowX: "auto",
-                    }}
-                  >
-                    <h1 style={{ color: "white" }}>Video</h1>
-                  </div>
+                 
+            <VideoPlayer/>
+                  
+                   
+                
                   <div
                     id={"card_container_div"}
                     style={{
