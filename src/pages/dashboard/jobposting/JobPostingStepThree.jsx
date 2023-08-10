@@ -2,7 +2,7 @@ import React from "react";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import CustomDropzone from "../../../components/dropzone/CustomDropzone";
-import CommonTextInput from "../../../components/textfield/CommonTextInput";
+
 
 const JobPostingStepThree = () => {
   const responsive = useResponsiveStyles();
