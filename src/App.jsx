@@ -17,6 +17,7 @@ import MyProfile from "./pages/dashboard/profile/MyProfile";
 import ChangePassword from "./pages/dashboard/profile/ChangePassword";
 import CandiatateReview from "./pages/dashboard/jobposting/CandiatateReview";
 import Error404 from "./pages/error404/Error404";
+import RatingParameter from "./components/admin/RatingParameter";
 
 const App = () => {
   return (
@@ -28,7 +29,7 @@ const App = () => {
         <Route path="password/:name" element={<Password />} />
       </Route>
       <Route path="on-boarding" element={<OnBoardingPage />} />
-      <Route path="dashboard" element={<Dashboard />}>
+      <Route path="/dashboard" element={<Dashboard />}>
         <Route path="home" element={<DashboardHome />}>
           <Route path="existinguser" element={<ExistingUser />} />
           <Route path="nonexisting" element={<NonExisting />} />

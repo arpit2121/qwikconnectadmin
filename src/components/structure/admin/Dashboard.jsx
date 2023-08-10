@@ -1,5 +1,5 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import CustomContainer from "../CustomContainer";
 import Navbar from "../admin/Navbar";
@@ -7,6 +7,14 @@ import Sidebar from "../admin/Sidebar";
 
 const Dashboard = () => {
   const responsive = useResponsiveStyles();
+  const {pathname}=useLocation()
+  const navigate = useNavigate();
+  console.log(pathname)
+  useEffect(() => {
+    if (pathname == "/dashboard/home" || "/dashboard") {
+      navigate("/dashboard/home/existinguser");
+    }
+  }, []);
   return (
     <CustomContainer>
       <div
@@ -32,6 +40,7 @@ const Dashboard = () => {
               position: "sticky",
               top: 0,
               backgroundColor: "#fff",
+              zIndex:'1'
             }}
           >
             <Navbar />

@@ -172,7 +172,6 @@ const Sidebar = () => {
               <SettingsIcon color={activeTab == 3 ? "white" : "#25282B"} />
             </div>
             <SettingMenu open={openSettings} setOpen={setOpenSettings} />
-
             <div
               style={{ opacity: activeTab == 3 ? 1 : 0 }}
               className={classes.dot}
@@ -187,7 +186,7 @@ const Sidebar = () => {
             className={classes.iconDiv}
             style={{ background: activeTab == 4 ? "#E5E0FF" : "none" }}
           >
-            <UsersComponent style={{ height: "2.3rem" }} image={user1} />
+            <UsersComponent style={{ height: "2.3rem" }} image={user1}/>
           </div>
         </div>
       </div>

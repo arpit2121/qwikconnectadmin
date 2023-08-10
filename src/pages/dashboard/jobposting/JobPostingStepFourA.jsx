@@ -25,12 +25,9 @@ const JobPostingStepFourA = () => {
         isToggle
         ?
         <>
-        {/* <div style={{marginTop:'2rem',padding:'2.5rem 8.75rem',border:'1px solid black', display:'flex',justifyContent:'center',alignItems:'center'}}> */}
-          {/* dropzone will come her */}
           <div style={{marginTop:'2rem'}}>
           <CustomDropzone />
           </div>
-      {/* </div> */}
       <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
         <div style={{padding:'0.75rem 1.5rem'}}>
           <CustomInputButton size='small' variant='text'>Edit Earlier Template</CustomInputButton>
@@ -45,7 +42,6 @@ const JobPostingStepFourA = () => {
         ''
       }
       <div style={{marginTop:'1.69rem'}}>
-        {/* <Body3>Public link</Body3> */}
         <CustomAllTypography name="Public link"/>
       </div>
       <div style={{marginTop:'0.56rem',padding:'1.5rem',border: '2px dashed #C1C1C1', display:'flex',justifyContent:'center',alignItems:'center',gap:'1rem'}}>

@@ -28,9 +28,7 @@ const PlansBilling = () => {
                   <CustomAllTypography name={'Payment'} variant={'body2'}/>
                   <CustomAllTypography name={'Free'} variant={'h4'}/></div>
                 <div>
-                  <CustomInputButton size='small' bgcolor='linear-gradient(180deg, #605DEC 0%, #A5F 100%)'>Upgrade subscription</CustomInputButton>
-                  {/* <CustomInputButton variant='contained' name='Upgrade subscription' bgColor='linear-gradient(180deg, #605DEC 0%, #A5F 100%)'/> */}
-                  {/* color='linear-gradient(180deg, #605DEC 0%, #A5F 100%)' */}
+                  <CustomInputButton size='small' sx={{backgroundImage:'linear-gradient(180deg, #605DEC 0%, #A5F 100%)'}}>Upgrade subscription</CustomInputButton>
                 </div>
               </div>
               <Divider sx={{color:'#C9C8D3',marginTop:'2.38rem'}}/>

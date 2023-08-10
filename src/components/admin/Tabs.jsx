@@ -84,7 +84,13 @@ const CustomTabs = () => {
           </div>
         </Box>
       ) : (
-        <LinkBar linkArray={[{title:'Home',path:'/dashboard/home'},{title:'My Job Post',path:'/jobposting/basicDaetails'}]} currentStep={value}  />
+        <LinkBar
+          linkArray={[
+            { title: "Home", path: "/dashboard/home" },
+            { title: "My Job Post", path: "/jobposting/basicDaetails" },
+          ]}
+          currentStep={value}
+        />
       )}
 
       <TabContext value={value}>
@@ -142,7 +148,7 @@ const CustomTabs = () => {
         </StyleTabPanel>
       </TabContext>
       {value == "1" ? (
-        <div style={{ paddingTop: "2rem" }}>
+        <div style={{ padding: "2rem 1rem 0 1rem" }}>
           <Notification />
         </div>
       ) : (
@@ -160,21 +166,58 @@ const CustomTabs = () => {
       >
         <div
           style={{
-            padding: "0 1rem 0 1rem",
+            padding:responsive.isMobile?'': "0 1rem 0 1rem",
             display: "flex",
-            width:'100%',
+            width: "100%",
             justifyContent: "space-between",
           }}
         >
-          <div>
-            {
-             value!="1"?<CustomInputButton variant="text" size="medium" startIcon={<LeftArrowIcon/>}>Back</CustomInputButton>:''
-            }
-          </div>
-          <div style={{ display: "flex",gap:'1.12rem'}}>
-            <CustomInputButton variant="text" size="medium">Close</CustomInputButton>
-            {value==="4"?<CustomInputButton variant="outlined" size="medium">Preview</CustomInputButton>:''}
-            <CustomInputButton size="medium" endIcon={<RightArrowIcon/>}>Save & Next</CustomInputButton>
+          {!responsive.isMobile ? (
+            <div>
+              {value != "1" ? (
+                <CustomInputButton
+                  variant="text"
+                  size="medium"
+                  startIcon={<LeftArrowIcon />}
+                >
+                  Back
+                </CustomInputButton>
+              ) : (
+                ""
+              )}
+            </div>
+          ) : (
+            ""
+          )}
+          <div
+            style={{
+              zIndex: 1,
+              backgroundColor:'white',
+              display: "flex",
+              gap: responsive.isMobile?"":"1.12rem",
+              width: responsive.isMobile?"100%":'',
+              boxShadow: responsive.isMobile
+                ? "2px 2px 2px 2px rgba(0, 0, 0, 0.25)"
+                : "",
+              position: responsive.isMobile ? "fixed" : "",
+              bottom: 1,
+              justifyContent:responsive.isMobile?'space-around':'',
+              padding: responsive.isMobile?'0.5rem 0.5rem':''
+            }}
+          >
+            <CustomInputButton variant="text" size="medium">
+              Close
+            </CustomInputButton>
+            {value === "4" ? (
+              responsive.isMobile?'':<CustomInputButton variant="outlined" size="medium">
+              Preview
+            </CustomInputButton>
+            ) : (
+              ""
+            )}
+            <CustomInputButton size="medium" endIcon={<RightArrowIcon />}>
+              Save & Next
+            </CustomInputButton>
           </div>
         </div>
       </div>

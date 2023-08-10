@@ -12,8 +12,7 @@ import AddIcon from "../../../components/icons/AddIcon";
 import DbIcon from "../../../components/icons/DbIcon";
 import QuestionCard from "../../../components/admin/QuestionCard";
 import Notification from "../../../components/notification/Notification";
-import IconButton, { CustomIconButton } from "../../../components/button/IconButton";
-
+import IconButton from "../../../components/button/IconButton";
 
 const JobPostingStepTwo = () => {
   const responsive = useResponsiveStyles();
@@ -110,7 +109,8 @@ const JobPostingStepTwo = () => {
                             justifyContent: "space-between",
                           }}
                         >
-                          {/* <IconButton icon={<EditIcon/>}/> */}
+                          {/* <IconButto icon={<EditIcon/>}/> */}
+                          {/* <IconButton variant="contained" icon={<EditIcon/>}/> */}
                           <EditIcon/>
                           <DeleteIcon/>
                         </div>
@@ -127,10 +127,11 @@ const JobPostingStepTwo = () => {
               justifyContent: "space-between",
               paddingTop: "30px",
               paddingBottom: "30px",
+              alignItems:'center'
             }}
           >
             <Body3>Sample Ratings</Body3>
-            <CustomInputButton variant="outlined" size="medium" startIcon={<AddIcon/>} sx={{width:'30%'}}>Add Parameter</CustomInputButton>
+            <CustomInputButton variant="outlined" size="medium" startIcon={<AddIcon/>}>Add Parameter</CustomInputButton>
           </div>
         </div>
         <div style={{ backgroundColor: "", paddingTop: "30px" }}>
@@ -231,5 +232,3 @@ const JobPostingStepTwo = () => {
 };
 
 export default JobPostingStepTwo;
-
-// display:'flex', justifyContent:'space-between', alignItems:'center'

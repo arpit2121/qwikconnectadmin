@@ -19,12 +19,14 @@ const CardContainerComponent = ({ cards = [1, 2, 3, 4, 5] }) => {
   };
   const cardStyle = { minWidth: responsive.isMobile ? "90%" : "31%" };
   return (
-    <div id="card_container_div" style={responsive?.isMobile ? cardDivStyleMobile : cardDivStyle}>
+    <div style={{marginTop:'2rem'}}>
+      <div id="card_container_div" style={responsive?.isMobile ? cardDivStyleMobile : cardDivStyle}>
       {cards?.map((elem, index) => (
         <div key={index} style={cardStyle}>
           <JobCard />
         </div>
       ))}
+    </div>
     </div>
   );
 };

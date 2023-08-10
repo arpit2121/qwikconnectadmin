@@ -6,6 +6,7 @@ const useResponsiveStyles = () => {
     isMobile: false,
     isTablet: false,
     isDesktop: false,
+    isRandom: false,
   });
 
   useEffect(() => {
@@ -15,6 +16,7 @@ console.log('inner',innerWidth)
       setResponsive({
         isMobile: innerWidth < 640,
         isTablet: innerWidth >= 640 && innerWidth < 1280,
+        isRandom: innerWidth >=  640 && innerWidth <950,
         isDesktop: innerWidth >= 1280,
       });
     };
@@ -25,7 +27,7 @@ console.log('inner',innerWidth)
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [responsive.isMobile, responsive.isDesktop, responsive.isTablet]);
+  }, [responsive.isMobile, responsive.isDesktop, responsive.isTablet,responsive.isRandom]);
 
   return responsive;
 };

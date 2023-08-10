@@ -87,5 +87,8 @@ export const darkspacetheme={
         }
 
     },
-    colorPallete:colors
+    colorPallete:colors,
+    typography: {
+        fontFamily: "Nunito Sans",
+    }
 }

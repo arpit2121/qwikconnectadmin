@@ -35,7 +35,7 @@ const Toggle = ({disabled,setIsToggle,isToggle}) => {
         onMouseLeave={() => setIsHovered(!disabled && false)}
         style={{
           display: 'flex',
-          width: '3rem',
+          width: '2.5rem',
           backgroundColor: disabled ? '#F4F3FE' : isSelected ? 'black' : '#D4D4DE',
           borderRadius: '0.75rem',
           padding: '0.25rem',
@@ -53,7 +53,7 @@ const Toggle = ({disabled,setIsToggle,isToggle}) => {
             backgroundColor: disabled ? '#FFFFFF' : '#FFFFFF',
             flexShrink: 0,
             borderRadius: '50%',
-            marginLeft: isSelected ? '2rem' : '',
+            marginLeft: isSelected ? '1.5rem' : '',
             transition: '.5s',
           }}
         ></span>

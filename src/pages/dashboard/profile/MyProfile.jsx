@@ -6,6 +6,7 @@ import { CustomInputButton } from "../../../components/button/CustomButoon";
 import { useNavigate } from "react-router-dom";
 import UsersComponent from "../../../components/admin/UsersComponent";
 import user1 from "../../../assets//svg/user1.svg";
+import PhoneIcon from "../../../components/icons/PhoneIcon";
 
 const MyProfile = () => {
   const responsive = useResponsiveStyles();
@@ -17,7 +18,7 @@ const MyProfile = () => {
         padding: responsive.isMobile ? "0 1rem 0 1rem" : "0 5rem 0 5rem",
       }}
     >
-      <div style={{ marginTop: "2.75rem"}}>dashboard profile</div>
+      <div style={{ marginTop: "2.75rem" }}>dashboard profile</div>
       <div
         style={{
           marginTop: "1.25rem",
@@ -27,11 +28,21 @@ const MyProfile = () => {
         }}
       >
         <div>
-        <div style={{ display: "flex", justifyContent: "center",gap:'1rem',alignItems:'center' }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "1rem",
+              alignItems: "center",
+            }}
+          >
             <UsersComponent image={user1} />
             <div>
-            <CustomAllTypography name={'Vaibhav Naik'} variant={'h3'}/>
-            <CustomAllTypography name={'vaibhavnaik@gmail.com'} variant={'body2'}/>
+              <CustomAllTypography name={"Vaibhav Naik"} variant={"h3"} />
+              <CustomAllTypography
+                name={"vaibhavnaik@gmail.com"}
+                variant={"body2"}
+              />
             </div>
           </div>
         </div>
@@ -84,13 +95,10 @@ const MyProfile = () => {
           />
         </div>
         <CommonTextInput
-          // value={email}
-          // setvalue={setEmail}
-          // title="Email ID"
-          placeholder="Mobile "
-          searchInput={false}
-          // setValue={setEmail}
-          type1={"email"}
+          style={{ margin: "1.5rem 0rem" }}
+          startIcon={<PhoneIcon />}
+          extraText={"+91"}
+          placeholder="Mobile no."
         />
         <CommonTextInput
           // value={email}
@@ -102,13 +110,9 @@ const MyProfile = () => {
           type1={"email"}
         />
         <CommonTextInput
-          // value={email}
-          // setvalue={setEmail}
-          // title="Email ID"
+          style={{ margin: "1.5rem 0rem" }}
+          type="dropdown"
           placeholder="Your Profession"
-          searchInput={false}
-          // setValue={setEmail}
-          type1={"email"}
         />
       </div>
       <div
@@ -116,6 +120,7 @@ const MyProfile = () => {
           marginTop: "3rem",
           display: "flex",
           justifyContent: "flex-end",
+          paddingBottom:'4rem'
         }}
       >
         <CustomInputButton size="medium">Save Changes</CustomInputButton>
