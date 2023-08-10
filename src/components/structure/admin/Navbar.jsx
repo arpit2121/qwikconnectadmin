@@ -28,6 +28,7 @@ navigate('/dashboard/home/existinguser')
         top: 0,
         overflow: "hidden",
         backgroundColor: "#fff",
+        zIndex:'1'
       }}
     >
       <div style={{ width: "10%", display: "flex", alignItems: "center" }} onClick={onIconClick}>

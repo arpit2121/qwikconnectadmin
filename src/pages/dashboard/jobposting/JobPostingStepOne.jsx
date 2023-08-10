@@ -49,8 +49,6 @@ const JobPostingStepOne = () => {
           </div>
         </div>
       </div>
-      {/* </div> */}
-      
     </CustomContainer>
   );
 };

@@ -11,16 +11,32 @@ function RatingParameter() {
     "Skills",
     "Aptitude",
   ];
+  const [state,setState] = useState({
+    Concentration:0,
+    Flexible:0,
+    Competency:0,
+    Skills:0,
+    Aptitude:0,
+  })
 
-  // const [selectedSmileyIndex, setSelectedSmileyIndex] = useState(-1);
   const [selectedSmileyIndex, setSelectedSmileyIndex] = useState(-1);
   const [selectedOuterIndex, setSelectedOuterIndex] = useState(-1);
+  
 
-  const handleClick = (innerIndex,outerIndex) => {
+  const handleClick = (innerIndex, outerIndex) => {
     setSelectedSmileyIndex(innerIndex);
-    setSelectedOuterIndex(outerIndex)
-  };
+    setSelectedOuterIndex(outerIndex);
+    
+    const parameterKey = data[outerIndex];
+    console.log(parameterKey)
+    setState(prevState => ({
+      ...prevState,
+      [parameterKey]: innerIndex+1
+    }));
 
+  };
+  console.log(state); 
+  
 
   return (
     <div>

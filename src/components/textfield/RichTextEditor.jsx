@@ -5,7 +5,7 @@ const RichTextEditor = () => {
     const editor = useRef();
     const [content, setContent] = useState();
   return (
-    <div style={{padding:'1rem'}}>
+    <div>
         <JoditEditor
         ref={editor}
         value={content}

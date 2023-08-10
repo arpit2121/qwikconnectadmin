@@ -127,10 +127,11 @@ const JobPostingStepTwo = () => {
               justifyContent: "space-between",
               paddingTop: "30px",
               paddingBottom: "30px",
+              alignItems:'center'
             }}
           >
             <Body3>Sample Ratings</Body3>
-            <CustomInputButton variant="outlined" size="medium" startIcon={<AddIcon/>} sx={{width:'30%'}}>Add Parameter</CustomInputButton>
+            <CustomInputButton variant="outlined" size="medium" startIcon={<AddIcon/>}>Add Parameter</CustomInputButton>
           </div>
         </div>
         <div style={{ backgroundColor: "", paddingTop: "30px" }}>

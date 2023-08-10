@@ -8,7 +8,7 @@ import CommonTextInput from '../../../components/textfield/CommonTextInput'
 
 const JobPostingStepFourB = () => {
   return (
-    <div style={{marginTop:'4rem'}}>
+    <div style={{marginTop:'4rem',padding:'0 1rem 0 1rem'}}>
         <div style={{display:'flex',justifyContent:'space-between'}}><CustomAllTypography name={'Enter Job Title here'} variant={'h2'}/>
         <img src={editicon} alt='edit'/></div>
         <div style={{marginTop:'2.19rem'}}>

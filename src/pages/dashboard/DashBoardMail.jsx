@@ -8,15 +8,15 @@ const DashBoardMail = () => {
   const responsive = useResponsiveStyles();
   return (
     <div
+    // 0 2rem 0 2rem
       style={{
         padding: !responsive.isMobile
-          ? "0 2rem 0 2rem"
+          ? ""
           : "0 0 3.94rem 0 3.94rem",
       }}
     >
       <CommonProfileBar  title={'Overview'} showProfile={false} />
       <CardContainerComponent/>
-  
     </div>
   );
 };
