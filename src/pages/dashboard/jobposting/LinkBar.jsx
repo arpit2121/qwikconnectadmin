@@ -2,7 +2,7 @@ import { Breadcrumbs } from "@mui/material";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
-import DotIcon from "../../../components/icons/dotIcon";
+import DotIcon from "../../../components/icons/DotIcon";
 import { useSelector } from "react-redux";
 
 const LinkBar = ({
