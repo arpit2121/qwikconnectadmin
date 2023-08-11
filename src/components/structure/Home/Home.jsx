@@ -20,11 +20,11 @@ const Home = () => {
     <CustomContainer>
       <div
         style={{
-          height: "100%",
           width: "100vw",
           display: "flex",
           maxHeight: "862px",
           backgroundColor: "",
+          padding:!responsive.isMobile?'3.88rem 6rem':'2rem'
         }}
       >
         <div
@@ -33,11 +33,12 @@ const Home = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center",
+            justifyContent: "flex-start",
+            paddingRight:!responsive.isMobile?'6rem':'',
             paddingLeft: !responsive.isMobile ? "rem" : "",
           }}
         >
-          <div style={{ width: "90%", height: "80%", backgroundColor: "" }}>
+          <div style={{ width: "100%", height: "100%", backgroundColor: "" }}>
             <div
               style={{
                 width: "100%",
@@ -67,19 +68,27 @@ const Home = () => {
           </div>
         </div>
         {!responsive.isMobile ? (
-          <div style={{ width: "50%" }}>
+        
             <div
               style={{
-                width: "90%",
-                height: "90%",
-                padding: "0 2rem",
+                width: "50%",
+                height: '100%',
                 display: "flex",
                 alignItems: "center",
+                borderRadius:'2.5rem'
               }}
             >
-              <img src={hero} alt="side image" width="100%" height="90%"></img>
-            </div>
-          </div>
+              <img  style={{
+                width: "100%",
+                height:responsive.isTablet?'70%': "100%",
+                // padding: "0 2rem",
+                objectFit:'contain',
+                display: "flex",
+                alignItems: "center",
+                borderRadius:'2.5rem'
+              }} src={hero} alt="side image" width="100%" height="100%"></img>
+             </div>
+         
         ) : (
           ""
         )}

@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import ErrorIcon from "../../assets/cancel.svg";
 import WarningIcon from "../../assets/cancel.svg";
 import SuccessIcon from "../../assets/cancel.svg";
 import LoadingIcon from "../../assets/cancel.svg";
 import CustomAllTypography from "../typography/CustomTypograpgy";
 import { makeStyles } from "@mui/styles";
-import { MenuItem, Select } from "@mui/material";
+import {
+  InputAdornment,
+  ListSubheader,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 import { styled } from "@mui/material";
 import _ from "lodash";
 import SearchIcon from "../icons/SearchIcon";
@@ -96,6 +102,13 @@ const useStyles = makeStyles({
   },
   countryCode: {
     display: "flex",
+    width: "100%",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: "0.5rem",
+  },
+  countryCode2: {
+    display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     gap: "0.5rem",
@@ -147,8 +160,10 @@ const CommonTextInput = ({
   type1,
   borderStyle = {}
 }) => {
+  let allCountryList = CountryList.getAll();
   const inputRef = React.createRef();
   const [isFocused, setIsFocused] = useState(false);
+  const [searchText, setSearchText] = useState("");
   const [countryCode, setCountryCode] = useState("+91");
 
   const statusMap = {
@@ -176,9 +191,10 @@ const CommonTextInput = ({
     setValue(e);
   };
   const handleCountryChange = (e) => {
+    console.log(e.target.value)
     setCountryCode(e.target.value);
   };
-  const allCountryList = CountryList.getAll();
+
   const handleClick = () => {
     inputRef.current.focus();
   };
@@ -189,6 +205,23 @@ const CommonTextInput = ({
     type,
     isFocused,
   });
+  let timeout;
+  const handleDebounce = (e) => {
+    setSearchText(e.target.value);
+  };
+  const containsText = (text, searchText) =>
+    text.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
+
+  const displayedOptions = useMemo(
+    () =>
+      allCountryList.filter(
+        (option) =>
+          containsText(option.dial_code, searchText) ||
+          containsText(option.name, searchText) ||
+          containsText(option.code, searchText)
+      ),
+    [searchText]
+  );
 
   return (
     <div className={classes.mainContainer} style={style}>
@@ -205,20 +238,63 @@ const CommonTextInput = ({
           <div style={{ width: "max-content", marginRight: "0.62rem" }}>
             <CustomSelect
               IconComponent={() => null}
+              MenuProps={{ autoFocus: false }}
               inputProps={{ sx: { padding: "0 !important", color: "#9D99AC" } }}
               sx={{ padding: 0, height: "max-content" }}
-              renderValue={(selected) => selected}
+              renderValue={() => countryCode}
               value={countryCode}
               onChange={handleCountryChange}
               className={classes.countryList}
               onClick={(e) => e.stopPropagation()}
+              onClose={() => setSearchText("")}
               native={false}
             >
-              {allCountryList?.map((elem, index) => (
+              <ListSubheader>
+                <TextField
+                  size="small"
+                  // Autofocus on textfield
+                  autoFocus
+                  placeholder="Type to search..."
+                  fullWidth
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                  onChange={handleDebounce}
+                  onKeyDown={(e) => {
+                    if (e.key !== "Escape") {
+                      // Prevents autoselecting item while typing (default Select behaviour)
+                      e.stopPropagation();
+                    }
+                  }}
+                />
+              </ListSubheader>
+
+              {displayedOptions?.map((elem, index) => (
                 <MenuItem key={index} value={elem?.dialCode}>
                   <div className={classes.countryCode}>
-                    <span>{elem?.flag}</span>
+                    <div className={classes.countryCode2}>
+                      <span>{elem?.flag}</span>
+                      <CustomAllTypography
+                        name={elem?.name}
+                        sx={{fontSize: "0.875rem"}}
+                        variant="body3"
+                        color="#9D99AC"
+                      />
+                      
+                      <CustomAllTypography
+                        sx={{fontSize: "0.875rem"}}
+                        name={`(${elem?.code})`}
+                        variant="body3"
+                        color="#9D99AC"
+                      />
+                      
+                    </div>
                     <CustomAllTypography
+                      sx={{fontSize: "0.875rem"}}
                       name={elem?.dial_code}
                       variant="body3"
                       color="#9D99AC"
@@ -256,7 +332,7 @@ const CommonTextInput = ({
               className={classes.textBoxStyles}
               onFocus={handleFocus}
               onBlur={handleBlur}
-              autoComplete="true"
+              autoComplete="new-user-street-address"
             />
           ) : (
             <CustomSelect

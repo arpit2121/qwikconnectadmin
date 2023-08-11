@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import UsersComponent from "../../../components/admin/UsersComponent";
 import user1 from "../../../assets//svg/user1.svg";
 import PhoneIcon from "../../../components/icons/PhoneIcon";
+import LinkBar from "../jobposting/LinkBar";
 
 const MyProfile = () => {
   const responsive = useResponsiveStyles();
@@ -18,7 +19,11 @@ const MyProfile = () => {
         padding: responsive.isMobile ? "0 1rem 0 1rem" : "0 5rem 0 5rem",
       }}
     >
-      <div style={{ marginTop: "2.75rem" }}>dashboard profile</div>
+    <LinkBar linkArray={[
+                    { title: "Home", path: "/dashboard/home/existinguser" },
+                    { title: "My Profile", path: "/dashboard/myprofile" },
+                    { title: "Change Password" },
+                  ]}/>
       <div
         style={{
           marginTop: "1.25rem",

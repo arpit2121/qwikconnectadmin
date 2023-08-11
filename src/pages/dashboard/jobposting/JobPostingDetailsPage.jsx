@@ -69,24 +69,8 @@ const JobPostingDetailsPage = () => {
         </div>
         </Box>
           :
-          <div
-          style={{
-            height: "10%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            padding: "0 1rem 0 1rem",
-            boxShadow: "0 2px 3px -1px rgba(0, 0, 0, 0.5)",
-            position:'sticky',
-            top:0,
-            overflow:'hidden',
-            backgroundColor:'#fff',
-            zIndex:1
-            // backgroundColor:'red'
-          }}
-        >
+ 
           <Navbar job={' '}/>
-        </div>
         }
         <div style={{backgroundColor:''}}>
            <CustomCard sx={{backgroundColor:'#F8F8F9'}}>

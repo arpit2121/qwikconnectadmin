@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { adminsApi } from "./services/admin";
 import { authApi } from "./services/auth";
+import commonReducer from './slice/common.slice'
 
-console.log(adminsApi)
+
 
 const store = configureStore({
     reducer: {
         // [adminsApi.reducerPath]: adminsApi.reducer,
         [authApi.reducerPath]: authApi.reducer,
+        common:commonReducer
     },
     middleware: (gDM) => gDM().concat(authApi.middleware)
 });

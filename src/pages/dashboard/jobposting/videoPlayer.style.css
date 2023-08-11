@@ -38,8 +38,16 @@ Main Container .app {
 
 .controls {
   display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+.playIcons {
+  width: 20%;
+  display: flex;
   align-items: center;
   justify-content: space-evenly;
+  cursor: pointer;
 }
 
 .controlsIcon {

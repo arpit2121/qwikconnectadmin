@@ -16,28 +16,7 @@ const JobPostingStepOne = () => {
         }}
       >
         {/* <div style={{height:'100%', width:'100%', position:'fixed'}}> */}
-        {responsive.isMobile ? (
-          ""
-        ) : (
-          <div
-            style={{
-              height: "10%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              padding: "0 1rem 0 1rem",
-              boxShadow: "0 2px 3px -1px rgba(0, 0, 0, 0.5)",
-              position: "sticky",
-              top: 0,
-              overflow: "hidden",
-              backgroundColor: "#fff",
-              zIndex: 1,
-              // backgroundColor:'red'
-            }}
-          >
-            <Navbar job={"Job Posting"} />
-          </div>
-        )}
+        {responsive.isMobile ? "" : <Navbar job={"Job Posting"} />}
         <div
           style={{
             paddingLeft: !responsive.isMobile ? "100px" : "",
@@ -49,6 +28,7 @@ const JobPostingStepOne = () => {
           </div>
         </div>
       </div>
+      {/* </div> */}
     </CustomContainer>
   );
 };

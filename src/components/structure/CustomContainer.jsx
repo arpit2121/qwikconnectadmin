@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from '@mui/material';
 
-const CustomContainer = ({ children}) => {
+const CustomContainer = ({ children,style}) => {
   const isLgScreen = window.innerWidth >= 1280; // Adjust the breakpoint value as per your requirement
   const containerHeight = isLgScreen ? 'auto' : '100vh'; // Adjust the height value for non-lg screens
 

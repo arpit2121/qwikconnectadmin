@@ -60,10 +60,10 @@ const Password = () => {
     <div
       style={{
         width: "100%",
-        height: "100%",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
+        gap:'3rem'
       }}
     >
       <div
@@ -89,7 +89,7 @@ const Password = () => {
           variant={"h5"}
         />
       </div>
-      <div style={{ marginTop: "2.50rem" }}>
+      <div >
         {/* <CustomPassword title={'Enter Password'} data={pass} setData={setPass}/> */}
         <CommonTextInput
           value={pass}
@@ -114,7 +114,7 @@ const Password = () => {
           </CustomInputButton>
         </div>
       </div>
-      <div style={{ marginTop: "4rem" }}>
+      <div style={{ marginTop: "2rem" }}>
         <CustomInputButton
           variant="contained"
           width={"100%"}

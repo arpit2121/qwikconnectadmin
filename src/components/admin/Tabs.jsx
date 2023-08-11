@@ -15,6 +15,8 @@ import Notification from "../notification/Notification";
 import LeftArrowIcon from "../icons/LeftArrowIcon";
 import RightArrowIcon from "../icons/RightArrowIcon";
 import LinkBar from "../../pages/dashboard/jobposting/LinkBar";
+import { useDispatch } from "react-redux";
+import { setSelectedJobPostingPage } from "../../slice/common.slice";
 
 const StyledTab = styled(Tab)({
   "&.Mui-selected": {
@@ -41,8 +43,10 @@ const StyleTabPanel = styled(TabPanel)({
 const CustomTabs = () => {
   const [value, setValue] = React.useState("1");
   const responsive = useResponsiveStyles();
+  const dispatch=useDispatch()
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    dispatch(setSelectedJobPostingPage(newValue))
   };
 
   const navigate = useNavigate();

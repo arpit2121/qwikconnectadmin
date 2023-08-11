@@ -17,6 +17,10 @@ import Player from "../../../components/videoplayer/Player";
 import VideoPlayer from "./VideoPlayer";
 import LinkBar from "./LinkBar";
 import RatingParameter from "../../../components/admin/RatingParameter";
+import SampleVideos from "./SampleVideos.json";
+import { useDispatch } from "react-redux";
+import { setVideoLink } from "../../../slice/common.slice";
+import thumbnail from "../../../assets/videoThumbnail.png";
 
 const CandiatateReview = () => {
   const responsive = useResponsiveStyles();
@@ -59,7 +63,7 @@ const CandiatateReview = () => {
   const buttonStyle = {
     borderRadius: 0,
   };
-
+  const dispatch = useDispatch();
   return (
     <CustomContainer>
       <div
@@ -70,22 +74,8 @@ const CandiatateReview = () => {
         }}
       >
         <div style={{ height: "100%", width: "100%" }}>
-          <div
-            style={{
-              height: "10%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              padding: "0 1rem 0 1rem",
-              boxShadow: "0 2px 3px -1px rgba(0, 0, 0, 0.5)",
-              position: "sticky",
-              top: 0,
-              backgroundColor: "#fff",
-              zIndex: "1",
-            }}
-          >
-            <Navbar />
-          </div>
+          <Navbar />
+
           <div style={{ display: responsive.isMobile ? "" : "flex" }}>
             <div
               style={{
@@ -209,7 +199,10 @@ const CandiatateReview = () => {
                   linkArray={[
                     { title: "Home", path: "/dashboard/home" },
                     { title: "My Job Post", path: "/jobposting/basicDaetails" },
-                    { title: "UI/UX Developer", path: "/jobposting/basicDaetails" },
+                    {
+                      title: "UI/UX Developer",
+                      path: "/jobposting/basicDaetails",
+                    },
                   ]}
                   showSteps={false}
                 />
@@ -234,27 +227,38 @@ const CandiatateReview = () => {
                       scrollbarWidth: "none",
                     }}
                   >
-                    {[1, 2, 3, 4, 5, 5, 6, 4, 2, 2, 2, 2, 2, 2].map(
-                      (data, index) => {
-                        return (
+                    {SampleVideos?.map((data, index) => {
+                      return (
+                        <div
+                          onClick={() =>
+                            dispatch(setVideoLink(data?.sources?.[0]))
+                          }
+                          style={{
+                            height: "6.5625rem",
+                            display: "flex",
+                            bordeRadius: "0.625rem",
+                            border: "1px solid #DCDCDC",
+                            flexDirection: "column",
+                            justifyContent: "flex-end",
+                            background: `url(${thumbnail})`,
+                            backgroundSize: "contain",
+                            width: "9.25rem",
+                          }}
+                        >
                           <div
                             style={{
-                              height: "6.5625rem",
-                              gap: "10px",
-                              border: "1px solid red",
                               width: "9.25rem",
+                              height: "35%",
+                              backgroundColor: "#ffff",
+                              fontSize:'0.75rem',
+                              
                             }}
                           >
-                            <div
-                              style={{
-                                width: "9.25rem",
-                                backgroundColor: "red",
-                              }}
-                            ></div>
+                            <p>{data?.subtitle}</p>
                           </div>
-                        );
-                      }
-                    )}
+                        </div>
+                      );
+                    })}
                   </div>
                 </CustomCard>
               </div>
