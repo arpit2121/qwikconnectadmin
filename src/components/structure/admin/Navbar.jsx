@@ -1,61 +1,75 @@
 import { Button } from "@mui/material";
 import React, { useState } from "react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import logo from "../../../assets/logo.svg";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link, useNavigate } from "react-router-dom";
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import CustomAllTypography from "../../typography/CustomTypograpgy";
 import { CustomInputButton } from "../../button/CustomButoon";
 import StasTopbar from "../../../pages/dashboard/StatsTopBar";
+import Logo from "../../icons/Logo";
 
-const Navbar = ({ job, onClick, showStatsBar = false }) => {
+const Navbar = ({ job, onClick, showStatsBar = true }) => {
   const responsive = useResponsiveStyles();
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const [isOp, setIsOp] = useState(false);
 
-const onIconClick=()=>{
-navigate('/dashboard/home/existinguser')
-}
+  const onIconClick = () => {
+    console.log('icon')
+    navigate("/dashboard/home/existinguser");
+  };
   return (
     <div
       style={{
-        width: "100%",
         display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
+        flexDirection: "column",
+        justifyContent: "center",
+        padding: responsive.isMobile?"1rem": "1.5rem 2.5rem",
+        boxShadow: "0 2px 3px -1px rgba(0, 0, 0, 0.5)",
         position: "sticky",
         top: 0,
-        overflow: "hidden",
         backgroundColor: "#fff",
         zIndex:'1'
       }}
     >
-      <div style={{ width: "10%", display: "flex", alignItems: "center" }} onClick={onIconClick}>
-        <img src={logo} alt="logo" width={"50%"}></img>
-      </div>
-      <div style={{ width: "55%" }}>
-        <CustomAllTypography name={job ? job : "Dashboard"} variant={"h3"} />
-      </div>
       <div
-        style={{ width: "25%", display: "flex", justifyContent: "flex-end" }}
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          position: "sticky",
+          top: 0,
+          overflow: "hidden",
+          backgroundColor: "#fff",
+        }}
       >
-        {job ? (
-          ""
-        ) : !showStatsBar ? (
-          <CustomInputButton
-            variant="outlined"
-            size="small"
-            responsive
-            component={Link}
-            to="/jobposting/basicDaetails"
-            endIcon={<ArrowForwardIcon />}
-          >
-            Verify
-          </CustomInputButton>
-        ) : (
-          <StasTopbar />
-        )}
+       
+         <Logo onClick={onIconClick}/>
+     
+        <div style={{ width: "55%" }}>
+          <CustomAllTypography name={job ? job : "Dashboard"} variant={"h3"} />
+        </div>
+        <div
+          style={{ width: "25%", display: "flex", justifyContent: "flex-end" }}
+        >
+          {job ? (
+            ""
+          ) : !showStatsBar ? (
+            <CustomInputButton
+              variant="outlined"
+              size="small"
+              responsive
+              component={Link}
+              to="/jobposting/basicDaetails"
+              endIcon={<ArrowForwardIcon />}
+            >
+              Verify
+            </CustomInputButton>
+          ) : (
+            <StasTopbar />
+          )}
+        </div>
       </div>
     </div>
   );

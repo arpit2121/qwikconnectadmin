@@ -5,6 +5,7 @@ import { CustomCard } from '../../../components/card/CustomCard';
 import { Divider } from '@mui/material';
 import LinearWithValueLabel from '../../../components/admin/LinearProgress';
 import { CustomInputButton } from '../../../components/button/CustomButoon';
+import LinkBar from '../jobposting/LinkBar';
 
 
 const PlansBilling = () => {
@@ -12,7 +13,11 @@ const PlansBilling = () => {
   return (
     <div style={{backgroundColor:'',padding:responsive.isMobile?'0 1rem 0 1rem':'0 5rem 0 5rem',}}>
         <div style={{marginTop:'2.75rem'}}>
-          dashboard
+        <LinkBar linkArray={[
+                    { title: "Home", path: "/dashboard/home/existinguser" },
+                    { title: "My Profile", path: "/dashboard/myprofile" },
+                    { title: "Plans & Billing" },
+                  ]}/>
         </div>
         <div style={{marginTop:'4.8rem'}}>
           <CustomAllTypography name={'My plan'} variant={'h1'}/>
