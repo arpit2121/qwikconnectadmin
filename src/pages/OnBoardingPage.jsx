@@ -10,9 +10,11 @@ import CustomAllTypography from "../components/typography/CustomTypograpgy";
 import { CustomInputButton } from "../components/button/CustomButoon";
 import CommonTextInput from "../components/textfield/CommonTextInput";
 import PhoneIcon from "../components/icons/PhoneIcon";
+import { useNavigate } from "react-router-dom";
 
 const OnBoardingPage = () => {
   const responsive = useResponsiveStyles();
+  const navigate = useNavigate();
   return (
     <CustomContainer>
       <div
@@ -122,7 +124,7 @@ const OnBoardingPage = () => {
                     variant="contained"
                     size="large"
                     responsive
-                    onClick={() => {}}
+                    onClick={() => navigate('/dashboard/home/existinguser')}
                   >
                     Proceed
                   </CustomInputButton>
