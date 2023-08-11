@@ -9,7 +9,7 @@ import { CustomInputButton } from "../../button/CustomButoon";
 import StasTopbar from "../../../pages/dashboard/StatsTopBar";
 import Logo from "../../icons/Logo";
 
-const Navbar = ({ job, onClick, showStatsBar = true }) => {
+const Navbar = ({ job, onClick, showStatsBar = false }) => {
   const responsive = useResponsiveStyles();
   const navigate = useNavigate();
   const [isOp, setIsOp] = useState(false);

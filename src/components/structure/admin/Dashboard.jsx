@@ -30,7 +30,7 @@ const Dashboard = () => {
           style={{ height: "100%", width: "100%", position: "sticky", top: 0 }}
         >
     
-            <Navbar />
+            <Navbar  showStatsBar={false}/>
           <div style={{ height: "90%", display: "flex" }}>
             {!responsive.isMobile && (
               <div
