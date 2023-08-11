@@ -11,7 +11,6 @@ const CommonProfileBar = ({
   showChangePasswordButton,
 }) => {
   const responsive = useResponsiveStyles();
-  console.log(" ---- >",responsive.isMobile)
   return (
     <div
       style={{

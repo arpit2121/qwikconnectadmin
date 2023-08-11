@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { CustomCard } from "../card/CustomCard";
 import CustomAllTypography from "../typography/CustomTypograpgy";
 import SmileIcon from "../icons/SmileIcon";
+import useResponsiveStyles from "../../utils/MediaQuery";
 
 function RatingParameter() {
   const data = [
@@ -22,7 +23,7 @@ function RatingParameter() {
   const [selectedSmileyIndex, setSelectedSmileyIndex] = useState(-1);
   const [selectedOuterIndex, setSelectedOuterIndex] = useState(-1);
   
-
+const responsive=useResponsiveStyles()
   const handleClick = (innerIndex, outerIndex) => {
     setSelectedSmileyIndex(innerIndex);
     setSelectedOuterIndex(outerIndex);
@@ -35,8 +36,8 @@ function RatingParameter() {
     }));
 
   };
-  console.log(state); 
-  
+
+  console.log(responsive)
 
   return (
     <div>
@@ -59,7 +60,7 @@ function RatingParameter() {
             {data.map((item, outerIndex) => {
               return (
                 <div
-                  style={{ display: "flex", alignItems: "center" }}
+                  style={{ display: "flex", alignItems: "center",flexDirection: responsive.isTablet?'column':"row",justifyContent:responsive.isTablet?'center':"" }}
                   key={outerIndex}
                 >
                   <div

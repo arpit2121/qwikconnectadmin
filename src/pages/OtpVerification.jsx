@@ -51,7 +51,7 @@ const OtpVerification = () => {
         <OTPInput
           autoFocus
           length={4}
-          style={{display:'flex',gap:!responsive.isMobile||!responsive.isTablet?'1.5rem':'10px'}}
+          style={{display:'flex',gap:responsive.isMobile||responsive.isTablet?'10px':'1.75rem'}}
           className="otpContainer"
           inputClassName="otpInput"
           onChangeOTP={(otp) => setOtp(otp)}

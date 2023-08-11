@@ -6,7 +6,9 @@ import LoadingIcon from "../../assets/cancel.svg";
 import CustomAllTypography from "../typography/CustomTypograpgy";
 import { makeStyles } from "@mui/styles";
 import {
+  FormControl,
   InputAdornment,
+  InputLabel,
   ListSubheader,
   MenuItem,
   Select,
@@ -17,6 +19,7 @@ import _ from "lodash";
 import SearchIcon from "../icons/SearchIcon";
 import CountryList from "country-list-with-dial-code-and-flag";
 import { darkspacetheme } from "../../theme/theme";
+import useResponsiveStyles from "../../utils/MediaQuery";
 
 const CustomSelect = styled(Select)(({ theme }) => ({
   width: "100%",
@@ -33,6 +36,9 @@ const CustomSelect = styled(Select)(({ theme }) => ({
   "&.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
     border: 0,
   },
+  // "&.MuiPaper-root-MuiPopover-paper-MuiMenu-paper": {
+  //   width:'200px !important'
+  // },
 }));
 
 const useStyles = makeStyles({
@@ -109,6 +115,7 @@ const useStyles = makeStyles({
   },
   countryCode2: {
     display: "flex",
+    width: "80%",
     justifyContent: "space-between",
     alignItems: "center",
     gap: "0.5rem",
@@ -116,6 +123,11 @@ const useStyles = makeStyles({
   title: {
     position: "absolute",
     left: "1.25rem",
+  },
+  menuPaper: {
+    maxHeight: "400px !important",
+    width: (props) =>
+      props.responsive.isMobile ? "100% !important" : "400px !important",
   },
 });
 
@@ -158,9 +170,10 @@ const CommonTextInput = ({
   curvedBorder = true,
   onClick = () => {},
   type1,
-  borderStyle = {}
+  borderStyle = {},
 }) => {
   let allCountryList = CountryList.getAll();
+  const responsive = useResponsiveStyles();
   const inputRef = React.createRef();
   const [isFocused, setIsFocused] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -191,7 +204,6 @@ const CommonTextInput = ({
     setValue(e);
   };
   const handleCountryChange = (e) => {
-    console.log(e.target.value)
     setCountryCode(e.target.value);
   };
 
@@ -204,6 +216,7 @@ const CommonTextInput = ({
     curvedBorder,
     type,
     isFocused,
+    responsive,
   });
   let timeout;
   const handleDebounce = (e) => {
@@ -225,7 +238,11 @@ const CommonTextInput = ({
 
   return (
     <div className={classes.mainContainer} style={style}>
-      <div className={classes.containerStyles} onClick={handleClick} style={borderStyle}>
+      <div
+        className={classes.containerStyles}
+        onClick={handleClick}
+        style={borderStyle}
+      >
         {startIcon && (
           <div
             className={classes.iconStyles}
@@ -235,10 +252,18 @@ const CommonTextInput = ({
           </div>
         )}
         {extraText && (
-          <div style={{ width: "max-content", marginRight: "0.62rem" }}>
+          <div
+            style={{
+              width: "max-content",
+              marginRight: "0.62rem",
+              position: "relative",
+            }}
+          >
             <CustomSelect
               IconComponent={() => null}
-              MenuProps={{ autoFocus: false }}
+              // MenuProps={{ autoFocus: false }}
+              labelId="search-select-label"
+              id="search-select"
               inputProps={{ sx: { padding: "0 !important", color: "#9D99AC" } }}
               sx={{ padding: 0, height: "max-content" }}
               renderValue={() => countryCode}
@@ -247,7 +272,10 @@ const CommonTextInput = ({
               className={classes.countryList}
               onClick={(e) => e.stopPropagation()}
               onClose={() => setSearchText("")}
-              native={false}
+              MenuProps={{
+                classes: { paper: classes.menuPaper },
+                autoFocus: false,
+              }}
             >
               <ListSubheader>
                 <TextField
@@ -280,21 +308,26 @@ const CommonTextInput = ({
                       <span>{elem?.flag}</span>
                       <CustomAllTypography
                         name={elem?.name}
-                        sx={{fontSize: "0.875rem"}}
+                        sx={{ fontSize: "0.875rem",    width: "60%",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis", }}
                         variant="body3"
                         color="#9D99AC"
                       />
-                      
+
                       <CustomAllTypography
-                        sx={{fontSize: "0.875rem"}}
+                        sx={{
+                          fontSize: "0.875rem",
+                      
+                        }}
                         name={`(${elem?.code})`}
                         variant="body3"
                         color="#9D99AC"
                       />
-                      
                     </div>
                     <CustomAllTypography
-                      sx={{fontSize: "0.875rem"}}
+                      sx={{ fontSize: "0.875rem" }}
                       name={elem?.dial_code}
                       variant="body3"
                       color="#9D99AC"
