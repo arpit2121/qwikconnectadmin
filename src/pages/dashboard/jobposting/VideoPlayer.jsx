@@ -138,7 +138,7 @@ const VideoPlayer = () => {
 
   function myFunction1() {
   // const vid = document.getElementById("video1");
-   videoRef.current.play()
+  //  videoRef.current.play()
   //  setVideoTime(vid?.duration);
   }
   useEffect(() => {
