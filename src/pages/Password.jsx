@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import CommonTextInput from "../components/textfield/CommonTextInput";
 import PasswordIcon from "../components/icons/PasswordIcon";
 import { useVerifyPasswordMutation } from "../services/auth";
+import OpenEyeIcon from '../components/icons/OpenEyeIcon';
 
 /*
 3 conditon
@@ -98,7 +99,7 @@ const Password = () => {
           searchInput={false}
           type1={type ? "password" : "text"}
           onClick={changeType}
-          endIcon={<PasswordIcon />}
+          endIcon={type ? <PasswordIcon /> : <OpenEyeIcon/>}
         />
         <div
           style={{
