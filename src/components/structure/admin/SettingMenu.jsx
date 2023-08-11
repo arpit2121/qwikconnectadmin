@@ -55,6 +55,7 @@ const SettingMenu = ({ open, setOpen }) => {
     {
       icon: <LogoutIcon />,
       title: "Log out",
+      url: '/login'
     },
   ];
   const classes = useStyles();

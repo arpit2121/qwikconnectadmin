@@ -3,7 +3,6 @@ import Navbar from "../../../components/structure/admin/Navbar";
 import CustomContainer from "../../../components/structure/CustomContainer";
 import { CustomCard } from "../../../components/card/CustomCard";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
-import RadioGroupRating from "../../../components/admin/RatingParameter";
 import UsersComponent from "../../../components/admin/UsersComponent";
 import user1 from "../../../assets/svg/user1.svg";
 import { Body3, TextDescription } from "../../../components/typography/Fields";
@@ -13,7 +12,6 @@ import DownloadIcon from "../../../components/icons/DownloadIcon";
 import CommonTextInput from "../../../components/textfield/CommonTextInput";
 import Review from "../../../components/structure/admin/Review";
 import useResponsiveStyles from "../../../utils/MediaQuery";
-import Player from "../../../components/videoplayer/Player";
 import VideoPlayer from "./VideoPlayer";
 import LinkBar from "./LinkBar";
 import RatingParameter from "../../../components/admin/RatingParameter";
@@ -22,7 +20,7 @@ import { useDispatch } from "react-redux";
 import { setVideoLink } from "../../../slice/common.slice";
 import thumbnail from "../../../assets/videoThumbnail.png";
 import ThumbsDownIcon from "../../../components/icons/ThumbsDownIcon";
-import ThumbsUpIcon from "../../../components/icons/ThumbsUpicon";
+import ThumbsUpIcon from "../../../components/icons/ThumbsUpIcon";
 import { darkspacetheme } from "../../../theme/theme";
 
 const CandiatateReview = () => {
@@ -88,7 +86,10 @@ const CandiatateReview = () => {
             <div
               style={{
                 width: responsive.isMobile ? "100%" : "25%",
-                // backgroundColor:'red'
+                height:'fit-content',
+                // backgroundColor:'red',
+                position:'sticky',
+                top:'0'
               }}
             >
               <div style={containerStyle}>
@@ -154,7 +155,7 @@ const CandiatateReview = () => {
                   ) : (
                     ""
                   )}
-                  <div style={{ ...moreContentStyle, marginTop: "1.30rem" }}>
+                  <div  style={{...moreContentStyle, marginTop: "1.30rem" }}>
                     <div
                       style={{
                         marginTop: "2.50rem",
@@ -338,16 +339,17 @@ const CandiatateReview = () => {
             <div
               style={{
                 width: responsive.isMobile ? "100%" : "25%",
-                zIndex: responsive.isMobile ? "" : "-1",
+                // zIndex: responsive.isMobile ? "" : "-1",
+                height:'fit-content'
               }}
             >
               <div
                 style={{
                   border: "1px solid #EBEBEB",
-                  padding: "0 1rem 5rem 2rem",
+                  padding: responsive.isMobile?'0 0 0 1rem':"0 1rem 5rem 2rem",
                 }}
               >
-                <div style={{ marginTop: "6rem" }}>
+                <div style={{ marginTop: "3rem" }}>
                   <CustomAllTypography
                     name={"Overall Ratings:"}
                     variant={"h5"}

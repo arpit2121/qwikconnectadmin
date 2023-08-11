@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import CustomAllTypography from "../components/typography/CustomTypograpgy";
-import { TextDescription } from "../components/typography/Fields";
 import useResponsiveStyles from "../utils/MediaQuery";
 import { CustomInputButton } from "../components/button/CustomButoon";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -33,7 +32,7 @@ const Password = () => {
   const handleClick = () => {
     console.log(state.goTO)
     // verifyPassword(pass);
-    if (true) {
+    if (false) {
       //name have something???then navigate to dashbaord page else navigate to onBoard page
       navigate("/dashboard/home/existinguser");
     } else {
