@@ -18,9 +18,11 @@ import ChangePassword from "./pages/dashboard/profile/ChangePassword";
 import CandiatateReview from "./pages/dashboard/jobposting/CandiatateReview";
 import Error404 from "./pages/error404/Error404";
 import RatingParameter from "./components/admin/RatingParameter";
+import TableCard from "./components/admin/TableCard";
 
 const App = () => {
   return (
+    // <TableCard/>
     <Routes>
       <Route path="/" element={<Home />}>
         <Route path="login" element={<Login />} />
