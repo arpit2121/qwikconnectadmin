@@ -6,14 +6,19 @@
 
 /* :root{
   font-family: 'Nunito Sans', sans-serif !important;
-/* } */
+} */
+
+
 #card_container_div::-webkit-scrollbar {
   display: none;
   height: 8px;
   width: 8px;
 }
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+
+/* Chrome, Firefox, Opera, Safari 10.1+ */
+::placeholder { 
   color: #9D99AC;
   font-size: 0.875rem;
   font-weight:400 ;
 }
+

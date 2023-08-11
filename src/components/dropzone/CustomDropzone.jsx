@@ -40,7 +40,7 @@
         padding: '0 0 1.5rem 0',
     },
     dropZone: {
-        padding: '2.5rem 8.75rem 3.75rem',
+        // padding: '2.5rem 8.75rem 3.75rem',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',

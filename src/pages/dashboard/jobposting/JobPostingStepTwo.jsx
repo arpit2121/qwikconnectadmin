@@ -59,21 +59,21 @@ const JobPostingStepTwo = () => {
               alignItems: "center",
               justifyContent: "space-between",
               backgroundColor: "",
-              width: "100%",
+              // width: "100%",
             }}
           >
             <div
               style={{
                 display: "flex",
                 gap: "0.5rem",
-                alignItems: "center",
-                width: "100%",
-                backgroundColor: "",
+                alignItems: responsive.isMobile?"":"center",
+                // width: "100%",
+                // backgroundColor: "red",
               }}
             >
               <CustomAllTypography
                 name={"Minimum passing per Parameter"}
-                variant={"h6"}
+                variant={responsive.isMobile?'body2':"h6"}
               />
               <InfoIcon />
             </div>
@@ -88,7 +88,7 @@ const JobPostingStepTwo = () => {
             </div>
           </div>
           <div style={{ paddingTop: "30px" }}>
-            <CustomCard>
+            <CustomCard sx={{boxShadow:'0px 8px 16px 0px rgba(142, 141, 208, 0.12)', borderRadius:'1.25rem'}}>
               <div style={{}}>
                 {ratingParameter.map((data, index) => {
                   return (
@@ -104,9 +104,10 @@ const JobPostingStepTwo = () => {
                         </div>
                         <div
                           style={{
-                            width: "20%",
+                            // width: "20%",
                             display: "flex",
-                            justifyContent: "space-between",
+                            // justifyContent: "space-between",
+                            gap: responsive.isMobile?'2.3rem':'2.92rem'
                           }}
                         >
                           {/* <IconButto icon={<EditIcon/>}/> */}
@@ -202,7 +203,7 @@ const JobPostingStepTwo = () => {
             paddingLeft: responsive.isMobile ? "1rem" : "",
           }}
         >
-          <CustomAllTypography name={"Q1"} variant={"h2"} fontColor="red" />
+          <CustomAllTypography name={"Q1"} variant={"h4"} sx={{color:'red'}} />
         </div>
         <div style={{ width: "100%" }}>
           <div
