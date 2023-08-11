@@ -19,7 +19,7 @@ const SingleInputComponent = (props) => {
         }
     }, [autoFocus, focus, prevFocus]);
     
-  return <input ref={inputRef} {...rest} style={{width:'1.5rem',fontSize:'1.75rem',fontWeight:700, padding:'0.6rem 1.25rem',textAlign:'center', borderRadius:'1.125rem', border:'1px solid var(--fields-stroke-focused, #605DEC)', backgroundColor:'var(--fields-form, #F7F7FD)'}}></input>
+  return <input ref={inputRef} {...rest} style={{width:'1.5rem',fontSize:'1.75rem',fontWeight:700, padding:responsive.isMobile?'0.2rem 1rem':'0.6rem 1.5rem',textAlign:'center', borderRadius:'1.125rem', border:'1px solid var(--fields-stroke-focused, #605DEC)', backgroundColor:'var(--fields-form, #F7F7FD)'}}></input>
 }
 
 const SingleOtpInput = memo(SingleInputComponent)

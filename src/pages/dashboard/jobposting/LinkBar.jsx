@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import DotIcon from "../../../components/icons/DotIcon";
 import { useSelector } from "react-redux";
+import useResponsiveStyles from "../../../utils/MediaQuery";
 
 const LinkBar = ({
   linkArray = [],
@@ -12,6 +13,7 @@ const LinkBar = ({
   showSteps = false,
 }) => {
   const navigate = useNavigate();
+  const responsive=useResponsiveStyles()
   const handleClick = (path) => {
     if (path) navigate(path);
   };
@@ -20,7 +22,7 @@ const LinkBar = ({
     <CustomAllTypography
       key={index}
       textcolor={index != linkArray.length - 1 ? "#8A8894" : "#202020"}
-      sx={{ fontSize: "0.875rem", fontWeight: 400, cursor: "pointer" }}
+      sx={{ fontSize: "0.875rem !important", fontWeight: 400, cursor: "pointer" }}
       name={elem?.title}
       onClick={() => handleClick(elem?.path)}
       variant="body2"
@@ -29,11 +31,11 @@ const LinkBar = ({
   return (
     <div
       style={{
-        display: "flex",
+        display: responsive.isMobile?'none':"flex",
         justifyContent: "space-between",
         alignItems: "center",
-        padding: "1rem",
-        paddingLeft:0
+        // padding: "1rem",
+        paddingLeft:10
       }}
     >
       <Breadcrumbs separator={<DotIcon />} aria-label="breadcrumb">

@@ -6,7 +6,7 @@ import CustomAllTypography from "../../../components/typography/CustomTypograpgy
 import RadioGroupRating from "../../../components/admin/RatingParameter";
 import UsersComponent from "../../../components/admin/UsersComponent";
 import user1 from "../../../assets/svg/user1.svg";
-import { Body3 } from "../../../components/typography/Fields";
+import { Body3, TextDescription } from "../../../components/typography/Fields";
 import StatusButton from "../../../components/button/StatusButton";
 import { CustomInputButton } from "../../../components/button/CustomButoon";
 import DownloadIcon from "../../../components/icons/DownloadIcon";
@@ -21,6 +21,9 @@ import SampleVideos from "./SampleVideos.json";
 import { useDispatch } from "react-redux";
 import { setVideoLink } from "../../../slice/common.slice";
 import thumbnail from "../../../assets/videoThumbnail.png";
+import ThumbsDownIcon from "../../../components/icons/ThumbsDownIcon";
+import ThumbsUpIcon from "../../../components/icons/ThumbsUpicon";
+import { darkspacetheme } from "../../../theme/theme";
 
 const CandiatateReview = () => {
   const responsive = useResponsiveStyles();
@@ -76,7 +79,12 @@ const CandiatateReview = () => {
         <div style={{ height: "100%", width: "100%" }}>
           <Navbar />
 
-          <div style={{ display: responsive.isMobile ? "" : "flex" }}>
+          <div
+            style={{
+              display: responsive.isMobile ? "" : "flex",
+              height: "calc(100% - 100px",
+            }}
+          >
             <div
               style={{
                 width: responsive.isMobile ? "100%" : "25%",
@@ -191,7 +199,7 @@ const CandiatateReview = () => {
                 padding: responsive.isMobile
                   ? "0 1rem"
                   : "0 1.5rem 5rem 1.5rem",
-                // overflow: responsive.isMobile?'none':"auto",
+                overflow: responsive.isMobile ? "none" : "scroll",
               }}
             >
               <div style={{ marginTop: "1.66rem" }}>
@@ -208,7 +216,13 @@ const CandiatateReview = () => {
                 />
               </div>
               <div style={{ marginTop: "1.75rem" }}>
-                <CustomCard sx={{ borderRadius: "1.25rem" }}>
+                <CustomCard
+                  sx={{
+                    borderRadius: "1.25rem",
+                    boxShadow: "0px 16px 24px 0px rgba(142, 141, 208, 0.12)",
+                    border: `1px solid ${darkspacetheme.colorPallete.bgdisabled}`,
+                  }}
+                >
                   <CustomAllTypography
                     name={"Q1. What are your hobbies?"}
                     variant={"h5"}
@@ -219,9 +233,11 @@ const CandiatateReview = () => {
                   <div
                     id={"card_container_div"}
                     style={{
-                      display: "flex",
-                      overflowX: "auto",
+                      display: responsive.isMobile?"":"flex",
+                      overflow: "auto",
                       gap: "1rem",
+                      maxHeight:responsive.isMobile?'300px':'unset',
+                      padding:'0.2rem',
                       paddingTop: "1rem",
                       msOverflowStyle: "none",
                       scrollbarWidth: "none",
@@ -230,31 +246,49 @@ const CandiatateReview = () => {
                     {SampleVideos?.map((data, index) => {
                       return (
                         <div
+                          key={index}
                           onClick={() =>
                             dispatch(setVideoLink(data?.sources?.[0]))
                           }
                           style={{
-                            height: "6.5625rem",
+                            height: responsive.isMobile?'5.43rem':"6.5625rem",
                             display: "flex",
-                            bordeRadius: "0.625rem",
                             border: "1px solid #DCDCDC",
-                            flexDirection: "column",
-                            justifyContent: "flex-end",
-                            background: `url(${thumbnail})`,
-                            backgroundSize: "contain",
-                            width: "9.25rem",
+                            borderRadius: "0.625rem",
+                            flexDirection:responsive.isMobile?'row': "column",
+                            alignItems:'center',
+                            justifyContent:responsive.isMobile?'space-around':'',
+                            width: responsive.isMobile?'100%': "9.25rem",
+                            marginTop:responsive.isMobile?5:0
                           }}
                         >
                           <div
+                        
                             style={{
-                              width: "9.25rem",
-                              height: "35%",
-                              backgroundColor: "#ffff",
-                              fontSize:'0.75rem',
+                              border: "1px solid #DCDCDC",
+                              borderRadius: "0.625rem",
+                              background:`url(${thumbnail})`,
+                              backgroundSize:'cover',
+                              width: responsive.isMobile?"32%": "100%",
+                              height: responsive.isMobile?'70%': "56%",
+                              backgroundPositionY:!responsive.isMobile?-5:''
                               
                             }}
+                      ></div>
+                          <div
+                            style={{
+                              width: "9.25rem",
+                              height: "40%",
+                              backgroundColor: "#ffff",
+                              fontSize: "0.75rem",
+                             
+                              borderRadius: "0.625rem",
+                            }}
                           >
-                            <p>{data?.subtitle}</p>
+                            <TextDescription>
+                              Q{index + 1}.{' '}
+                              {data?.subtitle}?
+                            </TextDescription>
                           </div>
                         </div>
                       );
@@ -319,7 +353,16 @@ const CandiatateReview = () => {
                     variant={"h5"}
                   />
                 </div>
-                <div style={{ marginTop: "1.94rem" }}>
+                <div
+                  style={{
+                    marginTop: "1.94rem",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "0.8rem",
+                  }}
+                >
+                  {<ThumbsDownIcon /> || <ThumbsUpIcon />}
                   <CustomAllTypography
                     name={"Rejected"}
                     variant={"h4"}
@@ -334,7 +377,7 @@ const CandiatateReview = () => {
                     gap: "1.50rem",
                   }}
                 >
-                  <RatingParameter/>
+                  <RatingParameter />
                 </div>
                 <div style={{ marginTop: "2.50rem" }}>
                   <CustomInputButton size="small" width="100%">
@@ -360,93 +403,3 @@ const CandiatateReview = () => {
 };
 
 export default CandiatateReview;
-
-{
-  /* <div
-                style={{
-                  border: "1px solid #EBEBEB",
-                  padding: "0 1rem 3rem 2rem",
-                }}
-              >
-                <div style={initialContentStyle}>
-                <div style={{ marginTop: "3.41rem"}}>
-                <UsersComponent image={user1}/>
-                </div>
-                <div style={{ marginTop: "2.30rem" }}>
-                  <CustomAllTypography name={"Danish Shah"} variant={"h3"} />
-                </div>
-                </div>
-                <div style={{ marginTop: "0.75rem" }}>
-                  <CustomAllTypography
-                    name={"email@emailexample.com"}
-                    variant={"body2"}
-                  />
-                  <CustomAllTypography
-                    name={"+91 993 000 0000"}
-                    variant={"body2"}
-                  />
-                </div>
-                <div style={{ marginTop: "1.44rem" }}>
-                  <Body3 color={"#8A8894"}>{"1d ago"}</Body3>
-                </div>
-                <div
-                  style={{
-                    marginTop: "2.50rem",
-                    display: "flex",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <CustomAllTypography name={"Status"} variant={"body2"} />{" "}
-                  <StatusButton name={"Pending"} />{" "}
-                </div>
-                <div
-                  style={{
-                    marginTop: "2.50rem",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "0.50rem",
-                  }}
-                >
-                  <CustomAllTypography
-                    name={"Current company: Flipmart"}
-                    variant={"body2"}
-                  />
-                  <CustomAllTypography
-                    name={"Exp.: 16 years"}
-                    variant={"body2"}
-                  />
-                  <CustomAllTypography
-                    name={"Profession: UI/UX Lead"}
-                    variant={"body2"}
-                  />
-                  <CustomAllTypography
-                    name={"Location: Remote"}
-                    variant={"body2"}
-                  />
-                </div>
-                <div style={{ marginTop: "2.63rem" }}>
-                  <CustomInputButton
-                    variant="outlined"
-                    size="small"
-                    width="100%"
-                  >
-                    View Resume
-                  </CustomInputButton>
-                </div>
-                {
-                  responsive.isMobile?
-                  <div style={{marginTop:'1.30rem',justifyContent:'center',display:'flex'}}>
-                    <CustomInputButton
-                    sx={{borderRadius:0}}
-                  variant="text"
-                  size="Large"
-                  onClick={handleToggleContent}
-                >
-                 More
-                </CustomInputButton>
-                  </div>
-
-                :""
-                }
-              </div> */
-}
