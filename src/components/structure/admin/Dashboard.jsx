@@ -27,7 +27,11 @@ const Dashboard = () => {
         }}
       >
         <div
-          style={{ height: "100%", width: "100%", position: "sticky", top: 0 }}
+          style={{ width: "100%",height:'100%',
+        display:responsive?.isMobile?'flex':'',
+        flexDirection:'column',
+        justifyContent:'space-between'
+        }}
         >
     
             <Navbar  showStatsBar={false}/>
@@ -49,9 +53,7 @@ const Dashboard = () => {
               <Outlet />
             </div>
           </div>
-        </div>
-
-        {responsive.isMobile && (
+          {responsive.isMobile && (
           <div
             style={{
               display: "flex",
@@ -59,12 +61,15 @@ const Dashboard = () => {
               padding: "0rem 1rem",
               marginBottom: "1rem",
               position:'sticky',
-              bottom:'0px'
+              bottom:'10px'
             }}
           >
             <Sidebar />
           </div>
         )}
+        </div>
+
+     
       </div>
     </CustomContainer>
   );

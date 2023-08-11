@@ -153,7 +153,7 @@ const VideoPlayer = () => {
     >
       <video
         id="video1"
-        style={{ objectFit: responsive.isMobile ? "contain" : "cover" }}
+        // style={{ objectFit: responsive.isMobile ? "contain" : "cover" }}
         ref={videoRef}
         poster={thumbnail}
         className="video"

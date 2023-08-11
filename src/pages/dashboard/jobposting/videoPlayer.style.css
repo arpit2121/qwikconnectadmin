@@ -43,11 +43,12 @@ Main Container .app {
   justify-content: space-between;
 }
 .playIcons {
-  width: 20%;
-  display: flex;
+  gap:0.4rem;
+    display: flex;
   align-items: center;
   justify-content: space-evenly;
   cursor: pointer;
+  margin-right: -20px;
 }
 
 .controlsIcon {

@@ -13,7 +13,7 @@ const ExistingUser = () => {
   const responsvie = useResponsiveStyles();
   const navigate = useNavigate();
   return (
-    <div style={{ padding: "2rem" }}>
+    <div style={{ padding:responsvie.isMobile?'1rem': "2rem" }}>
       <div
         style={{
           display: "flex",
