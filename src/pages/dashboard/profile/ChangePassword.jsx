@@ -7,6 +7,7 @@ import CustomPassword from '../../../components/textfield/CustomPassword';
 import CustomButton, { CustomInputButton } from '../../../components/button/CustomButoon';
 import CommonTextInput from '../../../components/textfield/CommonTextInput';
 import PasswordIcon from '../../../components/icons/PasswordIcon';
+import LinkBar from '../jobposting/LinkBar';
 
 
 const ChangePassword = () => {
@@ -14,7 +15,11 @@ const ChangePassword = () => {
   return (
     <div style={{backgroundColor:'',padding:responsive.isMobile?'0 1rem 0 1rem':'0 5rem 0 5rem',}}>
       <div style={{backgroundColor:'',marginTop:'2rem'}}>
-      dashboard profile
+      <LinkBar linkArray={[
+                    { title: "Home", path: "/dashboard/home/existinguser" },
+                    { title: "My Profile", path: "/dashboard/myprofile" },
+                    { title: "Change Password" },
+                  ]}/>
       </div>
       <div style={{backgroundColor:'',display:'flex',width:'100%'}}>
         <div style={{display:'flex',flexDirection:'column',gap:'2rem',width:responsive.isMobile?'100%':'50%'}}>

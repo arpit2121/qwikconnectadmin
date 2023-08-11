@@ -16,7 +16,6 @@ const Login = () => {
 
   // --- functions ---
   const handleButtonClick = () => {
-    console.log(email);
     signinuser(email);
     if (true) {
       navigate(false ? "/password/enterpass" : "/otp", {
@@ -26,7 +25,7 @@ const Login = () => {
           belowHeader: "Enter your password for youremail@example.com",
           button: "Log in",
           footer: "",
-          goTo: "/dashboard/home/existinguser"
+          goTo: "/dashboard/home/existinguser",
         },
       });
     }
@@ -38,7 +37,7 @@ const Login = () => {
         marginBottom: "2rem",
         display: "flex",
         flexDirection: "column",
-        gap: responsive.isMobile ? "3rem" : "3rem",
+        gap: responsive.isMobile ? "3rem" : "4.5rem",
       }}
     >
       <CustomAllTypography variant={"h1"} name={"Login/Signup"} />
@@ -50,18 +49,28 @@ const Login = () => {
           alignItems: "center",
         }}
       >
-        <GoogleSocial />
-        or
+        <div
+          style={{
+            display: "flex",
+            width:'100%',
+            flexDirection: "column",
+            gap: "1rem",
+            alignItems: "center",
+          }}
+        >
+          <GoogleSocial />
+          or
+        </div>
+        <CommonTextInput
+          value={email}
+          setvalue={setEmail}
+          title="Email ID"
+          placeholder="Type your name"
+          searchInput={false}
+          setValue={setEmail}
+          type1={"email"}
+        />
       </div>
-      <CommonTextInput
-        value={email}
-        setvalue={setEmail}
-        title="Email ID"
-        placeholder="Type your name"
-        searchInput={false}
-        setValue={setEmail}
-        type1={"email"}
-      />
       <CustomInputButton
         variant="contained"
         size="large"

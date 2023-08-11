@@ -5,8 +5,9 @@ import CustomAllTypography from "../../components/typography/CustomTypograpgy";
 import UserIcon from "../../components/icons/UserIcon";
 import RejectedIcon from "../../components/icons/RejectedIcon";
 import { darkspacetheme } from "../../theme/theme";
+import UserPlusIcon from "../../components/icons/UserPlusIcon";
 
-const StatsTopBar = ({ application = 23, shortlisted = 2, rejected = 3 }) => {
+const StatsTopBar = ({ application = 23, shortlisted = 2, rejected }) => {
   const responsive = useResponsiveStyles();
 
   const size = responsive?.isMobile ? 24 : 32;
@@ -27,7 +28,6 @@ const StatsTopBar = ({ application = 23, shortlisted = 2, rejected = 3 }) => {
       : "2rem !important",
     marginRight: responsive.isMobile ? 0 : "0.94rem",
   }
-console.log(responsive)
   return (
     <div
       style={{
@@ -60,7 +60,7 @@ console.log(responsive)
       </div>
       <div style={outerDiv}>
         <div style={innerDiv}>
-          <UserIcon
+          <UserPlusIcon
             height={size}
             width={size}
             style={{ marginRight: "0.9rem" }}
@@ -73,7 +73,7 @@ console.log(responsive)
         </div>
         <CustomAllTypography name={"Shortlisted"} variant={"body1"} />
       </div>
-      <div style={outerDiv}>
+    {rejected &&  <div style={outerDiv}>
         <div style={innerDiv}>
           <RejectedIcon
             height={size}
@@ -87,7 +87,7 @@ console.log(responsive)
           />
         </div>
         <CustomAllTypography name={"Rejected"} variant={"body1"} />
-      </div>
+      </div>}
     </div>
   );
 };

@@ -9,6 +9,8 @@ import VolumeIcon from "../../../components/icons/VolumeIcon";
 import styled from "styled-components";
 import thumbnail from "../../../assets/videoThumbnail.png";
 import { Forward5Rounded, Replay5Rounded } from "@mui/icons-material";
+import FullscreenIcon from "@mui/icons-material/Fullscreen";
+import { useSelector } from "react-redux";
 
 const CustomSoundBar = styled(Slider)(({ theme }) => ({
   "& .MuiSlider-thumb": {
@@ -75,6 +77,7 @@ const VideoPlayer = () => {
     }, 1000);
   };
 
+  const { videoLink } = useSelector((state) => state.common);
   const revert = () => {
     if (exitTimeOut) clearTimeout(exitTimeOut);
     setShowBackArrow(true);
@@ -93,23 +96,15 @@ const VideoPlayer = () => {
       setPlaying(false);
     }
   };
-  const interval = window.setInterval(function () {
+  const interval = setInterval(function () {
+    if (videoRef.current?.currentTime == videoTime) clearInterval(interval);
     setCurrentTime(videoRef.current?.currentTime);
   }, 1000);
-
-  useEffect(() => {
-    if (progress == 100) {
-      window.clearInterval(interval);
-    }
-  }, [progress]);
 
   useEffect(() => {
     !drag && setProgress((videoRef.current?.currentTime / videoTime) * 100);
   }, [currentTime, drag]);
 
-  useEffect(() => {
-    window.clearInterval(interval);
-  }, []);
   useEffect(() => {
     if (!playing) setPlay(true);
     else setPlay(false);
@@ -120,6 +115,7 @@ const VideoPlayer = () => {
     videoRef.current.volume = vol.target.value / 100;
   };
   const handleTimerDrag = (vol) => {
+    setDrag(true);
     if (!videoTime) setVideoTime(vid.duration);
     setProgress(vol.target.value);
     videoRef.current.currentTime = (vid.duration * progress) / 100;
@@ -136,6 +132,18 @@ const VideoPlayer = () => {
     setVolume(0);
     videoRef.current.volume = 0;
   };
+  const onFullScreen = () => {
+    videoRef.current.requestFullscreen();
+  };
+
+  function myFunction1() {
+  // const vid = document.getElementById("video1");
+  //  videoRef.current.play()
+  //  setVideoTime(vid?.duration);
+  }
+  useEffect(() => {
+    if (vid) myFunction1();
+  }, [videoLink,vid]);
   return (
     <div
       onMouseEnter={onVideoMouseEnter}
@@ -145,12 +153,13 @@ const VideoPlayer = () => {
     >
       <video
         id="video1"
+        style={{ objectFit: responsive.isMobile ? "contain" : "cover" }}
         ref={videoRef}
         poster={thumbnail}
         className="video"
-        src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+        src={videoLink}
       ></video>
-      (
+
       <div
         className="controlsContainer"
         style={{ opacity: showControlers ? 1 : 0 }}
@@ -163,8 +172,7 @@ const VideoPlayer = () => {
           </p>
 
           <CustomTimeBar
-            onDragEnd={() => setDrag(false)}
-            onDrag={() => setDrag(true)}
+            // onChangeCommitted={() => setDrag(false)}
             sx={{
               width: "80%",
               padding: "0px !important",
@@ -182,22 +190,32 @@ const VideoPlayer = () => {
           </p>
         </div>
         <div className="controls">
-          <VideoBackIcon className="controllerIcon" onClick={revert} />
-          {playing ? (
-            <VideoPlayIcon
+          <span></span>
+          <div className="playIcons">
+            <VideoBackIcon className="controllerIcon" onClick={revert} />
+            {playing ? (
+              <VideoPlayIcon
+                className="controllerIcon"
+                onClick={() => videoHandler("pause")}
+              />
+            ) : (
+              <VideoPlayIcon
+                className="controllerIcon"
+                onClick={() => videoHandler("play")}
+              />
+            )}
+            <VideoForwardIcon
               className="controllerIcon"
-              onClick={() => videoHandler("pause")}
+              onClick={fastForward}
             />
-          ) : (
-            <VideoPlayIcon
-              className="controllerIcon"
-              onClick={() => videoHandler("play")}
-            />
-          )}
-          <VideoForwardIcon className="controllerIcon" onClick={fastForward} />
+          </div>
+          <FullscreenIcon
+            sx={{ color: "white", cursor: "pointer" }}
+            onClick={onFullScreen}
+          />
         </div>
       </div>
-      )
+
       <div
         className="volumeController"
         style={{

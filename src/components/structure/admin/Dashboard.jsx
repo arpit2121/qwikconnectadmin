@@ -29,22 +29,8 @@ const Dashboard = () => {
         <div
           style={{ height: "100%", width: "100%", position: "sticky", top: 0 }}
         >
-          <div
-            style={{
-              height: "10%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              padding: "0 1rem 0 1rem",
-              boxShadow: "0 2px 3px -1px rgba(0, 0, 0, 0.5)",
-              position: "sticky",
-              top: 0,
-              backgroundColor: "#fff",
-              zIndex:'1'
-            }}
-          >
-            <Navbar />
-          </div>
+    
+            <Navbar  showStatsBar={false}/>
           <div style={{ height: "90%", display: "flex" }}>
             {!responsive.isMobile && (
               <div
@@ -72,6 +58,8 @@ const Dashboard = () => {
               justifyContent: "center",
               padding: "0rem 1rem",
               marginBottom: "1rem",
+              position:'sticky',
+              bottom:'0px'
             }}
           >
             <Sidebar />
