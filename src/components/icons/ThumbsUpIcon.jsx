@@ -4,11 +4,11 @@ function ThumbsUpIcon({
   height = 24,
   width = 24,
   className,
-  onClick = () => {},
+  // onClick = () => {},
 }) {
   return (
     <svg
-      onClick={onClick}
+      // onClick={onClick}
       className={className}
       width={width}
       height={height}
