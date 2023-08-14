@@ -13,8 +13,8 @@ import LinkBar from '../jobposting/LinkBar';
 const ChangePassword = () => {
   const responsive = useResponsiveStyles();
   return (
-    <div style={{backgroundColor:'',padding:responsive.isMobile?'0 1rem 0 1rem':'0 5rem 0 5rem',}}>
-      <div style={{backgroundColor:'',marginTop:'2rem'}}>
+    <div style={{backgroundColor:'',padding:responsive.isMobile?'0 1rem 0 1rem':'0 15rem 0 15rem',}}>
+      <div>
       <LinkBar linkArray={[
                     { title: "Home", path: "/dashboard/home/existinguser" },
                     { title: "My Profile", path: "/dashboard/myprofile" },
@@ -33,7 +33,7 @@ const ChangePassword = () => {
           <CommonTextInput
           // value={"asd"}
           setValue={"setPass"}
-          title="Password"
+          title="New Password"
           placeholder="Enter your password"
           searchInput={false}
           type1={true ? "password" : "text"}
@@ -43,7 +43,7 @@ const ChangePassword = () => {
           <CommonTextInput
           // value={"asd"}
           setValue={"setPass"}
-          title="Password"
+          title="Re-enter Password"
           placeholder="Enter your password"
           searchInput={false}
           type1={true ? "password" : "text"}

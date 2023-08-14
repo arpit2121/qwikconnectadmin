@@ -13,7 +13,7 @@ import CustomDropzone from '../dropzone/CustomDropzone'
 function QuestionCard() {
     const responsive = useResponsiveStyles();
   return (
-    <CustomCard sx={{display:'flex', alignItems:'center',gap:'1.5rem', flexDirection:responsive.isMobile?'column-reverse':'',strokeWidth:'1px',stroke:'#F4F3FE',filter:'drop-shadow(0px 8px 16px rgba(142, 141, 208, 0.12))',borderRadius:'1rem'}}>
+    <CustomCard sx={{display:'flex', alignItems:'center',gap:'1.5rem', flexDirection:responsive.isMobile?'column-reverse':'',strokeWidth:'1px',stroke:'#F4F3FE',filter:'drop-shadow(0px 8px 16px rgba(142, 141, 208, 0.12))',borderRadius:'1rem',boxShadow:'0px 8px 16px 0px rgba(142, 141, 208, 0.12)'}}>
         {/* <div style={{width:'0.6875rem', height:'2.9375rem',backgroundColor:'red'}}> */}
         {responsive.isMobile? <QuestionCardIconHorizontal/>:<QuestionCardLines/>}
         {/* </div> */}

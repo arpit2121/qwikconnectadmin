@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import CustomContainer from "../../../components/structure/CustomContainer";
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import Navbar from "../../../components/structure/admin/Navbar";
 import { Box } from "@mui/material";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import CustomButton, {
+import  {
   CustomInputButton,
 } from "../../../components/button/CustomButoon";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
@@ -20,6 +20,7 @@ import StatusButton from "../../../components/button/StatusButton";
 import { useNavigate } from "react-router-dom";
 import TableCard from "../../../components/admin/TableCard";
 import SystemRecommended from "../../../components/icons/SystemRecommended";
+import { generateRandomColor } from "../../../utils/RandomPastel";
 
 const data = [
   {
@@ -66,7 +67,10 @@ const data = [
 
 const JobPostingDetailsPage = () => {
   const responsive = useResponsiveStyles();
-  const navigate = useNavigate();
+  
+  const randomColor = generateRandomColor();
+  console.log(randomColor)
+
   return (
     <CustomContainer>
       <div style={{ height: "100%", width: "100vw", maxHeight: "862px" }}>
@@ -90,7 +94,6 @@ const JobPostingDetailsPage = () => {
             <div
               style={{
                 height: "100%",
-                backgroundColor: "",
                 display: "flex",
                 alignItems: "center",
                 paddingLeft: "10px",
@@ -108,7 +111,9 @@ const JobPostingDetailsPage = () => {
           <Navbar job={" "} />
         )}
         <div style={{ backgroundColor: "" }}>
-          <CustomCard sx={{ backgroundColor: "#F8F8F9" }}>
+        {/* "#F8F8F9" */}
+          <CustomCard sx={{ backgroundColor:`${randomColor}`,boxShadow:'0px 4px 4px 0px rgba(142, 141, 208, 0.16)',borderRadius:'1.25rem',
+          padding:responsive.isMobile?'0 1rem 1rem 1rem':'0 4.8rem 2rem 4.8rem'}}>
             <div>
               <div
                 style={{
@@ -124,7 +129,6 @@ const JobPostingDetailsPage = () => {
                     gap: "1.5rem",
                   }}
                 >
-                  {/* <CustomButton name={'Activate'}/> */}
                   <StatusButton name="Activated" />
                   <CustomAllTypography
                     name={"UI/UX Developer / Lead"}
@@ -155,6 +159,9 @@ const JobPostingDetailsPage = () => {
                 style={{
                   marginTop: "1.5rem",
                   width: responsive.isMobile ? "100%" : "50%",
+                  display:'flex',
+                  flexDirection:'column',
+                  gap:'0.8rem'
                 }}
               >
                 <CustomAllTypography
@@ -203,23 +210,19 @@ const JobPostingDetailsPage = () => {
           </CustomCard>
           <div
             style={{
-              marginTop: "1rem",
+              marginTop: "3.37rem",
               display: "flex",
               flexDirection: "column",
               gap: "1rem",
-              padding: "0 1rem 0 1rem",
+              padding: responsive.isMobile?"0 1rem 0 1rem":"0 4.8rem 0 4.8rem",
             }}
           >
             <div style={{ display: "flex", gap: "1rem" }}>
               <AwardIcon />
               <CustomAllTypography name={"Review Candidates"} variant={"h4"} />
             </div>
-            {/* <span style={{display:'flex',alignItems:'center'}}>
-            <CustomAllTypography name={'System Recommend candidate are highlighted in'} variant={'body2'}/>
-            <SystemRecommended/>
-            </span> */}
             <div style={{display:'flex',alignItems:'center'}}>
-              <span style={{ display: "flex", alignItems: 'center' }}>
+              <span style={{ display: "flex", alignItems: 'center',marginLeft:'2.5rem'}}>
                 <span>System Recommend candidate are highlighted in</span>
                 <span style={{marginLeft:'0.5rem'}}><SystemRecommended/></span>
               </span>

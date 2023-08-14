@@ -8,6 +8,7 @@ import UsersComponent from "../../../components/admin/UsersComponent";
 import user1 from "../../../assets//svg/user1.svg";
 import PhoneIcon from "../../../components/icons/PhoneIcon";
 import LinkBar from "../jobposting/LinkBar";
+import KeyIcon from "../../../components/icons/KeyIcon";
 
 const MyProfile = () => {
   const responsive = useResponsiveStyles();
@@ -16,14 +17,16 @@ const MyProfile = () => {
     <div
       style={{
         backgroundColor: "",
-        padding: responsive.isMobile ? "0 1rem 0 1rem" : "0 5rem 0 5rem",
+        padding: responsive.isMobile ? "0 1rem 0 1rem" : "0rem 15rem 0 15rem",
       }}
     >
-    <LinkBar linkArray={[
-                    { title: "Home", path: "/dashboard/home/existinguser" },
-                    { title: "My Profile", path: "/dashboard/myprofile" },
-                    { title: "Change Password" },
-                  ]}/>
+      <LinkBar
+        linkArray={[
+          { title: "Home", path: "/dashboard/home/existinguser" },
+          { title: "My Profile", path: "/dashboard/myprofile" },
+          { title: "Change Password" },
+        ]}
+      />
       <div
         style={{
           marginTop: "1.25rem",
@@ -51,13 +54,22 @@ const MyProfile = () => {
             </div>
           </div>
         </div>
-        <CustomInputButton
+        {
+          responsive.isMobile
+          ?
+          <div onClick={() => navigate("/dashboard/changepass")}>
+            <KeyIcon/>
+          </div>
+          :
+          <CustomInputButton
           size="small"
           variant="outlined"
+          startIcon={<KeyIcon/>}
           onClick={() => navigate("/dashboard/changepass")}
         >
           Change Password
         </CustomInputButton>
+        }
       </div>
       <div style={{ marginTop: "2rem" }}>
         <CustomAllTypography name={"Basic Details"} variant={"h1"} />
@@ -82,7 +94,7 @@ const MyProfile = () => {
           <CommonTextInput
             // value={email}
             // setvalue={setEmail}
-            // title="Email ID"
+            title="First Name"
             placeholder="First Name"
             searchInput={false}
             // setValue={setEmail}
@@ -92,7 +104,7 @@ const MyProfile = () => {
           <CommonTextInput
             // value={email}
             // setvalue={setEmail}
-            // title="Email ID"
+            title="Last Name"
             placeholder="Last Name"
             searchInput={false}
             // setValue={setEmail}
@@ -108,7 +120,7 @@ const MyProfile = () => {
         <CommonTextInput
           // value={email}
           // setvalue={setEmail}
-          // title="Email ID"
+          title="Company Name"
           placeholder="Company Name"
           searchInput={false}
           // setValue={setEmail}
@@ -125,7 +137,7 @@ const MyProfile = () => {
           marginTop: "3rem",
           display: "flex",
           justifyContent: "flex-end",
-          paddingBottom:'4rem'
+          paddingBottom: "4rem",
         }}
       >
         <CustomInputButton size="medium">Save Changes</CustomInputButton>

@@ -7,6 +7,7 @@ import CommonTextInput from "../components/textfield/CommonTextInput";
 import PasswordIcon from "../components/icons/PasswordIcon";
 import { useVerifyPasswordMutation } from "../services/auth";
 import OpenEyeIcon from '../components/icons/OpenEyeIcon';
+import { Body3 } from "../components/typography/Fields";
 
 /*
 3 conditon
@@ -108,7 +109,6 @@ const Password = () => {
             paddingTop: "4px",
           }}
         >
-          {/* <TextDescription responsive={responsive} size={'9px'} color={'#605DEC'} onClick={()=>console.log("hi")}>{newUser?'':"Forgot Password?"}</TextDescription> */}
           <CustomInputButton variant="text" onClick={forgetPassword}>
             {state.header ==='Set Password' ? "" : "Forgot Password?"}
           </CustomInputButton>
@@ -124,6 +124,13 @@ const Password = () => {
         >
           {state.button}
         </CustomInputButton>
+        {
+          !state.newUser
+          ?
+          <div style={{marginTop: '1.38rem',display:'flex',justifyContent:'center',alignItems:'center',width:'100%',gap:'0.4rem'}}>By Continuing this I agree to the <Body3 color={"#605DEC"}>Terms & Conditions</Body3> and <Body3 color={"#605DEC"}>Privacy Policy</Body3></div>
+          :
+          ""
+        }
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ import CustomAllTypography from "../../components/typography/CustomTypograpgy";
 import TrashIcon from "../../components/icons/TrashIcon";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
+import { Body3 } from "../../components/typography/Fields";
 
 const useStyles = makeStyles({
   card: {
@@ -27,11 +28,12 @@ const JobCard = () => {
         padding: "1rem",
         borderRadius: "1.25rem",
         border: "1px solid transparent",
+        boxShadow: "0px 8px 16px 0px rgba(142, 141, 208, 0.12)"
       }}
       onClick={() => navigate("/jobpostingdetailspage")}
     >
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <CustomAllTypography name={"1d ago"} variant={"body3"} />
+        <Body3  color="#8A8894">1d ago</Body3>
       </div>
       <div style={{ marginTop: "1.26rem" }}>
         <CustomAllTypography name={"UI/UX Developer / Lead"} variant={"h4"} />

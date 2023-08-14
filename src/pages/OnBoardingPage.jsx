@@ -99,6 +99,7 @@ const OnBoardingPage = () => {
                   style={{ marginTop: responsive.isTablet ? "0rem" : "3rem" }}
                 >
                   <CommonTextInput
+                   title="Full Name"
                     style={{ margin: "1.5rem 0rem" }}
                     placeholder="Full Name"
                   />
@@ -109,6 +110,7 @@ const OnBoardingPage = () => {
                     placeholder="Mobile no."
                   />
                   <CommonTextInput
+                  title="Company name"
                     style={{ margin: "1.5rem 0rem" }}
                     placeholder="Company name"
                   />
