@@ -2,8 +2,7 @@ import React from "react";
 import RatingParameter from "../../../components/admin/RatingParameter";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import useResponsiveStyles from "../../../utils/MediaQuery";
-import ThumbsDownIcon from "../../../components/icons/ThumbsDownIcon";
-import ThumbsUpIcon from "../../../components/icons/ThumbsUpicon";
+
 import { Body3 } from "../../../components/typography/Fields";
 import { CustomInputButton } from "../../../components/button/CustomButoon";
 
@@ -14,14 +13,18 @@ const RatingSection = () => {
       style={{
         width: responsive.isMobile ? "100%" : "25%",
         border: "1px solid #EBEBEB",
-        borderTop:'none',
+        borderTop: "none",
         padding: responsive.isMobile ? "2rem 4rem" : "0 3rem 3rem 3rem",
         boxSizing: "border-box",
         // zIndex: responsive.isMobile ? "" : "-1",
       }}
     >
       <div style={{ marginTop: responsive.isMobile ? "0rem" : "6rem" }}>
-        <CustomAllTypography sx={{fontSize:'1.125rem !important'}} name={"Overall Ratings:"} variant={"h5"} />
+        <CustomAllTypography
+          sx={{ fontSize: "1.125rem !important" }}
+          name={"Overall Ratings:"}
+          variant={"h5"}
+        />
       </div>
       <div
         style={{
@@ -32,10 +35,10 @@ const RatingSection = () => {
           gap: "0.8rem",
         }}
       >
-        {<ThumbsDownIcon /> || <ThumbsUpIcon />}
+        {/* {<ThumbsDownIcon /> || <ThumbsUpIcon />} */}
         <CustomAllTypography
           name={"Rejected"}
-          sx={{fontSize:'1.125rem !important'}}
+          sx={{ fontSize: "1.125rem !important" }}
           variant={"h4"}
           textcolor={"#F93232"}
         />
