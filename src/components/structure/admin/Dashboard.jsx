@@ -30,7 +30,7 @@ const Dashboard = () => {
           style={{ width: "100%",height:'100%',
         display:responsive?.isMobile?'flex':'',
         flexDirection:'column',
-        justifyContent:'space-between'
+        justifyContent:'space-between',
         }}
         >
     

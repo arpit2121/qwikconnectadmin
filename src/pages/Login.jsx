@@ -24,7 +24,7 @@ const Login = () => {
           header: "Welcome Back!",
           belowHeader: "Enter your password for youremail@example.com",
           button: "Log in",
-          footer: "",
+          footer: "By Continuing this I agree to the Terms & Conditions and Privacy Policy",
           goTo: "/dashboard/home/existinguser",
         },
       });
