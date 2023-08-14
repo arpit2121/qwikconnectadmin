@@ -33,7 +33,7 @@ const StatsTopBar = ({ application = 23, shortlisted = 2, rejected }) => {
       style={{
         display: "flex",
         gap: !responsive.isMobile || responsive.isRandom ? "2rem" : "0.5rem",
-        justifyContent: "space-between",
+        justifyContent: !rejected && responsive.isMobile?"space-around":"space-between",
         alignItems: "center",
         width:'100%',
         padding: responsive.isMobile || responsive.isRandom ? "1rem 1.5rem" : "0rem",
