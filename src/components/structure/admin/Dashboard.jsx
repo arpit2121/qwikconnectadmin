@@ -34,8 +34,8 @@ const Dashboard = () => {
         }}
         >
     
-            <Navbar  showStatsBar={false}/>
-          <div style={{ height: "90%", display: "flex" }}>
+            <Navbar showStatsBar={false}/>
+          <div style={{ height: "90%", display: "flex",overflow:'hidden' }}>
             {!responsive.isMobile && (
               <div
                 style={{
@@ -49,7 +49,7 @@ const Dashboard = () => {
                 <Sidebar />
               </div>
             )}
-            <div style={{ backgroundColor: "", width: "100%" }}>
+            <div style={{ backgroundColor: "", width: "100%",overflow:'scroll'}}>
               <Outlet />
             </div>
           </div>

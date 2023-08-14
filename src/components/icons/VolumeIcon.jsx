@@ -1,47 +1,140 @@
 import React from "react";
 
 const VolumeIcon = ({
+  type = "default",
   onClick = () => {},
-  height = 20,
-  width = 20,
+  height = 10,
+  width = 10,
   className,
-  color = "#25282B",
+  color = "white",
   style = {},
 }) => {
   return (
-    <svg
-      onClick={onClick}
-      style={style}
-      width={height}
-      height={width}
-      className={className}
-      viewBox="0 0 7 7"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <g clip-path="url(#clip0_952_9047)">
-        <path
-          d="M4.47926 4.82189C4.43998 4.8224 4.40162 4.8106 4.37003 4.78832C4.33845 4.76604 4.31539 4.7345 4.30438 4.69853C4.29338 4.66256 4.29503 4.62413 4.30909 4.58914C4.32315 4.55415 4.34884 4.52452 4.38224 4.50478C4.54573 4.40743 4.68 4.27133 4.77197 4.10976C4.86394 3.94818 4.91047 3.76663 4.90703 3.5828C4.9036 3.39896 4.8503 3.21911 4.75235 3.06077C4.6544 2.90242 4.51513 2.77098 4.3481 2.67925C4.32663 2.66854 4.30765 2.65379 4.29231 2.63589C4.27696 2.618 4.26558 2.59733 4.25882 2.57513C4.25207 2.55292 4.2501 2.52965 4.25302 2.5067C4.25594 2.48375 4.2637 2.4616 4.27583 2.44159C4.28795 2.42157 4.3042 2.4041 4.32359 2.39023C4.34297 2.37636 4.3651 2.36638 4.38863 2.36088C4.41217 2.35538 4.43663 2.35448 4.46054 2.35823C4.48445 2.36198 4.50732 2.37031 4.52777 2.38271C4.74767 2.50436 4.93089 2.67816 5.05966 2.88725C5.18843 3.09635 5.25837 3.33364 5.26271 3.57612C5.26705 3.81859 5.20564 4.05802 5.08442 4.27119C4.96321 4.48435 4.78631 4.66402 4.57089 4.79276C4.54371 4.81027 4.51202 4.82034 4.47926 4.82189Z"
-          fill="white"
-        />
-        <path
-          d="M4.87635 5.83802C4.83612 5.83779 4.79713 5.82469 4.76563 5.80081C4.73413 5.77693 4.71195 5.74365 4.70263 5.70631C4.69331 5.66897 4.6974 5.62973 4.71424 5.59487C4.73107 5.56001 4.75969 5.53155 4.7955 5.51405C5.17241 5.33687 5.48934 5.06192 5.70993 4.72074C5.93052 4.37955 6.04584 3.98596 6.04265 3.5851C6.03946 3.18425 5.9179 2.79237 5.6919 2.45442C5.46591 2.11647 5.14464 1.84614 4.76495 1.67444C4.74305 1.66505 4.72334 1.65156 4.70699 1.63478C4.69064 1.61799 4.67799 1.59825 4.66977 1.57672C4.66156 1.55519 4.65795 1.53231 4.65917 1.50943C4.66038 1.48654 4.66639 1.46413 4.67684 1.4435C4.68729 1.42287 4.70197 1.40445 4.72001 1.38933C4.73805 1.3742 4.75909 1.36268 4.78188 1.35545C4.80466 1.34821 4.82874 1.34541 4.85268 1.34721C4.87662 1.349 4.89995 1.35536 4.92127 1.3659C5.3623 1.56453 5.73571 1.87774 5.99868 2.26959C6.26165 2.66145 6.40352 3.11608 6.40802 3.58134C6.41252 4.04661 6.27947 4.50366 6.02413 4.90008C5.76879 5.2965 5.4015 5.61622 4.96439 5.82259C4.93688 5.83474 4.90659 5.84004 4.87635 5.83802Z"
-          fill="white"
-        />
-        <path
-          d="M3.56661 1.17945L1.90285 2.55075H0.824814C0.777162 2.55075 0.731461 2.5688 0.697766 2.60095C0.664071 2.6331 0.645142 2.6767 0.645142 2.72216V4.42256C0.645142 4.46802 0.664071 4.51162 0.697766 4.54376C0.731461 4.57591 0.777162 4.59397 0.824814 4.59397H1.86871L3.56841 6.0064C3.59411 6.02796 3.62575 6.04206 3.65957 6.04705C3.6934 6.05204 3.72802 6.04771 3.75936 6.03456C3.79069 6.02142 3.81744 6.00001 3.83645 5.97285C3.85546 5.94569 3.86594 5.91392 3.86666 5.88127V1.30287C3.8659 1.27004 3.85527 1.23811 3.83603 1.21088C3.8168 1.18365 3.78977 1.16226 3.75817 1.14926C3.72656 1.13626 3.6917 1.13219 3.65774 1.13755C3.62379 1.1429 3.59215 1.15745 3.56661 1.17945Z"
-          fill="white"
-        />
-      </g>
-      <defs>
-        <clipPath id="clip0_952_9047">
-          <path
-            d="M0.273193 6.66446C0.273193 3.25642 3.03596 0.493652 6.444 0.493652H6.74139V6.66446H0.273193Z"
-            fill="white"
-          />
-        </clipPath>
-      </defs>
-    </svg>
+    <>
+      {type === "default" ? (
+        <svg
+          onClick={onClick}
+          style={style}
+          width={width}
+          height={height}
+          className={className}
+          viewBox="0 0 24 24"
+          fill={color}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g id="24/ outlined / player / volume / level 2">
+            <path
+              id="Vector"
+              d="M11 5L6 9H2V15H6L11 19V5Z"
+              stroke={color}
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              id="Vector_2"
+              d="M19.07 4.93005C20.9447 6.80533 21.9979 9.34841 21.9979 12.0001C21.9979 14.6517 20.9447 17.1948 19.07 19.0701M15.54 8.46005C16.4774 9.39769 17.004 10.6692 17.004 11.9951C17.004 13.3209 16.4774 14.5924 15.54 15.5301"
+              stroke={color}
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </g>
+        </svg>
+      ) : (
+        (type == "lowSound" ? (
+          <svg
+            onClick={onClick}
+            style={style}
+            width={width}
+            height={height}
+            className={className}
+            viewBox="0 0 24 24"
+            fill={color}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="24/ outlined / player / volume / level 1">
+              <path
+                id="Vector"
+                d="M11 5L6 9H2V15H6L11 19V5Z"
+                stroke={color}
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                id="Vector_2"
+                d="M15.54 8.45996C16.4774 9.3976 17.004 10.6691 17.004 11.995C17.004 13.3208 16.4774 14.5923 15.54 15.53"
+                stroke={color}
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </g>
+          </svg>
+        ) : type == "mute" ? (
+          <svg
+          onClick={onClick}
+          style={style}
+          width={width}
+          height={height}
+          className={className}
+            viewBox="0 0 24 24"
+            fill={color}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="24/ outlined / player / volume / mute">
+              <path
+                id="Vector"
+                d="M11 5L6 9H2V15H6L11 19V5Z"
+                stroke={color}
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                id="Vector_2"
+                d="M23 9L17 15"
+                stroke={color}
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                id="Vector_3"
+                d="M17 9L23 15"
+                stroke={color}
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </g>
+          </svg>
+        ) : (
+          <svg
+            onClick={onClick}
+            style={style}
+            width={width}
+            height={height}
+            className={className}
+            viewBox="0 0 24 24"
+            fill={color}
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="24/ outlined / player / volume / level 0">
+              <path
+                id="Vector"
+                d="M11 5L6 9H2V15H6L11 19V5Z"
+                stroke={color}
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </g>
+          </svg>
+        ))
+      )}
+    </>
   );
 };
 export default VolumeIcon;

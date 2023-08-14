@@ -41,6 +41,7 @@ Main Container .app {
   width: 100%;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 4px;
 }
 .playIcons {
   gap:0.4rem;

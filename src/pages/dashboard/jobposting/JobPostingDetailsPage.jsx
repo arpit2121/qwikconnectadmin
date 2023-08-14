@@ -108,7 +108,7 @@ const JobPostingDetailsPage = () => {
             </div>
           </Box>
         ) : (
-          <Navbar job={" "} />
+          <Navbar  />
         )}
         <div style={{ backgroundColor: "" }}>
         {/* "#F8F8F9" */}
@@ -152,7 +152,7 @@ const JobPostingDetailsPage = () => {
                     marginTop: "1.5rem",
                   }}
                 >
-                  <StatsTopBar />
+                  <StatsTopBar rejected={24} />
                 </div>
               </div>
               <div

@@ -16,7 +16,7 @@ const JobPostingStepOne = () => {
         }}
       >
         {/* <div style={{height:'100%', width:'100%', position:'fixed'}}> */}
-        {responsive.isMobile ? "" : <Navbar job={"Job Posting"} />}
+        {responsive.isMobile ? "" : <Navbar />}
         <div
           style={{
             paddingLeft: !responsive.isMobile ? "100px" : "",

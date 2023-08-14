@@ -123,6 +123,9 @@ const useStyles = makeStyles({
   title: {
     position: "absolute",
     left: "1.25rem",
+    transition: "opacity 1500ms",
+    transition: "display 1500ms",
+    transition: "position 1500ms",
   },
   menuPaper: {
     maxHeight: "400px !important",
@@ -340,10 +343,10 @@ const CommonTextInput = ({
         )}
         {searchInput && <SearchIcon className={classes.searchIcon} />}
         <div className={classes.inputdiv}>
-          {title && (
+           
             <div
               className={classes.title}
-              style={{ position: isFocused || !!value ? "static" : "absolute" }}
+              style={{ position: isFocused || !!value ? "static" : "absolute" ,opacity:title?1:0}}
             >
               <CustomAllTypography
                 name={_.startCase(_.toLower(title))}
@@ -352,7 +355,8 @@ const CommonTextInput = ({
                 textcolor={darkspacetheme.pallete.fields.title}
               />
             </div>
-          )}
+           
+          
 
           {type != "dropdown" ? (
             <input

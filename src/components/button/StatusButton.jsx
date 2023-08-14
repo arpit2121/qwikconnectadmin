@@ -36,15 +36,15 @@ const useStyles = makeStyles({
     borderRadius:' 0.25rem'
   },
   pending: {
-    display: "flex",
-    width: "5.8125rem",
+    // width: "5.8125rem",
     padding: "0.5rem 1rem",
     alignItems: "flex-start",
     gap: "0.625rem",
     backgroundColor:'#FFF9C5',
     border:'none',
     color:'#212121',
-    borderRadius:' 0.25rem'
+    borderRadius:' 0.25rem',
+    textAlign:'center'
   },
   shortlisted: {
     display: "flex",
@@ -65,7 +65,7 @@ const useStyles = makeStyles({
 const StatusButton = ({name}) => {
     const responsive = useResponsiveStyles();
   const classes = useStyles();
-  return <button className={name==="Rejected"?classes.rejected:name=="Activated"?classes.activated:name==="Pending"?classes.pending:name==="Shortlisted"?classes.shortlisted:''} disabled style={{padding:responsive.isMobile?'0 1rem':'0.5rem 1rem'}}>{name}</button>;
+  return <button className={name==="Rejected"?classes.rejected:name=="Activated"?classes.activated:name==="Pending"?classes.pending:name==="Shortlisted"?classes.shortlisted:''} disabled style={{padding:responsive.isMobile?'0.25':'0.5rem 1rem'}}>{name}</button>;
 };
 
 export default StatusButton;

@@ -22,7 +22,7 @@ const OnBoardingPage = () => {
           height: "100%",
           width: "100vw",
           display: "flex",
-          maxHeight: "862px",
+          // maxHeight: "862px",
           backgroundColor: "",
         }}
       >
@@ -30,7 +30,7 @@ const OnBoardingPage = () => {
           style={{
             backgroundColor: "#E5E4FF",
             width: "100vw",
-            maxHeight: "862px",
+            // maxHeight: "862px",
             background:
               "linear-gradient(337deg, #E3E5FB 0%, #E6E7FA 12.50%, #F8F5F6 100%)",
             position: "relative",
@@ -68,7 +68,7 @@ const OnBoardingPage = () => {
               position: "relative",
             }}
           >
-            <div
+            {/* <div
               style={{
                 marginTop: "2rem",
                 width: responsive.isMobile ? "95%" : "40%",
@@ -78,63 +78,73 @@ const OnBoardingPage = () => {
                 alignItems: "center",
                 position: "relative",
               }}
+            > */}
+            <div
+              style={{
+                padding:
+                  responsive.isMobile || responsive.isTablet
+                    ? "1.5rem"
+                    : "4rem",
+                borderRadius: "1.125rem",
+                marginTop: responsive.isTablet ? "" : "0.78rem",
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                background: "white",
+                width: responsive.isMobile ? "75%" : "35%",
+                // height: responsive.isMobile ? "90%" : "90%",
+                justifyContent: "space-between",
+                // gap:
+                // height:'max-content'
+              }}
             >
-              <CustomCard
-                sx={{
-                  padding:
+              <CustomAllTypography
+                name={"Let us know about you"}
+                variant={"h3"}
+              />
+              <div
+                style={{
+                  marginTop:
                     responsive.isMobile || responsive.isTablet
-                      ? "1.5rem"
-                      : "4rem",
-                  borderRadius: "1.125rem",
-                  marginTop: responsive.isTablet ? "" : "0.78rem",
-                  width: "100%",
-                  // height:'max-content'
+                      ? "1rem"
+                      : "3rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: responsive.isTablet ? "1rem" : "1.5rem",
                 }}
               >
-                <CustomAllTypography
-                  name={"Let us know about you"}
-                  variant={"h3"}
+                <CommonTextInput title="Full Name" placeholder="Full Name" />
+                <CommonTextInput
+                  startIcon={<PhoneIcon />}
+                  extraText={"+91"}
+                  placeholder="Mobile no."
                 />
-                <div
-                  style={{ marginTop: responsive.isTablet ? "0rem" : "3rem" }}
-                >
-                  <CommonTextInput
-                   title="Full Name"
-                    style={{ margin: "1.5rem 0rem" }}
-                    placeholder="Full Name"
-                  />
-                  <CommonTextInput
-                    style={{ margin: "1.5rem 0rem" }}
-                    startIcon={<PhoneIcon />}
-                    extraText={"+91"}
-                    placeholder="Mobile no."
-                  />
-                  <CommonTextInput
+                <CommonTextInput
                   title="Company name"
-                    style={{ margin: "1.5rem 0rem" }}
-                    placeholder="Company name"
-                  />
-                  <CommonTextInput
-                    style={{ margin: "1.5rem 0rem" }}
-                    type="dropdown"
-                    placeholder="Your Profession"
-                  />
-                </div>
-                <div style={{ marginTop: "3.5rem" }}>
-                  <CustomInputButton
-                    width={"100%"}
-                    variant="contained"
-                    size="large"
-                    responsive
-                    onClick={() => navigate('/dashboard/home/existinguser')}
-                  >
-                    Proceed
-                  </CustomInputButton>
-                </div>
-              </CustomCard>
+                  placeholder="Company name"
+                />
+                <CommonTextInput
+                  type="dropdown"
+                  placeholder="Your Profession"
+                />
+              </div>
+              <div
+                style={{ marginTop: responsive.isMobile ? "1rem" : "2.5rem" }}
+              >
+                <CustomInputButton
+                  width={"100%"}
+                  variant="contained"
+                  size="large"
+                  responsive
+                  onClick={() => navigate("/dashboard/home/existinguser")}
+                >
+                  Proceed
+                </CustomInputButton>
+              </div>
             </div>
           </div>
         </div>
+        {/* </div> */}
       </div>
     </CustomContainer>
   );

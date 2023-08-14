@@ -33,8 +33,9 @@ const StatsTopBar = ({ application = 23, shortlisted = 2, rejected }) => {
       style={{
         display: "flex",
         gap: !responsive.isMobile || responsive.isRandom ? "2rem" : "0.5rem",
-        justifyContent: "space-between",
+        justifyContent: !rejected && responsive.isMobile?"space-around":"space-between",
         alignItems: "center",
+        width:'100%',
         padding: responsive.isMobile || responsive.isRandom ? "1rem 1.5rem" : "0rem",
         background: responsive.isMobile ? darkspacetheme.colorPallete.aliceBlue
           : "none",
@@ -93,41 +94,3 @@ const StatsTopBar = ({ application = 23, shortlisted = 2, rejected }) => {
 };
 
 export default StatsTopBar;
-
-// import React from 'react'
-// import useResponsiveStyles from '../../utils/MediaQuery';
-// import UserPlus12Icon from '../../components/icons/UserPlus12Icon';
-// import UserIcon from "../../components/icons/UserIcon";
-// import RejectedIcon from "../../components/icons/RejectedIcon";
-// import CustomAllTypography from '../../components/typography/CustomTypograpgy';
-
-// const StatsTopBar = () => {
-//   const responsive = useResponsiveStyles()
-//   return (
-//     <div style={{backgroundColor:'red',display:'flex',gap:responsive.isMobile?'1.75rem':'3.06rem',padding:responsive.isMobile?'0.25rem':'',backgroundColor:responsive.isMobile?'':'', borderRadius:responsive.isMobile?'0.5rem':''}}>
-//       <div style={{display:responsive.isMobile?'':'flex',gap:'0.94rem'}}>
-//         <div style={{display:'flex',gap:responsive.isMobile?'0.25rem':'0.94rem',alignItems:'center'}}>
-//         <UserIcon/>
-//         <CustomAllTypography name="23" variant={'h3'}/>
-//         </div>
-//         <CustomAllTypography name="Applications" variant={"body2"}/>
-//       </div>
-//       <div style={{display:responsive.isMobile?'':'flex',gap:'0.94rem'}}>
-//         <div style={{display:'flex',gap:responsive.isMobile?'0.25rem':'0.94rem',alignItems:'center'}}>
-//         <UserPlus12Icon />
-//         <CustomAllTypography name="3" variant={'h3'}/>
-//         </div>
-//         <CustomAllTypography name="Shortlisted" variant={"body2"}/>
-//       </div>
-//       <div style={{display:responsive.isMobile?'':'flex',gap:'0.94rem',alignItems:'center'}}>
-//         <div style={{display:'flex',gap:responsive.isMobile?'0.25rem':'0.94rem',alignItems:'center'}}>
-//         <RejectedIcon />
-//         <CustomAllTypography name="2" variant={'h3'}/>
-//         </div>
-//         <CustomAllTypography name="Rejected" variant={"body2"}/>
-//       </div>
-//     </div>
-//   )
-// }
-
-// export default StatsTopBar
