@@ -1,17 +1,10 @@
 import React from "react";
 
-function ThumbsUpIcon({
-  height = 24,
-  width = 24,
-  className,
-  // onClick = () => {},
-}) {
+const ThumbsUpicon = () => {
   return (
     <svg
-      // onClick={onClick}
-      className={className}
-      width={width}
-      height={height}
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -25,6 +18,6 @@ function ThumbsUpIcon({
       />
     </svg>
   );
-}
+};
 
-export default ThumbsUpIcon;
+export default ThumbsUpicon;
