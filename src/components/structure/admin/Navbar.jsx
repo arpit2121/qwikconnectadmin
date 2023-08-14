@@ -56,7 +56,7 @@ const Navbar = ({
         padding: responsive.isMobile ? "1rem" : "1.5rem 2.5rem",
         boxShadow: responsive.isMobile
           ? ""
-          : "0 2px 3px -1px rgba(0, 0, 0, 0.5)",
+          : "0px 4px 4px 0px rgba(142, 141, 208, 0.16)",
         position: "sticky",
         top: 0,
         backgroundColor: "#fff",

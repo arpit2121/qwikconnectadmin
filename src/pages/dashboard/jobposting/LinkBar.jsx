@@ -34,7 +34,7 @@ const LinkBar = ({
         display: responsive.isMobile?'none':"flex",
         justifyContent: "space-between",
         alignItems: "center",
-        // padding: "1rem",
+        paddingTop: "2rem",
         paddingLeft:10
       }}
     >

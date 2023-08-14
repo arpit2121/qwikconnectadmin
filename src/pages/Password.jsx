@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import CustomAllTypography from "../components/typography/CustomTypograpgy";
-import { TextDescription } from "../components/typography/Fields";
 import useResponsiveStyles from "../utils/MediaQuery";
 import { CustomInputButton } from "../components/button/CustomButoon";
 import { useLocation, useNavigate } from "react-router-dom";
 import CommonTextInput from "../components/textfield/CommonTextInput";
 import PasswordIcon from "../components/icons/PasswordIcon";
 import { useVerifyPasswordMutation } from "../services/auth";
+import OpenEyeIcon from '../components/icons/OpenEyeIcon';
+import { Body3 } from "../components/typography/Fields";
 
 /*
 3 conditon
@@ -33,7 +34,7 @@ const Password = () => {
   const handleClick = () => {
     console.log(state.goTO)
     // verifyPassword(pass);
-    if (true) {
+    if (false) {
       //name have something???then navigate to dashbaord page else navigate to onBoard page
       navigate("/dashboard/home/existinguser");
     } else {
@@ -99,7 +100,7 @@ const Password = () => {
           searchInput={false}
           type1={type ? "password" : "text"}
           onClick={changeType}
-          endIcon={<PasswordIcon />}
+          endIcon={type ? <PasswordIcon /> : <OpenEyeIcon/>}
         />
         <div
           style={{
@@ -108,7 +109,6 @@ const Password = () => {
             paddingTop: "4px",
           }}
         >
-          {/* <TextDescription responsive={responsive} size={'9px'} color={'#605DEC'} onClick={()=>console.log("hi")}>{newUser?'':"Forgot Password?"}</TextDescription> */}
           <CustomInputButton variant="text" onClick={forgetPassword}>
             {state.header ==='Set Password' ? "" : "Forgot Password?"}
           </CustomInputButton>
@@ -124,6 +124,13 @@ const Password = () => {
         >
           {state.button}
         </CustomInputButton>
+        {
+          !state.newUser
+          ?
+          <div style={{marginTop: '1.38rem',display:'flex',justifyContent:'center',alignItems:'center',width:'100%',gap:'0.4rem'}}>By Continuing this I agree to the <Body3 color={"#605DEC"}>Terms & Conditions</Body3> and <Body3 color={"#605DEC"}>Privacy Policy</Body3></div>
+          :
+          ""
+        }
       </div>
     </div>
   );

@@ -164,7 +164,7 @@ const Sidebar = () => {
           <div className={classes.iconContainer}>
             <div
               onClick={(e) => {
-                setOpenSettings(e.target);
+                // setOpenSettings(e.target);
                 setActiveTab(3);
               }}
               className={
@@ -173,7 +173,7 @@ const Sidebar = () => {
             >
               <SettingsIcon color={activeTab == 3 ? "white" : "#25282B"} />
             </div>
-            <SettingMenu open={openSettings} setOpen={setOpenSettings} />
+            {/* <SettingMenu open={openSettings} setOpen={setOpenSettings} /> */}
             <div
               style={{ opacity: activeTab == 3 ? 1 : 0 }}
               className={classes.dot}
@@ -182,7 +182,8 @@ const Sidebar = () => {
         )}
         <div className={classes.iconDiv}>
           <div
-            onClick={() => {
+            onClick={(e) => {
+              setOpenSettings(e.target);
               setActiveTab(4);
             }}
             className={classes.iconDiv}
@@ -190,6 +191,7 @@ const Sidebar = () => {
           >
             <UsersComponent style={{ height: "2.3rem" }} image={user1}/>
           </div>
+          <SettingMenu open={openSettings} setOpen={setOpenSettings} />
         </div>
       </div>
     </div>

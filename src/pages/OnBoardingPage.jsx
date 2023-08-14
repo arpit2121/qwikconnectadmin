@@ -10,9 +10,11 @@ import CustomAllTypography from "../components/typography/CustomTypograpgy";
 import { CustomInputButton } from "../components/button/CustomButoon";
 import CommonTextInput from "../components/textfield/CommonTextInput";
 import PhoneIcon from "../components/icons/PhoneIcon";
+import { useNavigate } from "react-router-dom";
 
 const OnBoardingPage = () => {
   const responsive = useResponsiveStyles();
+  const navigate = useNavigate();
   return (
     <CustomContainer>
       <div
@@ -102,38 +104,39 @@ const OnBoardingPage = () => {
               />
               <div
                 style={{
-                  marginTop: responsive.isMobile || responsive.isTablet ? "1rem" : "3rem",
+                  marginTop:
+                    responsive.isMobile || responsive.isTablet
+                      ? "1rem"
+                      : "3rem",
                   display: "flex",
                   flexDirection: "column",
                   gap: responsive.isTablet ? "1rem" : "1.5rem",
                 }}
               >
-                <CommonTextInput placeholder="Full Name" />
+                <CommonTextInput title="Full Name" placeholder="Full Name" />
                 <CommonTextInput
-                  // style={{ margin: "1.5rem 0rem" }}
                   startIcon={<PhoneIcon />}
                   extraText={"+91"}
                   placeholder="Mobile no."
                 />
                 <CommonTextInput
-                  // style={{ margin: "1.5rem 0rem" }}
+                  title="Company name"
                   placeholder="Company name"
                 />
                 <CommonTextInput
-                  // style={{ margin: "1.5rem 0rem" }}
                   type="dropdown"
                   placeholder="Your Profession"
                 />
               </div>
               <div
-               style={{ marginTop:responsive.isMobile?'1rem': "2.5rem" }}
+                style={{ marginTop: responsive.isMobile ? "1rem" : "2.5rem" }}
               >
                 <CustomInputButton
                   width={"100%"}
                   variant="contained"
                   size="large"
                   responsive
-                  onClick={() => {}}
+                  onClick={() => navigate("/dashboard/home/existinguser")}
                 >
                   Proceed
                 </CustomInputButton>

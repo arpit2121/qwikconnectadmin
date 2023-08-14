@@ -15,7 +15,7 @@ const DashboardHome = () => {
   return (
     <div style={{ height: "100%", width: "100%" }}>
        <CommonProfileBar />
-      <Outlet />
+       <Outlet />
     </div>
   );
 };

@@ -55,6 +55,7 @@ const SettingMenu = ({ open, setOpen }) => {
     {
       icon: <LogoutIcon />,
       title: "Log out",
+      url: '/login'
     },
   ];
   const classes = useStyles();
@@ -74,7 +75,7 @@ const SettingMenu = ({ open, setOpen }) => {
     <Menu
       id="lock-menu"
       anchorEl={open}
-      sx={{ marginLeft: 7, padding: 0 }}
+      sx={{ marginLeft: 7, padding: 0}}
       open={openSetting}
       onClose={handleClose}
       MenuListProps={{
