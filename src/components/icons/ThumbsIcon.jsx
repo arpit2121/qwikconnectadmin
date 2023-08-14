@@ -1,6 +1,6 @@
 import React from "react";
 
-const ThumbsUpIcon = () => {
+const ThumbsIcon = () => {
   return (
     <svg
       width="24"
@@ -20,4 +20,4 @@ const ThumbsUpIcon = () => {
   );
 };
 
-export default ThumbsUpIcon;
+export default ThumbsIcon;

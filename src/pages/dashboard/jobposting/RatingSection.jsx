@@ -3,7 +3,7 @@ import RatingParameter from "../../../components/admin/RatingParameter";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import ThumbsDownIcon from "../../../components/icons/ThumbsDownIcon";
-import ThumbsUpIcon from "../../../components/icons/ThumbsUpicon";
+import ThumbsIcon from '../../../components/icons/ThumbsIcon'
 import { Body3 } from "../../../components/typography/Fields";
 import { CustomInputButton } from "../../../components/button/CustomButoon";
 
@@ -36,7 +36,7 @@ const RatingSection = () => {
           gap: "0.8rem",
         }}
       >
-        {<ThumbsDownIcon/> || <ThumbsUpIcon/>}
+        {<ThumbsDownIcon/> || <ThumbsIcon/>}
         <CustomAllTypography
           name={"Rejected"}
           sx={{ fontSize: "1.125rem !important" }}
