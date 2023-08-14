@@ -37,7 +37,7 @@ const Login = () => {
         marginBottom: "2rem",
         display: "flex",
         flexDirection: "column",
-        gap: responsive.isMobile ? "3rem" : "4.5rem",
+        gap: responsive.isMobile ? "3rem": responsive.isTablet ?"2rem": "4.5rem",
       }}
     >
       <CustomAllTypography variant={"h1"} name={"Login/Signup"} />

@@ -23,6 +23,7 @@ const useStyles = makeStyles({
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
+    padding:'20px 0px'
   },
   main2: {
     width: "100%",
@@ -75,6 +76,7 @@ const useStyles = makeStyles({
   container2: {
     minHeight: "35%",
     display: "flex",
+    // gap:'2rem',
     flexDirection: "column",
     justifyContent: "space-around",
     alignItems: "center",

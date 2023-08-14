@@ -8,6 +8,7 @@ import UsersComponent from "../../../components/admin/UsersComponent";
 import user1 from "../../../assets//svg/user1.svg";
 import PhoneIcon from "../../../components/icons/PhoneIcon";
 import LinkBar from "../jobposting/LinkBar";
+import PasswordKeyIcon from "../../../components/icons/PasswordKey";
 
 const MyProfile = () => {
   const responsive = useResponsiveStyles();
@@ -52,6 +53,7 @@ const MyProfile = () => {
           </div>
         </div>
         <CustomInputButton
+        startIcon={<PasswordKeyIcon color='#605DEC'/>}
           size="small"
           variant="outlined"
           onClick={() => navigate("/dashboard/changepass")}

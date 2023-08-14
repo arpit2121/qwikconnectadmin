@@ -1,47 +1,40 @@
 import React from "react";
 
-const VideoPauseIcon = ({
+const VolumeIcon = ({
   onClick = () => {},
-  height = 24,
-  width = 24,
+  height = 20,
+  width = 15,
   className,
   color = "#25282B",
   style = {},
 }) => {
   return (
     <svg
-    onClick={onClick}
+      onClick={onClick}
       style={style}
       width={width}
       height={height}
       className={className}
       viewBox="0 0 24 24"
-      fill="none"
+      fill="white"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-        fill="white"
+        d="M11 5L6 9H2V15H6L11 19V5Z"
+        fill="#white"
         stroke="white"
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
       />
       <path
-        d="M10 15V9"
-        stroke="#25282B"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      />
-      <path
-        d="M14 15V9"
-        stroke="#25282B"
-        stroke-width="2.5"
+        d="M15.54 8.45996C16.4774 9.3976 17.004 10.6691 17.004 11.995C17.004 13.3208 16.4774 14.5923 15.54 15.53"
+        stroke="white"
+        stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
       />
     </svg>
   );
 };
-export default VideoPauseIcon;
+export default VolumeIcon;

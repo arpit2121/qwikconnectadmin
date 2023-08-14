@@ -15,8 +15,8 @@ const DashBoardMail = () => {
           : "0 0 3.94rem 0 3.94rem",
       }}
     >
-      <CommonProfileBar  title={'Overview'} showProfile={false} />
-      <CardContainerComponent/>
+      <CommonProfileBar  title={'Overview'} showProfile={false} rejected={23} />
+      <CardContainerComponent style={{padding:responsive.isMobile?'1rem':'3.87rem',marginTop:0}} />
     </div>
   );
 };

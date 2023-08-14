@@ -11,6 +11,7 @@ import thumbnail from "../../../assets/videoThumbnail.png";
 import { Forward5Rounded, Replay5Rounded } from "@mui/icons-material";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import { useSelector } from "react-redux";
+import VideoPauseIcon from "../../../components/icons/VideoPauseIcon";
 
 const CustomSoundBar = styled(Slider)(({ theme }) => ({
   "& .MuiSlider-thumb": {
@@ -63,6 +64,7 @@ const VideoPlayer = () => {
   const [progress, setProgress] = useState(0);
   const [drag, setDrag] = useState(false);
   const [volume, setVolume] = useState(100);
+  const [volumeIconType, setVolumeIconType] = useState('default');
   const responsive = useResponsiveStyles();
   const vid = document.getElementById("video1");
   const videoRef = useRef(null);
@@ -96,10 +98,11 @@ const VideoPlayer = () => {
       setPlaying(false);
     }
   };
-  const interval = setInterval(function () {
-    if (videoRef.current?.currentTime == videoTime) clearInterval(interval);
-    setCurrentTime(videoRef.current?.currentTime);
-  }, 1000);
+  // const interval = setInterval(function () {
+  //   console.log('running')
+  //   if (videoRef.current?.currentTime == videoTime) clearInterval(interval);
+  //   setCurrentTime(videoRef.current?.currentTime);
+  // }, 1000);
 
   useEffect(() => {
     !drag && setProgress((videoRef.current?.currentTime / videoTime) * 100);
@@ -112,6 +115,8 @@ const VideoPlayer = () => {
 
   const handleVolumeChange = (vol) => {
     setVolume(vol.target.value);
+    console.log(vol.target.value)
+    setVolumeIconType(vol.target.value==0?'mute':vol.target.value<50?'lowSound':'default')
     videoRef.current.volume = vol.target.value / 100;
   };
   const handleTimerDrag = (vol) => {
@@ -129,8 +134,16 @@ const VideoPlayer = () => {
     if (!play) setShowControllers(false);
   };
   const onClickVolume = () => {
-    setVolume(0);
-    videoRef.current.volume = 0;
+    if(volume==0){
+
+      setVolume(100);
+      setVolumeIconType('default')
+      videoRef.current.volume = 100;
+    }else{
+      setVolume(0);
+      setVolumeIconType('mute')
+      videoRef.current.volume = 0;
+    }
   };
   const onFullScreen = () => {
     videoRef.current.requestFullscreen();
@@ -172,7 +185,7 @@ const VideoPlayer = () => {
           </p>
 
           <CustomTimeBar
-            // onChangeCommitted={() => setDrag(false)}
+            onChangeCommitted={() => setDrag(false) }
             sx={{
               width: "80%",
               padding: "0px !important",
@@ -193,15 +206,15 @@ const VideoPlayer = () => {
           <span></span>
           <div className="playIcons">
             <VideoBackIcon className="controllerIcon" onClick={revert} />
-            {playing ? (
-              <VideoPlayIcon
-                className="controllerIcon"
-                onClick={() => videoHandler("pause")}
-              />
-            ) : (
+            {!playing ? (
               <VideoPlayIcon
                 className="controllerIcon"
                 onClick={() => videoHandler("play")}
+              />
+            ) : (
+              <VideoPauseIcon
+                className="controllerIcon"
+                onClick={() => videoHandler("pause")}
               />
             )}
             <VideoForwardIcon
@@ -231,9 +244,10 @@ const VideoPlayer = () => {
           onChange={handleVolumeChange}
         />
         <VolumeIcon
+        type={volumeIconType}
           onClick={onClickVolume}
-          height={responsive.isMobile ? 12 : 20}
-          width={responsive.isMobile ? 12 : 20}
+          height={responsive.isMobile ? 12 : 15}
+          width={responsive.isMobile ? 12 : 15}
         />
       </div>
       <div className={"timeForwardBackwardDiv"}>
@@ -241,24 +255,13 @@ const VideoPlayer = () => {
           className="arrowContainer"
           style={{ opacity: showBackArrow ? 1 : 0 }}
         >
-          {/* <div class="arrow">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          -5 */}
           <Replay5Rounded sx={{ fontSize: "3rem", color: "white" }} />
         </div>
         <div
           className="arrowContainer"
           style={{ opacity: showFwdArrow ? 1 : 0 }}
         >
-          {/* <div class="arrow2">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          +5 */}
+         
           <Forward5Rounded sx={{ fontSize: "3rem", color: "white" }} />
         </div>
       </div>
