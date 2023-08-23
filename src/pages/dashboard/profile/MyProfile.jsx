@@ -17,7 +17,7 @@ const MyProfile = () => {
     <div
       style={{
         backgroundColor: "",
-        padding: responsive.isMobile ? "0 1rem 0 1rem" : "0rem 15rem 0 15rem",
+        padding: responsive.isMobile ? "0 1rem 0 1rem" : responsive.isTablet? "0 5rem 0 5rem" : "0rem 15rem 0 15rem",
       }}
     >
       <LinkBar

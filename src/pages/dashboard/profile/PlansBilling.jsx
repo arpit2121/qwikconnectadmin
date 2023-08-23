@@ -11,7 +11,7 @@ import LinkBar from '../jobposting/LinkBar';
 const PlansBilling = () => {
   const responsive = useResponsiveStyles();
   return (
-    <div style={{backgroundColor:'',padding:responsive.isMobile?'0 1rem 0 1rem':'0 15rem 0 15rem',}}>
+    <div style={{backgroundColor:'',padding:responsive.isMobile ? "0 1rem 0 1rem" : responsive.isTablet? "0 5rem 0 5rem" : "0rem 15rem 0 15rem"}}>
         <div>
         <LinkBar linkArray={[
                     { title: "Home", path: "/dashboard/home/existinguser" },

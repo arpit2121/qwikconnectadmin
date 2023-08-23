@@ -24,7 +24,7 @@ function QuestionCard() {
         {/* </div> */}
         <div style={{display:'flex',flexDirection:'column', gap:'1.50rem',width: responsive.isMobile?'100%':'80%'}}> 
             <div style={{display:'flex',justifyContent:'space-between'}}>
-            <CustomAllTypography name="Question Title here" variant='h3'/>
+            <CustomAllTypography name="Question Title here" variant='h3' textcolor="#C9C8D3"/>
             <EditIcon/>
             </div>
             <div style={{display:'flex',gap:'0.652rem'}}><Checkbox/><div>Mandatory</div></div>

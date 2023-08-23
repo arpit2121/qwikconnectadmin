@@ -196,6 +196,7 @@ const JobPostingStepTwo = () => {
           display: responsive.isMobile ? "" : "flex",
           width: "100%",
           alignItems: "center",
+          gap:'2rem'
         }}
       >
         <div
@@ -203,7 +204,7 @@ const JobPostingStepTwo = () => {
             paddingLeft: responsive.isMobile ? "1rem" : "",
           }}
         >
-          <CustomAllTypography name={"Q1"} variant={"h4"} sx={{color:'red'}} />
+          <CustomAllTypography name={"Q1"} variant={"h4"} textcolor={"#C9C8D3"} />
         </div>
         <div style={{ width: "100%" }}>
           <div
@@ -217,13 +218,13 @@ const JobPostingStepTwo = () => {
           </div>
         </div>
       </div>
-      <div style={{padding:responsive.isMobile?'1rem':'2.5rem'}}>
+      <div style={{padding:responsive.isMobile?'1rem':'0 0 0 4rem',marginTop:responsive.isMobile?'':'2.5rem'}}>
       <div style={{width:'100%', backgroundColor:''}}>
         {/* <Notification/> */}
         <Notification/>
         </div>
       </div>
-      <div style={{paddingLeft:responsive.isMobile?'1rem':'2rem'}}>
+      <div style={{paddingLeft:responsive.isMobile?'1rem':'4rem',marginTop:'2rem'}}>
       <div style={{width:'95%'}}>
             <CustomInputButton size="medium" variant="outlined" startIcon={''} width="100%">Add Questions</CustomInputButton>
         </div>
