@@ -17,6 +17,7 @@ import MyProfile from "./pages/dashboard/profile/MyProfile";
 import ChangePassword from "./pages/dashboard/profile/ChangePassword";
 import CandiatateReview from "./pages/dashboard/jobposting/CandiatateReview";
 import Error404 from "./pages/error404/Error404";
+import InviteTemplate from "./components/admin/InviteTemplate";
 
 const App = () => {
   return (
@@ -28,9 +29,9 @@ const App = () => {
       </Route>
       <Route path="on-boarding" element={<OnBoardingPage />} />
       <Route path="/dashboard" element={<Dashboard />}>
-        <Route path="home" element={<DashboardHome />}>
-          <Route path="existinguser" element={<ExistingUser />} />
-          <Route path="nonexisting" element={<NonExisting />} />
+        <Route path="home/:id" element={<DashboardHome />}>
+          {/* <Route path="existinguser" element={<ExistingUser />} />
+          <Route path="nonexisting" element={<NonExisting />} /> */}
         </Route>
         <Route path="changepass" element={<ChangePassword />} />
         <Route path="myprofile" element={<MyProfile />} />
@@ -45,6 +46,7 @@ const App = () => {
       ></Route>
       <Route path="/candidatereview" element={<CandiatateReview />} />
       <Route path="*" element={<Error404/>}/>
+      <Route path="invite" element={<InviteTemplate/>}/>
     </Routes>
   );
 };

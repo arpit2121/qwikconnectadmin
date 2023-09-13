@@ -34,7 +34,7 @@ const Navbar = ({
     "/dashboard/changepass": { title: "Change Password", button: null },
     "/dashboard/myprofile": { title: "My Profile", button: null },
     "/dashboard/myPlans": { title: "Plan & Billings ", button: null },
-    "/jobposting/basicDaetails": {
+    "/jobposting/PublicLink": {
       title: "Job Posting ",
       button: {
         title: "Preview",
@@ -45,7 +45,7 @@ const Navbar = ({
   };
 
   const onIconClick = () => {
-    navigate("/dashboard/home/existinguser");
+    navigate("/dashboard/home");
   };
   return (
     <div

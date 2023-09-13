@@ -13,25 +13,28 @@ function RatingParameter() {
     "Aptitude",
   ];
   const [state,setState] = useState({
-    Concentration:0,
-    Flexible:0,
-    Competency:0,
-    Skills:0,
-    Aptitude:0,
+    Concentration:-1,
+    Flexible:-1,
+    Competency:-1,
+    Skills:-1,
+    Aptitude:-1,
   })
+  console.log("parameter state ==>",  state);
 
   const [selectedSmileyIndex, setSelectedSmileyIndex] = useState(-1);
   const [selectedOuterIndex, setSelectedOuterIndex] = useState(-1);
   
 const responsive=useResponsiveStyles()
-  const handleClick = (innerIndex, outerIndex) => {
+  const handleClick = (innerIndex, outerIndex,item1) => {
+    console.log("1",innerIndex,"2",outerIndex)
+    console.log("selected parameter ==>" , item1)
     setSelectedSmileyIndex(innerIndex);
     setSelectedOuterIndex(outerIndex);
     
-    const parameterKey = data[outerIndex];
+    const parameterKey = item1;
     setState(prevState => ({
       ...prevState,
-      [parameterKey]: innerIndex+1
+      [parameterKey] : innerIndex
     }));
 
   };
@@ -52,7 +55,8 @@ const responsive=useResponsiveStyles()
               justifyContent: "center",
             }}
           >
-            {data.map((item, outerIndex) => {
+            {data.map((item1, outerIndex) => {
+              console.log(item1)
               return (
                 <div
                   style={{ display: "flex", alignItems: "center",flexDirection: responsive.isTablet?'column':"row",justifyContent:responsive.isTablet?'center':"" }}
@@ -64,7 +68,7 @@ const responsive=useResponsiveStyles()
                       padding: "0.2rem 0.5rem",
                     }}
                   >
-                    {item}
+                    {item1}
                   </div>
                   <div
                     style={{
@@ -76,28 +80,30 @@ const responsive=useResponsiveStyles()
                     }}
                   >
                     {[0, 1, 2, 3, 4].map((item, innerIndex) => {
+                      console.log("item",item)
+                      console.log("data object", state[item1])
                       let smileyColor = "#AAAAAA"; // Default grey color
 
-                      if (selectedSmileyIndex >= 0) {
+                      if (state[item1] >= 0) {
                         smileyColor =
-                          selectedSmileyIndex === 0
+                        state[item1] === 0
                             ? "#F93232"
-                            : selectedSmileyIndex === 1
+                            : state[item1] === 1
                             ? "#FFB82E"
                             : "#605DEC";
                       }
 
-                      if (innerIndex > selectedSmileyIndex) {
+                      if (innerIndex > state[item1]) {
                         smileyColor = "#AAAAAA"; // Grey color for smileys after the selected index
                       }
 
                       return (
                         <div
-                          onClick={() => handleClick(innerIndex,outerIndex)}
+                          onClick={() => handleClick(innerIndex,outerIndex,item1  )}
                           style={{ display: "flex" }}
                           key={innerIndex}
                         >
-                          <SmileIcon color={selectedOuterIndex===outerIndex?smileyColor:"#AAAAAA"} />
+                          <SmileIcon color={smileyColor} />
                         </div>
                       );
                     })}

@@ -10,11 +10,11 @@ const Dashboard = () => {
   const {pathname}=useLocation()
   const navigate = useNavigate();
   console.log(pathname)
-  useEffect(() => {
-    if (pathname == "/dashboard/home" || "/dashboard") {
-      navigate("/dashboard/home/existinguser");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (pathname == "/dashboard/home" || "/dashboard") {
+  //     navigate("/dashboard/home");
+  //   }
+  // }, []);
   return (
     <CustomContainer>
       <div

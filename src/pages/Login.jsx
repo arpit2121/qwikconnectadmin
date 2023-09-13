@@ -34,7 +34,8 @@ const Login = () => {
   return (
     <div
       style={{
-        marginBottom: "2rem",
+        // marginBottom: "2rem",
+        marginTop:'2rem',
         display: "flex",
         flexDirection: "column",
         gap: responsive.isMobile ? "3rem": responsive.isTablet ?"2rem": "4.5rem",

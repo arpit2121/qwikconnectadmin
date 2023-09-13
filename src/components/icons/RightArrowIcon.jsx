@@ -1,6 +1,6 @@
 import React from "react";
 
-function RightArrowIcon() {
+function RightArrowIcon({color='white'}) {
   return (
     <svg
       width="16"
@@ -11,17 +11,17 @@ function RightArrowIcon() {
     >
       <path
         d="M2 8H14"
-        stroke="white"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M9.0002 3L14 8L9.0001 13"
-        stroke="white"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

@@ -80,7 +80,6 @@ const CandiatateReview = () => {
       >
         <div style={{ height: "100%", width: "100%" }}>
           <Navbar showTitle={false} showStatsBar />
-
           <div
             style={{
               display: responsive.isMobile ? "" : "flex",
@@ -101,7 +100,6 @@ const CandiatateReview = () => {
             >
               <div style={initialContentStyle}>
                 <UsersComponent image={user1} />
-
                 <div
                   style={{
                     display: "flex",

@@ -5,8 +5,26 @@ import user1 from "../../../assets/svg/user1.svg";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import { darkspacetheme } from "../../../theme/theme";
 
+
+function getGreetingByTime() {
+  const currentTime = new Date();
+  const currentHour = currentTime.getHours();
+
+  if (currentHour >= 5 && currentHour < 11) {
+    return "Good Morning";
+  } else if (currentHour >= 11 && currentHour < 16) {
+    return "Good Afternoon";
+  } else if (currentHour >= 16 && currentHour < 22) {
+    return "Good Evening";
+  }
+  else {
+    return "Hello, Night Owl";
+  }
+}
+
+
 const CommonProfile = ({
-    title="Good Morning, Vaibhav",
+    title=`${getGreetingByTime()}, Vaibhav`,
     subtitle="Ready to hunt your next candidate? ",
     style={}
 }) => {

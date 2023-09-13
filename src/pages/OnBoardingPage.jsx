@@ -1,5 +1,4 @@
-import React from "react";
-import { CustomCard } from "../components/card/CustomCard";
+import React, { useEffect, useState } from "react";
 import vector from "../assets/vector.svg";
 import vector1 from "../assets/vector1.svg";
 import header from "../assets/header.svg";
@@ -11,10 +10,46 @@ import { CustomInputButton } from "../components/button/CustomButoon";
 import CommonTextInput from "../components/textfield/CommonTextInput";
 import PhoneIcon from "../components/icons/PhoneIcon";
 import { useNavigate } from "react-router-dom";
+import { useAddAdminMutation } from "../services/admin";
 
 const OnBoardingPage = () => {
   const responsive = useResponsiveStyles();
   const navigate = useNavigate();
+  const [addAdmin,{data:profileData,isLoading,isSuccess}] = useAddAdminMutation();
+  const [onBoardingDetail, setOnBoardingDetail] = useState({
+    email: "arpit.singh@gmail.com",
+    fullName: "",
+    phoneNumber: "",  
+    companyName: "",
+    profession: "",
+    profileImage: "link of profile image"
+  });
+  
+
+  useEffect(()=>{
+    console.log(onBoardingDetail)
+  },[onBoardingDetail])
+
+
+  const handleInputChange = (event) => {
+    console.log("hii",event);
+    const { name, value } = event.target;
+    setOnBoardingDetail((prevDetails) => ({
+      ...prevDetails,
+      [name]: value,
+    }));
+  };
+
+
+
+  const handelOnBoard = async() =>{
+  await  addAdmin(onBoardingDetail).then((response)=>{
+    console.log("--->",response.data)
+      if(response.data){ 
+        navigate(`/dashboard/home/${response.data._id}`)}
+    })
+  }
+
   return (
     <CustomContainer>
       <div
@@ -22,7 +57,6 @@ const OnBoardingPage = () => {
           height: "100%",
           width: "100vw",
           display: "flex",
-          // maxHeight: "862px",
           backgroundColor: "",
         }}
       >
@@ -30,7 +64,6 @@ const OnBoardingPage = () => {
           style={{
             backgroundColor: "#E5E4FF",
             width: "100vw",
-            // maxHeight: "862px",
             background:
               "linear-gradient(337deg, #E3E5FB 0%, #E6E7FA 12.50%, #F8F5F6 100%)",
             position: "relative",
@@ -68,17 +101,6 @@ const OnBoardingPage = () => {
               position: "relative",
             }}
           >
-            {/* <div
-              style={{
-                marginTop: "2rem",
-                width: responsive.isMobile ? "95%" : "40%",
-                // height: "80%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                position: "relative",
-              }}
-            > */}
             <div
               style={{
                 padding:
@@ -113,19 +135,41 @@ const OnBoardingPage = () => {
                   gap: responsive.isTablet ? "1rem" : "1.5rem",
                 }}
               >
-                <CommonTextInput title="Full Name" placeholder="Full Name" />
+                <CommonTextInput
+                  value={onBoardingDetail.fullName}
+                  title="Full Name"
+                  placeholder="FirstName LastName"
+                  searchInput={false}
+                  setValue={setOnBoardingDetail.fullName}
+                  name="fullName"
+                  handleInputChange={handleInputChange}
+                />
                 <CommonTextInput
                   startIcon={<PhoneIcon />}
                   extraText={"+91"}
                   placeholder="Mobile no."
+                  value={onBoardingDetail.phoneNumber}
+                  setValue={setOnBoardingDetail.phoneNumber}
+                  name="phoneNumber"
+                  handleInputChange={handleInputChange}
+                  // status={"error"}
                 />
                 <CommonTextInput
                   title="Company name"
                   placeholder="Company name"
+                  value={onBoardingDetail.companyName}
+                  setValue={setOnBoardingDetail.companyName}
+                  searchInput={false}
+                  name="companyName"
+                  handleInputChange={handleInputChange}
                 />
                 <CommonTextInput
                   type="dropdown"
                   placeholder="Your Profession"
+                  value={onBoardingDetail.profession}
+                  setValue={setOnBoardingDetail.profession}
+                  handleInputChange={handleInputChange}
+                  name="profession"
                 />
               </div>
               <div
@@ -136,7 +180,8 @@ const OnBoardingPage = () => {
                   variant="contained"
                   size="large"
                   responsive
-                  onClick={() => navigate("/dashboard/home/existinguser")}
+                  // onClick={() => navigate("/dashboard/home/existinguser")}
+                  onClick={handelOnBoard}
                 >
                   Proceed
                 </CustomInputButton>
@@ -144,7 +189,6 @@ const OnBoardingPage = () => {
             </div>
           </div>
         </div>
-        {/* </div> */}
       </div>
     </CustomContainer>
   );

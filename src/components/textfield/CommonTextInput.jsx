@@ -138,6 +138,7 @@ const CommonTextInput = ({
   style = {},
   width,
   extraText,
+  name,
   options = [
     "Software Engineer",
     "Doctor",
@@ -166,7 +167,8 @@ const CommonTextInput = ({
   endIcon,
   placeholder = "Write here",
   title,
-  value = "",
+  // value = "",
+  value = "value",
   setValue = () => {},
   searchInput,
   status,
@@ -174,6 +176,7 @@ const CommonTextInput = ({
   onClick = () => {},
   type1,
   borderStyle = {},
+  handleInputChange,
 }) => {
   let allCountryList = CountryList.getAll();
   const responsive = useResponsiveStyles();
@@ -181,6 +184,12 @@ const CommonTextInput = ({
   const [isFocused, setIsFocused] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [countryCode, setCountryCode] = useState("+91");
+  const [selectedOption, setSelectedOption] = useState();
+  // const [handleSearchTextChange, setHandleSearchTextChange] = useState('')
+
+  // const filteredOptions = options.filter((option) =>
+  //   option.toLowerCase().includes(searchText.toLowerCase())
+  // );
 
   const statusMap = {
     error: { color: "#FFD8D8", icon: ErrorIcon },
@@ -203,8 +212,11 @@ const CommonTextInput = ({
   const handleChange = (e) => {
     setValue(e.target.value);
   };
+
   const handleChangeSelect = (e) => {
-    setValue(e);
+    console.log("hiii");
+    console.log(e.target.value);
+    setValue(e.target.value);
   };
   const handleCountryChange = (e) => {
     setCountryCode(e.target.value);
@@ -213,6 +225,7 @@ const CommonTextInput = ({
   const handleClick = () => {
     inputRef.current.focus();
   };
+
   const classes = useStyles({
     getStatusColor,
     status,
@@ -311,10 +324,13 @@ const CommonTextInput = ({
                       <span>{elem?.flag}</span>
                       <CustomAllTypography
                         name={elem?.name}
-                        sx={{ fontSize: "0.875rem",    width: "60%",
-                        whiteSpace: "nowrap",
-                        overflow: "hidden",
-                        textOverflow: "ellipsis", }}
+                        sx={{
+                          fontSize: "0.875rem",
+                          width: "60%",
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
                         variant="body3"
                         color="#9D99AC"
                       />
@@ -322,7 +338,6 @@ const CommonTextInput = ({
                       <CustomAllTypography
                         sx={{
                           fontSize: "0.875rem",
-                      
                         }}
                         name={`(${elem?.code})`}
                         variant="body3"
@@ -343,58 +358,143 @@ const CommonTextInput = ({
         )}
         {searchInput && <SearchIcon className={classes.searchIcon} />}
         <div className={classes.inputdiv}>
-           
-            <div
-              className={classes.title}
-              style={{ position: isFocused || !!value ? "static" : "absolute" ,opacity:title?1:0}}
-            >
-              <CustomAllTypography
-                name={_.startCase(_.toLower(title))}
-                variant="caption"
-                sx={{ fontSize: "0.75rem" }}
-                textcolor={darkspacetheme.pallete.fields.title}
-              />
-            </div>
-           
-          
+          <div
+            className={classes.title}
+            style={{
+              position: isFocused || !!value ? "static" : "absolute",
+              opacity: title ? 1 : 0,
+            }}
+          >
+            <CustomAllTypography
+              name={_.startCase(_.toLower(title))}
+              variant="caption"
+              sx={{ fontSize: "0.75rem" }}
+              textcolor={darkspacetheme.pallete.fields.title}
+            />
+          </div>
 
           {type != "dropdown" ? (
             <input
-              onChange={handleChange}
+              name={name}
               type={type1 ? type1 : "text"}
               label={title}
-              // value={value}
+              value={value}
               placeholder={title ? "" : placeholder}
               ref={inputRef}
               className={classes.textBoxStyles}
               onFocus={handleFocus}
               onBlur={handleBlur}
               autoComplete="new-user-street-address"
+              onChange={
+                handleInputChange
+                  ? (e) => {
+                      handleInputChange(e);
+                    }
+                  : handleChange
+              }
             />
           ) : (
+            // <CustomSelect
+            //   value={"value"}
+            //   placeholder="Type Your Profession"
+            //   displayEmpty
+            //   renderValue={(selected) => {
+            //     if (selected.length === 0) {
+            //       return (
+            //         <CustomAllTypography
+            //           sx={{ fontSize: "0.875rem", fontWeight: 400 }}
+            //           name={placeholder}
+            //           variant="body3"
+            //           textcolor="#9D99AC"
+            //         />
+            //       );
+            //     }
+
+            //     // return selected?.join(", ");
+            //   }}
+            //   onChange={handleChangeSelect}
+            //   // onChange={(e) => setSearchText(e.target.value)}
+            //   // onKeyDown={(e) => {
+            //   //   if (e.key !== "Escape") {
+            //   //     // Prevents autoselecting item while typing (default Select behaviour)
+            //   //     e.stopPropagation();
+            //   //   }
+            //   // }}
+            //   sx={{ background: "none", border: "none" }}
+            // >
+            //   {options?.map((menuItem, index) => (
+            //     <MenuItem key={index} value={MenuItem}>
+            //       {menuItem}
+            //     </MenuItem>
+            //   ))}
+            // </CustomSelect>
+
             <CustomSelect
-              value={value}
+              // Disables auto focus on MenuItems and allows TextField to be in focus
+              MenuProps={{ autoFocus: false }}
+              // labelId="search-select-label"
+              name={name}
+              placeholder="Type Your Profession"
               displayEmpty
-              renderValue={(selected) => {
-                if (selected.length === 0) {
+              // id="search-select"
+              value={value}
+              // label="Options"
+              // onChange={(e) => {setSelectedOption(e.target.value), console.log("selected",e.target.value)}}
+              onChange={
+                handleInputChange
+                  ? (e) => {
+                      handleInputChange(e);
+                    }
+                  : "setSelectedOption(e.target.value)"
+              }
+              // onChange={(e) => setValue(e.target.value)}
+              onClose={() => setSearchText("")}
+              // renderValue={() => selectedOption}
+                renderValue={(value) => {
+                if (!value) {
                   return (
                     <CustomAllTypography
                       sx={{ fontSize: "0.875rem", fontWeight: 400 }}
                       name={placeholder}
                       variant="body3"
                       textcolor="#9D99AC"
+                      // textcolor="red"
                     />
                   );
                 }
 
-                return selected?.join(", ");
+                return value;
+                // return selectedOption?.join(", ");
               }}
-              onChange={handleChangeSelect}
               sx={{ background: "none", border: "none" }}
             >
-              {options?.map((menuItem, index) => (
-                <MenuItem key={index} value={MenuItem}>
-                  {menuItem}
+               {/* <ListSubheader>
+                <TextField
+                  size="small"
+                  // Autofocus on textfield
+                  autoFocus
+                  placeholder="Type to search..."
+                  fullWidth
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SearchIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                  // onChange={handleDebounce}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key !== "Escape") {
+                      // Prevents autoselecting item while typing (default Select behaviour)
+                      e.stopPropagation();
+                    }
+                  }}
+                />
+              </ListSubheader> */}
+              {options?.map((option, i) => (
+                <MenuItem key={i} value={option}>
+                  {option}
                 </MenuItem>
               ))}
             </CustomSelect>

@@ -41,8 +41,8 @@ const Home = () => {
           <div style={{ width: "100%", height: "100%", backgroundColor: "" }}>
             <div
               style={{
-                width: "100%",
-                height: "20%",
+                // width: "110%",
+                // height: "20%",
                 display: "flex",
                 justifyContent: "flex-start",
               }}
@@ -55,11 +55,11 @@ const Home = () => {
           </div>
           <div
             style={{
-              height: "10%",
-              width: "90%",
+              // height: "10%",
+              width: "97%",
               display: "flex",
-              alignItems: "flex-end",
-              marginTop: "1rem",
+              alignItems: "flex-start",
+              marginTop: "5rem",
             }}
           >
             <TextDescription responsive={responsive}>

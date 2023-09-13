@@ -16,6 +16,7 @@ export const initialState = {
         state.videoLink = action.payload;
       },
       setNavbarTitle: (state, action) => {
+        console.log("asdasd",action.payload)
         state.navbarTitle = action.payload;
       }
     },

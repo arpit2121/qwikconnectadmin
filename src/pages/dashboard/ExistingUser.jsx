@@ -8,6 +8,7 @@ import CardContainerComponent from "./CardContainerComponent";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setSelectedJobPostingPage } from "../../slice/common.slice";
+import { authApi } from "../../services/auth";
 
 const ExistingUser = () => {
   const responsvie = useResponsiveStyles();
@@ -35,6 +36,7 @@ const ExistingUser = () => {
             endIcon={<ArrowForwardIcon />}
             onClick={() => {
               navigate("/dashboard/myJobPost");
+              // authApi.util.invalidateTags('')
               dispatch(setSelectedJobPostingPage(2));
             }}
           >

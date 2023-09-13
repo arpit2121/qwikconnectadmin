@@ -17,6 +17,7 @@ import RightArrowIcon from "../icons/RightArrowIcon";
 import LinkBar from "../../pages/dashboard/jobposting/LinkBar";
 import { useDispatch } from "react-redux";
 import { setSelectedJobPostingPage } from "../../slice/common.slice";
+import { useSelector } from "react-redux";
 
 const StyledTab = styled(Tab)({
   "&.Mui-selected": {
@@ -41,17 +42,43 @@ const StyleTabPanel = styled(TabPanel)({
 });
 
 const CustomTabs = () => {
+  const counter = useSelector(state=>state.common.selectedJobPostingPage)
+  console.log("counter",counter.selectedJobPostingPage)
   const [value, setValue] = React.useState("1");
   const responsive = useResponsiveStyles();
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    dispatch(setSelectedJobPostingPage(newValue))
+    dispatch(setSelectedJobPostingPage(newValue));
   };
+
+  React.useEffect(() => {
+    console.log("value",value)
+    console.log("hahaha",counter)
+  }, [value,counter])
+  
 
   const navigate = useNavigate();
   const goBack = () => {
     navigate("/dashboard/home/existinguser");
+  };
+
+  const handleNext = () => {
+    const nextValue = parseInt(value) + 1;
+    if (nextValue <= 4) {
+      setValue(nextValue.toString());
+    }
+    // else{
+    //   goBack();
+    // }
+  };
+
+  const handleBack = () => {
+    const prevValue = parseInt(value) - 1;
+    if (prevValue >= 1) {
+      setValue(prevValue.toString());
+    }
   };
 
   return (
@@ -170,7 +197,7 @@ const CustomTabs = () => {
       >
         <div
           style={{
-            padding:responsive.isMobile?'': "0 1rem 0 1rem",
+            padding: responsive.isMobile ? "" : "0 1rem 0 1rem",
             display: "flex",
             width: "100%",
             justifyContent: "space-between",
@@ -183,6 +210,7 @@ const CustomTabs = () => {
                   variant="text"
                   size="medium"
                   startIcon={<LeftArrowIcon />}
+                  onClick={handleBack}
                 >
                   Back
                 </CustomInputButton>
@@ -196,32 +224,43 @@ const CustomTabs = () => {
           <div
             style={{
               zIndex: 1,
-              backgroundColor:'white',
+              backgroundColor: "white",
               display: "flex",
-              gap: responsive.isMobile?"":"1.12rem",
-              width: responsive.isMobile?"100%":'',
+              gap: responsive.isMobile ? "" : "1.12rem",
+              width: responsive.isMobile ? "100%" : "",
               boxShadow: responsive.isMobile
                 ? "2px 2px 2px 2px rgba(0, 0, 0, 0.25)"
                 : "",
               position: responsive.isMobile ? "fixed" : "",
               bottom: 1,
-              justifyContent:responsive.isMobile?'space-around':'',
-              padding: responsive.isMobile?'0.5rem 0.5rem':''
+              justifyContent: responsive.isMobile ? "space-around" : "",
+              padding: responsive.isMobile ? "0.5rem 0.5rem" : "",
             }}
           >
-            <CustomInputButton variant="text" size="medium">
+            <CustomInputButton variant="text" size="medium" onClick={()=>navigate('/dashboard/home/existinguser')}>
               Close
             </CustomInputButton>
             {value === "4" ? (
-              responsive.isMobile?'':<CustomInputButton variant="outlined" size="medium">
-              Preview
-            </CustomInputButton>
+              responsive.isMobile ? (
+                ""
+              ) : (
+                <CustomInputButton variant="outlined" size="medium">
+                  Preview
+                </CustomInputButton>
+              )
             ) : (
               ""
             )}
-            <CustomInputButton size="medium" endIcon={<RightArrowIcon />}>
-              Save & Next
+            {
+              value === "4" ? 
+              <CustomInputButton size="medium" endIcon={<RightArrowIcon />} onClick={handleNext}>
+              Publish
             </CustomInputButton>
+            :
+            <CustomInputButton size="medium" endIcon={<RightArrowIcon />} onClick={handleNext}>
+            Save & Next
+          </CustomInputButton>
+            }
           </div>
         </div>
       </div>

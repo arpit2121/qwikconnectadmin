@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import CommonTextInput from "../components/textfield/CommonTextInput";
 import PasswordIcon from "../components/icons/PasswordIcon";
 import { useVerifyPasswordMutation } from "../services/auth";
-import OpenEyeIcon from '../components/icons/OpenEyeIcon';
+import OpenEyeIcon from "../components/icons/OpenEyeIcon";
 import { Body3 } from "../components/typography/Fields";
 
 /*
@@ -32,7 +32,7 @@ const Password = () => {
   };
 
   const handleClick = () => {
-    console.log(state.goTO)
+    console.log(state.goTO);
     // verifyPassword(pass);
     if (false) {
       //name have something???then navigate to dashbaord page else navigate to onBoard page
@@ -60,11 +60,12 @@ const Password = () => {
   return (
     <div
       style={{
-        width: "100%",
+        // width: "100%",
+        marginTop:'2rem',
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        gap:'3rem'
+        gap: "3rem",
       }}
     >
       <div
@@ -78,7 +79,7 @@ const Password = () => {
         <CustomAllTypography
           variant={"h1"}
           // name={newUser ? "Set Password" : "Welcome Back!"}
-          name= {state.header}
+          name={state.header}
         />
         <CustomAllTypography
           // name={
@@ -86,11 +87,11 @@ const Password = () => {
           //     ? "for youremail@example.com"
           //     : "Enter your password for youremail@example.com"
           // }
-          name= {state.belowHeader}
+          name={state.belowHeader}
           variant={"h5"}
         />
       </div>
-      <div >
+      <div>
         {/* <CustomPassword title={'Enter Password'} data={pass} setData={setPass}/> */}
         <CommonTextInput
           value={pass}
@@ -100,7 +101,7 @@ const Password = () => {
           searchInput={false}
           type1={type ? "password" : "text"}
           onClick={changeType}
-          endIcon={type ? <PasswordIcon /> : <OpenEyeIcon/>}
+          endIcon={type ? <PasswordIcon /> : <OpenEyeIcon />}
         />
         <div
           style={{
@@ -110,7 +111,7 @@ const Password = () => {
           }}
         >
           <CustomInputButton variant="text" onClick={forgetPassword}>
-            {state.header ==='Set Password' ? "" : "Forgot Password?"}
+            {state.header === "Set Password" ? "" : "Forgot Password?"}
           </CustomInputButton>
         </div>
       </div>
@@ -124,13 +125,23 @@ const Password = () => {
         >
           {state.button}
         </CustomInputButton>
-        {
-          !state.newUser
-          ?
-          <div style={{marginTop: '1.38rem',display:'flex',justifyContent:'center',alignItems:'center',width:'100%',gap:'0.4rem'}}>By Continuing this I agree to the <Body3 color={"#605DEC"}>Terms & Conditions</Body3> and <Body3 color={"#605DEC"}>Privacy Policy</Body3></div>
-          :
+        {!state.newUser ? (
+          <div
+            style={{
+              marginTop: "1.38rem",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              gap: "0.4rem",
+            }}
+          >
+            By Continuing this I agree to the Terms & Conditions and Privacy
+            Policy
+          </div>
+        ) : (
           ""
-        }
+        )}
       </div>
     </div>
   );

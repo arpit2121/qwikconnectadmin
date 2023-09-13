@@ -19,7 +19,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
     border: "none",
+    position: "relative",
   },
+  //  width: "150px"
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -41,6 +43,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
+const ReviewButtonWrapper = styled("div")({
+  position: "absolute", // Position the button absolutely within the cell
+  top: "50%", // Center vertically
+  left: "30%", // Center horizontally
+  transform: "translate(-50%, -50%)", // Center both horizontally and vertically
+});
+
 export default function CustomizedTables({ data }) {
   const navigate = useNavigate();
   const [hoveredRow, setHoveredRow] = React.useState(null);
@@ -58,7 +67,7 @@ export default function CustomizedTables({ data }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row,index) => (
+          {data.map((row, index) => (
             <StyledTableRow
               key={row.name}
               onClick={() => navigate("/candidatereview")}
@@ -83,8 +92,15 @@ export default function CustomizedTables({ data }) {
               </StyledTableCell>
               <StyledTableCell align="left">{row.time}</StyledTableCell>
               <StyledTableCell align="left">
-              {hoveredRow === index ? <CustomInputButton variant="text">Review</CustomInputButton> : ""}
-            </StyledTableCell>
+                {hoveredRow === index ? (
+                  <ReviewButtonWrapper>
+                    <CustomInputButton variant="text">Review</CustomInputButton>
+                    {/* Review */}
+                  </ReviewButtonWrapper>
+                ) : (
+                  ""
+                )}
+              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

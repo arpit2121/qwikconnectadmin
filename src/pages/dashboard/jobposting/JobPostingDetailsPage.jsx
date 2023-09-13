@@ -67,6 +67,7 @@ const data = [
 
 const JobPostingDetailsPage = () => {
   const responsive = useResponsiveStyles();
+  const navigate = useNavigate()
   
   const randomColor = generateRandomColor();
   console.log(randomColor)
@@ -102,7 +103,7 @@ const JobPostingDetailsPage = () => {
               <AiOutlineArrowLeft style={{ fontSize: "30px" }} />
             </div>
             <div style={{ paddingRight: "1.25rem" }}>
-              <CustomInputButton size="small" variant="outlined">
+              <CustomInputButton size="small" variant="outlined" onClick={()=>navigate('')}>
                 Preview
               </CustomInputButton>
             </div>
@@ -186,13 +187,14 @@ const JobPostingDetailsPage = () => {
                     size="small"
                     variant="outlined"
                     width={responsive.isMobile ? "100%" : ""}
+                    onClick={()=>navigate('/jobposting/basicDaetails')}
                   >
                     Edit
                   </CustomInputButton>
                   {responsive.isMobile ? (
                     ""
                   ) : (
-                    <CustomInputButton size="small" variant="outlined">
+                    <CustomInputButton size="small" variant="outlined" onClick={()=>navigate('/jobposting/basicDaetails')}>
                       Preview
                     </CustomInputButton>
                   )}
@@ -201,6 +203,7 @@ const JobPostingDetailsPage = () => {
                     variant="outlined"
                     width={responsive.isMobile ? "100%" : ""}
                     sx={{ borderColor: "#F93232", color: "#F93232" }}
+                    onClick={()=>navigate('')}
                   >
                     Deactive
                   </CustomInputButton>

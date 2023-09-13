@@ -25,7 +25,10 @@ const OtpVerification = () => {
   };
 
   return (
-    <div style={{ width: "100%", height: "100%",paddingLeft:'0.5rem' }}>
+    <div style={{ 
+      // width: "100%", 
+    height: "100%"
+    ,marginTop:'2rem' }}>
       <div style={{ marginTop: "2rem" }}>
         <CustomAllTypography
           variant={"h1"}

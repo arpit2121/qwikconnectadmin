@@ -4,13 +4,19 @@ import Toggle from '../../../components/selectedcontrols/Toggle'
 import useResponsiveStyles from '../../../utils/MediaQuery'
 import { useState } from 'react'
 import { CustomInputButton } from '../../../components/button/CustomButoon'
-import { Body3 } from '../../../components/typography/Fields'
 import CopyIcon from '../../../components/icons/CopyIcon'
 import CustomDropzone from '../../../components/dropzone/CustomDropzone'
+import { useNavigate } from 'react-router-dom'
 
 const JobPostingStepFourA = () => {
   const responsive = useResponsiveStyles();
   const [isToggle, setIsToggle] = useState(false)
+  const [publicUrl, setPulicUrl] = useState('https://qwickconnect.io/interview/JobPostTitle/dateofexpire')
+  const handleClick = () =>{
+    // console.log("hii")
+    navigator.clipboard.writeText(publicUrl)
+  }
+  const navigate = useNavigate();
   return (
     <div style={{padding:responsive.isMobile?'0 1rem':''}}>
      <div>
@@ -30,7 +36,7 @@ const JobPostingStepFourA = () => {
           </div>
       <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
         <div style={{padding:'0.75rem 1.5rem'}}>
-          <CustomInputButton size='small' variant='text'>Edit Earlier Template</CustomInputButton>
+          <CustomInputButton size='small' variant='text' onClick={()=>navigate('/invite')}>Edit Earlier Template</CustomInputButton>
         </div>
         Downlaod sample csv
       </div>
@@ -45,8 +51,8 @@ const JobPostingStepFourA = () => {
         <CustomAllTypography name="Public link"/>
       </div>
       <div style={{marginTop:'0.56rem',padding:'1.5rem',border: '2px dashed #C1C1C1', display:'flex',justifyContent:'center',alignItems:'center',gap:'1rem'}}>
-          url will come here
-          <CopyIcon/>
+          {publicUrl}
+          <CopyIcon onClick={handleClick}/> 
       </div>
      </div>
     </div>

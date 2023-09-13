@@ -7,11 +7,11 @@ import commonReducer from './slice/common.slice'
 
 const store = configureStore({
     reducer: {
-        // [adminsApi.reducerPath]: adminsApi.reducer,
+        [adminsApi.reducerPath]: adminsApi.reducer,
         [authApi.reducerPath]: authApi.reducer,
         common:commonReducer
     },
-    middleware: (gDM) => gDM().concat(authApi.middleware)
+    middleware: (gDM) => gDM().concat(authApi.middleware,adminsApi.middleware)
 });
 
 

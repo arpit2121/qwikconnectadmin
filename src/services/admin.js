@@ -1,26 +1,32 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 
+
+// http://localhost:4546/admin-apis/v1/admin/on-board
 export const adminsApi = createApi({
     reducerPath: 'adminsApi',//unique key wee will access the data by this name it will store all data as cache
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://loclhost:3001/',
+        baseUrl: 'http://localhost:4546/admin-apis/v1/admin/',
     }),
-    tagTypes: ["Student","Teacher"],
+    tagTypes: ["Student","Teacher","Admin"],
     //endpoint are hit point
     endpoints: (builder)=> ({
         getStudents: builder.query({
             query: ()=> 'students',
             providesTags: ["Student"],
         }),
+        getAdminInfo: builder.query({
+            query: (id)=> `profile/${id}`,
+            // providesTags: ["Admin"],
+        }),
         getStudentsById: builder.query({
             query: (id)=> `students/${id}`,
             //template litteral
         }),
-        addStudent: builder.mutation({
-            query: (student) => ({
-                url: 'students',
+        addAdmin: builder.mutation({
+            query: (admin) => ({
+                url: 'on-board',
                 method: "POST",
-                body: student,
+                body: admin,
             }),
             invalidatesTags: ["Student"],
         }),
@@ -36,7 +42,7 @@ export const adminsApi = createApi({
 })
 
 
-export const {useGetStudentsQuery, useGetStudentsByIdQuery, useAddStudentMutation, useUpdateStudentMutation} = adminsApi;
+export const {useGetStudentsQuery, useGetStudentsByIdQuery, useAddAdminMutation, useUpdateStudentMutation,useGetAdminInfoQuery} = adminsApi;
 
 //fetchBaseQuery - similar to axios
 //once i fetch the data the it stored as cache after that i you want same data then you can use it bcoz it's in inside a reducer

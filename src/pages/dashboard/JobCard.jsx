@@ -9,13 +9,29 @@ import { Body3 } from "../../components/typography/Fields";
 const useStyles = makeStyles({
   card: {
     "&:hover": {
-      // border: "1px solid #605DEC",
-      boxShadow:
-        " 1px 2px 3px rgba(0, 0, 0, 0.05) inset, 0px 0px 8px #605DEC",
-      // background:
-      //   "radial-gradient(circle, rgba(230,129,255,0.1) 0%, rgba(61,58,206,0.1) 100%)",
+      background: "linear-gradient(180deg, rgba(96, 93, 236, 0.20) 0%, rgba(255, 255, 255, 0.20) 100%), #FFF",
+      "& .trash-icon": {
+        visibility: "visible",
+        // backgroundColor:'red'
+      },
+    },
+    "& .trash-icon": {
+      position:'relative',
+      // backgroundColor: "blue", // Apply a different background color when not hovered
+      visibility: "hidden", // You can also control the default display here if needed
     },
   },
+  // trashIcon: {
+  //   display: "none",
+  //   position: "absolute",
+  //   top: "0.5rem",
+  //   right: "0.5rem",
+  //   cursor: "pointer",
+  //   zIndex: 1,
+  //   "&:hover": {
+  //     display: "block",
+  //   }
+  // },
 });
 const JobCard = () => {
   const classes = useStyles();
@@ -28,7 +44,8 @@ const JobCard = () => {
         padding: "1rem",
         borderRadius: "1.25rem",
         border: "1px solid transparent",
-        boxShadow: "0px 8px 16px 0px rgba(142, 141, 208, 0.12)"
+        boxShadow: "0px 8px 16px 0px rgba(142, 141, 208, 0.12)",
+        
       }}
       onClick={() => navigate("/jobpostingdetailspage")}
     >
@@ -58,7 +75,7 @@ const JobCard = () => {
           color={"#36BF76"}
           textcolor={"#36BF76"}
         />
-        <TrashIcon />
+         <TrashIcon className={"trash-icon"}/> 
       </div>
     </CustomCard>
   );

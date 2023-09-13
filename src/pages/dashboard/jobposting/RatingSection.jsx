@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import RatingParameter from "../../../components/admin/RatingParameter";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import useResponsiveStyles from "../../../utils/MediaQuery";
@@ -9,6 +9,7 @@ import { CustomInputButton } from "../../../components/button/CustomButoon";
 
 const RatingSection = () => {
   const responsive = useResponsiveStyles();
+  const [state, setState] = useState(true);
   return (
     <div
       style={{
@@ -36,12 +37,12 @@ const RatingSection = () => {
           gap: "0.8rem",
         }}
       >
-        {<ThumbsDownIcon/> || <ThumbsIcon/>}
+        {state ? <ThumbsIcon/> : <ThumbsDownIcon/>}
         <CustomAllTypography
-          name={"Rejected"}
+          name={state ? "Shortlisted" :"Rejected"}
           sx={{ fontSize: "1.125rem !important" }}
           variant={"h4"}
-          textcolor={"#F93232"}
+          textcolor={state ? "#A5F" :"#F93232"}
         />
       </div>
       <div
