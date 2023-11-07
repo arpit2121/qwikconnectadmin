@@ -20,9 +20,7 @@ import SearchIcon from "../icons/SearchIcon";
 import CountryList from "country-list-with-dial-code-and-flag";
 import { darkspacetheme } from "../../theme/theme";
 import useResponsiveStyles from "../../utils/MediaQuery";
-import { message } from "antd";
 import { useEffect } from "react";
-
 const CustomSelect = styled(Select)(({ theme }) => ({
   width: "100%",
   height: "2.5rem",
