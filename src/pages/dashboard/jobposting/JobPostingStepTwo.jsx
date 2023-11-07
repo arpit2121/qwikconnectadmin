@@ -13,109 +13,162 @@ import AddIcon from "../../../components/icons/AddIcon";
 import DbIcon from "../../../components/icons/DbIcon";
 import QuestionCard from "../../../components/admin/QuestionCard";
 import Notification from "../../../components/notification/Notification";
-import { useEffect } from "react";
-import { IconButton } from "@mui/material";
 import CustomTooltip from "../../../components/tooltip/CustomTooltip";
 import RatingParameter from "../../../components/admin/RatingParameter";
 import { current } from "@reduxjs/toolkit";
+import SaveIcon from "../../../components/icons/InfoIcon";
+import { useDispatch, useSelector } from "react-redux";
+import { setParameter, setQuestions, setMinimumPassingParameter, setDisplayQuestions, updateQuestion } from "../../../slice/job.slice";
+import { useAddNewQuestionMutation } from "../../../services/job";
+import FormData from "form-data";
 
 const JobPostingStepTwo = () => {
   const responsive = useResponsiveStyles();
-  const [ratingParameter, setRatingParameter] = useState([
-    "Concentration",
-    "Flexible",
-    "Competency",
-    "Skills",
-    "Aptitude",
-  ]);
+  const dispatch = useDispatch();
 
-  // const []
+  // const { ratingParameters } = useSelector(
+  //   (state) => state.job.question_setup
+  // );
 
-  // const [parameterOption, setParameterOption] = useState([]);
-  // const [questionOption, setSelectQuestionOption] = useState([]);
+  const [addNewQuestion] = useAddNewQuestionMutation();
 
-  const [questionSections, setQuestionSections] = React.useState([1]);
 
-  const [questions, setQuestions] = useState([
-    {
-      question_title: "",
-      questionVideo: "",
-      isMandatory: "",
-      retakes: "",
-      thinking_time: "",
-      time_to_answer: "",
-    },
-  ]);
+  const { questionsArray,passingPoint,display_questions, ratingParameters } = useSelector((state) => state.job.question_setup);
+
+  // Step 1: Create an array of options
+  const options = ratingParameters.map((item, index) => index + 1);
+
+  // const [questionSections, setQuestionSections] = React.useState([1]);
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [editedData, setEditedData] = useState("Parameter");
+
+
+  console.log("questionsArrayminimum_passing_parameter,display_questions", questionsArray,display_questions);
+
+  const questions_option = questionsArray.map((value, index) => index + 1);
+
+  const handleSave = (index) => {
+    // Perform the save action, e.g., update the data in your state or API
+    // After saving, clear the editing state
+    console.log("saved called");
+    const updateRatingParmeters = [...ratingParameters];
+    updateRatingParmeters[editingIndex] = editedData;
+    dispatch(setParameter(updateRatingParmeters));
+    setEditingIndex(null);
+  };
 
   //save reference for dragItem and dragOverItem
   const dragItem = useRef(null);
   const dragOverItem = useRef(null);
 
+  const handleAddQuestion = async () => {
+    // const newQuestionNumber = questionSections.length + 1;
+    // setQuestionSections([...questionSections, newQuestionNumber]);
+    // if (questionsArray.length > 0) {
+    // const formData = new FormData();
+    // const { video_key, ...jsonData } = questionsArray[0];
+    // console.log("videp_key", formData,jsonData, video_key)
+    // // formData.append("file", video_key);
+    // // Append the remaining properties as JSON data
+    // formData.append('file',video_key)
+    // formData.append('json_data', JSON.stringify(jsonData)); 
+    // console.log("videp_key", formData)
+    // }
+    const { video_key, ...jsonData } = questionsArray[questionsArray.length - 1];
+    const formData = new FormData();
+    try {
+      formData.append('file', video_key);
+      formData.append('json_data', JSON.stringify(jsonData));
+      // ...
+    } catch (error) {
+      console.error("Error creating FormData:", error);
+    }
+    // data.append('file', new Blob([files[0].file]));
+    console.log("file in FormData:", formData.get('file'));
+    console.log("json_data in FormData:", formData.get('json_data'));
 
-  const handleAddQuestion = () => {
-    const newQuestionNumber = questionSections.length + 1;
-    setQuestionSections([...questionSections, newQuestionNumber]);
+    const jobPostId= "651154effdc5ba161f0b15b0";
+    const adminId =  "651137f89cbfd5858dc871a5"
+
+    await addNewQuestion({formData:formData, adminId: adminId, jobPostId:jobPostId}).then((response) => {
+      console.log("response data", response); 
+      if (response.data) {
+       console.log("hello")
+      }
+    });
+
+    dispatch(
+      setQuestions([
+        ...questionsArray,
+        {
+        questionNo: questionsArray.length+1,
+        questionTitle: "Question Title here",
+        isMandatory: false,
+        retakes: "",
+        thinkingTime: "",
+        timeToAnswer: "",
+        questionVideoKey: "blob file",
+        },
+      ])
+    );
   };
 
-  const onEdit = () => {
-    // console.log("edit")
+  const handleEdit = (index) => {
+    setEditingIndex(index);
   };
+
+  const handleInputChange = (name, value, index) => {
+    console.log("porinitng value", name, value, index);
+    dispatch(updateQuestion({ name, value, index }));
+  };
+
+  const minimumPassingParameter = (name, value, index) => {
+    dispatch(setMinimumPassingParameter(value));
+  }
+
+  const setDisplayQuestion = (name, value, index) => {
+    dispatch(setDisplayQuestions(value));
+  }
+
 
   const onDelete = (indexToDelete) => {
     console.log("delete", indexToDelete);
-    const newData = ratingParameter.filter(
+    const newData = ratingParameters.filter(
       (item, index) => index !== indexToDelete
     );
-    setRatingParameter(newData);
+    // setRatingParameter(newData);
+    dispatch(setParameter(newData));
   };
 
-  // useEffect(()=>{
-  //   console.log("ratingParameter.length, questionSections.length",ratingParameter.length, questionSections.length)
-  //   // setParameterOption(Array.from({ length:  parameterOption.length}, (_, index) => index + 1));
-  //   // setSelectQuestionOption(Array.from({ length:  questionSections.length}, (_, index) => index + 1));
-  //   console.log("arameterOption",parameterOption,",questionOption",questionOption)
-  // },[ratingParameter,questionSections,parameterOption,questionOption])
-
-  //handel drag on start drag function
-
-  //handle drag start
-  const onDragStart = (e, index) => {
-    console.log("Drag started", index);
-  };
-
-  //handle drag enter
-  const onDragEnter = (e, index) => {
-    console.log("Drag Enter", index);
-  };
-
-  //handle drag hover
-  const onDragEnd = (e) => {
-    console.log("Drag End", e);
+  const deleteQuestion = (deleteIndexQuestion) => {
+    // const deletedQuestion = questionsArray.filter((item, index) => index!=deleteIndexQuestion)
+    // dispatch() --> dipsatch the particular question object
+    const updatedQuestions = [...questionsArray];
+    updatedQuestions.splice(deleteIndexQuestion, 1);
+    dispatch(setQuestions(updatedQuestions));
   };
 
   //handeol sorting
   const handelSort = () => {
-    console.log("hii")
+    console.log("hii");
     //duplicate item
-    let _questions = [...questionSections];
-    console.log("_questions",_questions)
-    
+    let _questions = [...questionsArray];
+    console.log("_questions", _questions);
+
     //remove and save the dragged item content
-    const dragItemContent = _questions.splice(dragItem/current,1)[0]
-    console.log("dragItemContent",dragItemContent)
+    const dragItemContent = _questions.splice(dragItem / current, 1)[0];
+    console.log("dragItemContent", dragItemContent);
 
     //switch the position
-    _questions.splice(dragOverItem.current, 0, dragItemContent)
+    _questions.splice(dragOverItem.current, 0, dragItemContent);
 
     //reset the position of ref
-    dragItem.current = null
-    dragOverItem.current = null
-
+    dragItem.current = null;
+    dragOverItem.current = null;
     //update the actual array
-    setQuestionSections(_questions)
-  }
+    dispatch(setQuestions(_questions));
+  };
 
-  console.log("questionSections",questionSections)
   return (
     <div
       style={{
@@ -182,6 +235,11 @@ const JobPostingStepTwo = () => {
                 borderStyle={{ borderRadius: "0.25rem" }}
                 type="dropdown"
                 placeholder="All"
+                options={options}
+                value={passingPoint}
+                handleDropChange={minimumPassingParameter}
+                index={""}
+                nameCom={""}
               />
             </div>
           </div>
@@ -193,37 +251,51 @@ const JobPostingStepTwo = () => {
               }}
             >
               <div style={{}}>
-                {ratingParameter.map((data, index) => {
-                  return (
-                    <div style={{ padding: "1rem" }}>
+                {ratingParameters.map((data, index) => (
+                  <div style={{ padding: "1rem" }} key={index}>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <div style={{ width: "80%" }}>
+                        {editingIndex === index ? (
+                          // Render the input field for editing
+                          <input
+                            type="text"
+                            value={editedData}
+                            onChange={(e) => setEditedData(e.target.value)}
+                          />
+                        ) : (
+                          // Render the data when not editing
+                          <CustomAllTypography name={data} variant={"body2"} />
+                        )}
+                      </div>
                       <div
                         style={{
                           display: "flex",
-                          justifyContent: "space-between",
+                          gap: "2.92rem",
                         }}
                       >
-                        <div style={{ width: "80%" }}>
-                          <CustomAllTypography name={data} variant={"body2"} />
-                        </div>
-                        <div
-                          style={{
-                            // width: "20%",
-                            display: "flex",
-                            // justifyContent: "space-between",
-                            gap: responsive.isMobile ? "2.3rem" : "2.92rem",
-                          }}
-                        >
-                          <div onClick={() => onEdit(index)}>
+                        {editingIndex === index ? (
+                          // Show the "Save" icon when editing
+                          <div onClick={() => handleSave(index)}>
+                            <SaveIcon />
+                          </div>
+                        ) : (
+                          // Show the "Edit" icon when not editing
+                          <div onClick={() => handleEdit(index, data)}>
                             <EditIcon />
                           </div>
-                          <div onClick={() => onDelete(index)}>
-                            <DeleteIcon />
-                          </div>
+                        )}
+                        <div onClick={() => onDelete(index)}>
+                          <DeleteIcon />
                         </div>
                       </div>
                     </div>
-                  );
-                })}
+                  </div>
+                ))}
               </div>
             </CustomCard>
           </div>
@@ -236,7 +308,6 @@ const JobPostingStepTwo = () => {
               alignItems: "center",
             }}
           >
-            {/* <Body3>Sample Ratings</Body3> */}
             <CustomTooltip
               icon={<Body3>Sample Ratings</Body3>}
               message={<RatingParameter />}
@@ -246,7 +317,7 @@ const JobPostingStepTwo = () => {
               size="medium"
               startIcon={<AddIcon />}
               onClick={() => {
-                setRatingParameter([...ratingParameter, "Parameter"]);
+                dispatch(setParameter([...ratingParameters, editedData]));
               }}
             >
               Add Parameter
@@ -272,7 +343,10 @@ const JobPostingStepTwo = () => {
                 }}
               >
                 <DbIcon />
-                <CustomAllTypography name={"10"} variant={"h3"} />
+                <CustomAllTypography
+                  name={questionsArray.length}
+                  variant={"h3"}
+                />
                 <div>
                   <Body3>Questions</Body3>
                   <Body3>Added</Body3>
@@ -306,14 +380,19 @@ const JobPostingStepTwo = () => {
                   style={{ margin: "1.5rem 0rem" }}
                   borderStyle={{ borderRadius: "0.25rem" }}
                   type="dropdown"
-                  placeholder="None"
+                  placeholder="1"
+                  options={questions_option}
+                  value={display_questions}
+                  handleDropChange={setDisplayQuestion}
+                  index={""}
+                  nameCom={""}
                 />
               </div>
             </div>
           </div>
         </div>
       </div>
-      {questionSections.map((questionNumber, index) => {
+      {questionsArray.map((questions, index) => {
         return (
           <div
             style={{
@@ -330,14 +409,14 @@ const JobPostingStepTwo = () => {
               }}
             >
               <CustomAllTypography
-                name={`Q${index+1}`}
+                name={`Q${index + 1}`}
                 variant={"h4"}
                 textcolor={"#C9C8D3"}
               />
             </div>
             <div style={{ width: "100%" }}>
               <div
-              key={index}
+                key={index}
                 style={{
                   paddingLeft: responsive.isMobile ? "1rem" : "",
                   paddingRight: responsive.isMobile ? "1rem" : "",
@@ -345,16 +424,18 @@ const JobPostingStepTwo = () => {
                   display: "flex",
                   flexDirection: "column",
                   rowGap: "3rem",
-                  // backgroundColor:'red'
                 }}
                 draggable
-                // onDragStart={(e) => onDragStart(e, index)}
-                // onDragEnter={(e) => onDragEnter(e, index)}
-                onDragStart={(e)=> dragItem.current=index}
-                onDragEnter={(e)=>dragOverItem.current=index}
+                onDragStart={(e) => (dragItem.current = index)}
+                onDragEnter={(e) => (dragOverItem.current = index)}
                 onDragEnd={handelSort}
               >
-                <QuestionCard index={index}/>
+                <QuestionCard
+                  index={index}
+                  questions={questions}
+                  deleteQuestion={deleteQuestion}
+                  handleChange={handleInputChange}
+                />
               </div>
             </div>
           </div>

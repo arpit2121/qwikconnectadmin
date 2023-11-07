@@ -11,6 +11,10 @@ import UploadIcon from "../icons/UploadIcon";
 import SuccessIcon from "../icons/SuccessIcon";
 import CloseIcon from "../icons/CloseIcon";
 import PdfImage from "../../assets/pdfImage.jpg";
+import { useDispatch } from "react-redux";
+import { setFilesData } from "../../slice/common.slice";
+
+
 
 const CustomSoundBar = styled(Slider)(({ theme }) => ({
   "& .MuiSlider-thumb": {
@@ -41,7 +45,10 @@ const Layout = ({
   files,
   extra: { maxFiles },
 }) => {
+
+
   console.log("files",files)
+
   return (
     <div>
       {files.length == 0 && (
@@ -65,6 +72,9 @@ const Layout = ({
     </div>
   );
 };
+
+
+
 const Preview = ({ meta, files }, ...props) => {
   const [loaded, setLoaded] = useState(0);
   const [doneLoading, setDoneLoading] = useState(false);
@@ -175,7 +185,10 @@ const Preview = ({ meta, files }, ...props) => {
     </div>
   );
 };
-const Input = ({ accept, onFiles, files, getFilesFromEvent }) => {
+
+
+
+const Input = ({ accept, onFiles, files, getFilesFromEvent, message}) => {
   const text = files.length > 0 ? "Add more files" : "Choose files";
   const responsive = useResponsiveStyles();
 
@@ -195,12 +208,13 @@ const Input = ({ accept, onFiles, files, getFilesFromEvent }) => {
       <UploadIcon />
       <div style={{ textAlign: "center", color: "#212121" }}>
         <CustomAllTypography
-          name={"Upload your resume here"}
+          // name={"Upload your resume here"}
+          name={message}
           sx={{ fontSize: "0.75rem" }}
           textcolor={"#8A8894"}
         />
         <CustomAllTypography
-          name={"PDF, Word format only, File Size: 3 MB max"}
+          name={message?message:"PDF, Word format only, File Size: 3 MB max"}
           sx={{ fontSize: "0.75rem" }}
           textcolor={"#8A8894"}
         />
@@ -219,8 +233,13 @@ const Input = ({ accept, onFiles, files, getFilesFromEvent }) => {
     </label>
   );
 };
-const CustomLayout = () => {
+
+const CustomLayout = ({ acceptedTypes,message,setUploadedFiles }) => {
+  console.log("message",message)
+
   const getUploadParams = () => ({ url: "https://httpbin.org/post" });
+
+
   const getFilesFromEvent = (e) => {
     return new Promise((resolve) => {
       getDroppedOrSelectedFiles(e).then((chosenFiles) => {
@@ -228,6 +247,17 @@ const CustomLayout = () => {
       });
     });
   };
+
+  const handleChangeStatus = ({ meta, file }, status) => {
+     console.log("uploading",file,"status",status) 
+      if(status==="done"){
+        console.log("hiii")
+        setUploadedFiles(file)
+      }
+    }
+
+
+
   const handleSubmit = (files, allFiles) => {
     console.log(files.map((f) => f.meta));
     allFiles.forEach((f) => f.remove());
@@ -239,6 +269,7 @@ const CustomLayout = () => {
       LayoutComponent={Layout}
       onSubmit={handleSubmit}
       PreviewComponent={Preview}
+      onChangeStatus={handleChangeStatus}
       multiple={false}
       maxFiles={5}
       disabled={(files) =>
@@ -248,23 +279,25 @@ const CustomLayout = () => {
           )
         )
       }
-      accept=" image/*,audio/*,video/*,.pdf"
+      // accept= "image/*,audio/*,video/*,.pdf"
+      accept= {acceptedTypes[0]}
       //   accept=".pdf,.doc"
       styles={{
         dropzone: {
           border: "1px dotted black",
           minHeight: "10.62rem",
-          maxHeight: 100,
+          // maxHeight: 100,
         },
       }}
       InputComponent={Input}
       getFilesFromEvent={getFilesFromEvent}
+      // uploadedFiles={uploadedFiles}
     />
   );
 };
 
-const CustomDropzone = ({ multiple = false }) => {
-  return <CustomLayout />;
+const CustomDropzone = ({ multiple = false,acceptedTypes,name,setUploadedFiles}) => {
+  return <CustomLayout acceptedTypes={acceptedTypes} message={name} setUploadedFiles={setUploadedFiles}/>;
 };
 
 export default CustomDropzone;

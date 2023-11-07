@@ -7,6 +7,9 @@ import SystemRecommended from "../icons/SystemRecommended";
 
 const TableCard = ({image, Name, email, id, status, time,system}) => {
     const navigate = useNavigate();
+    const handleClick = () =>{
+      navigate("/candidatereview")
+    }
   return (
     <div
       style={{
@@ -19,7 +22,8 @@ const TableCard = ({image, Name, email, id, status, time,system}) => {
         paddingRight:'1rem',
         alignItems:'center'
       }}
-      onClick={()=>navigate("/candidatereview")}
+      onClick={handleClick}
+      key={id}
     >
       <div style={{display:'flex'}}>
         <div>{image}</div>

@@ -24,11 +24,13 @@ function getGreetingByTime() {
 
 
 const CommonProfile = ({
-    title=`${getGreetingByTime()}, Vaibhav`,
+    userName,
+    title=`${getGreetingByTime()}, ${userName}`,
     subtitle="Ready to hunt your next candidate? ",
-    style={}
+    style={},
 }) => {
 
+  // console.log(userName)
   const responsive = useResponsiveStyles();
   const size=responsive.isMobile?'2.4rem':'5.93rem'
 

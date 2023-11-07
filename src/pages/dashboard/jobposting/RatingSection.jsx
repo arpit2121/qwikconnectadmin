@@ -53,7 +53,7 @@ const RatingSection = () => {
           gap: "1.50rem",
         }}
       >
-        <RatingParameter />
+        <RatingParameter setState={setState}/>
       </div>
       <div style={{ marginTop: "2.50rem" }}>
         <CustomInputButton size="small" width="100%">

@@ -20,10 +20,14 @@ import LinkBar from "./LinkBar";
 import RatingSection from "./RatingSection";
 import SampleVideos from "./SampleVideos.json";
 import VideoPlayer from "./VideoPlayer";
+import { useParams } from "react-router-dom";
+import { useLazyGetCandidateDataQuery } from "../../../services/interviewee";
+
 
 const CandiatateReview = () => {
   const responsive = useResponsiveStyles();
   const [showMoreContent, setShowMoreContent] = useState(false);
+  const [pdfData, setPdfData] = useState(null);
   const handleToggleContent = () => {
     setShowMoreContent(!showMoreContent);
   };
@@ -69,6 +73,19 @@ const CandiatateReview = () => {
     display: "flex",
   };
   const dispatch = useDispatch();
+  const { intervieweeId } = useParams();
+
+  console.log("intervieweeId --> ", intervieweeId);
+  const [getCandidateData, { data: candidateData }] =
+    useLazyGetCandidateDataQuery();
+
+  useEffect(() => {
+    getCandidateData(intervieweeId, true);
+  }, []);
+
+  console.log("candidateData", candidateData);
+
+
   return (
     <CustomContainer>
       <div
@@ -112,7 +129,10 @@ const CandiatateReview = () => {
                       marginTop: !responsive.isMobile ? "2.30rem" : 0,
                     }}
                   >
-                    <CustomAllTypography name={"Danish Shah"} variant={"h3"} />
+                    <CustomAllTypography
+                      name={candidateData?.fullName}
+                      variant={"h3"}
+                    />
                   </div>
                   <div
                     style={{
@@ -130,7 +150,7 @@ const CandiatateReview = () => {
                       }}
                     >
                       <CustomAllTypography
-                        name={"email@emailexample.com"}
+                        name={candidateData?.email}
                         variant={"body2"}
                         textcolor="#212121"
                       />
@@ -138,7 +158,7 @@ const CandiatateReview = () => {
                         color={" #818181"}
                         onClick={() =>
                           navigator.clipboard.writeText(
-                            "email@emailexample.com"
+                            `${candidateData?.email}`
                           )
                         }
                       />
@@ -151,7 +171,7 @@ const CandiatateReview = () => {
                       }}
                     >
                       <CustomAllTypography
-                        name={"+91 993 000 0000"}
+                        name={`+91 ${candidateData?.phoneNumber}`}
                         variant={"body2"}
                         textcolor="#212121"
                       />
@@ -209,15 +229,15 @@ const CandiatateReview = () => {
                         }}
                       >
                         <CustomAllTypography
-                          name={"Current company: Flipmart"}
+                          name={`Current company: ${candidateData?.currentCompany}`}
                           variant={"body2"}
                         />
                         <CustomAllTypography
-                          name={"Exp.: 16 years"}
+                          name={`Exp.: ${candidateData?.experience}`}
                           variant={"body2"}
                         />
                         <CustomAllTypography
-                          name={"Profession: UI/UX Lead"}
+                          name={`Profession:${candidateData?.profession}`}
                           variant={"body2"}
                         />
                         <CustomAllTypography
@@ -293,8 +313,8 @@ const CandiatateReview = () => {
                       return (
                         <div
                           key={index}
-                          onClick={() =>
-                            dispatch(setVideoLink(data?.sources?.[0]))
+                          onClick={
+                            () => dispatch(setVideoLink(data?.sources?.[0])) //here we will set the video link
                           }
                           style={{
                             height: responsive.isMobile

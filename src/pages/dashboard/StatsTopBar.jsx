@@ -7,8 +7,10 @@ import RejectedIcon from "../../components/icons/RejectedIcon";
 import { darkspacetheme } from "../../theme/theme";
 import UserPlusIcon from "../../components/icons/UserPlusIcon";
 
-const StatsTopBar = ({ application = 23, shortlisted = 2, rejected }) => {
+const StatsTopBar = ({ application, shortlisted, rejected }) => {
   const responsive = useResponsiveStyles();
+
+  console.log("rejected",rejected)
 
   const size = responsive?.isMobile ? 24 : 32;
   const outerDiv = {
@@ -74,7 +76,8 @@ const StatsTopBar = ({ application = 23, shortlisted = 2, rejected }) => {
         </div>
         <CustomAllTypography name={"Shortlisted"} variant={"body1"} />
       </div>
-    {rejected &&  <div style={outerDiv}>
+    {rejected==0 || rejected ?
+    <div style={outerDiv}>
         <div style={innerDiv}>
           <RejectedIcon
             height={size}
@@ -88,7 +91,7 @@ const StatsTopBar = ({ application = 23, shortlisted = 2, rejected }) => {
           />
         </div>
         <CustomAllTypography name={"Rejected"} variant={"body1"} />
-      </div>}
+      </div>:""}
     </div>
   );
 };

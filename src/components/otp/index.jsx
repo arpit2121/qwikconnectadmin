@@ -10,6 +10,8 @@ const OTPInputComponent = (props) => {
     onChangeOTP,
     inputClassName,
     inputStyle,
+    message,
+    status,
     ...rest
   } = props;
 
@@ -17,7 +19,7 @@ const OTPInputComponent = (props) => {
 const [activeInput, setActiveInput] = useState(0);
 const [otpValues, setOTPValues] = useState(Array(4).fill(''));
 
-console.log(Array.prototype.join())
+console.log("meesage",message)
 
 console.log("otp-values",otpValues)
 // Helper to return OTP from inputs
@@ -164,12 +166,13 @@ console.log("otp-values",otpValues)
   );
 
   return (
+   <>
     <div {...rest}>
       {Array(4)
         .fill("")
         .map((_, index) => {
           return(
-            <SingleOtpInput
+              <SingleOtpInput
             key={`SingleInput-${index}`}
             type={isNumberInput ? "number" : "text"}
             focus={activeInput === index}
@@ -184,9 +187,12 @@ console.log("otp-values",otpValues)
             className={inputClassName}
             disabled={disabled}
           />
+
           )
         })}
     </div>
+    <p style={{color:'red',marginTop:'0.5rem',fontSize:'0.8rem'}}>{message}</p>
+   </>
   );
 };
 

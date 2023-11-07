@@ -2,12 +2,14 @@ import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import CustomAllTypography from "../../typography/CustomTypograpgy";
 import { CustomInputButton } from "../../button/CustomButoon";
 import StasTopbar from "../../../pages/dashboard/StatsTopBar";
 import Logo from "../../icons/Logo";
+import Loader from "../../loader/Loader";
+import { useAddNewJobMutation } from "../../../services/job";
 
 const Navbar = ({
   showStatsBar = false,
@@ -18,23 +20,27 @@ const Navbar = ({
   const navigate = useNavigate();
   const [isOp, setIsOp] = useState(false);
   const { pathname } = useLocation();
-  console.log(pathname);
+  const [addNewJob, {data,isLoading}] = useAddNewJobMutation();
+  const {id} = useParams();
+  
+  console.log("pathName -> . ",pathname);
+
   const titleMap = {
-    "/dashboard/home/existinguser": {
+    [`/dashboard/home/${id}`]: {
       title: "Dashboard",
       button: {
         title: "New Job",
         src: "/jobposting/basicDaetails",
       },
     },
-    "/dashboard/myJobPost": {
+    [`/dashboard/myJobPost/${id}`]: {
       title: "Job Posting",
       button: { title: "New Job", src: "/jobposting/basicDaetails" },
     },
-    "/dashboard/changepass": { title: "Change Password", button: null },
-    "/dashboard/myprofile": { title: "My Profile", button: null },
-    "/dashboard/myPlans": { title: "Plan & Billings ", button: null },
-    "/jobposting/PublicLink": {
+    [`/dashboard/changepass/${id}`]: { title: "Change Password", button: null },
+    [`/dashboard/myprofile/${id}`]: { title: "My Profile", button: null },
+    [`/dashboard/myPlans/${id}`]: { title: "Plan & Billings ", button: null },
+    "/jobposting/publish-link": {
       title: "Job Posting ",
       button: {
         title: "Preview",
@@ -45,9 +51,23 @@ const Navbar = ({
   };
 
   const onIconClick = () => {
-    navigate("/dashboard/home");
+    navigate(`/dashboard/home/${id}`);
   };
+
+  const handelClick = async () => {
+    console.log("hello i'm here",pathname)
+    if(pathname===`/dashboard/home/${id}`){
+      await addNewJob(id).then((response) => {
+        console.log("response data", response.data);
+        if (response.data) {
+          navigate("/jobposting/basicDaetails");
+        }
+      });
+    }
+  }
+
   return (
+    <>
     <div
       style={{
         display: "flex",
@@ -95,8 +115,10 @@ const Navbar = ({
                   size="small"
                   responsive
                   component={Link}
-                  to={titleMap[pathname]?.button?.src}
-                  endIcon={<ArrowForwardIcon />}
+                  // to={titleMap[pathname]?.button?.src}
+                  endIcon={<ArrowForwardIcon />
+                }
+                onClick={handelClick}
                 >
                   {titleMap[pathname]?.button?.title}
                 </CustomInputButton>
@@ -105,6 +127,8 @@ const Navbar = ({
         </div>
       </div>
     </div>
+    <Loader/>
+    </>
   );
 };
 

@@ -19,7 +19,8 @@ const useStyles = makeStyles({
   },
 });
 
-const SettingMenu = ({ open, setOpen }) => {
+const SettingMenu = ({ open, setOpen, id }) => {
+  console.log("hdjahdhjaj", id)
   const settingOptions = [
     {
       icon: <ProfileIcon />,
@@ -64,7 +65,7 @@ const SettingMenu = ({ open, setOpen }) => {
   const openSetting = Boolean(open);
   const handleMenuItemClick = (event, index,url) => {
     setSelectedIndex(index);
-    navigate(url)
+    navigate(url+`/${id}`)
     setOpen(false);
   };
 

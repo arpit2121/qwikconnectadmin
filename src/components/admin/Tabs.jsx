@@ -4,7 +4,7 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import CustomAllTypography from "../typography/CustomTypograpgy";
 import { styled } from "@mui/material";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useResponsiveStyles from "../../utils/MediaQuery";
 import JobPostingStepTwo from "../../pages/dashboard/jobposting/JobPostingStepTwo";
 import JobPostingStepThree from "../../pages/dashboard/jobposting/JobPostingStepThree";
@@ -18,6 +18,11 @@ import LinkBar from "../../pages/dashboard/jobposting/LinkBar";
 import { useDispatch } from "react-redux";
 import { setSelectedJobPostingPage } from "../../slice/common.slice";
 import { useSelector } from "react-redux";
+import {
+  usePublishLinkMutation,
+  useUpdateBasicDetailsMutation,
+  useUpdateParametersMutation,
+} from "../../services/job";
 
 const StyledTab = styled(Tab)({
   "&.Mui-selected": {
@@ -42,42 +47,133 @@ const StyleTabPanel = styled(TabPanel)({
 });
 
 const CustomTabs = () => {
-  const counter = useSelector(state=>state.common.selectedJobPostingPage)
-  console.log("counter",counter.selectedJobPostingPage)
+  const urls = [
+    "/jobposting/basic-details",
+    "/jobposting/question-setup",
+    "/jobposting/branding",
+    "/jobposting/publish-link",
+  ];
+  const counter = useSelector((state) => state.common.selectedJobPostingPage);
   const [value, setValue] = React.useState("1");
+  let value1 = urls[parseInt(value) - 1];
   const responsive = useResponsiveStyles();
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
+
+  const { basic_details, branding, publish_link, question_setup } = useSelector(
+    (state) => state.job
+  );
+
+  const [updateBasicDetails, { data: basicDetails, isLoading }] =
+    useUpdateBasicDetailsMutation();
+  const [updateParameters] = useUpdateParametersMutation();
+  const [publishLink] = usePublishLinkMutation();
+
+  console.log("path", pathname);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
     dispatch(setSelectedJobPostingPage(newValue));
   };
 
-  React.useEffect(() => {
-    console.log("value",value)
-    console.log("hahaha",counter)
-  }, [value,counter])
-  
-
   const navigate = useNavigate();
   const goBack = () => {
     navigate("/dashboard/home/existinguser");
   };
 
-  const handleNext = () => {
+  // const handleNext = () => {
+  //   const nextValue = parseInt(value) + 1;
+  //   console.log("nextValue --- > ",nextValue, pathname)
+  //   if (nextValue <= 4) {
+  //     setValue(nextValue.toString());
+  //     dispatch(setSelectedJobPostingPage(nextValue));
+  //   }
+  // };
+
+  //handle next function for handeling the api
+
+  const handleNext = async () => {
     const nextValue = parseInt(value) + 1;
+    console.log("nextValue --- > ", nextValue, pathname);
+
     if (nextValue <= 4) {
-      setValue(nextValue.toString());
+      // setValue(nextValue.toString());
+
+      // Check the current pathname and make API calls accordingly
+      switch (value) {
+        case "1":
+          console.log("hoo1", basic_details);
+          const jobPostId = "651154effdc5ba161f0b15b0";
+          await updateBasicDetails({ basic_details, jobPostId }).then(
+            (response) => {
+              console.log("response data", response);
+              if (response.data) {
+                setValue(nextValue.toString());
+                dispatch(setSelectedJobPostingPage(nextValue));
+              }
+            }
+          );
+          // setValue(nextValue.toString());
+          break;
+        case "2":
+          console.log("hoo2");
+          const jobPostId1 = "651154effdc5ba161f0b15b0";
+          const adminId1 = "651137f89cbfd5858dc871a5";
+          await updateParameters({
+            json_data: question_setup,
+            adminId: adminId1,
+            jobPostId: jobPostId1,
+          }).then((response) => {
+            console.log("response data", response);
+            if (response.data) {
+              setValue(nextValue.toString());
+              dispatch(setSelectedJobPostingPage(nextValue));
+            }
+          });
+          // setValue(nextValue.toString());
+          // API call for tab 2
+          // dispatch(setSelectedJobPostingPage(nextValue));
+          // Make API call specific to tab 2
+          break;
+        case "3":
+          console.log("hoo3");
+          setValue(nextValue.toString());
+          dispatch(setSelectedJobPostingPage(nextValue));
+          // setValue(nextValue.toString());
+          // API call for tab 3
+          // dispatch(setSelectedJobPostingPage(nextValue));
+          // Make API call specific to tab 3
+          break;
+        default:
+          console.log("tabindex is not present");
+          break;
+      }
     }
-    // else{
-    //   goBack();
-    // }
+  };
+
+  const handlePublish = async () => {
+    console.log("hello");
+    const jobPostId1 = "651154effdc5ba161f0b15b0";
+    const adminId1 = "651137f89cbfd5858dc871a5";
+    await publishLink({
+      formData: "",
+      adminId: adminId1,
+      jobPostId: jobPostId1,
+    }).then((response) => {
+      console.log("response data", response);
+      if (response.data) {
+        // setValue(nextValue.toString());
+        // dispatch(setSelectedJobPostingPage(nextValue));
+        navigate("/dashboard/home/existinguser")
+      }
+    });
   };
 
   const handleBack = () => {
     const prevValue = parseInt(value) - 1;
     if (prevValue >= 1) {
       setValue(prevValue.toString());
+      dispatch(setSelectedJobPostingPage(prevValue));
     }
   };
 
@@ -121,6 +217,7 @@ const CustomTabs = () => {
             { title: "My Job Post", path: "/jobposting/basicDaetails" },
           ]}
           currentStep={value}
+          showSteps={true}
         />
       )}
 
@@ -135,7 +232,7 @@ const CustomTabs = () => {
             TabIndicatorProps={{
               style: {
                 backgroundColor: "#202020",
-                color: "red   ",
+                color: "red",
               },
             }}
           >
@@ -143,25 +240,25 @@ const CustomTabs = () => {
               label="Basic Details"
               value="1"
               component={Link}
-              to={"/jobposting/basicDaetails"}
+              to={"/jobposting/basic-details"}
             />
             <StyledTab
               label="Question Setup"
               value="2"
               component={Link}
-              to={"/jobposting/questionSetup"}
+              to={"/jobposting/question-setup"}
             />
             <StyledTab
               label="Branding"
               value="3"
               component={Link}
-              to={"/jobposting/Branding"}
+              to={"/jobposting/branding"}
             />
             <StyledTab
               label="Publish link"
               value="4"
               component={Link}
-              to={"/jobposting/PublicLink"}
+              to={"/jobposting/publish-link"}
             />
           </TabList>
         </Box>
@@ -237,7 +334,11 @@ const CustomTabs = () => {
               padding: responsive.isMobile ? "0.5rem 0.5rem" : "",
             }}
           >
-            <CustomInputButton variant="text" size="medium" onClick={()=>navigate('/dashboard/home/existinguser')}>
+            <CustomInputButton
+              variant="text"
+              size="medium"
+              onClick={() => navigate("/dashboard/home/existinguser")}
+            >
               Close
             </CustomInputButton>
             {value === "4" ? (
@@ -251,16 +352,23 @@ const CustomTabs = () => {
             ) : (
               ""
             )}
-            {
-              value === "4" ? 
-              <CustomInputButton size="medium" endIcon={<RightArrowIcon />} onClick={handleNext}>
-              Publish
-            </CustomInputButton>
-            :
-            <CustomInputButton size="medium" endIcon={<RightArrowIcon />} onClick={handleNext}>
-            Save & Next
-          </CustomInputButton>
-            }
+            {value === "4" ? (
+              <CustomInputButton
+                size="medium"
+                endIcon={<RightArrowIcon />}
+                onClick={handlePublish}
+              >
+                Publish
+              </CustomInputButton>
+            ) : (
+              <CustomInputButton
+                size="medium"
+                endIcon={<RightArrowIcon />}
+                onClick={handleNext}
+              >
+                Save & Next
+              </CustomInputButton>
+            )}
           </div>
         </div>
       </div>

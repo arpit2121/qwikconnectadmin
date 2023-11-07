@@ -9,46 +9,76 @@ import CustomAllTypography from "../components/typography/CustomTypograpgy";
 import { CustomInputButton } from "../components/button/CustomButoon";
 import CommonTextInput from "../components/textfield/CommonTextInput";
 import PhoneIcon from "../components/icons/PhoneIcon";
-import { useNavigate } from "react-router-dom";
-import { useAddAdminMutation } from "../services/admin";
+import { useLocation, useNavigate } from "react-router-dom";
+import {
+  useAddAdminMutation,
+  useLazyGetProfessionsQuery,
+} from "../services/admin";
+import { onBoardingSchema } from "../validations";
+import { useFormik } from "formik";
+import { useGetProfessionsQuery } from "../services/admin";
+import { isFulfilled } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
 
 const OnBoardingPage = () => {
   const responsive = useResponsiveStyles();
   const navigate = useNavigate();
-  const [addAdmin,{data:profileData,isLoading,isSuccess}] = useAddAdminMutation();
-  const [onBoardingDetail, setOnBoardingDetail] = useState({
-    email: "arpit.singh@gmail.com",
-    fullName: "",
-    phoneNumber: "",  
-    companyName: "",
-    profession: "",
-    profileImage: "link of profile image"
-  });
+  const dispatch = useDispatch();
+  const [isOther, setIsOther] = useState(false)
+  const [addAdmin, { data: profileData, isLoading, isSuccess }] =
+    useAddAdminMutation();
+    const { state } = useLocation();
+
+  const { data } = useGetProfessionsQuery();
+
+  // console.log(data);
+  // if(isSuccess)
+  // {
+  //   dispatch()
+  // }
+
+  const allProfessions = data
+    ?.map((categoryData) => categoryData.professions)
+    .reduce((acc, professions) => acc.concat(professions), []);
+  // console.log(allProfessions);
+
+
+
+
+  const handelOnBoard = async () => {
+    console.log(values);
+    await addAdmin(values).then((response) => {
+      console.log("response data", response.data);
+      if (response.data) {
+        navigate(`/dashboard/home/${response.data?._id}`);
+      }
+    });
+  };
   
 
-  useEffect(()=>{
-    console.log(onBoardingDetail)
-  },[onBoardingDetail])
+  const {
+    values,
+    // handleBlur,
+    handleChange,
+    // handleSubmit,
+    errors,
+    touched,
+    // isSubmitting,
+    isValid,
+    // isValidating,
+  } = useFormik({
+    initialValues: {
+      email: "vaibhavnaik12@gmail.com",
+      fullName: "",
+      phone_number: "",
+      company_name: "",
+      profession: "",
+    },
+    validationSchema: onBoardingSchema,
+    handelOnBoard,
+  });
 
-
-  const handleInputChange = (event) => {
-    console.log("hii",event);
-    const { name, value } = event.target;
-    setOnBoardingDetail((prevDetails) => ({
-      ...prevDetails,
-      [name]: value,
-    }));
-  };
-
-
-
-  const handelOnBoard = async() =>{
-  await  addAdmin(onBoardingDetail).then((response)=>{
-    console.log("--->",response.data)
-      if(response.data){ 
-        navigate(`/dashboard/home/${response.data._id}`)}
-    })
-  }
+  console.log(values)
 
   return (
     <CustomContainer>
@@ -136,40 +166,55 @@ const OnBoardingPage = () => {
                 }}
               >
                 <CommonTextInput
-                  value={onBoardingDetail.fullName}
+                  // value={onBoardingDetail.fullName}
                   title="Full Name"
                   placeholder="FirstName LastName"
                   searchInput={false}
-                  setValue={setOnBoardingDetail.fullName}
+                  // setValue={setOnBoardingDetail.fullName}
                   name="fullName"
-                  handleInputChange={handleInputChange}
+                  // handleInputChange={handleInputChange}
+                  handleChange2={handleChange("fullName")}
+                  value={values.fullName}
+                  status={errors.fullName ? "error" : ""}
+                  message={errors.fullName ? errors.fullName : ""}
                 />
                 <CommonTextInput
                   startIcon={<PhoneIcon />}
                   extraText={"+91"}
                   placeholder="Mobile no."
-                  value={onBoardingDetail.phoneNumber}
-                  setValue={setOnBoardingDetail.phoneNumber}
-                  name="phoneNumber"
-                  handleInputChange={handleInputChange}
+                  // value={onBoardingDetail.phoneNumber}
+                  // setValue={setOnBoardingDetail.phoneNumber}
+                  name="phone_number"
+                  // handleInputChange={handleInputChange}
                   // status={"error"}
+                  handleChange2={handleChange("phone_number")}
+                  value={values.phone_number}
+                  status={errors.phone_number ? "error" : ""}
+                  message={errors.phone_number ? errors.phone_number : ""}
                 />
                 <CommonTextInput
                   title="Company name"
                   placeholder="Company name"
-                  value={onBoardingDetail.companyName}
-                  setValue={setOnBoardingDetail.companyName}
+                  // value={onBoardingDetail.companyName}
+                  // setValue={setOnBoardingDetail.companyName}
                   searchInput={false}
-                  name="companyName"
-                  handleInputChange={handleInputChange}
+                  name="company_name"
+                  // handleInputChange={handleInputChange}
+                  handleChange2={handleChange("company_name")}
+                  value={values.company_name}
+                  status={errors.company_name ? "error" : ""}
+                  message={errors.company_name ? errors.company_name : ""}
                 />
                 <CommonTextInput
-                  type="dropdown"
+                  type={isOther?"":"dropdown"}
                   placeholder="Your Profession"
-                  value={onBoardingDetail.profession}
-                  setValue={setOnBoardingDetail.profession}
-                  handleInputChange={handleInputChange}
                   name="profession"
+                  handleInputChange={handleChange("profession")}
+                  value={values.profession}
+                  status={errors.profession ? "error" : ""}
+                  message={errors.profession ? errors.profession : ""}
+                  options={allProfessions}
+                  setIsOther={setIsOther}
                 />
               </div>
               <div
@@ -182,6 +227,7 @@ const OnBoardingPage = () => {
                   responsive
                   // onClick={() => navigate("/dashboard/home/existinguser")}
                   onClick={handelOnBoard}
+                  disabled={!isValid}
                 >
                   Proceed
                 </CustomInputButton>

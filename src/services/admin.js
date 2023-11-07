@@ -5,7 +5,7 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 export const adminsApi = createApi({
     reducerPath: 'adminsApi',//unique key wee will access the data by this name it will store all data as cache
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:4546/admin-apis/v1/admin/',
+        baseUrl: 'http://localhost:4546/v1/admin',
     }),
     tagTypes: ["Student","Teacher","Admin"],
     //endpoint are hit point
@@ -15,8 +15,11 @@ export const adminsApi = createApi({
             providesTags: ["Student"],
         }),
         getAdminInfo: builder.query({
-            query: (id)=> `profile/${id}`,
+            query: (id)=> `profile?adminId=${id}`,
             // providesTags: ["Admin"],
+        }),
+        getProfessions: builder.query({
+            query: () => 'professions',
         }),
         getStudentsById: builder.query({
             query: (id)=> `students/${id}`,
@@ -28,7 +31,7 @@ export const adminsApi = createApi({
                 method: "POST",
                 body: admin,
             }),
-            invalidatesTags: ["Student"],
+            // invalidatesTags: ["Student"],
         }),
         updateStudent: builder.mutation({
             query: ({id, ...student}) => ({
@@ -36,13 +39,17 @@ export const adminsApi = createApi({
                 method: "PUT",
                 body: student,
             }),
-            invalidatesTags: ["Student"],
-        })
+            // invalidatesTags: ["Student"],
+        }),
+        getAvatar: builder.query({
+            query: (key)=> `avatar?key=${key}`,
+            //template litteral
+        }),
     }),
 })
 
 
-export const {useGetStudentsQuery, useGetStudentsByIdQuery, useAddAdminMutation, useUpdateStudentMutation,useGetAdminInfoQuery} = adminsApi;
+export const {useGetStudentsQuery, useGetStudentsByIdQuery, useAddAdminMutation, useUpdateStudentMutation,useGetAdminInfoQuery, useGetProfessionsQuery, useLazyGetProfessionsQuery} = adminsApi;
 
 //fetchBaseQuery - similar to axios
 //once i fetch the data the it stored as cache after that i you want same data then you can use it bcoz it's in inside a reducer

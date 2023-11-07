@@ -13,6 +13,7 @@ const CommonProfileBar = ({
   title,
   showChangePasswordButton,
   style = {},
+  userName,
 }) => {
   const responsive = useResponsiveStyles();
   return (
@@ -31,7 +32,7 @@ const CommonProfileBar = ({
       }}
     >
       {title && <CustomAllTypography name={title} variant={"h3"} />}
-      {showProfile && <CommonProfile />}
+      {showProfile && <CommonProfile userName={userName}/>}
       {responsive.isMobile ? (
         <div
           style={{

@@ -1,18 +1,38 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import { TextField } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import editicon from "../../../assets/svg/edit.svg";
 import RichTextEditor from "../../../components/textfield/RichTextEditor";
 import CommonTextInput from "../../../components/textfield/CommonTextInput";
-import { TextField } from "@mui/material";
-import { useEffect } from "react";
+import { setBasicDetails } from "../../../slice/job.slice";
+
 
 const JobPostingStepFourB = () => {
-  // const [state, setState] = useState({
-  //   jobTitle: "Enter Job Title here",
-  // });
-  // const [jobTitle, setJobTitle] = useState("Enter Job Title here");
+
   const [isEditing, setIsEditing] = useState(false);
   const [isNameFocused, setIsNamedFocused] = React.useState(false);
+
+const {
+  jobTitle,
+  jobDescription,
+  hiringLocation,
+  profession,
+  requiredExperience
+} = useSelector((state)=>state.job.basic_details)
+
+const dispatch = useDispatch();
+
+
+console.log("jobTitle,jobDescription,hiringLocation,profession,requiredExperience", jobTitle,
+jobDescription,
+hiringLocation,
+profession,
+requiredExperience)
+
+useEffect(()=>{
+  console.log("jkbsajdbasjbd",jobDescription)
+},[jobDescription])
 
   const [jobDetails, setJobDetails] = useState({
     job_title: "Enter Job Title here",
@@ -21,23 +41,34 @@ const JobPostingStepFourB = () => {
     your_profession: "",
   });
 
-  console.log(jobDetails)
+
+
+  // console.log(jobDetails)
 
   const handleInputChange = (event) => {
-    console.log("hii");
+    // console.log("hii");
     const { name, value } = event.target;
-    setJobDetails((prevDetails) => ({
-      ...prevDetails,
-      [name]: value,
-    }));
+    // setJobDetails((prevDetails) => ({
+    //   ...prevDetails,
+    //   [name]: value,
+    // }));
+    dispatch(setBasicDetails({name, value}))
   };
 
+  
+
   const handleChange = (newContent) => {
-    setJobDetails({
-      ...jobDetails,
-      jobDescription: newContent,
-    });
+    // setJobDetails({
+    //   ...jobDetails,
+    //   jobDescription: newContent,
+    // });
+    // job_description: newContent
+    let name = "jobDescription";
+    let value = newContent;
+    dispatch(setBasicDetails({name, value}))
   };
+
+
 
   const handleEditClick = () => {
     // Implement your edit action here
@@ -68,7 +99,8 @@ const JobPostingStepFourB = () => {
       >
         {!isNameFocused ? (
           <CustomAllTypography
-            name={jobDetails.job_title}
+            name={jobTitle}
+            // name={jobDetails.job_title}
             variant={"h2"}
             // value={jobDetails.job_title}
             // onClick={handleEditClick}
@@ -81,10 +113,10 @@ const JobPostingStepFourB = () => {
             autoFocus
             inputProps={{
               style: {
-                fontSize: "3rem",
+                fontSize: "2.5rem",
                 border: "none", // Set border to "none" to remove the border
                 outline: "none",
-                padding: "2px",
+                padding: "0",
                 fontWeight: 700,
                 lineHeight: "120%",
                 // width: `${jobTitle.length * 30}px`
@@ -92,8 +124,9 @@ const JobPostingStepFourB = () => {
                 // minWidth: 50
               },
             }}
-            value={jobDetails.job_title}
-            name="job_title"
+            // value={jobDetails.job_title}
+            value={jobTitle}
+            name="jobTitle"
             onChange={(event) => handleInputChange(event)}
             onBlur={(event) => setIsNamedFocused(false)}
           />
@@ -109,15 +142,22 @@ const JobPostingStepFourB = () => {
         <CustomAllTypography name={"Job Description"} variant={"body2"} />
       </div>
       <div>
-        <RichTextEditor content={jobDetails.job_description} setContent={setJobDetails.job_description} handleChange={handleChange}/>
+        <RichTextEditor
+        //  content={jobDetails.job_description} 
+        //  setContent={setJobDetails.job_description} 
+         content={jobDescription} 
+         setContent={jobDescription} 
+         handleChange={handleChange}/>
         <div style={{ marginTop: "2.63rem" }}>
           <CommonTextInput
-            value={jobDetails.hiring_loc}
+            // value={jobDetails.hiring_loc}
+            value={hiringLocation}
             title="Enter Hiring location"
             placeholder="FirstName LastName"
             searchInput={false}
-            setValue={setJobDetails.hiring_loc}
-            name="hiring_loc"
+            setValue={hiringLocation}
+            // setValue={setJobDetails.hiring_loc}
+            name="hiringLocation"
             handleInputChange={handleInputChange}
           />
         </div>
@@ -134,10 +174,10 @@ const JobPostingStepFourB = () => {
             style={{ margin: "1.5rem 0rem" }}
             type="dropdown"
             placeholder="Your Profession"
-            value={jobDetails.your_profession}
-            setValue={setJobDetails.your_profession}
+            value={profession}
+            setValue={profession}
             handleInputChange={handleInputChange}
-            name="your_profession"
+            name="profession"
           />
         </div>
       </div>

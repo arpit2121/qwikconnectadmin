@@ -33,9 +33,15 @@ const useStyles = makeStyles({
   //   }
   // },
 });
-const JobCard = () => {
+const JobCard = ({data}) => {
   const classes = useStyles();
   const navigate = useNavigate();
+
+  const handleClick = () =>{
+    //  navigate("/jobpostingdetailspage")
+     navigate(`/jobpostingdetailspage/${data._id}`)
+  }
+
   return (
     <CustomCard
       className={classes.card}
@@ -47,19 +53,19 @@ const JobCard = () => {
         boxShadow: "0px 8px 16px 0px rgba(142, 141, 208, 0.12)",
         
       }}
-      onClick={() => navigate("/jobpostingdetailspage")}
+      onClick={handleClick}
     >
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <Body3  color="#8A8894">1d ago</Body3>
       </div>
       <div style={{ marginTop: "1.26rem" }}>
-        <CustomAllTypography name={"UI/UX Developer / Lead"} variant={"h4"} />
+        <CustomAllTypography name={data.jobTitle} variant={"h4"} />
       </div>
       <div style={{ marginTop: "0.75rem" }}>
-        <CustomAllTypography name={"Office: Remote"} variant={"body2"} />
+        <CustomAllTypography name={data.hiringLocation} variant={"body2"} />
       </div>
       <div style={{ marginTop: "0.75rem" }}>
-        <CustomAllTypography name={"Exp.: 12 to 16 year"} variant={"body2"} />
+        <CustomAllTypography name={`Exp.: ${data.requiredExperience}`} variant={"body2"} />
       </div>
       <div
         style={{
@@ -70,7 +76,7 @@ const JobCard = () => {
         }}
       >
         <CustomAllTypography
-          name={"24 Applied • 2 Shortlisted • 1 Closed"}
+          name={`${data.application.length} Applied • ${data.shortlisted.length} Shortlisted • ${data.rejected.length} Closed`}
           variant={"body2"}
           color={"#36BF76"}
           textcolor={"#36BF76"}

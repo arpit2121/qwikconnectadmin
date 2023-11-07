@@ -64,12 +64,16 @@ const VideoPlayer = () => {
   const [progress, setProgress] = useState(0);
   const [drag, setDrag] = useState(false);
   const [volume, setVolume] = useState(100);
-  const [volumeIconType, setVolumeIconType] = useState('default');
+  const [volumeIconType, setVolumeIconType] = useState("default");
   const responsive = useResponsiveStyles();
+
   const vid = document.getElementById("video1");
+
   const videoRef = useRef(null);
+
   let enterTimeOut;
   let exitTimeOut;
+
   const fastForward = () => {
     if (enterTimeOut) clearTimeout(enterTimeOut);
     setShowFwdArrow(true);
@@ -80,6 +84,7 @@ const VideoPlayer = () => {
   };
 
   const { videoLink } = useSelector((state) => state.common);
+
   const revert = () => {
     if (exitTimeOut) clearTimeout(exitTimeOut);
     setShowBackArrow(true);
@@ -88,6 +93,9 @@ const VideoPlayer = () => {
       setShowBackArrow(false);
     }, 1000);
   };
+
+
+
   const videoHandler = (control) => {
     if (control === "play") {
       videoRef.current.play();
@@ -98,6 +106,7 @@ const VideoPlayer = () => {
       setPlaying(false);
     }
   };
+
   // const interval = setInterval(function () {
   //   console.log('running')
   //   if (videoRef.current?.currentTime == videoTime) clearInterval(interval);
@@ -115,10 +124,17 @@ const VideoPlayer = () => {
 
   const handleVolumeChange = (vol) => {
     setVolume(vol.target.value);
-    console.log(vol.target.value)
-    setVolumeIconType(vol.target.value==0?'mute':vol.target.value<50?'lowSound':'default')
+    console.log(vol.target.value);
+    setVolumeIconType(
+      vol.target.value == 0
+        ? "mute"
+        : vol.target.value < 50
+        ? "lowSound"
+        : "default"
+    );
     videoRef.current.volume = vol.target.value / 100;
   };
+
   const handleTimerDrag = (vol) => {
     setDrag(true);
     if (!videoTime) setVideoTime(vid.duration);
@@ -134,14 +150,13 @@ const VideoPlayer = () => {
     if (!play) setShowControllers(false);
   };
   const onClickVolume = () => {
-    if(volume==0){
-
+    if (volume == 0) {
       setVolume(100);
-      setVolumeIconType('default')
+      setVolumeIconType("default");
       videoRef.current.volume = 100;
-    }else{
+    } else {
       setVolume(0);
-      setVolumeIconType('mute')
+      setVolumeIconType("mute");
       videoRef.current.volume = 0;
     }
   };
@@ -150,13 +165,15 @@ const VideoPlayer = () => {
   };
 
   function myFunction1() {
-  // const vid = document.getElementById("video1");
-  //  videoRef.current.play()
-  //  setVideoTime(vid?.duration);
+    // const vid = document.getElementById("video1");
+    //  videoRef.current.play()
+    //  setVideoTime(vid?.duration);
   }
+
   useEffect(() => {
     if (vid) myFunction1();
-  }, [videoLink,vid]);
+  }, [videoLink, vid]);
+
   return (
     <div
       onMouseEnter={onVideoMouseEnter}
@@ -164,13 +181,20 @@ const VideoPlayer = () => {
       className="outerDiv"
       style={{ height: responsive.isMobile ? "11.06rem" : "21.28rem" }}
     >
-      <video
+      {/* <video
         id="video1"
         // style={{ objectFit: responsive.isMobile ? "contain" : "cover" }}
         ref={videoRef}
         poster={thumbnail}
         className="video"
         src={videoLink}
+      ></video> */}
+
+      <video
+        id="video1"
+        ref={videoRef}
+        poster={thumbnail}
+        className="video"
       ></video>
 
       <div
@@ -185,7 +209,7 @@ const VideoPlayer = () => {
           </p>
 
           <CustomTimeBar
-            onChangeCommitted={() => setDrag(false) }
+            onChangeCommitted={() => setDrag(false)}
             sx={{
               width: "80%",
               padding: "0px !important",
@@ -244,7 +268,7 @@ const VideoPlayer = () => {
           onChange={handleVolumeChange}
         />
         <VolumeIcon
-        type={volumeIconType}
+          type={volumeIconType}
           onClick={onClickVolume}
           height={responsive.isMobile ? 12 : 15}
           width={responsive.isMobile ? 12 : 15}
@@ -261,7 +285,6 @@ const VideoPlayer = () => {
           className="arrowContainer"
           style={{ opacity: showFwdArrow ? 1 : 0 }}
         >
-         
           <Forward5Rounded sx={{ fontSize: "3rem", color: "white" }} />
         </div>
       </div>

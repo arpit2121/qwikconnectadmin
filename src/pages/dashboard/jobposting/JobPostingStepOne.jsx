@@ -4,8 +4,11 @@ import useResponsiveStyles from "../../../utils/MediaQuery";
 import CustomTabs from "../../../components/admin/Tabs";
 import Navbar from "../../../components/structure/admin/Navbar";
 
+
 const JobPostingStepOne = () => {
   const responsive = useResponsiveStyles();
+
+
   return (
     <CustomContainer>
       <div

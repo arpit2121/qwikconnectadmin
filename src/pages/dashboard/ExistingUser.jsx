@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import { setSelectedJobPostingPage } from "../../slice/common.slice";
 import { authApi } from "../../services/auth";
 
-const ExistingUser = () => {
+const ExistingUser = ({data}) => {
   const responsvie = useResponsiveStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ const ExistingUser = () => {
           </CustomInputButton>
         </div>
       </div>
-      <CardContainerComponent />
+      <CardContainerComponent data={data}/>
     </div>
   );
 };

@@ -1,44 +1,64 @@
-import React, { useState } from "react";
+import React from "react";
 import CustomAllTypography from "../components/typography/CustomTypograpgy";
 import useResponsiveStyles from "../utils/MediaQuery";
 import { CustomInputButton } from "../components/button/CustomButoon";
 import GoogleSocial from "../components/social/GoogleSocial";
 import CommonTextInput from "../components/textfield/CommonTextInput";
-import { useSigninUserMutation } from "../services/auth";
+import { useLazyVerifyEmailQuery } from "../services/auth";
 import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import { basicSchema } from "../validations";
+import { useEffect } from "react";
+import CustomizedSnackbar from "../components/snackbar/CustomizedSnackbar";
+import  CircularIndeterminate from "../components/loader/CircularLoader";
 
 const Login = () => {
   const responsive = useResponsiveStyles();
-  const [email, setEmail] = useState("");
   const navigate = useNavigate();
-  const [signinuser, { data, isError, isSuccess, error }] =
-    useSigninUserMutation();
+  const [verifyEmail, { data, isSuccess, isLoading }] = useLazyVerifyEmailQuery();
 
-  // --- functions ---
-  const handleButtonClick = () => {
-    signinuser(email);
-    if (true) {
-      navigate(false ? "/password/enterpass" : "/otp", {
+  const onSubmit = async (emailId) => {
+    await verifyEmail(emailId.email, true);
+  };
+
+  const { values, handleChange, handleSubmit, errors, touched, isValid } =
+    useFormik({
+      initialValues: {
+        email: "",
+      },
+      validationSchema: basicSchema,
+      onSubmit,
+    });
+
+  useEffect(() => {
+    if (isSuccess) {
+      navigate(data.message === "Found" ? "/password/enterpass" : "/otp", {
         state: {
           newUser: true,
           header: "Welcome Back!",
-          belowHeader: "Enter your password for youremail@example.com",
+          belowHeader: `Enter your password for ${values?.email}`,
           button: "Log in",
-          footer: "By Continuing this I agree to the Terms & Conditions and Privacy Policy",
+          footer:
+            "By Continuing this I agree to the Terms & Conditions and Privacy Policy",
           goTo: "/dashboard/home/existinguser",
+          email: values?.email,
+          message: data?.message,
         },
       });
     }
-  };
+  }, [isSuccess]);
 
   return (
     <div
       style={{
-        // marginBottom: "2rem",
-        marginTop:'2rem',
+        marginTop: "2rem",
         display: "flex",
         flexDirection: "column",
-        gap: responsive.isMobile ? "3rem": responsive.isTablet ?"2rem": "4.5rem",
+        gap: responsive.isMobile
+          ? "3rem"
+          : responsive.isTablet
+          ? "2rem"
+          : "4.5rem",
       }}
     >
       <CustomAllTypography variant={"h1"} name={"Login/Signup"} />
@@ -53,7 +73,7 @@ const Login = () => {
         <div
           style={{
             display: "flex",
-            width:'100%',
+            width: "100%",
             flexDirection: "column",
             gap: "1rem",
             alignItems: "center",
@@ -63,13 +83,14 @@ const Login = () => {
           or
         </div>
         <CommonTextInput
-          value={email}
-          setvalue={setEmail}
+          value={values.email}
           title="Email ID"
           placeholder="Type your name"
           searchInput={false}
-          setValue={setEmail}
-          type1={"email"}
+          handleChange2={handleChange}
+          name={"email"}
+          status={errors.email && touched.email ? "error" : ""}
+          message={errors.email && touched.email ? errors.email : ""}
         />
       </div>
       <CustomInputButton
@@ -77,11 +98,19 @@ const Login = () => {
         size="large"
         responsive
         goon={"password"}
-        onClick={handleButtonClick}
+        onClick={() => handleSubmit(values.email)}
         width={"100%"}
+        disabled={!isValid}
       >
-        Continue
+        {
+          isLoading
+          ?
+          <CircularIndeterminate/>
+          :
+          "Continue"
+        }
       </CustomInputButton>
+      <CustomizedSnackbar />
     </div>
   );
 };

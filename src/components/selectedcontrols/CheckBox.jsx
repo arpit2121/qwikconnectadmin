@@ -1,15 +1,28 @@
-import { isDisabled } from "@testing-library/user-event/dist/utils";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateQuestion } from "../../slice/job.slice";
 
-const Checkbox = ({  props}) => {
+const Checkbox = ({ isMandatory, index }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
-    const disabled = false
+  const disabled = false;
+  const dispatch = useDispatch();
+  
+  const handleToggle = () =>{
+    let name = "isMandatory";
+    let value = !isMandatory;
+    dispatch(updateQuestion({name, value, index}))
+  }
+
+
   const toggleChecked = (e) => {
     e.preventDefault(); // Prevents default right-click menu
     if (!disabled) {
-      setIsChecked(!isChecked);
+      // setIsChecked(!isChecked);
+      let name = "isMandatory";
+      let value = !isMandatory;
+      dispatch(updateQuestion({name, value, index}))
     }
   };
 
@@ -17,7 +30,8 @@ const Checkbox = ({  props}) => {
     <div style={{ display: "flex" }}>
       <div
         tabIndex={disabled ? undefined : 0} // Add tabIndex only when not disabled
-        onClick={() => setIsChecked(!isChecked)} // Toggle on regular click
+        onClick={handleToggle} // Toggle on regular click
+        // onClick={() => setIsChecked(!isChecked)} // Toggle on regular click
         onContextMenu={toggleChecked} // Toggle on right-click
         onMouseEnter={() => setIsHovered(!disabled && true)}
         onMouseLeave={() => setIsHovered(!disabled && false)}
@@ -25,7 +39,8 @@ const Checkbox = ({  props}) => {
         onBlur={() => setIsFocused(!disabled && false)}
       >
         <div
-          onClick={() => setIsChecked(!isChecked)} // Toggle on regular click
+          onClick={handleToggle} // Toggle on regular click
+          // onClick={() => setIsChecked(!isChecked)} // Toggle on regular click
           onContextMenu={toggleChecked} // Toggle on right-click
           onMouseEnter={() => setIsHovered(!disabled && true)}
           onMouseLeave={() => setIsHovered(!disabled && false)}
@@ -37,7 +52,7 @@ const Checkbox = ({  props}) => {
             height: "1.5rem",
             backgroundColor: disabled
               ? "#D4D4DE"
-              : isChecked
+              : isMandatory
               ? "black"
               : "#D4D4DE",
             borderRadius: "0.25rem",
@@ -50,7 +65,7 @@ const Checkbox = ({  props}) => {
             outline: isFocused && !disabled ? "2px solid #F845FC" : "none",
           }}
         >
-          {isChecked && (
+          {isMandatory && (
             <span
               style={{
                 display: "inline-block",

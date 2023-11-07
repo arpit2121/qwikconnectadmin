@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import InboxIcon from "../../icons/InboxIcon";
 import HomeIcon from "../../icons/HomeIcon";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import SettingsIcon from "../../icons/SettingsIcon";
 import SearchIcon from "../../icons/SearchIcon";
@@ -85,10 +85,14 @@ const useStyles = makeStyles({
 
 const Sidebar = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState(1);
+  const path = useLocation();
+  const [activeTab, setActiveTab] = useState(path.pathname);
   const [openSettings, setOpenSettings] = useState(false);
   const responsive = useResponsiveStyles();
   const classes = useStyles({ responsive });
+  const {id} = useParams();
+
+  console.log("path -> ",path.pathname)
 
   const direction = { flexDirection: responsive.isMobile ? "row" : "column" };
   return (
@@ -97,21 +101,21 @@ const Sidebar = () => {
         <div className={classes.iconContainer}>
           <div
             onClick={() => {
-              setActiveTab(1);
-              navigate("/dashboard/home/existinguser");
+              setActiveTab(`/dashboard/home/${id}`);
+              navigate(`/dashboard/home/${id}`);
             }}
             className={
-              activeTab === 1 ? classes.iconDivActive : classes.iconDiv
+              activeTab === `/dashboard/home/${id}` ? classes.iconDivActive : classes.iconDiv
             }
           >
             <HomeIcon
-              color={activeTab == 1 ? "white" : "#25282B"}
-              onClick={() => navigate("/dashboard/home/existinguser")}
+              color={activeTab == "/dashboard/home/existinguser" ? "white" : "#25282B"}
+              onClick={() => navigate(`/dashboard/home/${id}`)}
             />
           </div>
           {
             <div
-              style={{ opacity: activeTab == 1 ? 1 : 0 }}
+              style={{ opacity: activeTab == `/dashboard/home/${id}` ? 1 : 0 }}
               className={classes.dot}
             ></div>
           }
@@ -120,18 +124,18 @@ const Sidebar = () => {
           <div className={classes.iconContainer}>
             <div
               onClick={() => {
-                setActiveTab(2);
-                navigate("/dashboard/myJobPost");
+                setActiveTab(`/dashboard/myJobPost/${id}`);
+                navigate(`/dashboard/myJobPost/${id}`);
               }}
               className={
-                activeTab === 2 ? classes.iconDivActive : classes.iconDiv
+                activeTab === `/dashboard/myJobPost/${id}` ? classes.iconDivActive : classes.iconDiv
               }
             >
-              <InboxIcon color={activeTab == 2 ? "white" : "#25282B"} />
+              <InboxIcon color={activeTab == `/dashboard/myJobPost/${id}` ? "white" : "#25282B"} />
             </div>
             {
               <div
-                style={{ opacity: activeTab == 2 ? 1 : 0 }}
+                style={{ opacity: activeTab == `/dashboard/myJobPost/${id}` ? 1 : 0 }}
                 className={classes.dot}
               ></div>
             }
@@ -142,18 +146,18 @@ const Sidebar = () => {
         <div className={classes.iconContainer}>
           <div
             onClick={() => {
-              setActiveTab(2);
-              navigate("/dashboard/myJobPost");
+              setActiveTab(`/dashboard/myJobPost/${id}`);
+              navigate(`/dashboard/myJobPost/${id}`);
             }}
             className={
-              activeTab === 2 ? classes.iconDivActive : classes.iconDiv
+              activeTab === `/dashboard/myJobPost/${id}` ? classes.iconDivActive : classes.iconDiv
             }
           >
-            <InboxIcon color={activeTab == 2 ? "white" : "#25282B"} />
+            <InboxIcon color={activeTab == `/dashboard/myJobPost/${id}` ? "white" : "#25282B"} />
           </div>
           {
             <div
-              style={{ opacity: activeTab == 2 ? 1 : 0 }}
+              style={{ opacity: activeTab == `/dashboard/myJobPost/${id}` ? 1 : 0 }}
               className={classes.dot}
             ></div>
           }
@@ -171,7 +175,7 @@ const Sidebar = () => {
                 activeTab === 3 ? classes.iconDivActive : classes.iconDiv
               }
             >
-              <SettingsIcon color={activeTab == 3 ? "white" : "#25282B"} />
+              <SettingsIcon color={activeTab == 3 ? "white" : "#25282B"} id={id}/>
             </div>
             {/* <SettingMenu open={openSettings} setOpen={setOpenSettings} /> */}
             <div
@@ -191,7 +195,7 @@ const Sidebar = () => {
           >
             <UsersComponent style={{ height: "2.3rem" }} image={user1}/>
           </div>
-          <SettingMenu open={openSettings} setOpen={setOpenSettings} />
+          <SettingMenu open={openSettings} setOpen={setOpenSettings} id={id}/>
         </div>
       </div>
     </div>

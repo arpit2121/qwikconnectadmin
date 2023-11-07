@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CustomCard } from "../card/CustomCard";
 import CustomAllTypography from "../typography/CustomTypograpgy";
 import SmileIcon from "../icons/SmileIcon";
 import useResponsiveStyles from "../../utils/MediaQuery";
+import { object } from "yup";
 
-function RatingParameter() {
+function RatingParameter(props) {
   const data = [
     "Concentration",
     "Flexible",
@@ -23,6 +24,18 @@ function RatingParameter() {
 
   const [selectedSmileyIndex, setSelectedSmileyIndex] = useState(-1);
   const [selectedOuterIndex, setSelectedOuterIndex] = useState(-1);
+
+  useEffect(()=>{
+    const passProperties = Object.keys(state).filter((key)=> state[key] >= 2);
+    console.log("-->",passProperties)
+    if (passProperties.length >= 2) {
+      // return "pass";
+      console.log("hiii")
+      props.setState(true)
+    } else {
+      props.setState(false)
+    }
+  },[state])
   
 const responsive=useResponsiveStyles()
   const handleClick = (innerIndex, outerIndex,item1) => {

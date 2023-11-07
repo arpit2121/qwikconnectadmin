@@ -1,46 +1,108 @@
-import React, { useState } from "react";
+import React, {useState } from "react";
 import CustomAllTypography from "../components/typography/CustomTypograpgy";
-import useResponsiveStyles from "../utils/MediaQuery";
 import { CustomInputButton } from "../components/button/CustomButoon";
 import { useLocation, useNavigate } from "react-router-dom";
 import CommonTextInput from "../components/textfield/CommonTextInput";
 import PasswordIcon from "../components/icons/PasswordIcon";
-import { useVerifyPasswordMutation } from "../services/auth";
+import { useLoginUserMutation, useSignupUserMutation } from "../services/auth";
 import OpenEyeIcon from "../components/icons/OpenEyeIcon";
-import { Body3 } from "../components/typography/Fields";
+import { passwrodSchema } from "../validations";
+import { useFormik } from "formik";
+import { useEffect } from "react";
+import CircularIndeterminate from "../components/loader/CircularLoader";
 
-/*
-3 conditon
-1 - come from existing user
-2 - come after otp
-3 - come after forget password
-*/
 
 const Password = () => {
-  const [newUser, setNewUser] = useState(false);
-  const [pass, setPass] = useState("");
-  const responsive = useResponsiveStyles();
   const navigate = useNavigate();
   const [type, setCurrType] = useState(true);
   const { state } = useLocation();
-  const [verifyPassword, { data }] = useVerifyPasswordMutation();
 
-  console.log(state);
+  const [loginUser, {data:loginData, isSuccess:isLoginSuccess, isLoading: isLoginLoading}] = useLoginUserMutation();
+  const [signupUser, {data: signupData, isSuccess:isSignupSuccess, isLoading: isSignupLoading}] = useSignupUserMutation();
+  
 
   const changeType = () => {
     setCurrType(!type);
   };
+  
 
   const handleClick = () => {
-    console.log(state.goTO);
-    // verifyPassword(pass);
-    if (false) {
-      //name have something???then navigate to dashbaord page else navigate to onBoard page
-      navigate("/dashboard/home/existinguser");
-    } else {
-      navigate("/on-boarding");
+    // console.log(state.goTO);
+    console.log("hii", values.password)
+    if(state?.message==="Found"){
+      loginUser({email: state.email, password: values.password}).then((response)=>{
+        console.log("response -> ",response)
+        if(response.data?.adminId===null)
+        {
+          navigate("/on-boarding", {
+            state:{
+              email: state.email,
+            }
+          });
+        }
+        else{
+          navigate(`/dashboard/home/${response.data?.adminId}`);
+        }
+      }).catch((error)=>{console.log("hahahah", error)});
+    }else{
+      signupUser({email: state.email, password: values.password}).then(()=>{
+        navigate("/on-boarding", {
+          state: {
+            data: "forgetpassword",
+            state: {
+              newUser: true,
+              header: "Forget Password?",
+              belowHeader: "Reset your password for youremail@example.com",
+              button: "Reset",
+              footer: "",
+            },
+          },
+        });
+      }).catch(()=>{});
+      console.log(signupData);
     }
   };
+
+
+  const handleClick1 = async () =>{
+    if(state?.message==="Found"){
+      await loginUser({email: state.email, password: values.password});
+    }
+    else{
+      await signupUser({email: state.email, password: values.password})
+    }
+  }
+
+  useEffect(()=>{
+    if(isLoginSuccess){
+      if(data?.adminId===null)
+        {
+          navigate("/on-boarding", {
+            state:{
+              email: state.email,
+            }
+          });
+        }
+        else{
+          navigate(`/dashboard/home/${data?.adminId}`);
+        }
+    }else if(isSignupSuccess){
+      navigate("/on-boarding", {
+        state: {
+          data: "forgetpassword",
+          state: {
+            newUser: true,
+            header: "Forget Password?",
+            belowHeader: "Reset your password for youremail@example.com",
+            button: "Reset",
+            footer: "",
+          },
+        },
+      });
+    }
+  },[isLoginSuccess, isSignupSuccess])
+
+
 
   const forgetPassword = () => {
     navigate("/password/forgetpassword", {
@@ -57,10 +119,17 @@ const Password = () => {
     });
   };
 
+  const {values, handleBlur, handleChange,handleSubmit,errors,touched, isSubmitting,isValid, isValidating} = useFormik({
+    initialValues:{
+      password: "",
+    },
+    validationSchema: passwrodSchema,
+    handleClick
+  })
+  
   return (
     <div
       style={{
-        // width: "100%",
         marginTop:'2rem',
         display: "flex",
         flexDirection: "column",
@@ -78,24 +147,19 @@ const Password = () => {
       >
         <CustomAllTypography
           variant={"h1"}
-          // name={newUser ? "Set Password" : "Welcome Back!"}
           name={state.header}
         />
         <CustomAllTypography
-          // name={
-          //   newUser
-          //     ? "for youremail@example.com"
-          //     : "Enter your password for youremail@example.com"
-          // }
           name={state.belowHeader}
           variant={"h5"}
         />
       </div>
       <div>
-        {/* <CustomPassword title={'Enter Password'} data={pass} setData={setPass}/> */}
         <CommonTextInput
-          value={pass}
-          setValue={setPass}
+          handleChange2={handleChange('password')}
+          value={values.password}
+          status={errors.password ? "error": ""}
+          message={errors.password ? errors.password: ""}
           title="Password"
           placeholder="Enter your password"
           searchInput={false}
@@ -121,9 +185,16 @@ const Password = () => {
           width={"100%"}
           size="large"
           responsive
-          onClick={handleClick}
+          onClick={handleClick1}
+          disabled={!isValid}
         >
-          {state.button}
+          {
+            isLoginLoading || isSignupLoading
+            ?
+            <CircularIndeterminate/>
+            :
+            state.button
+          }
         </CustomInputButton>
         {!state.newUser ? (
           <div

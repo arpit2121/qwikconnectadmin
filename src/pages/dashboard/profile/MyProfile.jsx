@@ -1,18 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import CommonTextInput from "../../../components/textfield/CommonTextInput";
 import { CustomInputButton } from "../../../components/button/CustomButoon";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import UsersComponent from "../../../components/admin/UsersComponent";
 import user1 from "../../../assets//svg/user1.svg";
 import PhoneIcon from "../../../components/icons/PhoneIcon";
 import LinkBar from "../jobposting/LinkBar";
 import KeyIcon from "../../../components/icons/KeyIcon";
+import { useGetAdminInfoQuery } from "../../../services/admin";
+import { useDispatch } from "react-redux";
+import { setApiLoadere } from "../../../slice/common.slice";
+import EditIcon from "../../../components/icons/EditIcon";
 
 const MyProfile = () => {
   const responsive = useResponsiveStyles();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [disabled, setDisabled] = useState(true);
+  const {id} = useParams();
+  const {
+    data:adminData,
+    isLoading,
+  } = useGetAdminInfoQuery(id);
+
+
+  const isEdit = () =>{
+    console.log("edit called")
+    setDisabled(false)
+  }
+
+  console.log("id --> ",id)
+
+
+  if(isLoading) {
+    dispatch(setApiLoadere(true));
+  }
+  else{
+    dispatch(setApiLoadere(false));
+  }
+
+  console.log("admin data in my profiel --> ",adminData)
   return (
     <div
       style={{
@@ -46,9 +75,9 @@ const MyProfile = () => {
           >
             <UsersComponent image={user1} />
             <div>
-              <CustomAllTypography name={"Vaibhav Naik"} variant={"h3"} />
+              <CustomAllTypography name={adminData?.admin?.fullName} variant={"h3"} />
               <CustomAllTypography
-                name={"vaibhavnaik@gmail.com"}
+                name={adminData?.email}
                 variant={"body2"}
               />
             </div>
@@ -71,9 +100,10 @@ const MyProfile = () => {
         </CustomInputButton>
         }
       </div>
-      <div style={{ marginTop: "2rem" }}>
+      <div style={{ marginTop: "2rem", display:'flex', alignItems:'center', gap:'2rem' }}>
         <CustomAllTypography name={"Basic Details"} variant={"h1"} />
-      </div>
+        <div onClick={isEdit} style={{cursor:'pointer'}}><EditIcon/></div>
+      </div>      
       <div
         style={{
           marginTop: "3rem",
@@ -92,7 +122,8 @@ const MyProfile = () => {
           }}
         >
           <CommonTextInput
-            // value={email}
+          disabled={disabled}
+            value={adminData?.admin?.fullName}
             // setvalue={setEmail}
             title="First Name"
             placeholder="First Name"
@@ -102,7 +133,8 @@ const MyProfile = () => {
           />
           <br />
           <CommonTextInput
-            // value={email}
+          disabled={disabled}
+            value={adminData?.admin?.fullName}
             // setvalue={setEmail}
             title="Last Name"
             placeholder="Last Name"
@@ -112,13 +144,16 @@ const MyProfile = () => {
           />
         </div>
         <CommonTextInput
+        disabled={disabled}
           style={{ margin: "1.5rem 0rem" }}
           startIcon={<PhoneIcon />}
           extraText={"+91"}
           placeholder="Mobile no."
+          value={adminData?.admin?.phone_number}
         />
         <CommonTextInput
-          // value={email}
+        disabled={disabled}
+          value={adminData?.admin?.company_name}
           // setvalue={setEmail}
           title="Company Name"
           placeholder="Company Name"
@@ -127,9 +162,11 @@ const MyProfile = () => {
           type1={"email"}
         />
         <CommonTextInput
+        disabled={disabled}
           style={{ margin: "1.5rem 0rem" }}
           type="dropdown"
           placeholder="Your Profession"
+          value={adminData?.admin?.profession}
         />
       </div>
       <div

@@ -2,25 +2,37 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 
 export const authApi = createApi({
     reducerPath: "authApi",
-    baseQuery: fetchBaseQuery({baseUrl: "http://localhost:3000/admin"}),
+    baseQuery: fetchBaseQuery({baseUrl: "http://localhost:4546/v1/auth"}),
     tagTypes: [],
     //invalidateTags, proivdeTags
     endpoints: (builder) => ({
-        signinUser: builder.mutation({
-            query: (email) => {
-                // console.log("reducer",email)
+        verifyEmail: builder.query({
+            query: (email) => `/verify-email?email=${email}`,
+        }),
+        loginUser: builder.mutation({
+            query   : ({email, password}) => {
+                console.log("reducer -> ",email, password)
                 return{
-                    url: "/login",
+                    url: `/login?email=${email}&password=${password}`,
                     method: "POST",
-                    body: {email:email},
+                }
+            }
+        }),
+        signupUser: builder.mutation({
+            query   : ({email, password}) => {
+                console.log("reducer -> ",email, password)
+                return{
+                    url: `/signup?email=${email}&password=${password}`,
+                    method: "POST",
                 }
             }
         }),
         verifyOtp: builder.mutation({
             query: (body) => {
+                console.log("boo", body)
                 return{
                     url: "/verify-otp",
-                    method: "post",
+                    method: "POST",
                     body,
                 }
             }
@@ -29,7 +41,7 @@ export const authApi = createApi({
             query: (body) => {
                 return {
                     url: "/set-password",
-                    method: "post",
+                    method: "POST",
                     body,
                 }
             }
@@ -38,7 +50,7 @@ export const authApi = createApi({
             query: (body) => {
                 return {
                     url: "/verify-password",
-                    method: "post",
+                    method: "POST",
                     body,
                 }
             }
@@ -46,4 +58,4 @@ export const authApi = createApi({
     }),
 })
 
-export const {useSigninUserMutation, useVerifyPasswordMutation, useSetPasswordMutation, useVerifyOtpMutation} = authApi;
+export const {useSigninUserMutation, useVerifyPasswordMutation, useSetPasswordMutation, useVerifyOtpMutation, useVerifyEmailMutation, useLazyVerifyEmailQuery, useLoginUserMutation, useSignupUserMutation} = authApi;

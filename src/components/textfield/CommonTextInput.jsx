@@ -20,6 +20,8 @@ import SearchIcon from "../icons/SearchIcon";
 import CountryList from "country-list-with-dial-code-and-flag";
 import { darkspacetheme } from "../../theme/theme";
 import useResponsiveStyles from "../../utils/MediaQuery";
+import { message } from "antd";
+import { useEffect } from "react";
 
 const CustomSelect = styled(Select)(({ theme }) => ({
   width: "100%",
@@ -58,6 +60,7 @@ const useStyles = makeStyles({
     justifyContent: "start",
     alignItems: "center",
     outline: "none",
+    
     position: "relative",
     backgroundColor: (props) =>
       props?.status ? props?.getStatusColor(props?.status) : "#F7F7FD",
@@ -134,6 +137,9 @@ const useStyles = makeStyles({
   },
 });
 
+// const containsText2 = (text, searchText) =>
+// text.toLowerCase().indexOf(searchText.toLowerCase()) > -1;
+
 const CommonTextInput = ({
   style = {},
   width,
@@ -177,12 +183,19 @@ const CommonTextInput = ({
   type1,
   borderStyle = {},
   handleInputChange,
+  handleChange2,
+  message,
+  disabled=false,
+  setIsOther,
+  handleDropChange,
+  index,
+  nameCom
 }) => {
   let allCountryList = CountryList.getAll();
   const responsive = useResponsiveStyles();
   const inputRef = React.createRef();
   const [isFocused, setIsFocused] = useState(false);
-  const [searchText, setSearchText] = useState("");
+  // const [searchText, setSearchText] = useState("");
   const [countryCode, setCountryCode] = useState("+91");
   const [selectedOption, setSelectedOption] = useState();
   // const [handleSearchTextChange, setHandleSearchTextChange] = useState('')
@@ -225,6 +238,21 @@ const CommonTextInput = ({
   const handleClick = () => {
     inputRef.current.focus();
   };
+
+
+  useEffect(()=>{
+
+  },[value])
+
+  const allOptions = ["Option One", "Option Two", "Option Three", "Option Four"];
+
+  const [searchText, setSearchText] = useState("");
+
+
+  // const displayedOptions1 = useMemo(
+  //   () => options.filter((option) => containsText2(option, searchText)),
+  //   [searchText]
+  // );
 
   const classes = useStyles({
     getStatusColor,
@@ -295,6 +323,7 @@ const CommonTextInput = ({
             >
               <ListSubheader>
                 <TextField
+                // id="input"
                   size="small"
                   // Autofocus on textfield
                   autoFocus
@@ -375,10 +404,12 @@ const CommonTextInput = ({
 
           {type != "dropdown" ? (
             <input
+              id="input"  
               name={name}
               type={type1 ? type1 : "text"}
               label={title}
               value={value}
+              disabled={disabled}
               placeholder={title ? "" : placeholder}
               ref={inputRef}
               className={classes.textBoxStyles}
@@ -390,66 +421,32 @@ const CommonTextInput = ({
                   ? (e) => {
                       handleInputChange(e);
                     }
-                  : handleChange
+                  : handleChange2
+                  // : handleChange
               }
             />
           ) : (
-            // <CustomSelect
-            //   value={"value"}
-            //   placeholder="Type Your Profession"
-            //   displayEmpty
-            //   renderValue={(selected) => {
-            //     if (selected.length === 0) {
-            //       return (
-            //         <CustomAllTypography
-            //           sx={{ fontSize: "0.875rem", fontWeight: 400 }}
-            //           name={placeholder}
-            //           variant="body3"
-            //           textcolor="#9D99AC"
-            //         />
-            //       );
-            //     }
-
-            //     // return selected?.join(", ");
-            //   }}
-            //   onChange={handleChangeSelect}
-            //   // onChange={(e) => setSearchText(e.target.value)}
-            //   // onKeyDown={(e) => {
-            //   //   if (e.key !== "Escape") {
-            //   //     // Prevents autoselecting item while typing (default Select behaviour)
-            //   //     e.stopPropagation();
-            //   //   }
-            //   // }}
-            //   sx={{ background: "none", border: "none" }}
-            // >
-            //   {options?.map((menuItem, index) => (
-            //     <MenuItem key={index} value={MenuItem}>
-            //       {menuItem}
-            //     </MenuItem>
-            //   ))}
-            // </CustomSelect>
-
             <CustomSelect
-              // Disables auto focus on MenuItems and allows TextField to be in focus
               MenuProps={{ autoFocus: false }}
-              // labelId="search-select-label"
+              disabled={disabled}
+              labelId="search-select-label"
+              id="search-select"
               name={name}
               placeholder="Type Your Profession"
               displayEmpty
-              // id="search-select"
               value={value}
-              // label="Options"
-              // onChange={(e) => {setSelectedOption(e.target.value), console.log("selected",e.target.value)}}
               onChange={
                 handleInputChange
                   ? (e) => {
+                    // {e.target.value==="Other" ?setIsOther(true):setIsOther(false)}
+                    // {value!="" &&  e.target.value==="Other" ? setIsOther(true):setIsOther(false) }
                       handleInputChange(e);
                     }
-                  : "setSelectedOption(e.target.value)"
+                  : (e) => {
+                    handleDropChange(nameCom,e.target.value, index)
+                  }
               }
-              // onChange={(e) => setValue(e.target.value)}
               onClose={() => setSearchText("")}
-              // renderValue={() => selectedOption}
                 renderValue={(value) => {
                 if (!value) {
                   return (
@@ -458,13 +455,11 @@ const CommonTextInput = ({
                       name={placeholder}
                       variant="body3"
                       textcolor="#9D99AC"
-                      // textcolor="red"
                     />
                   );
                 }
 
                 return value;
-                // return selectedOption?.join(", ");
               }}
               sx={{ background: "none", border: "none" }}
             >
@@ -492,6 +487,7 @@ const CommonTextInput = ({
                   }}
                 />
               </ListSubheader> */}
+              {/* {displayedOptions1?.map((option, i) => ( */}
               {options?.map((option, i) => (
                 <MenuItem key={i} value={option}>
                   {option}
@@ -520,7 +516,7 @@ const CommonTextInput = ({
             style={{ marginRight: "0.75rem" }}
           />
           <CustomAllTypography
-            name={_.startCase(_.toLower(status))}
+            name={_.startCase(_.toLower(message))}
             variant="caption"
             color="#AAAAAA"
           />

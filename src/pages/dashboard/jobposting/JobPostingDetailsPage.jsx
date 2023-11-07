@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomContainer from "../../../components/structure/CustomContainer";
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import Navbar from "../../../components/structure/admin/Navbar";
@@ -17,10 +17,12 @@ import user1 from "../../../assets/svg/user1.svg";
 import AwardIcon from "../../../components/icons/AwardIcon";
 import { Body3 } from "../../../components/typography/Fields";
 import StatusButton from "../../../components/button/StatusButton";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import TableCard from "../../../components/admin/TableCard";
 import SystemRecommended from "../../../components/icons/SystemRecommended";
 import { generateRandomColor } from "../../../utils/RandomPastel";
+import { useGetJobInfoQuery, useLazyGetJobInfoQuery } from "../../../services/job";
+import { useLazyGetAllIntervieweeQuery } from "../../../services/interviewee";
 
 const data = [
   {
@@ -68,9 +70,37 @@ const data = [
 const JobPostingDetailsPage = () => {
   const responsive = useResponsiveStyles();
   const navigate = useNavigate()
+  const { jobPostId } = useParams();
+
+  console.log(" jobPostId ---> ", jobPostId)
+  // const {data: jobData} = useGetJobInfoQuery(jobPostId)
+
+  const [getJobInfo, {data: jobInfo}] = useLazyGetJobInfoQuery();
+
+  const [getAllInterviewee, {data: intervieweeData}] = useLazyGetAllIntervieweeQuery();
+
+  useEffect(() => {
+    getJobInfo(jobPostId, true) // the second arg is preferCacheValue
+    getAllInterviewee({adminId:"651137f89cbfd5858dc871a5",jobPostId}, true)
+  }, [])
+
+
+  const handleClick1 = (intervieweeId) =>{
+    console.log("hello",intervieweeId)
+    navigate(`/candidatereview/${intervieweeId}`,{
+      state:{
+        passingPoint: jobInfo.passingPoint
+      }
+    })
+  }
+
+
+
+  var convertedJobDesc = (jobInfo?.jobDescription)?.replace(/<[^>]+>/g, '');
+  console.log("job-->", intervieweeData)
   
   const randomColor = generateRandomColor();
-  console.log(randomColor)
+  console.log("hdhdh",randomColor)
 
   return (
     <CustomContainer>
@@ -132,15 +162,17 @@ const JobPostingDetailsPage = () => {
                 >
                   <StatusButton name="Activated" />
                   <CustomAllTypography
-                    name={"UI/UX Developer / Lead"}
+                    name={jobInfo?.jobTitle}
+                    // name={"UI/UX Developer / Lead"}
                     variant={"h3"}
                   />
                   <CustomAllTypography
-                    name={"Office: Remote"}
+                    name={`Office: ${jobInfo?.hiringLocation}`}
+                    // name={"Office: Remote"}
                     variant={"body2"}
                   />
                   <CustomAllTypography
-                    name={"Exp.: 12 to 16 year"}
+                    name={`Exp.: ${jobInfo?.requiredExperience}`}
                     variant={"body2"}
                   />
                   <Body3 color={"#8A8894"}>{"1d Ago"}</Body3>
@@ -153,7 +185,7 @@ const JobPostingDetailsPage = () => {
                     marginTop: "1.5rem",
                   }}
                 >
-                  <StatsTopBar rejected={24} />
+                  <StatsTopBar application={jobInfo?.application.length} shortlisted={jobInfo?.shortlisted.length} rejected={jobInfo?.rejected.length} />
                 </div>
               </div>
               <div
@@ -171,7 +203,8 @@ const JobPostingDetailsPage = () => {
                 />
                 <CustomAllTypography
                   name={
-                    "${}Allegis Group, Inc. is an international talent management firm headquartered in Hanover, Maryland, United States. As of 2018, it had US$13.4 billion in revenue, and 19,000 employees. It ranks fourth in the world. More"
+                    // "${}Allegis Group, Inc. is an international talent management firm headquartered in Hanover, Maryland, United States. As of 2018, it had US$13.4 billion in revenue, and 19,000 employees. It ranks fourth in the world. More"
+                    `${convertedJobDesc}`
                   }
                   variant={"body2"}
                 />
@@ -232,20 +265,21 @@ const JobPostingDetailsPage = () => {
             </div>
             <div>
               {responsive.isMobile ? (
-                data.map((users) => {
+                intervieweeData?.map((users) => {
                   return (
                     <TableCard
-                      image={users.profileimage}
-                      Name={users.name}
+                      image={<UsersComponent image={user1} style={{ width: "2rem", height: "2rem" }} />}
+                      Name={users.fullName}
                       email={users.email}
-                      time={users.time}
-                      status={users.status}
+                      time={"1d ago"}
+                      status={users.status==="pending"?"Pending":users.status}
                       system={false}
+                      id={users._id}
                     />
                   );
                 })
               ) : (
-                <CustomizedTables data={data} />
+                <CustomizedTables data={intervieweeData} hadleClick={handleClick1}/>
               )}
             </div>
             <div

@@ -74,10 +74,3 @@ const CustomButton = (props) => {
 };
 
 export default CustomButton;
-
-
-
-
-
-//endIcon={<DeleteIcon />}
-//startIcon={<DeleteIcon />}

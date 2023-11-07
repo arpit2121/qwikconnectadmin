@@ -1,14 +1,28 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import CustomAllTypography from "../../components/typography/CustomTypograpgy";
 import { CustomCard } from "../../components/card/CustomCard";
-import useResponsiveStyles from "../../utils/MediaQuery";
 import { CustomInputButton } from "../../components/button/CustomButoon";
 import RightArrowIcon from "../../components/icons/RightArrowIcon";
-import LeftArrowIcon from "../../components/icons/LeftArrowIcon";
+import { useAddNewJobMutation } from "../../services/job";
+
 
 
 const NonExisting = () => {
-  const responsive = useResponsiveStyles();
+  
+  const [addNewJob, {data,isLoading}] = useAddNewJobMutation();
+  const navigate = useNavigate();
+
+  const handelClick = async () =>{
+    console.log("hiii")
+    await addNewJob("651137f89cbfd5858dc871a5").then((response) => {
+      console.log("response data", response.data);
+      if (response.data) {
+        navigate("/jobposting/basicDaetails");
+      }
+    });
+  }
+
   return (
     <div style={{ marginTop: "8rem", marginRight: "4rem", marginLeft: "3rem" }}>
       <CustomCard
@@ -33,45 +47,13 @@ const NonExisting = () => {
                   variant="outlined"
                   size="medium"
                   endIcon={<RightArrowIcon color="#605DEC"/>}
-                  // onClick={handleBack}
+                  onClick={handelClick}
                 >
             New Job
           </CustomInputButton>
       </CustomCard>
     </div>
-    // <div style={{width: "100%" }}>
-
-    // </div>
   );
 };
 
 export default NonExisting;
-
-{
-  /* <CustomCard responsive={responsive} sx={{display:'flex',
-  flexDirection:'column',
-  alignItems:'center',borderRadius:'1.25rem'}}>
-          <div>
-          <CustomAllTypography
-            name={"Positions"}
-            variant={"h3"}
-            fontStyle={"normal"}
-          />
-          </div>
-          <div>
-          <CustomAllTypography
-            name={"Create your first position and video interview"}
-            variant={"body1"}
-          />
-          </div>
-          <div>
-          <Button
-            variant="contained"
-            sx={{ borderRadius: "14px" }}
-            endIcon={<ArrowForwardIcon />}
-          >
-            New Job
-          </Button>
-          </div>
-        </CustomCard> */
-}
