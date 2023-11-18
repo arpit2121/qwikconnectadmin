@@ -23,6 +23,8 @@ const {
 
 const dispatch = useDispatch();
 
+const exp = ["<1yrs", "1-2yrs", "2-3yrs", "3-4yrs", ">5yrs"]
+
 
 console.log("jobTitle,jobDescription,hiringLocation,profession,requiredExperience", jobTitle,
 jobDescription,
@@ -82,9 +84,9 @@ useEffect(()=>{
     // You can save the modified jobTitle here
   };
 
-  useEffect(()=>{
-    console.log(jobDetails)
-  },[jobDetails])
+  // useEffect(()=>{
+  //   console.log(jobDetails)
+  // },[jobDetails])
 
 
   return (
@@ -162,14 +164,19 @@ useEffect(()=>{
           />
         </div>
         <div style={{ marginTop: "2.63rem" }}>
-          {" "}
-          {/* <CommonTextInput
-            style={{ margin: "1.5rem 0rem" }}
-            type="dropdown"
-            placeholder="Your Profession"
-            value={jobDetails.your_profession}
-            setValue={setJobDetails.your_profession}
-          /> */}
+        <CommonTextInput
+                style={{ margin: "1.5rem 0rem" }}
+                // borderStyle={{ borderRadius: "0.25rem" }}
+                type="dropdown"
+                placeholder="All"
+                options={exp}
+                // value={passingPoint}
+                // handleDropChange={minimumPassingParameter}
+                index={""}
+                nameCom={""}
+              />
+        </div>
+        <div style={{ marginTop: "2.63rem" }}>
           <CommonTextInput
             style={{ margin: "1.5rem 0rem" }}
             type="dropdown"

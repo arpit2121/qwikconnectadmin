@@ -10,6 +10,7 @@ import Paper from "@mui/material/Paper";
 import StatusButton from "../button/StatusButton";
 import { useNavigate } from "react-router-dom";
 import { CustomInputButton } from "../button/CustomButoon";
+import CustomAllTypography from "../typography/CustomTypograpgy";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -57,6 +58,7 @@ export default function CustomizedTables({ data, hadleClick }) {
   // const handleClick = () =>{
   //   navigate("/candidatereview")
   // }
+  console.log("data", data);
   return (
     <TableContainer component={Paper} sx={{ borderRadius: "1.25rem" }}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -70,21 +72,31 @@ export default function CustomizedTables({ data, hadleClick }) {
             <StyledTableCell align="left">Action</StyledTableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {
-            data?.length < 0 ?
-            <StyledTableRow align='center'>
-              no data to dispaly
+        {data?.length === 0 ? (
+          <TableBody>
+            <StyledTableRow
+              align="center"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                backgroundColor: "red",
+              }}
+            >
+              <CustomAllTypography name={"No Data To Display"} variant={"h3"} />
             </StyledTableRow>
-            :
-            data?.map((row, index) => (
+          </TableBody>
+        ) : (
+          data?.map((row, index) => (
+            <TableBody>
               <StyledTableRow
                 key={row.no}
-                onClick={()=>hadleClick(row?._id)}
+                // onClick={() => hadleClick(row?._id)}
                 onMouseEnter={() => setHoveredRow(index)}
                 onMouseLeave={() => setHoveredRow(null)}
               >
-                <StyledTableCell align="left">{`#${index+1}`}</StyledTableCell>
+                <StyledTableCell align="left">{`#${
+                  index + 1
+                }`}</StyledTableCell>
                 <StyledTableCell align="left">
                   <div
                     style={{
@@ -99,23 +111,74 @@ export default function CustomizedTables({ data, hadleClick }) {
                 <StyledTableCell align="left">{row.email}</StyledTableCell>
                 <StyledTableCell align="left">{"1d ago"}</StyledTableCell>
                 <StyledTableCell align="left">
-                  {<StatusButton name={row.status==="pending"?"Pending":""} />}
+                  {
+                    <StatusButton
+                      name={row.status === "Shortlisted" ? "Shortlisted" : row.status === "Pending" ? "Pending" : "Rejected"}
+                    />
+                  }
                 </StyledTableCell>
                 <StyledTableCell align="left">
                   {hoveredRow === index ? (
                     <ReviewButtonWrapper>
-                      <CustomInputButton variant="text">Review</CustomInputButton>
-                      {/* Review */}
+                      <CustomInputButton variant="text" onClick={() => hadleClick(row?._id)}>
+                        Review
+                      </CustomInputButton>
                     </ReviewButtonWrapper>
                   ) : (
                     ""
                   )}
                 </StyledTableCell>
               </StyledTableRow>
-            ))
-          }
-        </TableBody>
+            </TableBody>
+          ))
+        )}
       </Table>
     </TableContainer>
   );
 }
+
+// <TableBody>
+//           {
+//             data?.length === 0 ?
+//             <StyledTableRow align='center' style={{display:'flex', justifyContent:'center', backgroundColor:'red'}}>
+//               <CustomAllTypography name={"hhehhe"} variant={'h1'}/>
+//             </StyledTableRow>
+//             :
+//             data?.map((row, index) => (
+//               <StyledTableRow
+//                 key={row.no}
+//                 onClick={()=>hadleClick(row?._id)}
+//                 onMouseEnter={() => setHoveredRow(index)}
+//                 onMouseLeave={() => setHoveredRow(null)}
+//               >
+//                 <StyledTableCell align="left">{`#${index+1}`}</StyledTableCell>
+//                 <StyledTableCell align="left">
+//                   <div
+//                     style={{
+//                       display: "flex",
+//                       alignItems: "center",
+//                       gap: ".5rem",
+//                     }}
+//                   >
+//                     {row.profileimage} {row.fullName}
+//                   </div>
+//                 </StyledTableCell>
+//                 <StyledTableCell align="left">{row.email}</StyledTableCell>
+//                 <StyledTableCell align="left">{"1d ago"}</StyledTableCell>
+//                 <StyledTableCell align="left">
+//                   {<StatusButton name={row.status==="pending"?"Pending":""} />}
+//                 </StyledTableCell>
+//                 <StyledTableCell align="left">
+//                   {hoveredRow === index ? (
+//                     <ReviewButtonWrapper>
+//                       <CustomInputButton variant="text">Review</CustomInputButton>
+//                       {/* Review */}
+//                     </ReviewButtonWrapper>
+//                   ) : (
+//                     ""
+//                   )}
+//                 </StyledTableCell>
+//               </StyledTableRow>
+//             ))
+//           }
+//         </TableBody>

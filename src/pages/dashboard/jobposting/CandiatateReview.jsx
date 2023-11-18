@@ -113,6 +113,8 @@ const CandiatateReview = () => {
                 boxSizing: "border-box",
                 border: "1px solid #EBEBEB",
                 borderTop: "none",
+                // backgroundColor:'red',
+                overflow:'scroll'
               }}
             >
               <div style={initialContentStyle}>
@@ -122,11 +124,13 @@ const CandiatateReview = () => {
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
+                    
                   }}
                 >
                   <div
                     style={{
                       marginTop: !responsive.isMobile ? "2.30rem" : 0,
+                      
                     }}
                   >
                     <CustomAllTypography
@@ -218,7 +222,9 @@ const CandiatateReview = () => {
                       style={{
                         ...moreContentStyle,
                         marginTop: responsive.isMobile ? 0 : "1.30rem",
+                        // backgroundColor:"blue"
                       }}
+
                     >
                       <div
                         style={{
@@ -226,6 +232,7 @@ const CandiatateReview = () => {
                           display: "flex",
                           flexDirection: "column",
                           gap: "0.50rem",
+                          // backgroundColor:'red'
                         }}
                       >
                         <CustomAllTypography
@@ -245,7 +252,7 @@ const CandiatateReview = () => {
                           variant={"body2"}
                         />
                       </div>
-                      <div style={{ marginTop: "2.63rem" }}>
+                      <div style={{ marginTop: "2.63rem"}}>
                         <CustomInputButton
                           variant="outlined"
                           size="small"

@@ -17,10 +17,10 @@ const OtpVerification = () => {
   const [verifyOtp, { data: otpData, isSuccess, isError, error, isLoading }] =
     useVerifyOtpMutation();
 
-  console.log(state);
+  console.log("state --> ",state);
 
   const handleButtonClick = () => {
-    verifyOtp({ email: state.email, otp: values.otp });
+    verifyOtp({ email: state.email, otp: values.otp, task: 'verify_email' });
     // console.log("--->",otpData, isError, error);
     // if(isSuccess){
     //   navigate("/password/set-password", {
@@ -55,6 +55,7 @@ const OtpVerification = () => {
     }
   });
 
+
   const {
     values,
     handleBlur,
@@ -70,8 +71,33 @@ const OtpVerification = () => {
       otp: "",
     },
     validationSchema: otpSchema,
+    isInitialValid:false,
     handleButtonClick,
   });
+
+  const [otp, setOtp] = useState('');
+  const [timer, setTimer] = useState(30);
+
+  useEffect(() => {
+    let interval;
+
+    if (timer > 0) {
+      interval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [timer]);
+
+  const handleResendClick = () => {
+    // Add logic to resend OTP here
+    setOtp(''); // Clear the previous OTP
+    setTimer(30); // Reset the timer
+  };
+
 
   return (
     <div
@@ -83,7 +109,7 @@ const OtpVerification = () => {
       <div style={{ marginTop: "2rem" }}>
         <CustomAllTypography
           variant={"h1"}
-          name={newUser ? "New Account Verification" : "Account Verification"}
+          name={state.newUser ? "New Account Verification" : "Account Verification"}
         />
         <CustomAllTypography
           sx={{ marginTop: "1rem" }}
@@ -130,9 +156,20 @@ const OtpVerification = () => {
           >
             {isLoading ? <CircularIndeterminate /> : "Verify"}
           </CustomInputButton>
-          <div style={{ display: "flex", gap: "10px", marginTop: "1rem" }}>
-            <CustomAllTypography variant={"body2"} name={"Resend in"} />
-            <CustomAllTypography variant={"body2"} name={"30s"} />
+          <div style={{ display: "flex", gap: "0.5rem", marginTop: "1rem",alignItems:'center' }}>
+            {
+              timer > 0 
+              ?
+              <>
+              <CustomAllTypography variant={"h6"} name={"Resend in"} />
+              <CustomAllTypography variant={"body2"} name={timer+'s'} />
+            </>
+              :
+              <>
+              <CustomAllTypography variant={"h6"} name={"Haven't Received Otp ?"} />
+              <CustomInputButton variant="text" size="small" onClick={handleResendClick}>Resend</CustomInputButton>
+              </>
+            }
           </div>
         </div>
       </div>

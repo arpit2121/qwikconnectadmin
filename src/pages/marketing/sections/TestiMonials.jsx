@@ -13,6 +13,7 @@ const TestiMonials = ({ style={} }) => {
     gap: "2rem",
     // padding: responsive.isMobile?''
     flexWrap: "wrap",
+    justifyContent:'center'
   };
 
   const cardDivStyleMobile = {
@@ -34,6 +35,8 @@ const TestiMonials = ({ style={} }) => {
         //   justifyContent: "center",
         //   flexDirection:'column'
       }}
+      id="testimonials"
+      className="testimonials"
     >
       <div
         style={{

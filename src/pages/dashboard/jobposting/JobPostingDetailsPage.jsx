@@ -4,9 +4,7 @@ import useResponsiveStyles from "../../../utils/MediaQuery";
 import Navbar from "../../../components/structure/admin/Navbar";
 import { Box } from "@mui/material";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import  {
-  CustomInputButton,
-} from "../../../components/button/CustomButoon";
+import { CustomInputButton } from "../../../components/button/CustomButoon";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import { CustomCard } from "../../../components/card/CustomCard";
 import CustomIcons from "../../../components/admin/Pagination";
@@ -21,8 +19,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import TableCard from "../../../components/admin/TableCard";
 import SystemRecommended from "../../../components/icons/SystemRecommended";
 import { generateRandomColor } from "../../../utils/RandomPastel";
-import { useGetJobInfoQuery, useLazyGetJobInfoQuery } from "../../../services/job";
+import {
+  useGetJobInfoQuery,
+  useLazyGetJobInfoQuery,
+} from "../../../services/job";
 import { useLazyGetAllIntervieweeQuery } from "../../../services/interviewee";
+import { useSelector } from "react-redux";
+import { useMemo } from "react";
+import Modal from "../../../components/modal/Modal";
 
 const data = [
   {
@@ -58,7 +62,231 @@ const data = [
   {
     no: "04",
     profileimage: (
-      <UsersComponent image={user1} style={{ width: "2rem", height: "2rem",padding:'0' }} />
+      <UsersComponent
+        image={user1}
+        style={{ width: "2rem", height: "2rem", padding: "0" }}
+      />
+    ),
+    name: "Danish Shah",
+    email: "Danish.shah@xmail.com",
+    status: "Rejected",
+    time: "30m ago",
+  },
+  {
+    no: "05",
+    profileimage: (
+      <UsersComponent
+        image={user1}
+        style={{ width: "2rem", height: "2rem", padding: "0" }}
+      />
+    ),
+    name: "Danish Shah",
+    email: "Danish.shah@xmail.com",
+    status: "Rejected",
+    time: "30m ago",
+  },
+  {
+    no: "06",
+    profileimage: (
+      <UsersComponent
+        image={user1}
+        style={{ width: "2rem", height: "2rem", padding: "0" }}
+      />
+    ),
+    name: "Danish Shah",
+    email: "Danish.shah@xmail.com",
+    status: "Rejected",
+    time: "30m ago",
+  },
+  {
+    no: "07",
+    profileimage: (
+      <UsersComponent
+        image={user1}
+        style={{ width: "2rem", height: "2rem", padding: "0" }}
+      />
+    ),
+    name: "Danish Shah",
+    email: "Danish.shah@xmail.com",
+    status: "Rejected",
+    time: "30m ago",
+  },
+  {
+    no: "08",
+    profileimage: (
+      <UsersComponent
+        image={user1}
+        style={{ width: "2rem", height: "2rem", padding: "0" }}
+      />
+    ),
+    name: "Danish Shah",
+    email: "Danish.shah@xmail.com",
+    status: "Rejected",
+    time: "30m ago",
+  },
+  {
+    no: "09",
+    profileimage: (
+      <UsersComponent
+        image={user1}
+        style={{ width: "2rem", height: "2rem", padding: "0" }}
+      />
+    ),
+    name: "Danish Shah",
+    email: "Danish.shah@xmail.com",
+    status: "Rejected",
+    time: "30m ago",
+  },
+  {
+    no: "10",
+    profileimage: (
+      <UsersComponent
+        image={user1}
+        style={{ width: "2rem", height: "2rem", padding: "0" }}
+      />
+    ),
+    name: "Danish Shah",
+    email: "Danish.shah@xmail.com",
+    status: "Rejected",
+    time: "30m ago",
+  },
+  {
+    no: "11",
+    profileimage: (
+      <UsersComponent
+        image={user1}
+        style={{ width: "2rem", height: "2rem", padding: "0" }}
+      />
+    ),
+    name: "Danish Shah",
+    email: "Danish.shah@xmail.com",
+    status: "Rejected",
+    time: "30m ago",
+  },
+  {
+    no: "12",
+    profileimage: (
+      <UsersComponent
+        image={user1}
+        style={{ width: "2rem", height: "2rem", padding: "0" }}
+      />
+    ),
+    name: "Danish Shah",
+    email: "Danish.shah@xmail.com",
+    status: "Rejected",
+    time: "30m ago",
+  },
+  {
+    no: "13",
+    profileimage: (
+      <UsersComponent
+        image={user1}
+        style={{ width: "2rem", height: "2rem", padding: "0" }}
+      />
+    ),
+    name: "Danish Shah",
+    email: "Danish.shah@xmail.com",
+    status: "Rejected",
+    time: "30m ago",
+  },
+  {
+    no: "14",
+    profileimage: (
+      <UsersComponent
+        image={user1}
+        style={{ width: "2rem", height: "2rem", padding: "0" }}
+      />
+    ),
+    name: "Danish Shah",
+    email: "Danish.shah@xmail.com",
+    status: "Rejected",
+    time: "30m ago",
+  },
+  {
+    no: "15",
+    profileimage: (
+      <UsersComponent
+        image={user1}
+        style={{ width: "2rem", height: "2rem", padding: "0" }}
+      />
+    ),
+    name: "Danish Shah",
+    email: "Danish.shah@xmail.com",
+    status: "Rejected",
+    time: "30m ago",
+  },
+  {
+    no: "16",
+    profileimage: (
+      <UsersComponent
+        image={user1}
+        style={{ width: "2rem", height: "2rem", padding: "0" }}
+      />
+    ),
+    name: "Danish Shah",
+    email: "Danish.shah@xmail.com",
+    status: "Rejected",
+    time: "30m ago",
+  },
+  {
+    no: "17",
+    profileimage: (
+      <UsersComponent
+        image={user1}
+        style={{ width: "2rem", height: "2rem", padding: "0" }}
+      />
+    ),
+    name: "Danish Shah",
+    email: "Danish.shah@xmail.com",
+    status: "Rejected",
+    time: "30m ago",
+  },
+  {
+    no: "18",
+    profileimage: (
+      <UsersComponent
+        image={user1}
+        style={{ width: "2rem", height: "2rem", padding: "0" }}
+      />
+    ),
+    name: "Danish Shah",
+    email: "Danish.shah@xmail.com",
+    status: "Rejected",
+    time: "30m ago",
+  },
+  {
+    no: "19",
+    profileimage: (
+      <UsersComponent
+        image={user1}
+        style={{ width: "2rem", height: "2rem", padding: "0" }}
+      />
+    ),
+    name: "Danish Shah",
+    email: "Danish.shah@xmail.com",
+    status: "Rejected",
+    time: "30m ago",
+  },
+  {
+    no: "20",
+    profileimage: (
+      <UsersComponent
+        image={user1}
+        style={{ width: "2rem", height: "2rem", padding: "0" }}
+      />
+    ),
+    name: "Danish Shah",
+    email: "Danish.shah@xmail.com",
+    status: "Rejected",
+    time: "30m ago",
+  },
+  {
+    no: "21",
+    profileimage: (
+      <UsersComponent
+        image={user1}
+        style={{ width: "2rem", height: "2rem", padding: "0" }}
+      />
     ),
     name: "Danish Shah",
     email: "Danish.shah@xmail.com",
@@ -67,40 +295,95 @@ const data = [
   },
 ];
 
+
+
 const JobPostingDetailsPage = () => {
   const responsive = useResponsiveStyles();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { jobPostId } = useParams();
+  const adminId = useSelector((state) => state.auth.adminId);
 
-  console.log(" jobPostId ---> ", jobPostId)
+  console.log(" jobPostId ---> ", jobPostId);
   // const {data: jobData} = useGetJobInfoQuery(jobPostId)
 
-  const [getJobInfo, {data: jobInfo}] = useLazyGetJobInfoQuery();
+  const [getJobInfo, { data: jobInfo }] = useLazyGetJobInfoQuery();
 
-  const [getAllInterviewee, {data: intervieweeData}] = useLazyGetAllIntervieweeQuery();
+  const [getAllInterviewee, { data: intervieweeData }] =
+    useLazyGetAllIntervieweeQuery();
 
   useEffect(() => {
-    getJobInfo(jobPostId, true) // the second arg is preferCacheValue
-    getAllInterviewee({adminId:"651137f89cbfd5858dc871a5",jobPostId}, true)
-  }, [])
+    console.log("jobPostIdjobPostId", adminId, jobPostId);
+    getJobInfo({ adminId: adminId, jobPostId: jobPostId }); // the second arg is preferCacheValue
+    getAllInterviewee({ adminId: adminId, jobPostId: jobPostId });
+  }, []);
 
+  console.log("intervieweeData", intervieweeData);
 
-  const handleClick1 = (intervieweeId) =>{
-    console.log("hello",intervieweeId)
-    navigate(`/candidatereview/${intervieweeId}`,{
-      state:{
-        passingPoint: jobInfo.passingPoint
-      }
-    })
-  }
+  const handleClick1 = (intervieweeId) => {
+    // console.log("hello",intervieweeId)
+    navigate(`/candidatereview/${intervieweeId}`, {
+      state: {
+        passingPoint: jobInfo.passingPoint,
+      },
+    });
+  };
 
+  var convertedJobDesc = jobInfo?.jobDescription?.replace(/<[^>]+>/g, "");
+  console.log("job-->", intervieweeData);
 
-
-  var convertedJobDesc = (jobInfo?.jobDescription)?.replace(/<[^>]+>/g, '');
-  console.log("job-->", intervieweeData)
-  
   const randomColor = generateRandomColor();
-  console.log("hdhdh",randomColor)
+  console.log("hdhdh", randomColor);
+
+  const [randColor, setRandColor] = useState();
+
+
+  useEffect(()=>{
+    setRandColor(randomColor)
+  },[])
+
+  const randcolor1 = useMemo(() => generateRandomColor(), [])
+  
+
+  //pagination data
+
+  const [activePage, setActivePage] = useState(1);
+  const [limitPerPage, setLimitPerPage] = useState(10);
+  const numOfTotalPages = Math.ceil(data.length / limitPerPage);
+
+  const indexOfLastData = activePage * limitPerPage;
+  const indexOfFirstData = indexOfLastData - limitPerPage;
+
+  const pages = [...Array(numOfTotalPages + 1).keys()].slice(1);
+  console.log("d", numOfTotalPages);
+
+  const visibleData = data.slice(indexOfFirstData, indexOfLastData);
+
+
+  const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+  
+    const handleClose = () => {
+      setOpen(false);
+    };
+
+    const handelDeactiveClick = () =>{
+      console.log("hello")
+      setOpen(true)
+    }
+
+    const handelEditClick = () =>{
+      console.log("hello")
+      setOpen(true)
+    }
+
+    const handelPreviewClick = () =>{
+      console.log("hello")
+      setOpen(true)
+    }
+  
 
   return (
     <CustomContainer>
@@ -133,18 +416,30 @@ const JobPostingDetailsPage = () => {
               <AiOutlineArrowLeft style={{ fontSize: "30px" }} />
             </div>
             <div style={{ paddingRight: "1.25rem" }}>
-              <CustomInputButton size="small" variant="outlined" onClick={()=>navigate('')}>
+              <CustomInputButton
+                size="small"
+                variant="outlined"
+                onClick={handelPreviewClick}
+              >
                 Preview
               </CustomInputButton>
             </div>
           </Box>
         ) : (
-          <Navbar  />
+          <Navbar />
         )}
         <div style={{ backgroundColor: "" }}>
-        {/* "#F8F8F9" */}
-          <CustomCard sx={{ backgroundColor:`${randomColor}`,boxShadow:'0px 4px 4px 0px rgba(142, 141, 208, 0.16)',borderRadius:'1.25rem',
-          padding:responsive.isMobile?'0 1rem 1rem 1rem':'0 4.8rem 2rem 4.8rem'}}>
+          {/* "#F8F8F9" */}
+          <CustomCard
+            sx={{
+              backgroundColor: `${randcolor1}`,
+              boxShadow: "0px 4px 4px 0px rgba(142, 141, 208, 0.16)",
+              borderRadius: "1.25rem",
+              padding: responsive.isMobile
+                ? "0 1rem 1rem 1rem"
+                : "0 4.8rem 2rem 4.8rem",
+            }}
+          >
             <div>
               <div
                 style={{
@@ -185,16 +480,20 @@ const JobPostingDetailsPage = () => {
                     marginTop: "1.5rem",
                   }}
                 >
-                  <StatsTopBar application={jobInfo?.application.length} shortlisted={jobInfo?.shortlisted.length} rejected={jobInfo?.rejected.length} />
+                  <StatsTopBar
+                    application={jobInfo?.application.length}
+                    shortlisted={jobInfo?.shortlisted.length}
+                    rejected={jobInfo?.rejected.length}
+                  />
                 </div>
               </div>
               <div
                 style={{
                   marginTop: "1.5rem",
                   width: responsive.isMobile ? "100%" : "50%",
-                  display:'flex',
-                  flexDirection:'column',
-                  gap:'0.8rem'
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.8rem",
                 }}
               >
                 <CustomAllTypography
@@ -220,14 +519,20 @@ const JobPostingDetailsPage = () => {
                     size="small"
                     variant="outlined"
                     width={responsive.isMobile ? "100%" : ""}
-                    onClick={()=>navigate('/jobposting/basicDaetails')}
+                    // onClick={() => navigate("/jobposting/basicDaetails")}
+                    onClick={handelEditClick}
                   >
                     Edit
                   </CustomInputButton>
                   {responsive.isMobile ? (
                     ""
                   ) : (
-                    <CustomInputButton size="small" variant="outlined" onClick={()=>navigate('/jobposting/basicDaetails')}>
+                    <CustomInputButton
+                      size="small"
+                      variant="outlined"
+                      // onClick={() => navigate("/jobposting/basicDaetails")}
+                    onClick={handelPreviewClick}
+                    >
                       Preview
                     </CustomInputButton>
                   )}
@@ -236,7 +541,7 @@ const JobPostingDetailsPage = () => {
                     variant="outlined"
                     width={responsive.isMobile ? "100%" : ""}
                     sx={{ borderColor: "#F93232", color: "#F93232" }}
-                    onClick={()=>navigate('')}
+                    onClick={handelDeactiveClick}
                   >
                     Deactive
                   </CustomInputButton>
@@ -250,36 +555,65 @@ const JobPostingDetailsPage = () => {
               display: "flex",
               flexDirection: "column",
               gap: "1rem",
-              padding: responsive.isMobile?"0 1rem 0 1rem":"0 4.8rem 0 4.8rem",
+              padding: responsive.isMobile
+                ? "0 1rem 0 1rem"
+                : "0 4.8rem 0 4.8rem",
             }}
           >
             <div style={{ display: "flex", gap: "1rem" }}>
               <AwardIcon />
               <CustomAllTypography name={"Review Candidates"} variant={"h4"} />
             </div>
-            <div style={{display:'flex',alignItems:'center'}}>
-              <span style={{ display: "flex", alignItems: 'center',marginLeft:'2.5rem'}}>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <span
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginLeft: "2.5rem",
+                }}
+              >
                 <span>System Recommend candidate are highlighted in</span>
-                <span style={{marginLeft:'0.5rem'}}><SystemRecommended/></span>
+                <span style={{ marginLeft: "0.5rem" }}>
+                  <SystemRecommended />
+                </span>
               </span>
             </div>
             <div>
               {responsive.isMobile ? (
-                intervieweeData?.map((users) => {
-                  return (
-                    <TableCard
-                      image={<UsersComponent image={user1} style={{ width: "2rem", height: "2rem" }} />}
-                      Name={users.fullName}
-                      email={users.email}
-                      time={"1d ago"}
-                      status={users.status==="pending"?"Pending":users.status}
-                      system={false}
-                      id={users._id}
-                    />
-                  );
-                })
+                visibleData?.length === 0 ? (
+                  <TableCard
+                    Name={
+                      <CustomAllTypography
+                        name={"No Data To Display"}
+                        variant={"h3"}
+                        sx={{ alignSelf: "center" }}
+                      />
+                    }
+                  ></TableCard>
+                ) : (
+                  visibleData?.map((users) => {
+                    return (
+                      <TableCard
+                        image={
+                          <UsersComponent
+                            image={user1}
+                            style={{ width: "2rem", height: "2rem" }}
+                          />
+                        }
+                        Name={users.fullName}
+                        email={users.email}
+                        time={"1d ago"}
+                        status={
+                          users.status === "Shortlisted" ? "Shortlisted" : users.status === "Pending" ? "Pending" : "Rejected"
+                        }
+                        system={false}
+                        id={users._id}
+                      />
+                    );
+                  })
+                )
               ) : (
-                <CustomizedTables data={intervieweeData} hadleClick={handleClick1}/>
+                <CustomizedTables data={visibleData} hadleClick={handleClick1}/>
               )}
             </div>
             <div
@@ -291,11 +625,12 @@ const JobPostingDetailsPage = () => {
                 marginBottom: "7rem",
               }}
             >
-              <CustomIcons />
+              <CustomIcons setActivePage={setActivePage} activePage={activePage} pageCount={numOfTotalPages}/>
             </div>
           </div>
         </div>
       </div>
+      <Modal open={open} handleClickOpen={handleClickOpen} handleClose={handleClose} />
     </CustomContainer>
   );
 };

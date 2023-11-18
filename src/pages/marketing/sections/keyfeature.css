@@ -1,0 +1,42 @@
+/* styles.css (or wherever your styles are defined) */
+/* .item-animation {
+    opacity: 0;
+    transform: translateY(20px);
+    animation-name: fadeInUp;
+    animation-delay: 800ms;
+    animation-timing-function: ease-in-out;
+    animation-duration: 300ms;
+    animation-fill-mode: both;
+  } */
+
+  .animated-item {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px); /* You can adjust the value based on your preference */
+    transition: opacity 800ms ease-in-out, transform 800ms ease-in-out;
+    /* animation-delay: 800ms; */
+  }
+  
+  .item-animation {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .item-hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px); /* You can adjust the value based on your preference */
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

@@ -1,8 +1,9 @@
 import React from "react";
 
-const QwikConnectLogo = () => {
+const QwikConnectLogo = ({onClick=()=>{}}) => {
   return (
     <svg
+      onClick={onClick}
       xmlns="http://www.w3.org/2000/svg"
       width="154"
       height="28"

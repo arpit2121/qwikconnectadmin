@@ -23,27 +23,38 @@ export const jobsApi = createApi({
     }),
     updateBasicDetails: builder.mutation({
       query: ({ basic_details, jobPostId }) => ({
-        url: `basic?jobpostId=${"652b6f25c577f5fc09241c32"}`,
+        url: `basic?jobpostId=${jobPostId}`,
         method: "PUT",
         body: basic_details,
       }),
     }),
     updateParameters: builder.mutation({
-      query: ({ json_data, jobPostId }) => ({
-        url: `parameters?jobPostId=${"652b6f25c577f5fc09241c32"}`,
-        method: "PUT",
-        body: json_data,
-      }),
+      query: ({ json_data, adminId, jobPostId }) => {
+        console.log("reducer -> ", json_data);
+        return {
+          url: `parameters?jobPostId=${jobPostId}`,
+          method: "PUT",
+          body: json_data,
+        };
+      },
     }),
     updateBranding: builder.mutation({
-      query: () => ({
-        url: `branding`,
-        method: "PUT",
-      }),
+      query: ({ adminId, jobPostId, formData }) => {
+        console.log("hiiii from reducer", formData);
+        return {
+          url: `branding?adminId=${adminId}&jobPostId=${jobPostId}`,
+          method: "PUT",
+          body: formData,
+          prepareHeaders: (headers) => {
+            headers.set("Content-Type", "multipart/form-data");
+            return headers;
+          },
+        };
+      },
     }),
     publishLink: builder.mutation({
       query: ({ formData, adminId, jobPostId }) => ({
-        url: `publish-link?jobPostId=${"652b6f25c577f5fc09241c32"}&adminId=${adminId}`,
+        url: `publish-link?jobPostId=${jobPostId}&adminId=${adminId}`,
         method: "PUT",
         body: formData, // Convert JSON to string
         FormData: true,
@@ -51,7 +62,7 @@ export const jobsApi = createApi({
     }),
     addNewQuestion: builder.mutation({
       query: ({ formData, adminId, jobPostId }) => ({
-        url: `question?jobPostId=${"652b6f25c577f5fc09241c32"}&adminId=${adminId}`,
+        url: `question?jobPostId=${jobPostId}&adminId=${adminId}`,
         method: "POST",
         body: formData, // Convert JSON to string
         FormData: true,
@@ -62,8 +73,11 @@ export const jobsApi = createApi({
       // providesTags: ["Admin"],
     }),
     getJobInfo: builder.query({
-      query: (jobPostId) => `get-job-detail?jobPostId=${jobPostId}`,
+      query: ({adminId,jobPostId}) => `get-job-detail?adminId=${adminId}&jobPostId=${jobPostId}`,
       // providesTags: ["Admin"],x
+    }),
+    getAllJobPost: builder.query({
+      query: (adminId) => `?adminId=${adminId}`,
     }),
   }),
 });
@@ -77,7 +91,8 @@ export const {
   useAddNewQuestionMutation,
   useGetActiveJobPostQuery,
   useGetJobInfoQuery,
-  useLazyGetJobInfoQuery
+  useLazyGetJobInfoQuery,
+  useGetAllJobPostQuery,
 } = jobsApi;
 
 // updateParameters: builder.mutation({

@@ -8,7 +8,7 @@ import Rounded from '../components/Rounded'
 const HeroSection = () => {
   return (
     <>
-        <Home/>
+        <Home />
         <KeyFeatures/>
         <TestiMonials/>
         <Plans/>

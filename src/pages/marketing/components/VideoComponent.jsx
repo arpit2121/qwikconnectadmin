@@ -2,6 +2,7 @@ import React from "react";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import VideoImage from "../../../assets/videoImage.png";
 
+
 const VideoComponent = () => {
   return (
     <div
@@ -10,8 +11,8 @@ const VideoComponent = () => {
         background: "#fff",
         borderRadius: "1.25rem",
         padding: "1.5rem",
-        maxWidth: "43.5rem", // Set a maximum width
-        width: "200%", // Take full width of the container
+        // maxWidth: "43.5rem", // Set a maximum width
+        // width: "100%", // Take full width of the container
         boxSizing: "border-box", // Ensure padding and border are included in the width
       }}
     >

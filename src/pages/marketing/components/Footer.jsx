@@ -3,9 +3,27 @@ import Logo from '../../../components/icons/Logo'
 import QwikConnectLogo from '../../../components/icons/QwikConnectLogo'
 import CustomAllTypography from '../../../components/typography/CustomTypograpgy'
 import useResponsiveStyles from '../../../utils/MediaQuery'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
-    const footer = ['Blog', 'Cookies', 'Privacy Policy', 'Terms of use']
+    const footer = [
+        {
+            name: 'Blog',
+            path: ''
+        },
+        {
+            name: 'Cookies',
+            path: ''
+        },
+        {
+            name: 'Privac Policy',
+            path: '/home/privacy-policy'
+        },
+        {
+            name: 'Terms of use',
+            path: '/home/term-condition'
+        }
+    ]
     const responsive = useResponsiveStyles();
   return (
     <div style={{
@@ -34,7 +52,8 @@ const Footer = () => {
                     {
                         footer.map((item, index)=>{
                             return(
-                                <CustomAllTypography variant={"body2"} name={item} />
+                                // <CustomAllTypography variant={"body2"} name={item} />
+                                <Link style={{textDecoration: 'none'}} to={item.path} target='_blank' rel="noopener noreferrer">{item.name}</Link>
                             )
                         })
                     }

@@ -13,6 +13,7 @@ import CloseIcon from "../icons/CloseIcon";
 import PdfImage from "../../assets/pdfImage.jpg";
 import { useDispatch } from "react-redux";
 import { setFilesData } from "../../slice/common.slice";
+import {setBrandingLogo} from "../../slice/job.slice";
 
 
 
@@ -91,11 +92,20 @@ const Preview = ({ meta, files }, ...props) => {
       }, 1000);
     }
   }, [meta]);
+  
   const onMouseOver = (e) => {
     e.stopPropagation();
     console.log("hoverr");
     doneLoading && setHovered(true);
   };
+  const dispatch = useDispatch();
+
+  const handelFileRemove = () =>{
+       files.forEach((f) => {
+                if (f?.meta?.id == meta?.id) f.remove();
+              })
+        dispatch(setBrandingLogo(""))
+  }
 
   return (
     <div
@@ -110,6 +120,7 @@ const Preview = ({ meta, files }, ...props) => {
         onMouseOver={onMouseOver}
         style={{ height: "100%", width: "100%", zIndex: 9 }}
         src={meta?.previewUrl ? meta?.previewUrl : PdfImage}
+        // src={meta?.previewUrl || PdfImage}
       />
 
       <div
@@ -157,13 +168,19 @@ const Preview = ({ meta, files }, ...props) => {
             left: 0,
           }}
         >
-          <CloseIcon
-            onClick={() =>
-              files.forEach((f) => {
-                if (f?.meta?.id == meta?.id) f.remove();
-              })
-            }
+          {
+            true ?
+            <CloseIcon
+            // onClick={() =>
+            //   files.forEach((f) => {
+            //     if (f?.meta?.id == meta?.id) f.remove();
+            //   })
+            // }
+            onClick={handelFileRemove}
           />
+            :
+            ""
+          }
           <CustomAllTypography
             name={meta.name}
             textcolor={"white"}
@@ -189,6 +206,7 @@ const Preview = ({ meta, files }, ...props) => {
 
 
 const Input = ({ accept, onFiles, files, getFilesFromEvent, message}) => {
+
   const text = files.length > 0 ? "Add more files" : "Choose files";
   const responsive = useResponsiveStyles();
 
@@ -222,6 +240,8 @@ const Input = ({ accept, onFiles, files, getFilesFromEvent, message}) => {
 
       <input
         style={{ display: "none" }}
+        // disabled
+        //you can disabled once the files is true
         type="file"
         accept={accept}
         onChange={(e) => {
@@ -234,7 +254,7 @@ const Input = ({ accept, onFiles, files, getFilesFromEvent, message}) => {
   );
 };
 
-const CustomLayout = ({ acceptedTypes,message,setUploadedFiles }) => {
+const CustomLayout = ({ acceptedTypes,message,setUploadedFiles, dispatch }) => {
   console.log("message",message)
 
   const getUploadParams = () => ({ url: "https://httpbin.org/post" });
@@ -253,6 +273,7 @@ const CustomLayout = ({ acceptedTypes,message,setUploadedFiles }) => {
       if(status==="done"){
         console.log("hiii")
         setUploadedFiles(file)
+        dispatch(setBrandingLogo(file))
       }
     }
 
@@ -262,6 +283,7 @@ const CustomLayout = ({ acceptedTypes,message,setUploadedFiles }) => {
     console.log(files.map((f) => f.meta));
     allFiles.forEach((f) => f.remove());
   };
+
 
   return (
     <Dropzone
@@ -279,6 +301,7 @@ const CustomLayout = ({ acceptedTypes,message,setUploadedFiles }) => {
           )
         )
       }
+      // disabled={true}
       // accept= "image/*,audio/*,video/*,.pdf"
       accept= {acceptedTypes[0]}
       //   accept=".pdf,.doc"
@@ -296,8 +319,8 @@ const CustomLayout = ({ acceptedTypes,message,setUploadedFiles }) => {
   );
 };
 
-const CustomDropzone = ({ multiple = false,acceptedTypes,name,setUploadedFiles}) => {
-  return <CustomLayout acceptedTypes={acceptedTypes} message={name} setUploadedFiles={setUploadedFiles}/>;
+const CustomDropzone = ({ multiple = false,acceptedTypes,name,setUploadedFiles, dispatch}) => {
+  return <CustomLayout acceptedTypes={acceptedTypes} message={name} setUploadedFiles={setUploadedFiles} dispatch={dispatch}/>;
 };
 
 export default CustomDropzone;

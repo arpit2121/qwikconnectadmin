@@ -12,7 +12,7 @@ const Home = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems:'center'
-    }}>
+    }} id='home' className='home'>
         <div style={{padding: '6.69rem  3.75rem 0rem 3.75rem', display: 'flex', flexDirection: 'column', alignItems:'center', justifyContent: 'center'}}>
         <CustomAllTypography name={'Revolutionize Your Hiring Process with'} variant={'h1'} sx={{textAlign: 'center'}}/>
         <CustomAllTypography name={'One-Way Interviews'} variant={'h1'} textcolor='#605DEC' sx={{textAlign: 'center'}}/>

@@ -17,6 +17,8 @@ const Password = () => {
   const [type, setCurrType] = useState(true);
   const { state } = useLocation();
 
+  console.log(state)
+
   const [loginUser, {data:loginData, isSuccess:isLoginSuccess, isLoading: isLoginLoading}] = useLoginUserMutation();
   const [signupUser, {data: signupData, isSuccess:isSignupSuccess, isLoading: isSignupLoading}] = useSignupUserMutation();
   
@@ -27,7 +29,7 @@ const Password = () => {
   
 
   const handleClick = () => {
-    // console.log(state.goTO);
+    console.log(state.goTO);
     console.log("hii", values.password)
     if(state?.message==="Found"){
       loginUser({email: state.email, password: values.password}).then((response)=>{
@@ -75,8 +77,10 @@ const Password = () => {
 
   useEffect(()=>{
     if(isLoginSuccess){
-      if(data?.adminId===null)
+      console.log("hheelloo", loginData)
+      if(loginData?.isAdminRegistered===false)
         {
+          console.log("hhahekekkekhakh")
           navigate("/on-boarding", {
             state:{
               email: state.email,
@@ -84,9 +88,11 @@ const Password = () => {
           });
         }
         else{
-          navigate(`/dashboard/home/${data?.adminId}`);
+          console.log("heheloooo 3", loginData)
+          navigate(`/dashboard/home/${loginData?.adminId}`);
         }
     }else if(isSignupSuccess){
+      console.log("hehheheh")
       navigate("/on-boarding", {
         state: {
           data: "forgetpassword",
@@ -104,18 +110,33 @@ const Password = () => {
 
 
 
+  // const forgetPassword = () => {
+  //   navigate("/password/forgetpassword", {
+  //     state: {
+  //       data: "forgetpassword",
+  //       state: {
+  //         newUser: true,
+  //         header: "Forget Password?",
+  //         belowHeader: "Reset your password for youremail@example.com",
+  //         button: "Reset",
+  //         footer: "",
+  //       },
+  //     },
+  //   });
+  // };
   const forgetPassword = () => {
-    navigate("/password/forgetpassword", {
-      state: {
-        data: "forgetpassword",
+    navigate("/otp", {
+      // state: {
+      //   data: "forgetpassword",
         state: {
-          newUser: true,
+          newUser: false,
           header: "Forget Password?",
           belowHeader: "Reset your password for youremail@example.com",
           button: "Reset",
           footer: "",
+          email: state.email
         },
-      },
+      // },
     });
   };
 
@@ -124,7 +145,8 @@ const Password = () => {
       password: "",
     },
     validationSchema: passwrodSchema,
-    handleClick
+    isInitialValid: false,
+    handleClick1
   })
   
   return (

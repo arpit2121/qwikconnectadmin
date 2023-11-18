@@ -18,6 +18,8 @@ const ContactUs = () => {
         alignSelf: "center",
         backgroundColor: "#FFF",
       }}
+      className="contact-us"
+      id="contact-us"
     >
       <div
         style={{

@@ -10,7 +10,7 @@ import PhoneIcon from "../../../components/icons/PhoneIcon";
 import LinkBar from "../jobposting/LinkBar";
 import KeyIcon from "../../../components/icons/KeyIcon";
 import { useGetAdminInfoQuery } from "../../../services/admin";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setApiLoadere } from "../../../slice/common.slice";
 import EditIcon from "../../../components/icons/EditIcon";
 
@@ -20,10 +20,11 @@ const MyProfile = () => {
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(true);
   const {id} = useParams();
+  const adminId = useSelector((state)=>state.auth.adminId);
   const {
     data:adminData,
     isLoading,
-  } = useGetAdminInfoQuery(id);
+  } = useGetAdminInfoQuery(adminId);
 
 
   const isEdit = () =>{
@@ -31,7 +32,7 @@ const MyProfile = () => {
     setDisabled(false)
   }
 
-  console.log("id --> ",id)
+  console.log("id --> ",adminId)
 
 
   if(isLoading) {
@@ -51,9 +52,9 @@ const MyProfile = () => {
     >
       <LinkBar
         linkArray={[
-          { title: "Home", path: "/dashboard/home/existinguser" },
+          { title: "Home", path: "/dashboard/home" },
           { title: "My Profile", path: "/dashboard/myprofile" },
-          { title: "Change Password" },
+          { title: "Update Profile" },
         ]}
       />
       <div

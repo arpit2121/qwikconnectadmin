@@ -63,15 +63,21 @@ const SettingMenu = ({ open, setOpen, id }) => {
   const [selectedIndex, setSelectedIndex] = React.useState(1);
   const navigate = useNavigate();
   const openSetting = Boolean(open);
+
   const handleMenuItemClick = (event, index,url) => {
     setSelectedIndex(index);
-    navigate(url+`/${id}`)
+    if (url === '/login') {
+      // Clear localStorage
+      localStorage.clear();
+    }
+    navigate(url)
     setOpen(false);
   };
 
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <Menu
       id="lock-menu"

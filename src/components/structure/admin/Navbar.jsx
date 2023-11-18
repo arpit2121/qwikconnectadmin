@@ -10,6 +10,8 @@ import StasTopbar from "../../../pages/dashboard/StatsTopBar";
 import Logo from "../../icons/Logo";
 import Loader from "../../loader/Loader";
 import { useAddNewJobMutation } from "../../../services/job";
+import { useSelector } from "react-redux";
+import QwikConnectLogo from "../../icons/QwikConnectLogo";
 
 const Navbar = ({
   showStatsBar = false,
@@ -21,46 +23,69 @@ const Navbar = ({
   const [isOp, setIsOp] = useState(false);
   const { pathname } = useLocation();
   const [addNewJob, {data,isLoading}] = useAddNewJobMutation();
-  const {id} = useParams();
+  const {jobpost_id} = useParams();
+  const adminId = useSelector((state)=>state.auth.adminId)
+  console.log(adminId)
   
   console.log("pathName -> . ",pathname);
 
   const titleMap = {
-    [`/dashboard/home/${id}`]: {
+    [`/dashboard/home`]: {
       title: "Dashboard",
       button: {
         title: "New Job",
         src: "/jobposting/basicDaetails",
       },
     },
-    [`/dashboard/myJobPost/${id}`]: {
+    [`/dashboard/myJobPost`]: {
       title: "Job Posting",
       button: { title: "New Job", src: "/jobposting/basicDaetails" },
     },
-    [`/dashboard/changepass/${id}`]: { title: "Change Password", button: null },
-    [`/dashboard/myprofile/${id}`]: { title: "My Profile", button: null },
-    [`/dashboard/myPlans/${id}`]: { title: "Plan & Billings ", button: null },
-    "/jobposting/publish-link": {
+    [`/dashboard/changepass`]: { title: "Change Password", button: null },
+    [`/dashboard/myprofile`]: { title: "My Profile", button: null },
+    [`/dashboard/myPlans`]: { title: "Plan & Billings ", button: null },
+    [`/jobposting/${jobpost_id}/publish-link`]: {
       title: "Job Posting ",
       button: {
         title: "Preview",
         src: "",
       },
     },
+    [`/jobposting/${jobpost_id}/question-setup`]: {
+      title: "Job Posting ",
+      button: {
+        title: "Preview",
+        src: "",
+      },
+    },
+    [`/jobposting/${jobpost_id}/branding`]: {
+      title: "Job Posting ",
+      button: {
+        title: "Preview",
+        src: "",
+      },
+    },
+    [`/jobposting/${jobpost_id}/basic-details`]: {
+      title: "Job Posting ",
+      // button: {
+      //   title: "Preview",
+      //   src: "",
+      // },
+    },
     // /dashboard/home/existinguser
   };
 
   const onIconClick = () => {
-    navigate(`/dashboard/home/${id}`);
+    navigate(`/dashboard/home`);
   };
 
   const handelClick = async () => {
     console.log("hello i'm here",pathname)
-    if(pathname===`/dashboard/home/${id}`){
-      await addNewJob(id).then((response) => {
+    if(pathname===`/dashboard/home` || 'dashboard/myJobPost'){
+      await addNewJob(adminId).then((response) => {
         console.log("response data", response.data);
         if (response.data) {
-          navigate("/jobposting/basicDaetails");
+          navigate(`/jobposting/${response.data._id}/basicDaetails`);
         }
       });
     }
@@ -95,7 +120,8 @@ const Navbar = ({
           backgroundColor: "#fff",
         }}
       >
-        <Logo onClick={onIconClick} />
+        {/* <Logo onClick={onIconClick} /> */}
+        {responsive.isMobile || responsive.isTablet? <Logo onClick={onIconClick}/> : <QwikConnectLogo onClick={onIconClick}/>}
 
         <div style={{ width: responsive.isMobile?'': "55%" }}>
           {showTitle && (

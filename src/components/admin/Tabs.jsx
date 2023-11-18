@@ -4,7 +4,7 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import CustomAllTypography from "../typography/CustomTypograpgy";
 import { styled } from "@mui/material";
 import { AiOutlineArrowLeft } from "react-icons/ai";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import useResponsiveStyles from "../../utils/MediaQuery";
 import JobPostingStepTwo from "../../pages/dashboard/jobposting/JobPostingStepTwo";
 import JobPostingStepThree from "../../pages/dashboard/jobposting/JobPostingStepThree";
@@ -19,10 +19,13 @@ import { useDispatch } from "react-redux";
 import { setSelectedJobPostingPage } from "../../slice/common.slice";
 import { useSelector } from "react-redux";
 import {
+  useAddNewJobMutation,
   usePublishLinkMutation,
   useUpdateBasicDetailsMutation,
+  useUpdateBrandingMutation,
   useUpdateParametersMutation,
 } from "../../services/job";
+import FormData from "form-data";
 
 const StyledTab = styled(Tab)({
   "&.Mui-selected": {
@@ -53,23 +56,30 @@ const CustomTabs = () => {
     "/jobposting/branding",
     "/jobposting/publish-link",
   ];
-  const counter = useSelector((state) => state.common.selectedJobPostingPage);
+  // const counter = useSelector((state) => state.common.selectedJobPostingPage);
   const [value, setValue] = React.useState("1");
   let value1 = urls[parseInt(value) - 1];
   const responsive = useResponsiveStyles();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
 
+  const adminId = useSelector((state)=>state.auth.adminId)
+
+const {jobpost_id} = useParams()
   const { basic_details, branding, publish_link, question_setup } = useSelector(
     (state) => state.job
   );
 
+  console.log("branding branding branding ",branding)
+
   const [updateBasicDetails, { data: basicDetails, isLoading }] =
-    useUpdateBasicDetailsMutation();
+  useUpdateBasicDetailsMutation();
   const [updateParameters] = useUpdateParametersMutation();
   const [publishLink] = usePublishLinkMutation();
+  const [updatedBranding] = useUpdateBrandingMutation();
 
-  console.log("path", pathname);
+
+  // console.log("path", pathname);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -78,7 +88,7 @@ const CustomTabs = () => {
 
   const navigate = useNavigate();
   const goBack = () => {
-    navigate("/dashboard/home/existinguser");
+    navigate("/dashboard/home");
   };
 
   // const handleNext = () => {
@@ -92,6 +102,14 @@ const CustomTabs = () => {
 
   //handle next function for handeling the api
 
+  const [addNewJob] = useAddNewJobMutation();
+  // console.log("dataaaa",)
+  
+  
+  React.useEffect(()=>{
+    addNewJob(adminId);
+  },[])
+
   const handleNext = async () => {
     const nextValue = parseInt(value) + 1;
     console.log("nextValue --- > ", nextValue, pathname);
@@ -103,7 +121,7 @@ const CustomTabs = () => {
       switch (value) {
         case "1":
           console.log("hoo1", basic_details);
-          const jobPostId = "651154effdc5ba161f0b15b0";
+          const jobPostId = jobpost_id;
           await updateBasicDetails({ basic_details, jobPostId }).then(
             (response) => {
               console.log("response data", response);
@@ -116,9 +134,10 @@ const CustomTabs = () => {
           // setValue(nextValue.toString());
           break;
         case "2":
-          console.log("hoo2");
-          const jobPostId1 = "651154effdc5ba161f0b15b0";
-          const adminId1 = "651137f89cbfd5858dc871a5";
+          console.log("hoo2", question_setup);
+          
+          const jobPostId1 = jobpost_id;
+          const adminId1 = adminId;
           await updateParameters({
             json_data: question_setup,
             adminId: adminId1,
@@ -137,12 +156,26 @@ const CustomTabs = () => {
           break;
         case "3":
           console.log("hoo3");
-          setValue(nextValue.toString());
-          dispatch(setSelectedJobPostingPage(nextValue));
+          // setValue(nextValue.toString());
+          // dispatch(setSelectedJobPostingPage(nextValue));
           // setValue(nextValue.toString());
           // API call for tab 3
           // dispatch(setSelectedJobPostingPage(nextValue));
           // Make API call specific to tab 3
+          const formData = new FormData();
+          formData.append('file', branding.blobFile)
+          formData.append('json_data',JSON.stringify(branding.colors))
+          await updatedBranding({
+            adminId,
+            jobPostId:jobpost_id,
+            formData
+          }).then((response) => {
+            console.log("response data", response);
+            if (response.data) {
+              setValue(nextValue.toString());
+              dispatch(setSelectedJobPostingPage(nextValue));
+            }
+          });
           break;
         default:
           console.log("tabindex is not present");
@@ -152,19 +185,17 @@ const CustomTabs = () => {
   };
 
   const handlePublish = async () => {
-    console.log("hello");
-    const jobPostId1 = "651154effdc5ba161f0b15b0";
-    const adminId1 = "651137f89cbfd5858dc871a5";
+
     await publishLink({
       formData: "",
-      adminId: adminId1,
-      jobPostId: jobPostId1,
+      adminId: adminId,
+      jobPostId: jobpost_id,
     }).then((response) => {
       console.log("response data", response);
       if (response.data) {
         // setValue(nextValue.toString());
         // dispatch(setSelectedJobPostingPage(nextValue));
-        navigate("/dashboard/home/existinguser")
+        navigate("/dashboard/home")
       }
     });
   };
@@ -214,7 +245,7 @@ const CustomTabs = () => {
         <LinkBar
           linkArray={[
             { title: "Home", path: "/dashboard/home" },
-            { title: "My Job Post", path: "/jobposting/basicDaetails" },
+            { title: "My Job Post", },
           ]}
           currentStep={value}
           showSteps={true}
@@ -240,39 +271,41 @@ const CustomTabs = () => {
               label="Basic Details"
               value="1"
               component={Link}
-              to={"/jobposting/basic-details"}
+              to={`/jobposting/${jobpost_id}/basic-details`}
             />
             <StyledTab
               label="Question Setup"
               value="2"
               component={Link}
-              to={"/jobposting/question-setup"}
+              to={`/jobposting/${jobpost_id}/question-setup`}
             />
             <StyledTab
               label="Branding"
               value="3"
               component={Link}
-              to={"/jobposting/branding"}
+              to={`/jobposting/${jobpost_id}/branding`}
+              disabled= {false ? true : false}
             />
             <StyledTab
               label="Publish link"
               value="4"
               component={Link}
-              to={"/jobposting/publish-link"}
+              to={`/jobposting/${jobpost_id}/publish-link`}
+              // disabled
             />
           </TabList>
         </Box>
         <StyleTabPanel value="1">
-          <JobPostingStepFourB />
+          <JobPostingStepFourB adminid={adminId} jobpostid={jobpost_id}/>
         </StyleTabPanel>
         <StyleTabPanel value="2">
-          <JobPostingStepTwo />
+          <JobPostingStepTwo adminid={adminId} jobpostid={jobpost_id}/>
         </StyleTabPanel>
         <StyleTabPanel value="3">
-          <JobPostingStepThree />
+          <JobPostingStepThree adminid={adminId} jobpostid={jobpost_id}/>
         </StyleTabPanel>
         <StyleTabPanel value="4">
-          <JobPostingStepFourA />
+          <JobPostingStepFourA adminid={adminId} jobpostid={jobpost_id}/>
         </StyleTabPanel>
       </TabContext>
       {value == "1" ? (

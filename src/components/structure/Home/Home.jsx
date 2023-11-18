@@ -56,10 +56,10 @@ const Home = () => {
           <div
             style={{
               // height: "10%",
-              width: "97%",
+              width: "100%",
               display: "flex",
               alignItems: "flex-start",
-              marginTop: "5rem",
+              // marginTop: "5rem",
             }}
           >
             <TextDescription responsive={responsive}>

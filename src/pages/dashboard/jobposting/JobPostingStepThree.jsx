@@ -1,18 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import CustomDropzone from "../../../components/dropzone/CustomDropzone";
-
+import { useDispatch, useSelector } from "react-redux";
+import CommonTextInput from "../../../components/textfield/CommonTextInput";
+import { setBrandingColor } from "../../../slice/job.slice";
 
 const JobPostingStepThree = () => {
   const responsive = useResponsiveStyles();
 
-  const [uploadedFiles, setUploadedFiles] = useState();
+  const [uploadedFiles, setUploadedFiles] = useState(null);
 
+  const branding = useSelector((state) => state.job.branding);
+  console.log("file ->>", branding.blobFile, branding.colors);
 
+  const dispatch = useDispatch();
 
+  const subscribed = false;
 
-  console.log("uploadedFiles",uploadedFiles)
+  const handleInputChange = (event) => {
+    // console.log("hii");
+    const { name, value } = event.target;
+    // setJobDetails((prevDetails) => ({
+    //   ...prevDetails,
+    //   [name]: value,
+    // }));
+    dispatch(setBrandingColor({name, value}))
+  };
+
+  console.log("uploadedFiles", uploadedFiles);
   return (
     <div style={{ padding: responsive.isMobile ? "0 1rem" : "" }}>
       <div style={{ backgroundColor: "", marginTop: "4rem" }}>
@@ -24,20 +40,35 @@ const JobPostingStepThree = () => {
           />
         </div>
         <div style={{ marginTop: "2rem" }}>
-          <CustomDropzone acceptedTypes={['image/*']} name={"Upload csv file"} setUploadedFiles={setUploadedFiles}/>
+          <CustomDropzone
+            acceptedTypes={["image/*"]}
+            name={"Upload csv file"}
+            setUploadedFiles={setUploadedFiles}
+            dispatch={dispatch}
+          />
         </div>
         <div
           style={{
             marginTop: "2.69rem",
             display: "flex",
             justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
           <CustomAllTypography
             name={"Primary Brand Colour"}
             variant={"body1"}
           />
-          <CustomAllTypography name={"#202020"} variant={"body1"} sx={{background:'var(--fields-form, #F7F7FD)', padding:'1rem 1.25rem', borderRadius:'1.125rem',border: '1px solid var(--fields-stroke-hover, #E8E6F8)'}}/>
+          <div style={{ width: "120px" }}>
+            <CommonTextInput
+              value={branding.colors.primary_brand_colour}
+              title=""
+              placeholder="color"
+              name={"primary_brand_colour"}
+              handleInputChange={handleInputChange}
+              disabled = {subscribed}
+            />
+          </div>
         </div>
         <div
           style={{
@@ -50,7 +81,16 @@ const JobPostingStepThree = () => {
             name={"Secondary Brand Colour"}
             variant={"body1"}
           />
-          <CustomAllTypography name={"#505DEC"} variant={"body1"} sx={{background:'var(--fields-form, #F7F7FD)', padding:'1rem 1.25rem', borderRadius:'1.125rem',border: '1px solid var(--fields-stroke-hover, #E8E6F8)'}}/>
+          <div style={{ width: "120px" }}>
+            <CommonTextInput
+              value={branding.colors.secondary_brand_colour}
+              title=""
+              placeholder="color"
+              name={"secondary_brand_colour"}
+              handleInputChange={handleInputChange}
+              disabled = {subscribed}
+            />
+          </div>
         </div>
       </div>
     </div>

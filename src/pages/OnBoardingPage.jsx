@@ -25,7 +25,7 @@ const OnBoardingPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isOther, setIsOther] = useState(false)
-  const [addAdmin, { data: profileData, isLoading, isSuccess }] =
+  const [addAdmin, { data: profileData, isLoading, isSuccess, isError, error }] =
     useAddAdminMutation();
     const { state } = useLocation();
 
@@ -45,15 +45,25 @@ const OnBoardingPage = () => {
 
 
 
-  const handelOnBoard = async () => {
-    console.log(values);
-    await addAdmin(values).then((response) => {
-      console.log("response data", response.data);
-      if (response.data) {
-        navigate(`/dashboard/home/${response.data?._id}`);
-      }
-    });
-  };
+  // const handelOnBoard = async () => {
+  //   console.log(values);
+  //   await addAdmin(values).then((response) => {
+  //     console.log("response data", response.data);
+  //     if (response.data) {
+  //       navigate(`/dashboard/home/${response.data?._id}`);
+  //     }
+  //   });
+  // };
+
+  const handelOnBoard = async () =>{
+    // isLoading(true)
+    const res = await addAdmin(values);
+    console.log("res",res)
+    navigate(`/dashboard/home/${res.data?._id}`);
+    if(isError){
+      console.log("error", error)
+    }
+  }
   
 
   const {
@@ -68,13 +78,14 @@ const OnBoardingPage = () => {
     // isValidating,
   } = useFormik({
     initialValues: {
-      email: "vaibhavnaik12@gmail.com",
+      email: state.email,
       fullName: "",
       phone_number: "",
       company_name: "",
       profession: "",
     },
     validationSchema: onBoardingSchema,
+    isInitialValid:false,
     handelOnBoard,
   });
 

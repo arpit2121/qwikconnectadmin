@@ -7,6 +7,7 @@ import {intervieweeApi} from "./services/interviewee";
 import commonReducer from './slice/common.slice';
 import adminRducer from './slice/admin.slice';
 import jobReducer from './slice/job.slice';
+import authReducer from './slice/auth.slice';
 
 
 
@@ -20,7 +21,8 @@ const store = configureStore({
         [intervieweeApi.reducerPath]: intervieweeApi.reducer,
         common: commonReducer,
         admin: adminRducer,
-        job: jobReducer
+        job: jobReducer,
+        auth: authReducer
     },
     middleware: (gDM) => gDM().concat(authApi.middleware,adminsApi.middleware,jobsApi.middleware,questionsApi.middleware, intervieweeApi.middleware)
 });

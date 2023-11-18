@@ -11,11 +11,14 @@ import { basicSchema } from "../validations";
 import { useEffect } from "react";
 import CustomizedSnackbar from "../components/snackbar/CustomizedSnackbar";
 import  CircularIndeterminate from "../components/loader/CircularLoader";
+import { useLocation } from "react-router-dom";
 
 const Login = () => {
   const responsive = useResponsiveStyles();
   const navigate = useNavigate();
   const [verifyEmail, { data, isSuccess, isLoading }] = useLazyVerifyEmailQuery();
+
+  const { state } = useLocation();
 
   const onSubmit = async (emailId) => {
     await verifyEmail(emailId.email, true);
@@ -26,9 +29,14 @@ const Login = () => {
       initialValues: {
         email: "",
       },
+      isInitialValid:false,
       validationSchema: basicSchema,
       onSubmit,
     });
+
+    useEffect(()=>{
+      console.log("isValid",isValid)
+    },[isValid])
 
   useEffect(() => {
     if (isSuccess) {
@@ -61,7 +69,7 @@ const Login = () => {
           : "4.5rem",
       }}
     >
-      <CustomAllTypography variant={"h1"} name={"Login/Signup"} />
+      <CustomAllTypography variant={"h1"} name={state?.name ? state.name : 'Login/Signup'} />
       <div
         style={{
           display: "flex",

@@ -16,7 +16,7 @@ const ChangePassword = () => {
     <div style={{backgroundColor:'',padding:responsive.isMobile ? "0 1rem 0 1rem" : responsive.isTablet? "0 5rem 0 5rem" : "0rem 15rem 0 15rem"}}>
       <div>
       <LinkBar linkArray={[
-                    { title: "Home", path: "/dashboard/home/existinguser" },
+                    { title: "Home", path: "/dashboard/home" },
                     { title: "My Profile", path: "/dashboard/myprofile" },
                     { title: "Change Password" },
                   ]}/>

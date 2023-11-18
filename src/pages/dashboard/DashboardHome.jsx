@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import CommonProfileBar from "./CommonProfileBar";
 import ExistingUser from "./ExistingUser";
 import NonExisting from "./NonExisting";
@@ -8,40 +8,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { setApiLoadere } from "../../slice/common.slice";
 import { useGetActiveJobPostQuery } from "../../services/job";
 
-
 const DashboardHome = () => {
   const dispatch = useDispatch();
-  
-  const {id} = useParams();
-  console.log("id", id)
 
-  const {
-    data:adminData,
-    isLoading,
-  } = useGetAdminInfoQuery(id);
-  // const 
-const {data: activeJobPost} = useGetActiveJobPostQuery(id)
+  const adminId = useSelector((state) => state.auth.adminId);
 
-console.log("activeJobPost",activeJobPost)
+  const { data: adminData, isLoading } = useGetAdminInfoQuery(adminId);
 
+  const { data: activeJobPost } = useGetActiveJobPostQuery(adminId);
 
-  if(isLoading) {
+  if (isLoading) {
     dispatch(setApiLoadere(true));
-  }
-  else{
+  } else {
     dispatch(setApiLoadere(false));
   }
-
-  console.log("adminn data --> ",adminData, activeJobPost,activeJobPost?.length)
-
-  // let split = adminData?.fullName.split(' ')
 
 
   return (
     <div style={{ height: "100%", width: "100%" }}>
-       <CommonProfileBar application={adminData?.IntervieweeData?.pending} shortlisted={adminData?.IntervieweeData?.shortlisted} userName={adminData?.admin?.fullName}/>
-       {/* <Outlet /> */}
-       {  activeJobPost?.length === 0 ? <NonExisting/> : <ExistingUser data={activeJobPost}/>}
+      <CommonProfileBar
+        application={adminData?.IntervieweeData?.pending}
+        shortlisted={adminData?.IntervieweeData?.shortlisted}
+        userName={adminData?.admin?.fullName}
+      />
+      {/* <Outlet /> */}
+      {activeJobPost?.length === 0 ? (
+        <NonExisting />
+      ) : (
+        <ExistingUser data={activeJobPost} />
+      )}
     </div>
   );
 };

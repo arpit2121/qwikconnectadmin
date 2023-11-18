@@ -22,7 +22,7 @@ import { setParameter, setQuestions, setMinimumPassingParameter, setDisplayQuest
 import { useAddNewQuestionMutation } from "../../../services/job";
 import FormData from "form-data";
 
-const JobPostingStepTwo = () => {
+const JobPostingStepTwo = ({adminid, jobpostid}) => {
   const responsive = useResponsiveStyles();
   const dispatch = useDispatch();
 
@@ -41,6 +41,7 @@ const JobPostingStepTwo = () => {
   // const [questionSections, setQuestionSections] = React.useState([1]);
   const [editingIndex, setEditingIndex] = useState(null);
   const [editedData, setEditedData] = useState("Parameter");
+  const admin_id = useSelector((state)=> state.auth.adminId)
 
 
   console.log("questionsArrayminimum_passing_parameter,display_questions", questionsArray,display_questions);
@@ -74,7 +75,9 @@ const JobPostingStepTwo = () => {
     // formData.append('json_data', JSON.stringify(jsonData)); 
     // console.log("videp_key", formData)
     // }
+    console.log("hello")
     const { video_key, ...jsonData } = questionsArray[questionsArray.length - 1];
+    console.log(jsonData, video_key)
     const formData = new FormData();
     try {
       formData.append('file', video_key);
@@ -87,30 +90,28 @@ const JobPostingStepTwo = () => {
     console.log("file in FormData:", formData.get('file'));
     console.log("json_data in FormData:", formData.get('json_data'));
 
-    const jobPostId= "651154effdc5ba161f0b15b0";
-    const adminId =  "651137f89cbfd5858dc871a5"
 
-    await addNewQuestion({formData:formData, adminId: adminId, jobPostId:jobPostId}).then((response) => {
+    await addNewQuestion({formData:formData, adminId: admin_id, jobPostId:jobpostid}).then((response) => {
       console.log("response data", response); 
       if (response.data) {
        console.log("hello")
       }
     });
 
-    dispatch(
-      setQuestions([
-        ...questionsArray,
-        {
-        questionNo: questionsArray.length+1,
-        questionTitle: "Question Title here",
-        isMandatory: false,
-        retakes: "",
-        thinkingTime: "",
-        timeToAnswer: "",
-        questionVideoKey: "blob file",
-        },
-      ])
-    );
+    // dispatch(
+    //   setQuestions([
+    //     ...questionsArray,
+    //     {
+    //     questionNo: questionsArray.length+1,
+    //     questionTitle: "Question Title here",
+    //     isMandatory: false,
+    //     retakes: "",
+    //     thinkingTime: "",
+    //     timeToAnswer: "",
+    //     questionVideoKey: "blob file",
+    //     },
+    //   ])
+    // );
   };
 
   const handleEdit = (index) => {
@@ -410,6 +411,7 @@ const JobPostingStepTwo = () => {
             >
               <CustomAllTypography
                 name={`Q${index + 1}`}
+                // name={`Q${[questions.questionNo]:index + 1}`}
                 variant={"h4"}
                 textcolor={"#C9C8D3"}
               />

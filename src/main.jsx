@@ -12,16 +12,17 @@ import { ThemeProvider } from 'styled-components'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-    <Provider store={store}>
+    <App />
+)
+
+
+    // <Provider store={store}>
     {/* <GoogleOAuthProvider clientId='802265504166-7q42g3j4pvcs7gsmmr1u70de4n7m79il.apps.googleusercontent.com'> */}
     {/* <ThemeProvider theme={darkspacetheme}> */}
-    <ThemeProvider theme={darkspacetheme}>
-    <BrowserRouter>
-    <App />
-    </BrowserRouter>
-    </ThemeProvider>
+    {/* <ThemeProvider theme={darkspacetheme}> */}
+    {/* <BrowserRouter> */}
+    {/* </BrowserRouter> */}
+    {/* </ThemeProvider> */}
     {/* </ThemeProvider> */}
     {/* </GoogleOAuthProvider>  */}
-    </Provider>
-    
-)
+    {/* </Provider> */}

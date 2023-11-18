@@ -11,13 +11,15 @@ export const initialState = {
     requiredExperience: "",
   },
   branding: {
-    image: "",
-    primary_brand_colour: "",
-    secondary_branch_colour: "",
+    blobFile: "",
+    colors: {
+      primary_brand_colour: "#202020",
+      secondary_brand_colour: "#505DEC",
+    }
   },
   publish_link: {
     publicLink: "",
-    csv: "set the file",
+    csvFile: "",
   },
   question_setup: {
     minimum_passing_parameter: "",
@@ -25,7 +27,7 @@ export const initialState = {
     display_questions: "",
     questionsArray: [
       {
-        questionNo: "",
+        questionNo: '',
         questionTitle: "Question Title here",
         isMandatory: false,
         retakes: "",
@@ -67,6 +69,13 @@ export const jobSlice = createSlice({
     deleteQuestion: (state, action) => {
       const {index, updatedObject} = action.payload;
       state.question_setup.questionsArray[index] = updatedObject;
+    },
+    setBrandingLogo: (state, action) => {
+      console.log("setting branding logo",action.payload)
+      state.branding.blobFile = action.payload; 
+    },
+    setBrandingColor: (state, action) => {
+      state.branding.colors[action.payload.name] = action.payload.value;
     }
   },
   extraReducers: (builder) => {
@@ -83,7 +92,26 @@ export const jobSlice = createSlice({
           passingPoint: payload?.passingPoint ? payload?.passingPoint : "",
           display_questions: payload?.displayQuestions ? payload?.displayQuestions : "",
           ratingParameters: payload?.ratingParameters,
-          questionsArray: payload?.questionBank
+          questionsArray:  payload?.questionBank.concat({
+            questionNo: "",
+            questionTitle: "Question Title here",
+            isMandatory: false,
+            retakes: "",
+            thinkingTime: "",
+            timeToAnswer: "",
+            questionVideoKey: "blob file",
+          }),
+          // payload?.questionBank.length===0 ? [
+          //   {
+          //     questionNo: "",
+          //     questionTitle: "Question Title here",
+          //     isMandatory: false,
+          //     retakes: "",
+          //     thinkingTime: "",
+          //     timeToAnswer: "",
+          //     questionVideoKey: "blob file",    
+          //   }
+          // ] : payload?.questionBank
         },
         state.publish_link = {
           publicLink: payload?.publicLink
@@ -93,6 +121,6 @@ export const jobSlice = createSlice({
   },
 });
 
-export const { setJobData, setBasicDetails, setParameter, setQuestions, updateQuestion, deleteQuestion, setMinimumPassingParameter, setDisplayQuestions} = jobSlice.actions;
+export const { setJobData, setBasicDetails, setParameter, setQuestions, updateQuestion, deleteQuestion, setMinimumPassingParameter, setDisplayQuestions, setBrandingLogo, setBrandingColor} = jobSlice.actions;
 
 export default jobSlice.reducer;

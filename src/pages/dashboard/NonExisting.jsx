@@ -5,6 +5,7 @@ import { CustomCard } from "../../components/card/CustomCard";
 import { CustomInputButton } from "../../components/button/CustomButoon";
 import RightArrowIcon from "../../components/icons/RightArrowIcon";
 import { useAddNewJobMutation } from "../../services/job";
+import { useSelector } from "react-redux";
 
 
 
@@ -12,13 +13,14 @@ const NonExisting = () => {
   
   const [addNewJob, {data,isLoading}] = useAddNewJobMutation();
   const navigate = useNavigate();
+  const adminId = useSelector((state)=>state.auth.adminId)
 
   const handelClick = async () =>{
-    console.log("hiii")
-    await addNewJob("651137f89cbfd5858dc871a5").then((response) => {
+    // console.log("hiii")
+    await addNewJob(adminId).then((response) => {
       console.log("response data", response.data);
       if (response.data) {
-        navigate("/jobposting/basicDaetails");
+        navigate(`/jobposting/${response.data._id}/basicDaetails`);
       }
     });
   }
