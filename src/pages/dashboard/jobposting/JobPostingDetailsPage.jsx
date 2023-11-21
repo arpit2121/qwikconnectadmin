@@ -317,7 +317,16 @@ const JobPostingDetailsPage = () => {
     getAllInterviewee({ adminId: adminId, jobPostId: jobPostId });
   }, []);
 
-  console.log("intervieweeData", intervieweeData);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     if (jobPostId) {
+  //       await getAllInterviewee({ adminId: adminId, jobPostId: jobPostId });
+  //     }
+  //   })();
+  // }, [jobPostId]);
+
+  console.log("intervieweeData", intervieweeData?.length);
 
   const handleClick1 = (intervieweeId) => {
     // console.log("hello",intervieweeId)
@@ -348,7 +357,7 @@ const JobPostingDetailsPage = () => {
 
   const [activePage, setActivePage] = useState(1);
   const [limitPerPage, setLimitPerPage] = useState(10);
-  const numOfTotalPages = Math.ceil(data.length / limitPerPage);
+  const numOfTotalPages = Math.ceil(data?.length / limitPerPage);
 
   const indexOfLastData = activePage * limitPerPage;
   const indexOfFirstData = indexOfLastData - limitPerPage;
@@ -356,7 +365,7 @@ const JobPostingDetailsPage = () => {
   const pages = [...Array(numOfTotalPages + 1).keys()].slice(1);
   console.log("d", numOfTotalPages);
 
-  const visibleData = data.slice(indexOfFirstData, indexOfLastData);
+  const visibleData = data?.slice(indexOfFirstData, indexOfLastData);
 
 
   const [open, setOpen] = React.useState(false);

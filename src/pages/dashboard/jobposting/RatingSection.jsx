@@ -19,6 +19,7 @@ const RatingSection = () => {
         padding: responsive.isMobile ? "2rem 4rem" : "0 3rem 3rem 3rem",
         boxSizing: "border-box",
         // zIndex: responsive.isMobile ? "" : "-1",
+        overflow:'scroll'
       }}
     >
       <div style={{ marginTop: responsive.isMobile ? "0rem" : "6rem" }}>

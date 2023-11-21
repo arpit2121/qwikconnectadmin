@@ -25,6 +25,7 @@ const OnBoardingPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isOther, setIsOther] = useState(false)
+  
   const [addAdmin, { data: profileData, isLoading, isSuccess, isError, error }] =
     useAddAdminMutation();
     const { state } = useLocation();

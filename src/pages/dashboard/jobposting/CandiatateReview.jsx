@@ -196,7 +196,7 @@ const CandiatateReview = () => {
                     }}
                   >
                     <CustomAllTypography name={"Status"} variant={"body2"} />{" "}
-                    <StatusButton name={"Pending"} />{" "}
+                    <StatusButton name={candidateData?.status === "Shortlisted" ? "Shortlisted" : candidateData?.status === "pending" ? "Pending" : "Rejected"} />{" "}
                     {responsive.isMobile && (
                       <div style={{ marginLeft: "1.44rem" }}>
                         <Body3 color={"#8A8894"}>{"1d ago"}</Body3>

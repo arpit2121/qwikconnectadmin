@@ -32,6 +32,34 @@ function QuestionCard({ index, questions,handleChange, deleteQuestion }) {
     deleteQuestion(index)
   }
 
+
+  const convertToSeconds = (selectedValue) => {
+    const secondsMap = {
+      '5s': 5,
+      '10s': 10,
+      '15s': 15,
+      '20s': 20,
+      '25s': 25,
+    };
+  
+    return secondsMap[selectedValue] || 0; // Default to 0 if not found
+  };
+
+  const handleChange2 = (event, index, nameCom) => {
+    // Your existing logic for handling changes
+    // ...
+  
+    // Now, add the conversion for 'thinkingTime' if applicable
+    if (nameCom === 'thinkingTime') {
+      const selectedValue = event.target.value;
+      const seconds = convertToSeconds(selectedValue); // Define this function
+      // Use the 'seconds' value as needed
+      // ...
+      handleChange(name, value, index)
+    }
+  };
+  
+
   return (
     <CustomCard
       key={index}
@@ -150,7 +178,8 @@ function QuestionCard({ index, questions,handleChange, deleteQuestion }) {
               placeholder="30 Sec"
               options={["5s", "10s", "15s", "20s", "25s"]}
               value={questions.thinkingTime}
-              handleDropChange={handleChange1}
+              // handleDropChange={handleChange1}
+               handleDropChange={(event) => handleChange2(event, index, "thinkingTime")}
               index={index}
               nameCom={"thinkingTime"}
             />

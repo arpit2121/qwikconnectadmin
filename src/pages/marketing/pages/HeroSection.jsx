@@ -4,6 +4,7 @@ import KeyFeatures from '../sections/KeyFeatures'
 import Plans from '../sections/Plans'
 import TestiMonials from '../sections/TestiMonials'
 import Rounded from '../components/Rounded'
+import UsersData from '../components/UsersData'
 
 const HeroSection = () => {
   return (
@@ -11,6 +12,7 @@ const HeroSection = () => {
         <Home />
         <KeyFeatures/>
         <TestiMonials/>
+        <UsersData/>
         <Plans/>
         <Rounded/>
     </>

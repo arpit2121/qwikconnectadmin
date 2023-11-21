@@ -6,6 +6,7 @@ import editicon from "../../../assets/svg/edit.svg";
 import RichTextEditor from "../../../components/textfield/RichTextEditor";
 import CommonTextInput from "../../../components/textfield/CommonTextInput";
 import { setBasicDetails } from "../../../slice/job.slice";
+import { useGetProfessionsQuery, useLazyGetProfessionsQuery } from "../../../services/admin";
 
 
 const JobPostingStepFourB = () => {
@@ -26,6 +27,7 @@ const dispatch = useDispatch();
 const exp = ["<1yrs", "1-2yrs", "2-3yrs", "3-4yrs", ">5yrs"]
 
 
+
 console.log("jobTitle,jobDescription,hiringLocation,profession,requiredExperience", jobTitle,
 jobDescription,
 hiringLocation,
@@ -36,14 +38,14 @@ useEffect(()=>{
   console.log("jkbsajdbasjbd",jobDescription)
 },[jobDescription])
 
-  const [jobDetails, setJobDetails] = useState({
-    job_title: "Enter Job Title here",
-    job_description: "",
-    hiring_loc: "",
-    your_profession: "",
-  });
 
+const { data } = useGetProfessionsQuery();
 
+const allProfessions = data
+?.map((categoryData) => categoryData.professions)
+.reduce((acc, professions) => acc.concat(professions), []);
+
+console.log("professionData",allProfessions)
 
   // console.log(jobDetails)
 
@@ -166,14 +168,13 @@ useEffect(()=>{
         <div style={{ marginTop: "2.63rem" }}>
         <CommonTextInput
                 style={{ margin: "1.5rem 0rem" }}
-                // borderStyle={{ borderRadius: "0.25rem" }}
                 type="dropdown"
-                placeholder="All"
+                placeholder="Your Experience"
+                value={requiredExperience}
+                setValue={requiredExperience}
+                handleInputChange={handleInputChange}
+                name="requiredExperience"
                 options={exp}
-                // value={passingPoint}
-                // handleDropChange={minimumPassingParameter}
-                index={""}
-                nameCom={""}
               />
         </div>
         <div style={{ marginTop: "2.63rem" }}>
@@ -185,6 +186,7 @@ useEffect(()=>{
             setValue={profession}
             handleInputChange={handleInputChange}
             name="profession"
+            options={allProfessions}
           />
         </div>
       </div>

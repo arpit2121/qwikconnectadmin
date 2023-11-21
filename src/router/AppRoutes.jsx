@@ -61,7 +61,7 @@ const AppRoutes = () => {
           <Route path="changepass" element={<ChangePassword />} />
           <Route path="myprofile" element={<MyProfile />} />
           <Route path="myPlans" element={<PlansBilling />} />
-          <Route path="myJobPost" element={<DashBoardMail />} />
+          <Route path="myJobPost" element=  {<DashBoardMail />} />
           <Route path="*" redirect to={<ExistingUser />} />
         </Route>
         <Route path="jobposting/:jobpost_id/:tabno" element={<JobPostingStepOne />} />

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../../../components/icons/Logo";
 import QwikConnectLogo from "../../../components/icons/QwikConnectLogo";
 import useResponsiveStyles from "../../../utils/MediaQuery";
@@ -7,7 +7,9 @@ import { CustomInputButton } from "../../../components/button/CustomButoon";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Link as ScrollLink } from 'react-scroll';
-import { Link } from "react-router-dom";
+import Hamburger from "../../../components/icons/Hamburger";
+import CustomDrawer from "./CustomDrawer";
+
 
 const MarketingNavbar = () => {
   const responsive = useResponsiveStyles();
@@ -88,6 +90,20 @@ const MarketingNavbar = () => {
     }
   };
 
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const handelDrawerClose = () =>{
+    setIsDrawerOpen(false)  
+  }
+
+
+  const handelDrawerOpen = () =>{
+    console.log("hello")
+      setIsDrawerOpen(true)
+      console.log(isDrawerOpen)
+  }
+
+
   return (
     <div
       style={{
@@ -144,7 +160,8 @@ const MarketingNavbar = () => {
         )}
       </div>
       {responsive.isMobile || responsive.isRandom ? (
-        <div>hamburge</div>
+        <div><Hamburger handelClick={handelDrawerOpen}/>{isDrawerOpen && <CustomDrawer isDrawerOpen={isDrawerOpen} handelClose={handelDrawerClose} navbarArray={navbars1} hash={hash}/> }</div>
+
       ) : (
         <div style={{ display: "flex" }}>
           {!user ? (

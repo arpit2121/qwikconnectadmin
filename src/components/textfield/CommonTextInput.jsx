@@ -87,7 +87,7 @@ const useStyles = makeStyles({
     width: "100%",
     border: "none",
     outline: "none",
-    color: (props) => (props?.disabled ? "#F7F7FD" : "#212121"),
+    // color: (props) => (props?.disabled ? "grey" : "#212121"),
     fontSize: "1rem",
     fontStyle: "normal",
     fontWeight: 400,
@@ -173,7 +173,7 @@ const CommonTextInput = ({
   placeholder = "Write here",
   title,
   // value = "",
-  value = "value",
+  value = "",
   setValue = () => {},
   searchInput,
   status,
@@ -412,8 +412,10 @@ const CommonTextInput = ({
               placeholder={title ? "" : placeholder}
               ref={inputRef}
               className={classes.textBoxStyles}
+              // color="red"
+              style={{color: disabled ? '#C5C0DB' : '#212121'}}
               onFocus={handleFocus}
-              onBlur={handleBlur}
+              onBlur={handleBlur}x
               autoComplete="new-user-street-address"
               onChange={
                 handleInputChange
@@ -434,6 +436,7 @@ const CommonTextInput = ({
               placeholder="Type Your Profession"
               displayEmpty
               value={value}
+              // className={classes.textBoxStyles}
               onChange={
                 handleInputChange
                   ? (e) => {

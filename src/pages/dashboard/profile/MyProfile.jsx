@@ -13,18 +13,24 @@ import { useGetAdminInfoQuery } from "../../../services/admin";
 import { useDispatch, useSelector } from "react-redux";
 import { setApiLoadere } from "../../../slice/common.slice";
 import EditIcon from "../../../components/icons/EditIcon";
+import { useFormik } from "formik";
+import { useEffect } from "react";
 
 const MyProfile = () => {
   const responsive = useResponsiveStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [disabled, setDisabled] = useState(true);
-  const {id} = useParams();
+
   const adminId = useSelector((state)=>state.auth.adminId);
+
   const {
     data:adminData,
     isLoading,
   } = useGetAdminInfoQuery(adminId);
+
+
 
 
   const isEdit = () =>{
@@ -32,7 +38,7 @@ const MyProfile = () => {
     setDisabled(false)
   }
 
-  console.log("id --> ",adminId)
+  console.log("id --> ",disabled)
 
 
   if(isLoading) {
@@ -43,6 +49,22 @@ const MyProfile = () => {
   }
 
   console.log("admin data in my profiel --> ",adminData)
+
+  const {values,isValid} = useFormik({
+    initialValues: {
+      firstName: adminData?.admin?.fullName ? adminData?.admin?.fullName.split(' ')[0] : "",
+      lastName: adminData?.admin?.fullName ? adminData?.admin?.fullName.split(' ')[1] : "", 
+      phone_number: adminData?.admin?.phone_number ? adminData?.admin?.phone_number : "",
+      company_name: adminData?.admin?.company_name ? adminData?.admin?.company_name : "",
+      profession: adminData?.admin?.profession ? adminData?.admin?.profession : ""
+    },
+    validationSchema: '',
+    isInitialValid:false,
+  }) 
+
+
+  console.log("va",adminData?.admin?.fullName.split(' ')[1])
+
   return (
     <div
       style={{
@@ -78,7 +100,7 @@ const MyProfile = () => {
             <div>
               <CustomAllTypography name={adminData?.admin?.fullName} variant={"h3"} />
               <CustomAllTypography
-                name={adminData?.email}
+                name={adminData?.admin?.email}
                 variant={"body2"}
               />
             </div>
@@ -135,13 +157,13 @@ const MyProfile = () => {
           <br />
           <CommonTextInput
           disabled={disabled}
-            value={adminData?.admin?.fullName}
+          value={adminData?.admin?.fullName}
             // setvalue={setEmail}
-            title="Last Name"
-            placeholder="Last Name"
-            searchInput={false}
+          title="Last Name"
+          placeholder="Last Name"
+          searchInput={false}
             // setValue={setEmail}
-            type1={"email"}
+          type1={"email"}
           />
         </div>
         <CommonTextInput
@@ -153,7 +175,7 @@ const MyProfile = () => {
           value={adminData?.admin?.phone_number}
         />
         <CommonTextInput
-        disabled={disabled}
+          disabled={disabled}
           value={adminData?.admin?.company_name}
           // setvalue={setEmail}
           title="Company Name"
@@ -163,7 +185,7 @@ const MyProfile = () => {
           type1={"email"}
         />
         <CommonTextInput
-        disabled={disabled}
+          disabled={disabled}
           style={{ margin: "1.5rem 0rem" }}
           type="dropdown"
           placeholder="Your Profession"

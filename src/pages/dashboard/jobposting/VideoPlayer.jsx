@@ -67,6 +67,16 @@ const VideoPlayer = () => {
   const [volumeIconType, setVolumeIconType] = useState("default");
   const responsive = useResponsiveStyles();
 
+  const [isVolumeHovered, setIsVolumeHovered] = useState(false);
+
+  const handleVolumeMouseEnter = () => {
+    setIsVolumeHovered(true);
+  };
+
+  const handleVolumeMouseLeave = () => {
+    setIsVolumeHovered(false);
+  };
+
   const vid = document.getElementById("video1");
 
   const videoRef = useRef(null);
@@ -167,8 +177,15 @@ const VideoPlayer = () => {
   function myFunction1() {
     // const vid = document.getElementById("video1");
     //  videoRef.current.play()
-    //  setVideoTime(vid?.duration);
+    //  setVideoTime(vid?.duration);  
   }
+
+  useEffect(() => {
+    if (vid) myFunction1();
+
+    // Update volume icon type based on the initial volume value
+    setVolumeIconType(volume === 0 ? "mute" : volume < 50 ? "lowSound" : "default");
+  }, [videoLink, vid]);
 
   useEffect(() => {
     if (vid) myFunction1();
@@ -176,8 +193,8 @@ const VideoPlayer = () => {
 
   return (
     <div
-      onMouseEnter={onVideoMouseEnter}
-      onMouseLeave={onVideoMouseLeave}
+      onMouseEnter={()=>{onVideoMouseEnter(), handleVolumeMouseEnter()}}
+      onMouseLeave={()=>{onVideoMouseLeave(), handleVolumeMouseLeave()}}
       className="outerDiv"
       style={{ height: responsive.isMobile ? "11.06rem" : "21.28rem" }}
     >
@@ -253,6 +270,7 @@ const VideoPlayer = () => {
         </div>
       </div>
 
+      {volume > 0 && isVolumeHovered && (
       <div
         className="volumeController"
         style={{
@@ -260,7 +278,7 @@ const VideoPlayer = () => {
           right: responsive.isMobile ? "0.37rem" : "1.37rem",
         }}
       >
-        <CustomSoundBar
+        {/* <CustomSoundBar
           sx={{ height: "70%", padding: "0px !important", width: "60%" }}
           orientation="vertical"
           aria-label="Volume"
@@ -272,8 +290,25 @@ const VideoPlayer = () => {
           onClick={onClickVolume}
           height={responsive.isMobile ? 12 : 15}
           width={responsive.isMobile ? 12 : 15}
-        />
+        /> */}
+         {/* {volume > 0 && isVolumeHovered && ( */}
+            <>
+              <CustomSoundBar
+                sx={{ height: "70%", padding: "0px !important", width: "60%" }}
+                orientation="vertical"
+                aria-label="Volume"
+                value={volume}
+                onChange={handleVolumeChange}
+              />
+              <VolumeIcon
+                type={volumeIconType}
+                onClick={onClickVolume}
+                height={responsive.isMobile ? 12 : 15}
+                width={responsive.isMobile ? 12 : 15}
+              />
+            </>
       </div>
+          )}
       <div className={"timeForwardBackwardDiv"}>
         <div
           className="arrowContainer"

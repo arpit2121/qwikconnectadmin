@@ -4,9 +4,10 @@ import { jobsApi } from "../services/job";
 export const initialState = {
   job_data: {},
   basic_details: {
-    jobTitle: "Enter Job Title here",
+    jobTitle: "",
     jobDescription: "",
     hiringLocation: "",
+    experience: "",
     profession: "",
     requiredExperience: "",
   },
@@ -33,7 +34,7 @@ export const initialState = {
         retakes: "",
         thinkingTime: "",
         timeToAnswer: "",
-        questionVideoKey: "blob file",    
+        questionVideoKey: "",    
       }
     ],
   },
@@ -83,10 +84,11 @@ export const jobSlice = createSlice({
       jobsApi.endpoints.addNewJob.matchFulfilled,
       (state, { payload }) => {
         state.basic_details = {
-          jobDescription: payload?.jobDescription,
+          jobDescription: payload?.jobDescription ? payload?.jobDescription: "Enter Job Title here",
           jobTitle: payload?.jobTitle,
           hiringLocation: payload?.hiringLocation,
           profession: payload?.profession,
+          requiredExperience: payload?.requiredExperience
         },
         state.question_setup = {
           passingPoint: payload?.passingPoint ? payload?.passingPoint : "",
@@ -99,19 +101,8 @@ export const jobSlice = createSlice({
             retakes: "",
             thinkingTime: "",
             timeToAnswer: "",
-            questionVideoKey: "blob file",
+            questionVideoKey: "",
           }),
-          // payload?.questionBank.length===0 ? [
-          //   {
-          //     questionNo: "",
-          //     questionTitle: "Question Title here",
-          //     isMandatory: false,
-          //     retakes: "",
-          //     thinkingTime: "",
-          //     timeToAnswer: "",
-          //     questionVideoKey: "blob file",    
-          //   }
-          // ] : payload?.questionBank
         },
         state.publish_link = {
           publicLink: payload?.publicLink

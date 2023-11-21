@@ -2,6 +2,8 @@ import React from "react";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import TestimonialCard from "../components/TestimonialCard";
 import useResponsiveStyles from "../../../utils/MediaQuery";
+import vector1 from '../../../assets/marketing/Vector3.svg'
+
 
 const data = [1, 2, 3, 4, 5, 6];
 
@@ -13,7 +15,8 @@ const TestiMonials = ({ style={} }) => {
     gap: "2rem",
     // padding: responsive.isMobile?''
     flexWrap: "wrap",
-    justifyContent:'center'
+    justifyContent:'center',
+    // backgroundColor:'red'
   };
 
   const cardDivStyleMobile = {
@@ -43,12 +46,12 @@ const TestiMonials = ({ style={} }) => {
           marginTop: "6.5rem",
           display: "flex",
           justifyContent: "center",
-        //   padding: '4rem'
+          // backgroundColor:'green'
         }}
       >
         <CustomAllTypography name={"Testimonial"} variant={"h1"} />
       </div>
-      <div style={{ marginTop: "2rem", ...style }}>
+      <div style={{ marginTop: "2rem", ...style, }}>
         <div
           id="card_container_div"
           style={responsive?.isMobile ? cardDivStyleMobile : cardDivStyle}
@@ -60,6 +63,13 @@ const TestiMonials = ({ style={} }) => {
           ))}
         </div>
       </div>
+      {/* <div style={{ position: "absolute", left: "-5rem", bottom: "-115rem",backgroundColor:'red',zIndex:'-1' }}>
+            <img
+              src={vector1}
+              alt="vector1"
+              width={responsive.isMobile ? "50%" : "100%"}
+            />
+          </div> */}
     </div>
   );
 };

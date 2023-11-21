@@ -5,6 +5,7 @@ import useResponsiveStyles from "../../../utils/MediaQuery";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
+
 const PricingCard = () => {
   const responsive = useResponsiveStyles();
   const adminId = useSelector((state) => state.auth.adminId);
@@ -39,6 +40,7 @@ const PricingCard = () => {
     //   });
   };
   return (
+    
     <div
       style={{
         display: "flex",
@@ -54,6 +56,7 @@ const PricingCard = () => {
         boxShadow: "0px 8px 16px 0px rgba(142, 141, 208, 0.12)",
         maxWidth: "27.5625rem",
         marginTop: "1.75rem",
+        flexBasis:'auto'
       }}
     >
       <div
