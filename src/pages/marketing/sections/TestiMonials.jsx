@@ -1,13 +1,14 @@
-import React from "react";
+// import React from "react";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import TestimonialCard from "../components/TestimonialCard";
 import useResponsiveStyles from "../../../utils/MediaQuery";
-import vector1 from '../../../assets/marketing/Vector3.svg'
+// import vector1 from '../../../assets/marketing/Vector3.svg'
 
 
 const data = [1, 2, 3, 4, 5, 6];
 
-const TestiMonials = ({ style={} }) => {
+// eslint-disable-next-line react/prop-types
+const TestiMonials = ({style}) => {
   const responsive = useResponsiveStyles();
 
   const cardDivStyle = {

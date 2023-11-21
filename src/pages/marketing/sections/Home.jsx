@@ -1,12 +1,12 @@
-import React from 'react'
+// import React from 'react'
 import CustomAllTypography from '../../../components/typography/CustomTypograpgy'
 import { CustomInputButton } from '../../../components/button/CustomButoon'
-import useResponsiveStyles from '../../../utils/MediaQuery'
+// import useResponsiveStyles from '../../../utils/MediaQuery'
 import right from "../../../assets/marketing/Group 16.png";
 import left from "../../../assets/marketing/Group 18.png";
 
 const Home = () => {
-    const responsive = useResponsiveStyles();
+    // const responsive = useResponsiveStyles();
   return (
     <div style={{
         flexShrink: 0,
@@ -20,7 +20,7 @@ const Home = () => {
         <CustomAllTypography name={'One-Way Interviews'} variant={'h1'} textcolor='#605DEC' sx={{textAlign: 'center'}}/>
         </div>
         <div style={{marginTop: '2.25rem', display:'flex',justifyContent:'center',alignItems:'center', alignSelf:'center'}}><CustomAllTypography name={'Discover Top Talent with Seamless Video Interviews'} variant={'h4'} sx={{textAlign: 'center'}}/></div>
-        <div style={{marginTop: '5.31rem', paddingBottom: '10rem'}}>
+        <div style={{marginTop: '5.31rem', paddingBottom: '10rem' , width: '250px'}}>
             <CustomInputButton variant="contained"
         size="large" width={"100%"} responsive>Try For Free</CustomInputButton>
         </div>

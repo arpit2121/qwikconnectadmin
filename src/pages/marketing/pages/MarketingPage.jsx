@@ -15,7 +15,8 @@ const MarketingPage = () => {
       }}
     >
       <MarketingNavbar />
-     {true ?  <HeroSection/> : <ContactUs/>}
+    <HeroSection/> 
+   {/* <ContactUs/> */}
       <Footer/>
     </div>
     </CustomContainer>

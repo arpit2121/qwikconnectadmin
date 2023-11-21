@@ -26,6 +26,7 @@ import ContactUs from "../pages/marketing/pages/ContactUs";
 
 
 
+// eslint-disable-next-line react/prop-types
 const ProtectedLayout = ({ user, redirectPath = "/login" }) => {
   if (!user) {
     return <Navigate to={redirectPath} replace />;
@@ -33,6 +34,7 @@ const ProtectedLayout = ({ user, redirectPath = "/login" }) => {
   return <Outlet />;
 };
 
+// eslint-disable-next-line react/prop-types
 const IsEmailId = ({email, redirectPath = "/login"}) =>{
     if(!email) {
         return <Navigate to={redirectPath} replace />;

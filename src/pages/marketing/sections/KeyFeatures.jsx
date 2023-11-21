@@ -1071,9 +1071,8 @@
 // export default KeyFeatures;
 
 //---it's done -----
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
-import VideoComponent from "../components/VideoComponent";
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import poly from "../../../assets/polygonpng.png";
 import polygon2 from "../../../assets/svg/polygon2.svg";
@@ -1139,7 +1138,7 @@ const KeyFeatures = () => {
   }, [showAnimation, data.length, currentItemIndex]);
 
   const handleSectionClick = () => {
-    setCurrentItemIndex(0);
+    setCurrentItemIndex(1);
     setShowAnimation(true);
   };
 
@@ -1153,7 +1152,6 @@ const KeyFeatures = () => {
           padding: responsive.isMobile ? "4rem 2rem" : "6.5rem 5.12rem",
           display: responsive.isMobile ? "" : "flex",
           alignItems: "center",
-          alignItems: "center",
         }}
         id="key-features"
         className="key-features"
@@ -1161,9 +1159,9 @@ const KeyFeatures = () => {
       >
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "1.5rem",
+            display: 'grid',
+            gridColumn: '2',
+            gap: "1rem",
             width: responsive.isMobile ? "100%" : "40%",
           }}
         >
@@ -1172,26 +1170,28 @@ const KeyFeatures = () => {
             variant={"h3"}
             textcolor={"#36BF76"}
           />
-          <CustomAllTypography name={"QwikConnect Platform"} variant={"h1"} />
+          <CustomAllTypography name={"QwikConnect Platform"} variant={"h1"} textcolor = {"white"}/>
           <CustomAllTypography
             name={
               "Empowering Recruiters: Unlock Your Hiring Potential with Effortless Candidate Discovery."
             }
             variant={"body1"}
+            textcolor = {"white"}
           />
         </div>
-        <div style={{ width: responsive.isMobile ? "100%" : "60%" }}>
-          <img src={VideoCall} width={'80%'}></img>
+        <div style={{ width: responsive.isMobile ? "100%" : "60%",  marginLeft: 'auto'}}>
+          <img src={VideoCall} width={'80%'} style={{ marginLeft: responsive.isMobile ? "0%" : "10%"}}></img>
         </div>
       </div>
 
       <div
         style={{
           background: `url(${polygon2}),linear-gradient(180deg, #C0BEFF 0%, #E3C8FF 100%)`,
-          padding: "6.5rem 5.12rem",
-          display: responsive.isMobile ? "" : "flex",
+          padding: "1rem 1rem",
+          // display: responsive.isMobile ? "" : "flex",
           alignItems: "center",
           backgroundSize: "cover",
+          
         }}
         onClick={handleSectionClick}
       >
@@ -1212,45 +1212,72 @@ const KeyFeatures = () => {
           }}>
         <img src={data[currentItemIndex].image} width={'100%'} height={'30%'}></img>
         </div> */}
-        <div
+        {
+                 showAnimation ===false &&<div style={{
+                  width: "100%",
+                  display: "flex",
+                  minHeight: responsive.isMobile? '400px' : '600px',
+                  justifyContent: "center",
+                  flexDirection: responsive.isMobile? 'column' : 'row',
+
+                  transition: "opacity 1s ease-in-out, transform 4s ease-in-out",
+                }}>
+                  <div style={{width: responsive.isMobile? '100%' : '49%', display: "flex", justifyContent: "center", alignItems: 'center' }}>
+                  <img src={data[currentItemIndex].image} alt="item" style={{ maxWidth: '100%', height: 'auto' , maxHeight: responsive.isMobile? '400px' :""}} />
+                  </div>
+                  <div style={{width: responsive.isMobile? '100%' : '49%', display: "flex", flexDirection: "column", gap: "1.5rem", margin: 'auto 0' }}>
+                    <CustomAllTypography
+                      name={data[currentItemIndex].item1}
+                      variant={"h3"}
+                      textcolor={"#CE1E25"}
+                    />
+                    <CustomAllTypography
+                      name={data[currentItemIndex].item2}
+                      variant={"h1"}
+                    />
+                    <CustomAllTypography
+                      name={data[currentItemIndex].item3}
+                      variant={"body1"}
+                    />
+                  </div>
+                </div>
+                
+        }
+       {showAnimation=== true&& <div
           className={`animated-item ${
             showAnimation ? "item-animation" : "item-hidden"
           }`}
           style={{
-            width: "60%",
+            width: "100%",
             display: "flex",
+            minHeight: responsive.isMobile? '400px' : '600px',
             justifyContent: "center",
-            // backgroundImage: `url(${data[currentItemIndex].image})`,
-            backgroundSize: "cover",
-            transition:
-              "opacity 1s ease-in-out, transform 4s ease-in-out",
+            flexDirection: responsive.isMobile? 'column' : 'row',
+            transition: "opacity 1s ease-in-out, transform 4s ease-in-out",
             opacity: showAnimation ? 1 : 0,
             visibility: showAnimation ? "visible" : "hidden",
             transform: `translateY(${showAnimation ? 0 : 20}px)`, // Adjust the translateY value
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "1.5rem",
-            }}
-          >
-            <CustomAllTypography
-              name={data[currentItemIndex].item1}
-              variant={"h3"}
-              textcolor={"#CE1E25"}
-            />
-            <CustomAllTypography
-              name={data[currentItemIndex].item2}
-              variant={"h1"}
-            />
-            <CustomAllTypography
-              name={data[currentItemIndex].item3}
-              variant={"body1"}
-            />
-          </div>
-        </div>
+              <div style={{ width: responsive.isMobile? '100%' : '49%', display: "flex", justifyContent: "center", alignItems: 'center' }}>
+              <img src={data[currentItemIndex].image} alt="item" style={{ maxWidth: '100%', height: 'auto' , maxHeight: responsive.isMobile? '400px' :""}} />
+                  </div>
+                  <div style={{width: responsive.isMobile? '100%' : '49%', display: "flex", flexDirection: "column", gap: "1.5rem", margin: 'auto 0' }}>
+                    <CustomAllTypography
+                      name={data[currentItemIndex].item1}
+                      variant={"h3"}
+                      textcolor={"#CE1E25"}
+                    />
+                    <CustomAllTypography
+                      name={data[currentItemIndex].item2}
+                      variant={"h1"}
+                    />
+                    <CustomAllTypography
+                      name={data[currentItemIndex].item3}
+                      variant={"body1"}
+                    />
+                  </div>
+        </div>}
       </div>
     </>
   );
