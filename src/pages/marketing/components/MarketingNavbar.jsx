@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { Link as ScrollLink } from 'react-scroll';
 import Hamburger from "../../../components/icons/Hamburger";
 import CustomDrawer from "./CustomDrawer";
+import { Link } from "react-router-dom/dist";
 
 
 const MarketingNavbar = () => {
@@ -115,6 +116,9 @@ const MarketingNavbar = () => {
         alignItems: "center",
         zIndex: 1,
         position: "sticky",
+      scrollBehavior:"smooth",
+      top: 0
+        
       }}
     >
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -126,30 +130,37 @@ const MarketingNavbar = () => {
             style={{
               display: "flex",
               alignItems: "center",
+              gap:"1rem",
+              marginLeft: '4rem',
+              marginRight: '1rem'
+
             }}
           >
             {navbars1.map((item, index) => {
                console.log("item.to:", item.to);
               return(
-                <div key={index} style={{ margin: "0 2.5rem" }}>
+                <div key={index} >
                 {
                   item.to===""
                    ?
                     navigate()
                    :
+                  
                    <ScrollLink
                   to={item.to.substring(1)} // Remove the "#" from the beginning of the 'to' prop
                   spy={true}
                   smooth={true}
                   offset={-100} // You may need to adjust the offset based on your layout
                   duration={1000}
+                  style={{fontWeight: '500' , textDecoration: 'none' , color:'#212121' , cursor:'pointer' }}
                   activeClass="active-link" // Specify the class name for the active link
                 >
-                  <CustomAllTypography
+                    {item.name}
+                  {/* <CustomAllTypography
                     name={item.name}
                     variant={"body2"}
                     textcolor={(item.to === hash) ?'#605DEC' : ''}
-                  />
+                  /> */}
                 </ScrollLink>
                 }
                 {/* <Link to={{pathname:item.to.substring(1)}}>{item.name}</Link> */}

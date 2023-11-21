@@ -8,20 +8,20 @@ export  const CustomInputButton = styled(Button)(({ theme, responsive, variant, 
   let padding;
   switch (size) {
     case 'large':
-      padding = '1.25rem 2rem';
+      padding = '0.8rem 2rem';
       break;
       case 'normal':
-      padding = '1rem 2rem';
-      break;
+        padding = '0.8rem 2rem';
+        break;
     case 'medium':
-      padding = '0.88rem 2rem';
+      padding = '0.5rem 1.5rem';
       break;
     case 'small':
-      padding = '0.75rem 1.5rem';
+      padding = '0.3rem 1.2rem';
       break;
     case 'extra-small':
     default:
-      padding = '0rem 1.5rem';
+      padding = '0.1rem 1rem';
       break;
   }
 

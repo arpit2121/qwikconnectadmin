@@ -22,6 +22,9 @@
   font-weight:400 ;
 }
 
+.bold{
+  font-weight: bold !important;
+}
 /* input:-webkit-autofill {
   -webkit-text-fill-color: red;
 

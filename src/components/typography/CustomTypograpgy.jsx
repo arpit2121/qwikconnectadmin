@@ -94,7 +94,7 @@ const CustomAllTypography = ({ name, variant, sx={}, fontStyle, textcolor,onClic
     <CustomTypography
       variant={variant}
       responsive={responsive}
-      fontStyle={fontStyle}
+      fontStyle={{fontWeight: 'bold'}}
       onClick={onClick}
       sx={{...sx,color:textcolor,cursor:'pointer'}}
     >
