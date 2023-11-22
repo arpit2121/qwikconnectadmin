@@ -1086,7 +1086,7 @@ import QuestionCardImage from '../../../assets/marketing/QuestionCardImage.png'
 const KeyFeatures = () => {
   const responsive = useResponsiveStyles();
   const [showAnimation, setShowAnimation] = useState(false);
-  const [currentItemIndex, setCurrentItemIndex] = useState(0);
+  const [currentItemIndex, setCurrentItemIndex] = useState(1);
 
   const data = [
     {

@@ -5,58 +5,59 @@ import useResponsiveStyles from "../../../utils/MediaQuery";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-
 const PricingCard = () => {
   const responsive = useResponsiveStyles();
   const adminId = useSelector((state) => state.auth.adminId);
 
   const checkout = async (plan) => {
-    const data = await axios
-      .post(
+    try {
+      const response = await axios.post(
         "http://localhost:4546/v1/subscription/create-subscription-checkout-session",
-        {body: JSON.stringify({ plan: "plan", customerId: adminId })},
+        { body: JSON.stringify({ plan: "plan", customerId: adminId }) },
         {
           headers: {
             "Content-Type": "application/json",
           },
-        },
-      ).then((res)=>{
-        console.log("Res", res)
-        window.location = res.data.url
-      }).catch((err)=>{
-        console.log(err);
-      })
-    //   .then((res) => {
-    //     if (res.ok) return res.json();
-    //     console.log(res);
-    //     return res.json().then((json) => Promise.reject(json));
-    //   })
-    //   .then(({ session }) => {
-    //     console.log("session", session)
-    //     window.location = session.url;
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.error);
-    //   });
+        }
+      );
+
+      window.location = response.data.url;
+    } catch (error) {
+      console.error(error);
+    }
   };
+
   return (
-    
     <div
       style={{
         display: "flex",
-        padding: "2.1875rem 1.4375rem",
+        padding: "35px 23px",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        gap: "2.75rem",
+        gap: "44px",
         flexShrink: 0,
-        borderRadius: "1.25rem",
+        width:"full",
+        cursor:'pointer',
+        borderRadius: "20px",
+        minWidth: '300px',
         border: "1px solid #F4F3FE",
-        background: "#fff",
+        background: "#FFF",
         boxShadow: "0px 8px 16px 0px rgba(142, 141, 208, 0.12)",
-        maxWidth: "27.5625rem",
-        marginTop: "1.75rem",
-        flexBasis:'auto'
+        transition: "all 0.5s ease",
+      }}
+      onClick={() => checkout("price")}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.borderRadius = "30px";
+        e.currentTarget.style.background =
+          "linear-gradient(180deg, #605DEC 0%, #A5F 100%)";
+          e.currentTarget.style.color= 'white'
+          e.currentTarget.style.boxShadow= '0px 8px 16px 0px rgba(142, 141, 208, 0.4)'
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.borderRadius = "20px";
+        e.currentTarget.style.background = "#FFF";
+        e.currentTarget.style.color= 'black'
       }}
     >
       <div
@@ -66,10 +67,11 @@ const PricingCard = () => {
           alignItems: "center",
         }}
       >
-        <CustomAllTypography name={"Starter Pack"} variant={"h4"} sx={{}} />
+        <CustomAllTypography name={"Starter Pack"} variant={"h4"} />
         <CustomAllTypography
           name={"Free trial plan for companies."}
           variant={"body1"}
+          sx={{ textAlign: "center" }}
         />
       </div>
       <div
@@ -107,7 +109,10 @@ const PricingCard = () => {
         size="large"
         responsive
         width={"100%"}
-        onClick={() => checkout("price")}
+        style={{
+          borderRadius: "20px",
+          background: 'black'
+        }}
       >
         Choose Starter
       </CustomInputButton>
