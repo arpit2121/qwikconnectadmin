@@ -1,4 +1,3 @@
-import React from "react";
 import Message from "../../../assets/svg/message.svg";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import CommonTextInput from "../../../components/textfield/CommonTextInput";

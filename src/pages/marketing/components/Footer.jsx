@@ -1,5 +1,5 @@
-import React from 'react';
-import Logo from '../../../components/icons/Logo';
+// import React from 'react';
+// import Logo from '../../../components/icons/Logo';
 import QwikConnectLogo from '../../../components/icons/QwikConnectLogo';
 import CustomAllTypography from '../../../components/typography/CustomTypograpgy';
 import useResponsiveStyles from '../../../utils/MediaQuery';
@@ -27,36 +27,18 @@ const Footer = () => {
     const responsive = useResponsiveStyles();
 
     return (
-        <div
-            style={{
-                display: 'flex',
-                padding: responsive.isMobile ? '2rem 1rem' : '4rem 0rem 3rem 0rem',
-                flexDirection: 'column',
-                alignItems: 'center',
-                gap: '4rem',
-                width:'full',
-                backgroundColor: '#F4F3FE',
-            }}
-        >
-            <div
-                style={{
-                    display: 'flex',
-                    padding: responsive.isMobile ? '0 1rem' : '0rem 2rem',
-                    flexDirection: 'column',
-                    alignItems: 'flex-start',
-                    gap: '2rem',
-                    width:'full'
-
-                }}
-            >
+ 
                 <div
                     style={{
                         display: responsive.isMobile ? 'flex' : 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',
                         alignSelf: 'stretch',
-                        flexDirection: 'column',
-                        width:'full'
+                        flexDirection: responsive.isMobile ? 'column' : 'row',
+                        width:'full',
+                        padding: responsive.isMobile ? '1rem' :'2rem',
+                        background: '#F4F3FE',
+                        gap: '1rem'
                     }}
                 >
                     <QwikConnectLogo />
@@ -82,8 +64,7 @@ const Footer = () => {
                     </div>
                     <CustomAllTypography variant={'body2'} name={'Copyright © 2023 QwikConnect. All rights reserved.'} />
                 </div>
-            </div>
-        </div>
+         
     );
 };
 

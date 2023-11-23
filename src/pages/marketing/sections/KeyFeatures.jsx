@@ -1086,7 +1086,7 @@ import QuestionCardImage from '../../../assets/marketing/QuestionCardImage.png'
 const KeyFeatures = () => {
   const responsive = useResponsiveStyles();
   const [showAnimation, setShowAnimation] = useState(false);
-  const [currentItemIndex, setCurrentItemIndex] = useState(1);
+  const [currentItemIndex, setCurrentItemIndex] = useState(0);
 
   const data = [
     {
@@ -1149,7 +1149,7 @@ const KeyFeatures = () => {
           background: `url(${poly}),linear-gradient(180deg, #605DEC 0%, #A5F 100%)`,
           backgroundSize: "cover", // Adjust as needed
           backgroundRepeat: "no-repeat",
-          // padding: responsive.isMobile ? "4rem 2rem" : "6.5rem 5.12rem",
+          padding: responsive.isMobile ? "4rem 2rem" : "6.5rem 5.12rem",
           display: "flex",
           alignItems: "center",
           flexDirection:  responsive.isMobile ? "column" :'row',
@@ -1182,14 +1182,14 @@ const KeyFeatures = () => {
           />
         </div>
         <div style={{ width: responsive.isMobile ? "100%" : "60%",  marginLeft: 'auto'}}>
-          <img src={VideoCall} width={'80%'} style={{ marginLeft: responsive.isMobile ? "0%" : "10%"}}></img>
+          <img src={VideoCall} width={'100%'} style={{ marginLeft: responsive.isMobile ? "0%" : "10%"}}></img>
         </div>
       </div>
 
       <div
         style={{
           background: `url(${polygon2}),linear-gradient(180deg, #C0BEFF 0%, #E3C8FF 100%)`,
-          // padding: "1rem 1rem",
+          padding: "1rem 0",
           // display: responsive.isMobile ? "" : "flex",
           alignItems: "center",
           backgroundSize: "cover",
@@ -1197,37 +1197,19 @@ const KeyFeatures = () => {
         }}
         onClick={handleSectionClick}
       >
-        {/* <div className={`animated-item ${
-            showAnimation ? "item-animation" : "item-hidden"
-          }`}
-          style={{
-            width: "60%",
-            display: "flex",
-            justifyContent: "center",
-            // backgroundImage: `url(${data[currentItemIndex].image})`,
-            backgroundSize: "cover",
-            transition:
-              "opacity 1s ease-in-out, transform 4s ease-in-out",
-            opacity: showAnimation ? 1 : 0,
-            visibility: showAnimation ? "visible" : "hidden",
-            transform: `translateY(${showAnimation ? 0 : 20}px)`, // Adjust the translateY value
-          }}>
-        <img src={data[currentItemIndex].image} width={'100%'} height={'30%'}></img>
-        </div> */}
         {
                  showAnimation ===false &&<div style={{
                   width: "100%",
                   display: "flex",
+                  gap: '20px',
                   minHeight: responsive.isMobile? '400px' : '600px',
-                  justifyContent: "center",
                   flexDirection: responsive.isMobile? 'column' : 'row',
-
                   transition: "opacity 1s ease-in-out, transform 4s ease-in-out",
                 }}>
-                  <div style={{width: responsive.isMobile? '100%' : '49%', display: "flex", justifyContent: "center", alignItems: 'center' }}>
+                  <div style={{width: responsive.isMobile? '100%' : '100%', display: "flex", justifyContent: "center", alignItems: 'center' }}>
                   <img src={data[currentItemIndex].image} alt="item" style={{ maxWidth: '100%', height: 'auto' , maxHeight: responsive.isMobile? '400px' :""}} />
                   </div>
-                  <div style={{width: responsive.isMobile? '100%' : '49%', display: "flex", flexDirection: "column", gap: "1.5rem", margin: 'auto 0' }}>
+                  <div style={{width: responsive.isMobile? '90%' : '100%', display: "flex", flexDirection: "column", gap: "1.5rem", margin: 'auto' , }}>
                     <CustomAllTypography
                       name={data[currentItemIndex].item1}
                       variant={"h3"}
@@ -1251,9 +1233,9 @@ const KeyFeatures = () => {
           }`}
           style={{
             width: "100%",
+            gap: '20px',
             display: "flex",
             minHeight: responsive.isMobile? '400px' : '600px',
-            justifyContent: "center",
             flexDirection: responsive.isMobile? 'column' : 'row',
             transition: "opacity 1s ease-in-out, transform 4s ease-in-out",
             opacity: showAnimation ? 1 : 0,
@@ -1261,10 +1243,10 @@ const KeyFeatures = () => {
             transform: `translateY(${showAnimation ? 0 : 20}px)`, // Adjust the translateY value
           }}
         >
-              <div style={{ width: responsive.isMobile? '100%' : '49%', display: "flex", justifyContent: "center", alignItems: 'center' }}>
+              <div style={{ width: responsive.isMobile? '100%' : '100%', display: "flex", justifyContent: "center", alignItems: 'center' }}>
               <img src={data[currentItemIndex].image} alt="item" style={{ maxWidth: '100%', height: 'auto' , maxHeight: responsive.isMobile? '400px' :""}} />
                   </div>
-                  <div style={{width: responsive.isMobile? '100%' : '49%', display: "flex", flexDirection: "column", gap: "1.5rem", margin: 'auto 0' }}>
+                  <div style={{width: responsive.isMobile? '90%' : '100%', display: "flex", flexDirection: "column", gap: "1.5rem", margin: 'auto' ,}}>
                     <CustomAllTypography
                       name={data[currentItemIndex].item1}
                       variant={"h3"}

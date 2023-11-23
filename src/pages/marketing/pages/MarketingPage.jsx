@@ -1,8 +1,8 @@
-import React from "react";
+// import React from "react";
 import MarketingNavbar from "../components/MarketingNavbar";
 import CustomContainer from "../../../components/structure/CustomContainer";
 import Footer from "../components/Footer";
-import ContactUs from './ContactUs'
+// import ContactUs from './ContactUs'
 import HeroSection from "./HeroSection";
 
 const MarketingPage = () => {

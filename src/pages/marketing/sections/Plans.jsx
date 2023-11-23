@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import PricingCard from "../components/PricingCard";
 import useResponsiveStyles from "../../../utils/MediaQuery";
@@ -35,9 +35,10 @@ const Plans = () => {
           <button
             style={{
               display: "inline-flex",
-              padding: "8px 16px",
+              padding: "10px 20px",
               alignItems: "flex-start",
               gap: "10px",
+              border: 'none',
               color: selectedPlan === "monthly" ? "white" : "black",
               background: selectedPlan === "monthly" ? "#202020" : "#F4F3FE",
             }}
@@ -48,9 +49,10 @@ const Plans = () => {
           <button
             style={{
               display: "inline-flex",
-              padding: "8px 16px",
+              padding: "10px 20px",
               alignItems: "flex-start",
               gap: "10px",
+              border: 'none',
               color: selectedPlan === "annual" ? "white" : "black",
               background: selectedPlan === "annual" ? "#202020" : "#F4F3FE",
               }}

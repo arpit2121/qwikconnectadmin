@@ -1,4 +1,3 @@
-import React from 'react'
 import Home from '../sections/Home'
 import KeyFeatures from '../sections/KeyFeatures'
 import Plans from '../sections/Plans'

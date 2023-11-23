@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
+import  { useState } from "react";
 import Logo from "../../../components/icons/Logo";
 import QwikConnectLogo from "../../../components/icons/QwikConnectLogo";
 import useResponsiveStyles from "../../../utils/MediaQuery";
-import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import { CustomInputButton } from "../../../components/button/CustomButoon";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Link as ScrollLink } from 'react-scroll';
 import Hamburger from "../../../components/icons/Hamburger";
 import CustomDrawer from "./CustomDrawer";
-import { Link } from "react-router-dom/dist";
+// import { Link } from "react-router-dom/dist";
 
 
 const MarketingNavbar = () => {
   const responsive = useResponsiveStyles();
-  const navbars = ["Home", "Key features", "Plans", "Contact us"];
+  // const navbars = ["Home", "Key features", "Plans", "Contact us"];
 
   const {hash} = useLocation();
   console.log("state",hash)
@@ -57,7 +56,7 @@ const MarketingNavbar = () => {
   const user = useSelector((state) => state.auth.user);
   const adminId = useSelector((state) => state.auth.adminId);
 
-  const login = true;
+  // const login = true;
 
   const handelLoginClick = () => {
     if (user) {

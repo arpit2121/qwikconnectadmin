@@ -1,15 +1,15 @@
-import React from "react";
+// import React from "react";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import { CustomInputButton } from "../../../components/button/CustomButoon";
-import useResponsiveStyles from "../../../utils/MediaQuery";
+// import useResponsiveStyles from "../../../utils/MediaQuery";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
 const PricingCard = () => {
-  const responsive = useResponsiveStyles();
+  // const responsive = useResponsiveStyles();
   const adminId = useSelector((state) => state.auth.adminId);
 
-  const checkout = async (plan) => {
+  const checkout = async () => {
     try {
       const response = await axios.post(
         "http://localhost:4546/v1/subscription/create-subscription-checkout-session",
