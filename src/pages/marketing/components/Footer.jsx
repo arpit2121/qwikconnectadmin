@@ -1,69 +1,90 @@
-import React from 'react'
-import Logo from '../../../components/icons/Logo'
-import QwikConnectLogo from '../../../components/icons/QwikConnectLogo'
-import CustomAllTypography from '../../../components/typography/CustomTypograpgy'
-import useResponsiveStyles from '../../../utils/MediaQuery'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import Logo from '../../../components/icons/Logo';
+import QwikConnectLogo from '../../../components/icons/QwikConnectLogo';
+import CustomAllTypography from '../../../components/typography/CustomTypograpgy';
+import useResponsiveStyles from '../../../utils/MediaQuery';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     const footer = [
         {
             name: 'Blog',
-            path: ''
+            path: '',
         },
         {
             name: 'Cookies',
-            path: ''
+            path: '',
         },
         {
-            name: 'Privac Policy',
-            path: '/home/privacy-policy'
+            name: 'Privacy Policy',
+            path: '/home/privacy-policy',
         },
         {
-            name: 'Terms of use',
-            path: '/home/term-condition'
-        }
-    ]
+            name: 'Terms of Use',
+            path: '/home/term-condition',
+        },
+    ];
     const responsive = useResponsiveStyles();
-  return (
-    <div style={{
-        display:' flex',
-        padding: '4rem 0rem 3rem 0rem',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: '4rem',
-        backgroundColor: '#F4F3FE'
-    }}>
+
+    return (
         <div
-        style={{display: 'flex',
-        padding: responsive.isMobile ? '0 1rem' : '0rem 2rem',
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-        gap: '2rem'
-        }}>
-            <div style={{
-                display: responsive.isMobile ? '' : 'flex',
-                justifyContent:'center',
-                alignItems:'center',
-                alignSelf: 'stretch'
-            }}>
-                 <QwikConnectLogo/>
-                    <div style={{gap: '2rem', display:'flex', padding: '0 2rem'}}>
-                    {
-                        footer.map((item, index)=>{
-                            return(
-                                // <CustomAllTypography variant={"body2"} name={item} />
-                                <Link style={{textDecoration: 'none'}} to={item.path} target='_blank' rel="noopener noreferrer">{item.name}</Link>
-                            )
-                        })
-                    }
+            style={{
+                display: 'flex',
+                padding: responsive.isMobile ? '2rem 1rem' : '4rem 0rem 3rem 0rem',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '4rem',
+                width:'full',
+                backgroundColor: '#F4F3FE',
+            }}
+        >
+            <div
+                style={{
+                    display: 'flex',
+                    padding: responsive.isMobile ? '0 1rem' : '0rem 2rem',
+                    flexDirection: 'column',
+                    alignItems: 'flex-start',
+                    gap: '2rem',
+                    width:'full'
+
+                }}
+            >
+                <div
+                    style={{
+                        display: responsive.isMobile ? 'flex' : 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        alignSelf: 'stretch',
+                        flexDirection: 'column',
+                        width:'full'
+                    }}
+                >
+                    <QwikConnectLogo />
+                    <div style={{ 
+                        gap: responsive.isMobile ? '0.4rem' : '2rem',
+                    width:'full',
+                     justifyContent: 'space-between',
+                      display: 'flex',
+                       padding: responsive.isMobile ? '0' : '0 2rem' , 
+                       flexWrap: 'wrap'
+                        }}>
+                        {footer.map((item, index) => (
+                            <Link
+                                key={index}
+                                style={{ textDecoration: 'none', padding: responsive.isMobile ? '0' : '0' }}
+                                to={item.path}
+                                target='_blank'
+                                rel='noopener noreferrer'
+                            >
+                                {item.name}
+                            </Link>
+                        ))}
                     </div>
-                <CustomAllTypography variant={"body2"} name={'Copyright © 2023 QwikConnect. All rights reserved.'} />
+                    <CustomAllTypography variant={'body2'} name={'Copyright © 2023 QwikConnect. All rights reserved.'} />
+                </div>
             </div>
-
         </div>
-    </div>
-  )
-}
+    );
+};
 
-export default Footer
+export default Footer;

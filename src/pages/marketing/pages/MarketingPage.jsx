@@ -9,10 +9,8 @@ const MarketingPage = () => {
   return (
     <CustomContainer>
     <div
-      style={{
-        height: "100%",
-        width: "100vw",
-      }}
+       style={{width:'100%', overflowX: 'hidden'}}
+
     >
       <MarketingNavbar />
     <HeroSection/> 

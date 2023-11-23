@@ -9,6 +9,7 @@ const Rounded = () => {
     <div style={{
         // maxHeight: '14.5rem',
         flexShrink: 0,
+        marginTop: '2rem',
         borderRadius: '7.25rem',
         background: 'linear-gradient(180deg, #4787F3 0%, #3D3ACE 100%)',
         padding: responsive.isMobile ? '0.5rem' : '2.3rem 0',

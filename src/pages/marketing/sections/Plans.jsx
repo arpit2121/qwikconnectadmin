@@ -12,7 +12,7 @@ const Plans = () => {
   };
 
   return (
-    <div style={{ padding: "4rem 2rem" }} id="plans" className="plans">
+    <div id="plans" className="plans">
       <div style={{ marginTop: "5.5rem" }}>
         <CustomAllTypography
           name={"Limitless Interviews, Affordable Plans: Get Started Today!"}

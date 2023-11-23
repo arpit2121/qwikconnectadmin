@@ -40,7 +40,7 @@ const PricingCard = () => {
         width:"full",
         cursor:'pointer',
         borderRadius: "20px",
-        minWidth: '300px',
+        minWidth: '280px',
         border: "1px solid #F4F3FE",
         background: "#FFF",
         boxShadow: "0px 8px 16px 0px rgba(142, 141, 208, 0.12)",

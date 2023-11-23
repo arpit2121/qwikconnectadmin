@@ -1149,9 +1149,11 @@ const KeyFeatures = () => {
           background: `url(${poly}),linear-gradient(180deg, #605DEC 0%, #A5F 100%)`,
           backgroundSize: "cover", // Adjust as needed
           backgroundRepeat: "no-repeat",
-          padding: responsive.isMobile ? "4rem 2rem" : "6.5rem 5.12rem",
-          display: responsive.isMobile ? "" : "flex",
+          // padding: responsive.isMobile ? "4rem 2rem" : "6.5rem 5.12rem",
+          display: "flex",
           alignItems: "center",
+          flexDirection:  responsive.isMobile ? "column" :'row',
+          gap: '10px'
         }}
         id="key-features"
         className="key-features"
@@ -1187,7 +1189,7 @@ const KeyFeatures = () => {
       <div
         style={{
           background: `url(${polygon2}),linear-gradient(180deg, #C0BEFF 0%, #E3C8FF 100%)`,
-          padding: "1rem 1rem",
+          // padding: "1rem 1rem",
           // display: responsive.isMobile ? "" : "flex",
           alignItems: "center",
           backgroundSize: "cover",
