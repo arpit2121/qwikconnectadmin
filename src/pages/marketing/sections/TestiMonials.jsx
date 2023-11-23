@@ -18,6 +18,14 @@ const TestiMonials = ({ style }) => {
     padding: "2rem", // Add padding for better spacing
   };
 
+
+  const cardDivStyleMobile = {
+    display: "flex",
+    gap: "2rem",
+    minWidth: "100%",
+    overflowX: "scroll",
+    padding: "1rem 0.1rem",
+  };
   const cardStyle = { minWidth: "100%" };
 
   return (
@@ -46,7 +54,7 @@ const TestiMonials = ({ style }) => {
       <div style={{ marginTop: "2rem", ...style }}>
         <div
           id="card_container_div"
-          style={cardContainerStyle}
+          style={responsive.isMobile ? cardDivStyleMobile : cardContainerStyle}
         >
           {data?.map((elem, index) => (
             <div key={index} style={cardStyle}>

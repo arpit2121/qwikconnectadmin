@@ -33,12 +33,12 @@ const Footer = () => {
                         display: responsive.isMobile ? 'flex' : 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        alignSelf: 'stretch',
-                        flexDirection: responsive.isMobile ? 'column' : 'row',
+                        flexDirection: responsive.isTablet ? 'column' : 'row',
                         width:'full',
                         padding: responsive.isMobile ? '1rem' :'2rem',
                         background: '#F4F3FE',
-                        gap: '1rem'
+                        gap: '1rem',
+
                     }}
                 >
                     <QwikConnectLogo />
