@@ -28,7 +28,7 @@ const GoogleSocial = () => {
 
   const handleLogin = async () => {
     const data = await googleLogin();
-    console.log("data",data);
+    console.log("data",data);onabort
     window.location = data.data;
     if(error){
       console.log("hgetting error while social login", error)

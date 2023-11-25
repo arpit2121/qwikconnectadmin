@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
+import  { useState } from "react";
 import Logo from "../../../components/icons/Logo";
 import QwikConnectLogo from "../../../components/icons/QwikConnectLogo";
 import useResponsiveStyles from "../../../utils/MediaQuery";
-import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import { CustomInputButton } from "../../../components/button/CustomButoon";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Link as ScrollLink } from 'react-scroll';
 import Hamburger from "../../../components/icons/Hamburger";
 import CustomDrawer from "./CustomDrawer";
+// import { Link } from "react-router-dom/dist";
 
 
 const MarketingNavbar = () => {
   const responsive = useResponsiveStyles();
-  const navbars = ["Home", "Key features", "Plans", "Contact us"];
+  // const navbars = ["Home", "Key features", "Plans", "Contact us"];
 
   const {hash} = useLocation();
   console.log("state",hash)
@@ -56,7 +56,7 @@ const MarketingNavbar = () => {
   const user = useSelector((state) => state.auth.user);
   const adminId = useSelector((state) => state.auth.adminId);
 
-  const login = true;
+  // const login = true;
 
   const handelLoginClick = () => {
     if (user) {
@@ -115,6 +115,9 @@ const MarketingNavbar = () => {
         alignItems: "center",
         zIndex: 1,
         position: "sticky",
+      scrollBehavior:"smooth",
+      top: 0
+        
       }}
     >
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -126,30 +129,37 @@ const MarketingNavbar = () => {
             style={{
               display: "flex",
               alignItems: "center",
+              gap:"1rem",
+              marginLeft: '4rem',
+              marginRight: '1rem'
+
             }}
           >
             {navbars1.map((item, index) => {
                console.log("item.to:", item.to);
               return(
-                <div key={index} style={{ margin: "0 2.5rem" }}>
+                <div key={index} >
                 {
                   item.to===""
                    ?
                     navigate()
                    :
+                  
                    <ScrollLink
                   to={item.to.substring(1)} // Remove the "#" from the beginning of the 'to' prop
                   spy={true}
                   smooth={true}
                   offset={-100} // You may need to adjust the offset based on your layout
                   duration={1000}
+                  style={{fontWeight: '500' , textDecoration: 'none' , color:'#212121' , cursor:'pointer' }}
                   activeClass="active-link" // Specify the class name for the active link
                 >
-                  <CustomAllTypography
+                    {item.name}
+                  {/* <CustomAllTypography
                     name={item.name}
                     variant={"body2"}
                     textcolor={(item.to === hash) ?'#605DEC' : ''}
-                  />
+                  /> */}
                 </ScrollLink>
                 }
                 {/* <Link to={{pathname:item.to.substring(1)}}>{item.name}</Link> */}
