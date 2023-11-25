@@ -59,7 +59,7 @@ const useStyles = makeStyles({
     justifyContent: "start",
     alignItems: "center",
     outline: "none",
-    
+
     position: "relative",
     backgroundColor: (props) =>
       props?.status ? props?.getStatusColor(props?.status) : "#F7F7FD",
@@ -184,11 +184,11 @@ const CommonTextInput = ({
   handleInputChange,
   handleChange2,
   message,
-  disabled=false,
+  disabled = false,
   setIsOther,
   handleDropChange,
   index,
-  nameCom
+  nameCom,
 }) => {
   let allCountryList = CountryList.getAll();
   const responsive = useResponsiveStyles();
@@ -238,15 +238,16 @@ const CommonTextInput = ({
     inputRef.current.focus();
   };
 
+  useEffect(() => {}, [value]);
 
-  useEffect(()=>{
-
-  },[value])
-
-  const allOptions = ["Option One", "Option Two", "Option Three", "Option Four"];
+  const allOptions = [
+    "Option One",
+    "Option Two",
+    "Option Three",
+    "Option Four",
+  ];
 
   const [searchText, setSearchText] = useState("");
-
 
   // const displayedOptions1 = useMemo(
   //   () => options.filter((option) => containsText2(option, searchText)),
@@ -322,7 +323,7 @@ const CommonTextInput = ({
             >
               <ListSubheader>
                 <TextField
-                // id="input"
+                  // id="input"
                   size="small"
                   // Autofocus on textfield
                   autoFocus
@@ -403,7 +404,7 @@ const CommonTextInput = ({
 
           {type != "dropdown" ? (
             <input
-              id="input"  
+              id="input"
               name={name}
               type={type1 ? type1 : "text"}
               label={title}
@@ -413,9 +414,10 @@ const CommonTextInput = ({
               ref={inputRef}
               className={classes.textBoxStyles}
               // color="red"
-              style={{color: disabled ? '#C5C0DB' : '#212121'}}
+              style={{ color: disabled ? "#C5C0DB" : "#212121" }}
               onFocus={handleFocus}
-              onBlur={handleBlur}x
+              onBlur={handleBlur}
+              x
               autoComplete="new-user-street-address"
               onChange={
                 handleInputChange
@@ -423,7 +425,7 @@ const CommonTextInput = ({
                       handleInputChange(e);
                     }
                   : handleChange2
-                  // : handleChange
+                // : handleChange
               }
             />
           ) : (
@@ -440,16 +442,16 @@ const CommonTextInput = ({
               onChange={
                 handleInputChange
                   ? (e) => {
-                    // {e.target.value==="Other" ?setIsOther(true):setIsOther(false)}
-                    // {value!="" &&  e.target.value==="Other" ? setIsOther(true):setIsOther(false) }
+                      // {e.target.value==="Other" ?setIsOther(true):setIsOther(false)}
+                      // {value!="" &&  e.target.value==="Other" ? setIsOther(true):setIsOther(false) }
                       handleInputChange(e);
                     }
                   : (e) => {
-                    handleDropChange(nameCom,e.target.value, index)
-                  }
+                      handleDropChange(nameCom, e.target.value, index);
+                    }
               }
               onClose={() => setSearchText("")}
-                renderValue={(value) => {
+              renderValue={(value) => {
                 if (!value) {
                   return (
                     <CustomAllTypography
@@ -465,7 +467,7 @@ const CommonTextInput = ({
               }}
               sx={{ background: "none", border: "none" }}
             >
-               {/* <ListSubheader>
+              {/* <ListSubheader>
                 <TextField
                   size="small"
                   // Autofocus on textfield

@@ -92,16 +92,14 @@ const KeyFeatures = () => {
             width: responsive.isMobile ? "100%" : "40%",
           }}
         >
-          <Typography variant="h3" style={{ color: "#36BF76" }}>
-            Introducing
-          </Typography>
-          <Typography variant="h1" style={{ color: "white" }}>
-            QwikConnect Platform
-          </Typography>
-          <Typography variant="body1" style={{ color: "white" }}>
-            Empowering Recruiters: Unlock Your Hiring Potential with Effortless
-            Candidate Discovery.
-          </Typography>
+          <CustomAllTypography variant="h3"textcolor = "#36BF76" name = {'Introducing'} >
+            
+          </CustomAllTypography>
+          <CustomAllTypography variant="h1" textcolor = "white" name= "QwikConnect Platform">
+          </CustomAllTypography>
+          <CustomAllTypography variant="body1" textcolor = "white" name= "Empowering Recruiters: Unlock Your Hiring Potential with Effortless Candidate Discovery" >
+           
+          </CustomAllTypography>
         </div>
         <div style={{ width: responsive.isMobile ? "100%" : "60%", marginLeft: 'auto' }}>
           <img src={VideoCall} width={'100%'} style={{ marginLeft: responsive.isMobile ? "0%" : "10%" }} alt="video-call" />
