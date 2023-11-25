@@ -3,35 +3,41 @@ import { CustomInputButton } from "../../../components/button/CustomButoon";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
-import { Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
 
 const PricingCard = ({ plan }) => {
   const adminId = useSelector((state) => state.auth.adminId);
 
-  const checkout = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:4546/v1/subscription/create-subscription-checkout-session",
-        {
-          body: JSON.stringify({
-            plan: plan.priceId, // Use the plan's priceId
-            customerId: adminId,
-          }),
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+  const navigate = useNavigate();
 
-      window.location = response.data.url;
-    } catch (error) {
-      console.error(error);
+  const checkout = async () => {
+    if(false){
+      try {
+        const response = await axios.post(
+          "http://localhost:4546/v1/subscription/create-subscription-checkout-session",
+          {
+            body: JSON.stringify({
+              plan: plan.priceId, // Use the plan's priceId
+              customerId: adminId,
+            }),
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+  
+        window.location = response.data.url;
+      } catch (error) {
+        console.error(error);
+      }
+    }else{
+      navigate('/login')  
     }
   };
 
-  console.log({plan})
   return (
     <div
       style={{
@@ -50,8 +56,7 @@ const PricingCard = ({ plan }) => {
         background: "#FFF",
         boxShadow: "0px 8px 16px 0px rgba(142, 141, 208, 0.12)",
         transition: "all 0.5s ease",
-      }}
-      onClick={checkout} // Pass the function directly
+      }} // Pass the function directly
       onMouseEnter={(e) => {
         e.currentTarget.style.borderRadius = "30px";
         e.currentTarget.style.background =
@@ -124,6 +129,7 @@ const PricingCard = ({ plan }) => {
           borderRadius: "20px",
           background: "black",
         }}
+        onClick={checkout}
       >
         Choose {plan.planType}
       </CustomInputButton>

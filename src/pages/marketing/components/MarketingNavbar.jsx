@@ -46,7 +46,7 @@ const MarketingNavbar = () => {
       name: "Plans",
     },
     {
-      to: "/contact-us",
+      to: "contact-us",
       name: "Contact us",
     },
   ];
@@ -103,6 +103,11 @@ const MarketingNavbar = () => {
       console.log(isDrawerOpen)
   }
 
+  const handelLogoClick = () => {
+    navigate('/')
+  }
+
+
 
   return (
     <div
@@ -121,7 +126,7 @@ const MarketingNavbar = () => {
       }}
     >
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div>{responsive.isMobile ? <Logo /> : <QwikConnectLogo />}</div>
+        <div>{responsive.isMobile ? <Logo onClick={handelLogoClick}/> : <QwikConnectLogo onClick={handelLogoClick}/>}</div>
         {responsive.isMobile || responsive.isRandom ? (
           ""
         ) : (
@@ -129,14 +134,13 @@ const MarketingNavbar = () => {
             style={{
               display: "flex",
               alignItems: "center",
-              gap:"1rem",
+              gap:"2.5rem",
               marginLeft: '4rem',
               marginRight: '1rem'
 
             }}
           >
             {navbars1.map((item, index) => {
-               console.log("item.to:", item.to);
               return(
                 <div key={index} >
                 {
@@ -155,14 +159,9 @@ const MarketingNavbar = () => {
                   activeClass="active-link" // Specify the class name for the active link
                 >
                     {item.name}
-                  {/* <CustomAllTypography
-                    name={item.name}
-                    variant={"body2"}
-                    textcolor={(item.to === hash) ?'#605DEC' : ''}
-                  /> */}
+
                 </ScrollLink>
                 }
-                {/* <Link to={{pathname:item.to.substring(1)}}>{item.name}</Link> */}
               </div>
               )
             })}
@@ -170,7 +169,7 @@ const MarketingNavbar = () => {
         )}
       </div>
       {responsive.isMobile || responsive.isRandom ? (
-        <div><Hamburger handelClick={handelDrawerOpen}/>{isDrawerOpen && <CustomDrawer isDrawerOpen={isDrawerOpen} handelClose={handelDrawerClose} navbarArray={navbars1} hash={hash}/> }</div>
+        <div><Hamburger handelClick={handelDrawerOpen}/>{isDrawerOpen && <CustomDrawer isDrawerOpen={isDrawerOpen} handelClose={handelDrawerClose} navbarArray={navbars1} hash={hash} handelLoginClick={handelLoginClick} handelSignupClick={handelSignupClick} handelLoggedInClick={handelLoggedInClick} user={user}/>}</div>
 
       ) : (
         <div style={{ display: "flex" }}>
