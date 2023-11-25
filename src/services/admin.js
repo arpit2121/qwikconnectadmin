@@ -1,4 +1,3 @@
-import { Api } from "@mui/icons-material";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
@@ -29,7 +28,6 @@ const baseQuery = fetchBaseQuery({
 baseUrl: "http://localhost:4546/v1/admin",
   prepareHeaders: (headers, { getState, endpoint }) => {
     const token = getState().auth.token?.access_token;
-    console.log("token -> ",token)
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
       headers.set("Access-Control-Allow-Origin", "*");
