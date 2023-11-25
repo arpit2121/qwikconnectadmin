@@ -1129,7 +1129,7 @@ const KeyFeatures = () => {
           // Animation completed on all indexes, reset showAnimation to false
           setShowAnimation(false);
         }
-      }, 800); // Adjust the delay as needed
+      }, 1000); // Adjust the delay as needed
     }
 
     return () => {
@@ -1153,7 +1153,7 @@ const KeyFeatures = () => {
           display: "flex",
           alignItems: "center",
           flexDirection:  responsive.isMobile ? "column" :'row',
-          gap: '10px'
+          gap: '20px'
         }}
         id="key-features"
         className="key-features"
@@ -1207,7 +1207,7 @@ const KeyFeatures = () => {
                   transition: "opacity 1s ease-in-out, transform 4s ease-in-out",
                 }}>
                   <div style={{width: responsive.isMobile? '100%' : '100%', display: "flex", justifyContent: "center", alignItems: 'center' }}>
-                  <img src={data[currentItemIndex].image} alt="item" style={{ maxWidth: '100%', height: 'auto' , maxHeight: responsive.isMobile? '400px' :""}} />
+                  <img src={data[currentItemIndex].image} alt="item" style={{ maxWidth: '100%', height: 'auto' , maxHeight: responsive.isMobile?  '400px' :"75vh"}} />
                   </div>
                   <div style={{width: responsive.isMobile? '90%' : '100%', display: "flex", flexDirection: "column", gap: "1.5rem", margin: 'auto' , }}>
                     <CustomAllTypography
@@ -1244,7 +1244,7 @@ const KeyFeatures = () => {
           }}
         >
               <div style={{ width: responsive.isMobile? '100%' : '100%', display: "flex", justifyContent: "center", alignItems: 'center' }}>
-              <img src={data[currentItemIndex].image} alt="item" style={{ maxWidth: '100%', height: 'auto' , maxHeight: responsive.isMobile? '400px' :""}} />
+              <img src={data[currentItemIndex].image} alt="item" style={{ maxWidth: '100%', height: 'auto' , maxHeight: responsive.isMobile? '400px' :"75vh", }} />
                   </div>
                   <div style={{width: responsive.isMobile? '90%' : '100%', display: "flex", flexDirection: "column", gap: "1.5rem", margin: 'auto' ,}}>
                     <CustomAllTypography

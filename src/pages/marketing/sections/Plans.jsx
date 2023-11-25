@@ -11,6 +11,85 @@ const Plans = () => {
     setSelectedPlan(plan);
   };
 
+  const plans = [
+    {
+      priceId: "aa1232da",
+      planPrice: "Free",
+      planType: "Starter Pack",
+      planDuration: "monthly",
+      noOfJobPost: 1,
+      interviewsPerMonth: 10,
+      isDownload: false,
+      isBranding: false,
+      noOfInvitation: 2,
+      recordingBackupInDays: 30
+    },
+    {
+      priceId: "sder43",
+      planPrice: 8,
+      planType: "Essential",
+      planDuration: "monthly",
+      noOfJobPost: 5,
+      interviewsPerMonth: 50,
+      isDownload: true,
+      isBranding: true,
+      noOfInvitation: 6,
+      recordingBackupInDays: 60
+    },
+    {
+      priceId: "sd34343",
+      planPrice: 50,
+      planType: "Professional",
+      planDuration: "monthly",
+      noOfJobPost: 'unlimited',
+      interviewsPerMonth: 1000,
+      isDownload: true,
+      isBranding: true,
+      noOfInvitation: 20,
+      recordingBackupInDays: 'unlimited'
+    },
+    {
+      priceId: "hs454",
+      planPrice: "Free",
+      planType: "Starter Pack",
+      planDuration: "yearly",
+      noOfJobPost: 1,
+      interviewsPerMonth: 10,
+      isDownload: false,
+      isBranding: false,
+      noOfInvitation: 2,
+      recordingBackupInDays: 30
+    },
+    {
+      priceId: "sd4545",
+      planPrice: 14,
+      planType: "Essential",
+      planDuration: "yearly",
+      noOfJobPost: 5,
+      interviewsPerMonth: 100,
+      isDownload: true,
+      isBranding: true,
+      noOfInvitation: 6,
+      recordingBackupInDays: 60
+    },
+    {
+      priceId: "hsh454",
+      planPrice: 75,
+      planType: "Professional",
+      planDuration: "yearly",
+      noOfJobPost: "unlimited",
+      interviewsPerMonth: 1000,
+      isDownload: true,
+      isBranding: true,
+      noOfInvitation: 20,
+      recordingBackupInDays: 'unlimited'
+    },
+  ];
+  const filteredPlans = plans.filter((plan) =>
+  selectedPlan === "monthly"
+    ? plan.planDuration === "monthly"
+    : plan.planDuration === "yearly"
+);
   return (
     <div id="plans" className="plans">
       <div style={{ marginTop: "5.5rem" }}>
@@ -86,9 +165,9 @@ const Plans = () => {
           flexWrap: "wrap",
         }}
       >
-        <PricingCard />
-        <PricingCard />
-        <PricingCard />
+ {filteredPlans.map((plan) => (
+          <PricingCard key={plan.priceId} plan={plan} />
+        ))}
       </div>
     </div>
   );
