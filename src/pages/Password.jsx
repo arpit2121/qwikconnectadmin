@@ -29,11 +29,8 @@ const Password = () => {
   
 
   const handleClick = () => {
-    console.log(state.goTO);
-    console.log("hii", values.password)
     if(state?.message==="Found"){
       loginUser({email: state.email, password: values.password}).then((response)=>{
-        console.log("response -> ",response)
         if(response.data?.adminId===null)
         {
           navigate("/on-boarding", {
@@ -88,8 +85,8 @@ const Password = () => {
           });
         }
         else{
-          console.log("heheloooo 3", loginData)
-          navigate(`/dashboard/home/${loginData?.adminId}`);
+          // console.log("heheloooo 3", loginData)
+          navigate(`/dashboard/home`);
         }
     }else if(isSignupSuccess){
       console.log("hehheheh")
@@ -99,7 +96,7 @@ const Password = () => {
           state: {
             newUser: true,
             header: "Forget Password?",
-            belowHeader: "Reset your password for youremail@example.com",
+            belowHeader: `Reset your password for ${state?.email}`,
             button: "Reset",
             footer: "",
           },

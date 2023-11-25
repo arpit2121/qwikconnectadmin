@@ -23,7 +23,7 @@ const Navbar = ({
   const [isOp, setIsOp] = useState(false);
   const { pathname } = useLocation();
   const [addNewJob, {data,isLoading}] = useAddNewJobMutation();
-  const {jobpost_id} = useParams();
+  const {jobpost_id, intervieweeId} = useParams();
   const adminId = useSelector((state)=>state.auth.adminId)
   console.log(adminId)
   
@@ -45,28 +45,28 @@ const Navbar = ({
     [`/dashboard/myprofile`]: { title: "My Profile", button: null },
     [`/dashboard/myPlans`]: { title: "Plan & Billings ", button: null },
     [`/jobposting/${jobpost_id}/publish-link`]: {
-      title: "Job Posting ",
+      title: "Job Posting",
       button: {
         title: "Preview",
         src: "",
       },
     },
     [`/jobposting/${jobpost_id}/question-setup`]: {
-      title: "Job Posting ",
+      title: "Job Posting",
       button: {
         title: "Preview",
         src: "",
       },
     },
     [`/jobposting/${jobpost_id}/branding`]: {
-      title: "Job Posting ",
+      title: "Job Posting",
       button: {
         title: "Preview",
         src: "",
       },
     },
     [`/jobposting/${jobpost_id}/basic-details`]: {
-      title: "Job Posting ",
+      title: "Job Posting",
       // button: {
       //   title: "Preview",
       //   src: "",
@@ -120,10 +120,9 @@ const Navbar = ({
           backgroundColor: "#fff",
         }}
       >
-        {/* <Logo onClick={onIconClick} /> */}
-        {responsive.isMobile || responsive.isTablet? <Logo onClick={onIconClick}/> : <QwikConnectLogo onClick={onIconClick}/>}
+        <Logo onClick={onIconClick} />
 
-        <div style={{ width: responsive.isMobile?'': "55%" }}>
+        <div style={{ width: responsive.isMobile?'': "60%" }}>
           {showTitle && (
             <CustomAllTypography
               name={titleMap[pathname]?.title}

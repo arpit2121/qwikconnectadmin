@@ -54,8 +54,16 @@ export const authApi = createApi({
                     body,
                 }
             }
-        })
+        }),
+        googleLogin: builder.mutation({
+            query: () => {
+                return {
+                    url: '/login-google',
+                    method: "GET"
+                }
+            }
+        }),
     }),
 })
 
-export const {useSigninUserMutation, useVerifyPasswordMutation, useSetPasswordMutation, useVerifyOtpMutation, useVerifyEmailMutation, useLazyVerifyEmailQuery, useLoginUserMutation, useSignupUserMutation} = authApi;
+export const {useSigninUserMutation, useVerifyPasswordMutation, useSetPasswordMutation, useVerifyOtpMutation, useVerifyEmailMutation, useLazyVerifyEmailQuery, useLoginUserMutation, useSignupUserMutation, useGoogleLoginMutation} = authApi;
