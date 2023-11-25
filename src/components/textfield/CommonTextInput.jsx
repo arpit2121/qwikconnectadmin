@@ -189,6 +189,8 @@ const CommonTextInput = ({
   handleDropChange,
   index,
   nameCom,
+  onBlur
+  
 }) => {
   let allCountryList = CountryList.getAll();
   const responsive = useResponsiveStyles();
@@ -219,6 +221,7 @@ const CommonTextInput = ({
 
   const handleBlur = (event) => {
     setIsFocused(false);
+    onBlur(event);
   };
 
   const handleChange = (e) => {
