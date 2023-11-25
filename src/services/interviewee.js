@@ -25,7 +25,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   
   const baseQuery = fetchBaseQuery({
   //   baseUrl: process.env.QWIKCONNECT_BACKEDN_API_URL,
-  baseUrl: "http://localhost:4546/v1/interviewee",
+  baseUrl: `${import.meta.env.VITE_API_KEY}/v1/interviewee`,
     prepareHeaders: (headers, { getState, endpoint }) => {
       const token = getState().auth.token?.access_token;
       console.log("token -> ",token)

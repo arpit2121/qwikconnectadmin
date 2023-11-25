@@ -1,10 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { adminsApi } from "../services/admin";
 
 
 
 export const initialState = {
-   adminData: {},
+   adminInfo: {},
   };
+
+
   export const adminSlice = createSlice({
     name: 'admin',
     initialState,
@@ -13,6 +16,12 @@ export const initialState = {
         state.selectedJobPostingPage = action.payload;
       },
     },
+    extraReducers: (builder) => {
+      builder.addMatcher(adminsApi.endpoints.getAdminInfo.matchFulfilled,
+        (state, {payload}) => {
+          state.adminInfo = payload;
+        })
+    }
   });
   
   export const {

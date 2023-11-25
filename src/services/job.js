@@ -25,7 +25,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 };
 
 const baseQuery = fetchBaseQuery({
-baseUrl: `http://localhost:4546//v1/job-post`,
+baseUrl: `${import.meta.env.VITE_API_KEY}/v1/job-post`,
   prepareHeaders: (headers, { getState, endpoint }) => {
     const token = getState().auth.token?.access_token;
     if (token) {

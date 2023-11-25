@@ -25,7 +25,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
 const baseQuery = fetchBaseQuery({
 //   baseUrl: process.env.QWIKCONNECT_BACKEDN_API_URL,
-baseUrl: "http://localhost:4546/v1/admin",
+baseUrl: `${import.meta.env.VITE_API_KEY}/v1/admin`,
   prepareHeaders: (headers, { getState, endpoint }) => {
     const token = getState().auth.token?.access_token;
     if (token) {
@@ -74,10 +74,11 @@ export const adminsApi = createApi({
       }),
       // invalidatesTags: ["Student"],
     }),
-    getAvatar: builder.query({
-      query: (key) => `avatar?key=${key}`,
-      //template litteral
-    }),
+    getAvtar: builder.query({
+      query: ({key}) => ({
+        url:`/avatar?key=${key}`
+      })
+    })
   }),
 });
 
@@ -89,6 +90,7 @@ export const {
   useGetAdminInfoQuery,
   useGetProfessionsQuery,
   useLazyGetProfessionsQuery,
+  useGetAvtarQuery
 } = adminsApi;
 
 //fetchBaseQuery - similar to axios

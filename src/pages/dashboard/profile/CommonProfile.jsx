@@ -4,7 +4,7 @@ import useResponsiveStyles from "../../../utils/MediaQuery";
 import user1 from "../../../assets/svg/user1.svg";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import { darkspacetheme } from "../../../theme/theme";
-
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 function getGreetingByTime() {
   const currentTime = new Date();
@@ -16,36 +16,41 @@ function getGreetingByTime() {
     return "Good Afternoon";
   } else if (currentHour >= 16 && currentHour < 22) {
     return "Good Evening";
-  }
-  else {
+  } else {
     return "Hello, Night Owl";
   }
 }
 
-
 const CommonProfile = ({
-    userName,
-    title=`${getGreetingByTime()}, ${userName}`,
-    subtitle="Ready to hunt your next candidate? ",
-    style={},
+  userName,
+  title = `${getGreetingByTime()}, ${userName}`,
+  subtitle = "Ready to hunt your next candidate? ",
+  style = {},
 }) => {
-
   // console.log(userName)
   const responsive = useResponsiveStyles();
-  const size=responsive.isMobile?'2.4rem':'5.93rem'
+  const size = responsive.isMobile ? "2.4rem" : "5.93rem";
+  
+  const key = useSelector((state) => state.admin.adminInfo?.admin?.avatar)
+  const adminId = useSelector((state) => state.auth?.adminId);
 
   return (
     <div
       style={{
-        display:'flex',
+        display: "flex",
         gap: "1rem",
         alignItems: "center",
-        marginBottom: responsive.isMobile ? "2rem" : 0 ,
-        ...style
+        marginBottom: responsive.isMobile ? "2rem" : 0,
+        ...style,
       }}
     >
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <UsersComponent style={{height:size,width:size}} image={user1} />
+        <UsersComponent
+          style={{ height: size, width: size }}
+          s3Key={key}
+          adminId={adminId}
+          image={user1}
+        />
       </div>
       <div
         style={{
