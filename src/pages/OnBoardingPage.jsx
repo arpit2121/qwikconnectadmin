@@ -32,38 +32,20 @@ const OnBoardingPage = () => {
 
   const { data } = useGetProfessionsQuery();
 
-  // console.log(data);
-  // if(isSuccess)
-  // {
-  //   dispatch()
-  // }
 
   const allProfessions = data
     ?.map((categoryData) => categoryData.professions)
     .reduce((acc, professions) => acc.concat(professions), []);
-  // console.log(allProfessions);
 
-
-
-
-  // const handelOnBoard = async () => {
-  //   console.log(values);
-  //   await addAdmin(values).then((response) => {
-  //     console.log("response data", response.data);
-  //     if (response.data) {
-  //       navigate(`/dashboard/home/${response.data?._id}`);
-  //     }
-  //   });
-  // };
 
   const handelOnBoard = async () =>{
     // isLoading(true)
     const res = await addAdmin(values);
     console.log("res",res)
-    navigate(`/dashboard/home/${res.data?._id}`);
-    if(isError){
-      console.log("error", error)
+    if(error){
+      alert(error);
     }
+    navigate(`/dashboard/home`);
   }
   
 
