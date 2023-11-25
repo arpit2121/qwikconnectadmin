@@ -23,6 +23,7 @@ import CandiatateReview from "../pages/dashboard/jobposting/CandiatateReview";
 import OnBoardingPage from "../pages/OnBoardingPage";
 import JobPostingDetailsPage from "../pages/dashboard/jobposting/JobPostingDetailsPage";
 import ContactUs from "../pages/marketing/pages/ContactUs";
+import HeroSection from "../pages/marketing/pages/HeroSection";
 
 
 
@@ -42,12 +43,18 @@ const IsEmailId = ({email, redirectPath = "/login"}) =>{
     return <Outlet />;
 }
 
+
+
 const AppRoutes = () => {
   const user = useSelector(selectCurrentUser);
   return (
     <Routes>
-      <Route path="/home" element={<MarketingPage />} />
-      <Route path="/contact-us" element={<ContactUs />} />
+      <Route path="/" element={<MarketingPage />} >
+        <Route path= "/" element={<HeroSection/>}/>
+        <Route path="contact-us" element={<ContactUs/>}/>
+      </Route>
+      <Route path="/home/privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="/home/term-condition" element={<TermCondition />} />
       <Route element={<Home />}>
         <Route path=":name" element={<Login />} />
         <Route element={<IsEmailId email={"arpitsingh@gmail.com"}/>}> 
@@ -76,8 +83,6 @@ const AppRoutes = () => {
           element={<CandiatateReview />}
         />
         <Route path="invite" element={<InviteTemplate />} />
-        <Route path="/home/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/home/term-condition" element={<TermCondition />} />
         <Route path="*" element={<Error404 />} />
       </Route>
     </Routes>

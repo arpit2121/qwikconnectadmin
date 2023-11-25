@@ -1,18 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-// http://localhost:4546/admin-apis/v1/admin/on-board
+
 export const jobsApi = createApi({
-  reducerPath: "jobsApi", //unique key wee will access the data by this name it will store all data as cache
+  reducerPath: "jobsApi", 
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:4546/v1/job-post",
   }),
   tagTypes: ["Job"],
-  //endpoint are hit point
   endpoints: (builder) => ({
-    // getStudentsById: builder.query({
-    //     query: (id)=> `students/${id}`,
-    //     //template litteral
-    // }),
     addNewJob: builder.mutation({
       query: (id) => ({
         url: `?adminId=${id}`,

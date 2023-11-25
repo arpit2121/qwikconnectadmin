@@ -1,13 +1,15 @@
 // ContactUs.js
 
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import CommonTextInput from "../../../components/textfield/CommonTextInput";
 import useResponsiveStyles from "../../../utils/MediaQuery";
+import MarketingNavbar from "../components/MarketingNavbar";
 import { CustomInputButton } from "../../../components/button/CustomButoon";
 import Message from "../../../assets/svg/message.svg";
+import CommonTextArea from "../../../components/textfield/CommonTextArea";
 
 const validationSchema = Yup.object().shape({
   fullName: Yup.string().required("Full Name is required"),
@@ -56,9 +58,10 @@ const ContactUs = () => {
       //   });
     },
   });
-  console.log({touched: formik.errors ,})
+  console.log({touched: formik.touched ,})
 
-  return (
+  return (<>
+     {/* <MarketingNavbar/> */}
       <div
         style={{
           display: "flex",
@@ -110,7 +113,7 @@ const ContactUs = () => {
                       formik.errors.fullName
                     }
                     status={
-                      ( formik.errors.fullName) && "error"
+                     ( submitted||( formik.touched.fullName &&formik.errors.fullName)) && "error"
                     }
                   />
                   <CommonTextInput
@@ -128,7 +131,7 @@ const ContactUs = () => {
                     helperText={
                       (submitted || formik.touched.email) && formik.errors.email
                     }
-                    status={( formik.errors.email) && "error"}
+                    status={( submitted||( formik.touched.email &&formik.errors.email)) && "error"}
                   />
                   <CommonTextInput
                     title="Phone Number"
@@ -148,11 +151,11 @@ const ContactUs = () => {
                       formik.errors.phoneNumber
                     }
                     status={
-                      (formik.errors.phoneNumber) && "error"
+                      ( submitted||( formik.touched.phoneNumber &&formik.errors.phoneNumber)) && "error"
                     }
                     
                   />
-                  <CommonTextInput
+                  <CommonTextArea
                     title="Message"
                     placeholder="Your Message"
                     name="message"
@@ -169,8 +172,12 @@ const ContactUs = () => {
                       formik.errors.message
                     }
                     status={
-                      ( formik.errors.message) && "error"
+                      ( submitted||( formik.touched.message &&formik.errors.message)) && "error"
                     }
+                  />
+                     <CustomAllTypography
+                    name={"You agree to our friendly privacy policy."}
+                    variant={"body2"}
                   />
                   <CustomInputButton
                     variant="contained"
@@ -179,13 +186,10 @@ const ContactUs = () => {
                     width={"100%"}
                     type="submit"
                   >
-                    Submit
+                    Send message
                   </CustomInputButton>
 
-                  <CustomAllTypography
-                    name={"You agree to our friendly privacy policy."}
-                    variant={"body2"}
-                  />
+               
                 </form>
           {responsive.isMobile ? (
             ""
@@ -193,6 +197,7 @@ const ContactUs = () => {
             <img src={Message} width={"20%"} height={'auto'} />
           )}
       </div>
+      </>
   );
 };
 

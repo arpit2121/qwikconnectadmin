@@ -1,5 +1,3 @@
-// import React from 'react';
-// import Logo from '../../../components/icons/Logo';
 import QwikConnectLogo from '../../../components/icons/QwikConnectLogo';
 import CustomAllTypography from '../../../components/typography/CustomTypograpgy';
 import useResponsiveStyles from '../../../utils/MediaQuery';
@@ -33,7 +31,7 @@ const Footer = () => {
                         display: responsive.isMobile ? 'flex' : 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',
-                        flexDirection: responsive.isTablet ? 'column' : 'row',
+                        flexDirection: responsive.isTablet || responsive.isMobile ? 'column' : 'row',
                         width:'full',
                         padding: responsive.isMobile ? '1rem' :'2rem',
                         background: '#F4F3FE',

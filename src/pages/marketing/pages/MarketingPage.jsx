@@ -1,20 +1,15 @@
-// import React from "react";
 import MarketingNavbar from "../components/MarketingNavbar";
 import CustomContainer from "../../../components/structure/CustomContainer";
 import Footer from "../components/Footer";
-// import ContactUs from './ContactUs'
-import HeroSection from "./HeroSection";
+import { Outlet} from "react-router-dom";
 
 const MarketingPage = () => {
   return (
     <CustomContainer>
     <div
-       style={{width:'100%', overflowX: 'hidden'}}
-
-    >
+       style={{width:'100%', overflowX: 'hidden'}}>
       <MarketingNavbar />
-    <HeroSection/> 
-   {/* <ContactUs/> */}
+      <Outlet/>
       <Footer/>
     </div>
     </CustomContainer>

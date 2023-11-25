@@ -48,7 +48,7 @@ const Login = () => {
           button: "Log in",
           footer:
             "By Continuing this I agree to the Terms & Conditions and Privacy Policy",
-          goTo: "/dashboard/home/existinguser",
+          goTo: "/dashboard/home",
           email: values?.email,
           message: data?.message,
         },

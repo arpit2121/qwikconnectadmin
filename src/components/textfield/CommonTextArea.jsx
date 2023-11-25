@@ -117,7 +117,8 @@ const CommonTextArea = ({
   curvedBorder = true,
   onClick = () => {},
   borderStyle = {},
-  maxCount=100
+  maxCount=100,
+  onBlur
 }) => {
   const responsive = useResponsiveStyles();
   const inputRef = React.createRef();
@@ -139,6 +140,7 @@ console.log(value)
 
   const handleBlur = (event) => {
     setIsFocused(false);
+    onBlur(event)
   };
 
   const handleChange = (e) => {

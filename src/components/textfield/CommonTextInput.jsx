@@ -420,7 +420,6 @@ const CommonTextInput = ({
               style={{ color: disabled ? "#C5C0DB" : "#212121" }}
               onFocus={handleFocus}
               onBlur={handleBlur}
-              x
               autoComplete="new-user-street-address"
               onChange={
                 handleInputChange

@@ -1,6 +1,7 @@
 import React from 'react';
 import { styled } from '@mui/material';
 import googleLogo from '../../assets/google.png'
+import { useGoogleLoginMutation} from '../../services/auth';
 
 const GoogleLoginButton = styled('button')`
   display: flex;
@@ -22,8 +23,16 @@ const GoogleLogo = styled('img')`
 `;
 
 const GoogleSocial = () => {
-  const handleLogin = () => {
-    // Handle Google login logic here
+
+  const [googleLogin, {error}] =  useGoogleLoginMutation();
+
+  const handleLogin = async () => {
+    const data = await googleLogin();
+    console.log("data",data);
+    window.location = data.data;
+    if(error){
+      console.log("hgetting error while social login", error)
+    }
   };
 
   return (

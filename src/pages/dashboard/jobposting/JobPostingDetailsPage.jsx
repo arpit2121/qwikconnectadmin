@@ -357,7 +357,7 @@ const JobPostingDetailsPage = () => {
 
   const [activePage, setActivePage] = useState(1);
   const [limitPerPage, setLimitPerPage] = useState(10);
-  const numOfTotalPages = Math.ceil(data?.length / limitPerPage);
+  const numOfTotalPages = Math.ceil(intervieweeData ? intervieweeData?.length / limitPerPage : 0);
 
   const indexOfLastData = activePage * limitPerPage;
   const indexOfFirstData = indexOfLastData - limitPerPage;
@@ -365,7 +365,7 @@ const JobPostingDetailsPage = () => {
   const pages = [...Array(numOfTotalPages + 1).keys()].slice(1);
   console.log("d", numOfTotalPages);
 
-  const visibleData = data?.slice(indexOfFirstData, indexOfLastData);
+  const visibleData = intervieweeData ? intervieweeData?.slice(indexOfFirstData, indexOfLastData) : [];
 
 
   const [open, setOpen] = React.useState(false);
