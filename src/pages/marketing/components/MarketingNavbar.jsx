@@ -178,7 +178,7 @@ const MarketingNavbar = () => {
             <>
               <CustomInputButton
                 variant="text"
-                size="large"
+                size="medium"
                 responsive
                 onClick={handelLoginClick}
               >
@@ -186,7 +186,7 @@ const MarketingNavbar = () => {
               </CustomInputButton>
               <CustomInputButton
                 variant="contained"
-                size="large"
+                size="medium"
                 responsive
                 onClick={handelSignupClick}
               >
@@ -196,7 +196,7 @@ const MarketingNavbar = () => {
           ) : (
             <CustomInputButton
               variant="outlined"
-              size="large"
+              size="medium"
               responsive
               onClick={handelLoggedInClick}
             >

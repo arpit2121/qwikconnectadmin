@@ -117,7 +117,7 @@ const PricingCard = ({ plan }) => {
 
       <CustomInputButton
         variant="contained"
-        size="large"
+        size="medium"
         responsive
         width={"100%"}
         style={{

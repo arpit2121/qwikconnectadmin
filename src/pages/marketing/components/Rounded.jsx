@@ -23,7 +23,7 @@ const Rounded = () => {
       }}
     >
       <CustomAllTypography name={'Try it out for Free!'} variant={'h1'} textcolor={'#FFF'} />
-      <CustomInputButton variant="contained" size="large" responsive>
+      <CustomInputButton variant="contained" size="medium" responsive>
         Get Started
       </CustomInputButton>
     </div>

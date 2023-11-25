@@ -2,11 +2,13 @@ import Message from "../../../assets/svg/message.svg";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import CommonTextInput from "../../../components/textfield/CommonTextInput";
 import useResponsiveStyles from "../../../utils/MediaQuery";
+import MarketingNavbar from "../components/MarketingNavbar";
 
 const ContactUs = () => {
     const responsive = useResponsiveStyles();
   return (
-    <div
+<>
+<div
       style={{
         display: "flex",
         padding: responsive.isMobile ? "" : "4rem 6rem",
@@ -109,6 +111,7 @@ const ContactUs = () => {
         {responsive.isMobile ? '' : <img src={Message} width="26.75rem" height="26.75rem" />}
       </div>
     </div>
+</>
   );
 };
 
