@@ -20,7 +20,7 @@ export const initialState = {
   },
   publish_link: {
     publicLink: "",
-    csvFile: "",
+    csvFile: null,
   },
   question_setup: {
     minimum_passing_parameter: "",
@@ -77,6 +77,10 @@ export const jobSlice = createSlice({
     },
     setBrandingColor: (state, action) => {
       state.branding.colors[action.payload.name] = action.payload.value;
+    },
+    setCsvFile: (state, action) => {
+      console.log("ac",action.payload)
+      state.publish_link.csvFile = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -112,6 +116,6 @@ export const jobSlice = createSlice({
   },
 });
 
-export const { setJobData, setBasicDetails, setParameter, setQuestions, updateQuestion, deleteQuestion, setMinimumPassingParameter, setDisplayQuestions, setBrandingLogo, setBrandingColor} = jobSlice.actions;
+export const { setJobData, setBasicDetails, setParameter, setQuestions, updateQuestion, deleteQuestion, setMinimumPassingParameter, setDisplayQuestions, setBrandingLogo, setBrandingColor, setCsvFile} = jobSlice.actions;
 
 export default jobSlice.reducer;

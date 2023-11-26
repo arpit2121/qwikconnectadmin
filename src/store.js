@@ -22,7 +22,9 @@ const store = configureStore({
         job: jobReducer,
         auth: authReducer
     },
-    middleware: (gDM) => gDM().concat(authApi.middleware,adminsApi.middleware,jobsApi.middleware, intervieweeApi.middleware)
+    middleware: (gDM) => gDM({
+        serializableCheck:false
+    }).concat(authApi.middleware,adminsApi.middleware,jobsApi.middleware, intervieweeApi.middleware)
 });
 
 export default store;

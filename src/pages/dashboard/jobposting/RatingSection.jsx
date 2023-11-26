@@ -7,9 +7,15 @@ import ThumbsIcon from '../../../components/icons/ThumbsIcon'
 import { Body3 } from "../../../components/typography/Fields";
 import { CustomInputButton } from "../../../components/button/CustomButoon";
 
-const RatingSection = () => {
+const RatingSection = ({status}) => {
   const responsive = useResponsiveStyles();
+
   const [state, setState] = useState(true);
+
+  const handelClickNext = () =>{
+
+  }
+
   return (
     <div
       style={{
@@ -38,12 +44,15 @@ const RatingSection = () => {
           gap: "0.8rem",
         }}
       >
+        {/* {status==="rejected" ? <ThumbsDownIcon/> : status==="shortlisted" ? <ThumbsIcon/> : "" } */}
         {state ? <ThumbsIcon/> : <ThumbsDownIcon/>}
         <CustomAllTypography
           name={state ? "Shortlisted" :"Rejected"}
+          // name={status==="pending"? "Pending" : status=="shortlisted" ? "Shortlisted": status=="rejected"?"Rejected":""}
           sx={{ fontSize: "1.125rem !important" }}
           variant={"h4"}
           textcolor={state ? "#A5F" :"#F93232"}
+          // textcolor={status=="rejected" ? "#F93232" : status=="pending" ? "orange" : status=="shortlisted" ? "#A5F":""}
         />
       </div>
       <div
@@ -57,7 +66,7 @@ const RatingSection = () => {
         <RatingParameter setState={setState}/>
       </div>
       <div style={{ marginTop: "2.50rem" }}>
-        <CustomInputButton size="small" width="100%">
+        <CustomInputButton size="small" width="100%" onClick={handelClickNext}>
           Confirm Result & Next
         </CustomInputButton>
       </div>

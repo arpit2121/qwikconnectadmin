@@ -38,7 +38,6 @@ const JobPostingStepTwo = ({adminid, jobpostid}) => {
   // Step 1: Create an array of options
   const options = ratingParameters.map((item, index) => index + 1);
 
-  // const [questionSections, setQuestionSections] = React.useState([1]);
   const [editingIndex, setEditingIndex] = useState(null);
   const [editedData, setEditedData] = useState("Parameter");
   const admin_id = useSelector((state)=> state.auth.adminId)
@@ -63,19 +62,6 @@ const JobPostingStepTwo = ({adminid, jobpostid}) => {
   const dragOverItem = useRef(null);
 
   const handleAddQuestion = async () => {
-    // const newQuestionNumber = questionSections.length + 1;
-    // setQuestionSections([...questionSections, newQuestionNumber]);
-    // if (questionsArray.length > 0) {
-    // const formData = new FormData();
-    // const { video_key, ...jsonData } = questionsArray[0];
-    // console.log("videp_key", formData,jsonData, video_key)
-    // // formData.append("file", video_key);
-    // // Append the remaining properties as JSON data
-    // formData.append('file',video_key)
-    // formData.append('json_data', JSON.stringify(jsonData)); 
-    // console.log("videp_key", formData)
-    // }
-    console.log("hello")
     const { video_key, ...jsonData } = questionsArray[questionsArray.length - 1];
     console.log(jsonData, video_key)
     const formData = new FormData();
@@ -86,9 +72,7 @@ const JobPostingStepTwo = ({adminid, jobpostid}) => {
     } catch (error) {
       console.error("Error creating FormData:", error);
     }
-    // data.append('file', new Blob([files[0].file]));
-    console.log("file in FormData:", formData.get('file'));
-    console.log("json_data in FormData:", formData.get('json_data'));
+
 
 
     await addNewQuestion({formData:formData, adminId: admin_id, jobPostId:jobpostid}).then((response) => {
@@ -97,21 +81,6 @@ const JobPostingStepTwo = ({adminid, jobpostid}) => {
        console.log("hello")
       }
     });
-
-    // dispatch(
-    //   setQuestions([
-    //     ...questionsArray,
-    //     {
-    //     questionNo: questionsArray.length+1,
-    //     questionTitle: "Question Title here",
-    //     isMandatory: false,
-    //     retakes: "",
-    //     thinkingTime: "",
-    //     timeToAnswer: "",
-    //     questionVideoKey: "blob file",
-    //     },
-    //   ])
-    // );
   };
 
   const handleEdit = (index) => {
@@ -345,7 +314,7 @@ const JobPostingStepTwo = ({adminid, jobpostid}) => {
               >
                 <DbIcon />
                 <CustomAllTypography
-                  name={questionsArray.length}
+                  name={questionsArray.length-1}
                   variant={"h3"}
                 />
                 <div>

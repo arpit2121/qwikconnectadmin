@@ -20,13 +20,14 @@ import LinkBar from "./LinkBar";
 import RatingSection from "./RatingSection";
 import SampleVideos from "./SampleVideos.json";
 import VideoPlayer from "./VideoPlayer";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { useLazyGetCandidateDataQuery } from "../../../services/interviewee";
 
 
 const CandiatateReview = () => {
   const responsive = useResponsiveStyles();
   const [showMoreContent, setShowMoreContent] = useState(false);
+  const {state} = useLocation();
   const [pdfData, setPdfData] = useState(null);
   const handleToggleContent = () => {
     setShowMoreContent(!showMoreContent);
@@ -34,12 +35,7 @@ const CandiatateReview = () => {
   useEffect(() => {
     setShowMoreContent(responsive.isMobile ? false : true);
   }, [responsive.isMobile]);
-  const containerStyle = {
-    width: "100%", // Set width to 100% for mobile view
-    // backgroundColor: "red",
-  };
 
-  const contentContainerStyle = {};
 
   const initialContentStyle = {
     overflow: "hidden",
@@ -75,7 +71,6 @@ const CandiatateReview = () => {
   const dispatch = useDispatch();
   const { intervieweeId } = useParams();
 
-  console.log("intervieweeId --> ", intervieweeId);
   const [getCandidateData, { data: candidateData }] =
     useLazyGetCandidateDataQuery();
 
@@ -83,7 +78,7 @@ const CandiatateReview = () => {
     getCandidateData(intervieweeId, true);
   }, []);
 
-  console.log("candidateData", candidateData);
+  console.log("state", state)
 
 
   return (
@@ -96,7 +91,7 @@ const CandiatateReview = () => {
         }}
       >
         <div style={{ height: "100%", width: "100%" }}>
-          <Navbar showTitle={false} showStatsBar />
+          <Navbar showTitle={false} showStatsBar  stats={state.stats}/>
           <div
             style={{
               display: responsive.isMobile ? "" : "flex",
@@ -113,7 +108,6 @@ const CandiatateReview = () => {
                 boxSizing: "border-box",
                 border: "1px solid #EBEBEB",
                 borderTop: "none",
-                // backgroundColor:'red',
                 overflow:'scroll'
               }}
             >
@@ -390,9 +384,9 @@ const CandiatateReview = () => {
                   Download Interviews
                 </CustomInputButton>
               </div>
-              {responsive.isMobile ? <RatingSection /> : <CommentSection />}
+              {responsive.isMobile ? <RatingSection status={candidateData?.status}/> : <CommentSection />}
             </div>
-            {responsive.isMobile ? <CommentSection /> : <RatingSection />}
+            {responsive.isMobile ? <CommentSection /> : <RatingSection status={candidateData?.status}/>}
           </div>
         </div>
       </div>

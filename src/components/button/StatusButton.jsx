@@ -56,6 +56,17 @@ const useStyles = makeStyles({
     border:'none',
     color:'#212121',
     borderRadius:' 0.25rem'
+  },
+  deavtive: {
+    display: "flex",
+    // width: "5.8125rem",
+    padding: "0.5rem 1rem",
+    alignItems: "flex-start",
+    gap: "0.625rem",
+    backgroundColor:'#FFCBCB',
+    border:'none',
+    color:'#212121',
+    borderRadius:' 0.25rem'
   }
 });
 
@@ -65,7 +76,7 @@ const useStyles = makeStyles({
 const StatusButton = ({name}) => {
     const responsive = useResponsiveStyles();
   const classes = useStyles();
-  return <button className={name==="Rejected"?classes.rejected:name=="Activated"?classes.activated:name==="Pending"?classes.pending:name==="Shortlisted"?classes.shortlisted:''} disabled style={{padding:responsive.isMobile?'0.25':'0.5rem 1rem'}}>{name}</button>;
+  return <button className={name==="Rejected"?classes.rejected:name=="Activated"?classes.activated:name==="Pending"?classes.pending:name==="Shortlisted"?classes.shortlisted:classes.deavtive} disabled style={{padding:responsive.isMobile?'0.25':'0.5rem 1rem'}}>{name}</button>;
 };
 
 export default StatusButton;

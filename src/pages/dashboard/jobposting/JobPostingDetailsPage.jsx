@@ -20,291 +20,21 @@ import TableCard from "../../../components/admin/TableCard";
 import SystemRecommended from "../../../components/icons/SystemRecommended";
 import { generateRandomColor } from "../../../utils/RandomPastel";
 import {
-  useGetJobInfoQuery,
   useLazyGetJobInfoQuery,
 } from "../../../services/job";
 import { useLazyGetAllIntervieweeQuery } from "../../../services/interviewee";
 import { useSelector } from "react-redux";
 import { useMemo } from "react";
 import Modal from "../../../components/modal/Modal";
-
-const data = [
-  {
-    no: "01",
-    profileimage: (
-      <UsersComponent image={user1} style={{ width: "2rem", height: "2rem" }} />
-    ),
-    name: "Danish Shah",
-    email: "Danish.shah@xmail.com",
-    status: "Rejected",
-    time: "30m ago",
-  },
-  {
-    no: "02",
-    profileimage: (
-      <UsersComponent image={user1} style={{ width: "2rem", height: "2rem" }} />
-    ),
-    name: "Danish Shah",
-    email: "Danish.shah@xmail.com",
-    status: "Pending",
-    time: "30m ago",
-  },
-  {
-    no: "03",
-    profileimage: (
-      <UsersComponent image={user1} style={{ width: "2rem", height: "2rem" }} />
-    ),
-    name: "Danish Shah",
-    email: "Danish.shah@xmail.com",
-    status: "Shortlisted",
-    time: "30m ago",
-  },
-  {
-    no: "04",
-    profileimage: (
-      <UsersComponent
-        image={user1}
-        style={{ width: "2rem", height: "2rem", padding: "0" }}
-      />
-    ),
-    name: "Danish Shah",
-    email: "Danish.shah@xmail.com",
-    status: "Rejected",
-    time: "30m ago",
-  },
-  {
-    no: "05",
-    profileimage: (
-      <UsersComponent
-        image={user1}
-        style={{ width: "2rem", height: "2rem", padding: "0" }}
-      />
-    ),
-    name: "Danish Shah",
-    email: "Danish.shah@xmail.com",
-    status: "Rejected",
-    time: "30m ago",
-  },
-  {
-    no: "06",
-    profileimage: (
-      <UsersComponent
-        image={user1}
-        style={{ width: "2rem", height: "2rem", padding: "0" }}
-      />
-    ),
-    name: "Danish Shah",
-    email: "Danish.shah@xmail.com",
-    status: "Rejected",
-    time: "30m ago",
-  },
-  {
-    no: "07",
-    profileimage: (
-      <UsersComponent
-        image={user1}
-        style={{ width: "2rem", height: "2rem", padding: "0" }}
-      />
-    ),
-    name: "Danish Shah",
-    email: "Danish.shah@xmail.com",
-    status: "Rejected",
-    time: "30m ago",
-  },
-  {
-    no: "08",
-    profileimage: (
-      <UsersComponent
-        image={user1}
-        style={{ width: "2rem", height: "2rem", padding: "0" }}
-      />
-    ),
-    name: "Danish Shah",
-    email: "Danish.shah@xmail.com",
-    status: "Rejected",
-    time: "30m ago",
-  },
-  {
-    no: "09",
-    profileimage: (
-      <UsersComponent
-        image={user1}
-        style={{ width: "2rem", height: "2rem", padding: "0" }}
-      />
-    ),
-    name: "Danish Shah",
-    email: "Danish.shah@xmail.com",
-    status: "Rejected",
-    time: "30m ago",
-  },
-  {
-    no: "10",
-    profileimage: (
-      <UsersComponent
-        image={user1}
-        style={{ width: "2rem", height: "2rem", padding: "0" }}
-      />
-    ),
-    name: "Danish Shah",
-    email: "Danish.shah@xmail.com",
-    status: "Rejected",
-    time: "30m ago",
-  },
-  {
-    no: "11",
-    profileimage: (
-      <UsersComponent
-        image={user1}
-        style={{ width: "2rem", height: "2rem", padding: "0" }}
-      />
-    ),
-    name: "Danish Shah",
-    email: "Danish.shah@xmail.com",
-    status: "Rejected",
-    time: "30m ago",
-  },
-  {
-    no: "12",
-    profileimage: (
-      <UsersComponent
-        image={user1}
-        style={{ width: "2rem", height: "2rem", padding: "0" }}
-      />
-    ),
-    name: "Danish Shah",
-    email: "Danish.shah@xmail.com",
-    status: "Rejected",
-    time: "30m ago",
-  },
-  {
-    no: "13",
-    profileimage: (
-      <UsersComponent
-        image={user1}
-        style={{ width: "2rem", height: "2rem", padding: "0" }}
-      />
-    ),
-    name: "Danish Shah",
-    email: "Danish.shah@xmail.com",
-    status: "Rejected",
-    time: "30m ago",
-  },
-  {
-    no: "14",
-    profileimage: (
-      <UsersComponent
-        image={user1}
-        style={{ width: "2rem", height: "2rem", padding: "0" }}
-      />
-    ),
-    name: "Danish Shah",
-    email: "Danish.shah@xmail.com",
-    status: "Rejected",
-    time: "30m ago",
-  },
-  {
-    no: "15",
-    profileimage: (
-      <UsersComponent
-        image={user1}
-        style={{ width: "2rem", height: "2rem", padding: "0" }}
-      />
-    ),
-    name: "Danish Shah",
-    email: "Danish.shah@xmail.com",
-    status: "Rejected",
-    time: "30m ago",
-  },
-  {
-    no: "16",
-    profileimage: (
-      <UsersComponent
-        image={user1}
-        style={{ width: "2rem", height: "2rem", padding: "0" }}
-      />
-    ),
-    name: "Danish Shah",
-    email: "Danish.shah@xmail.com",
-    status: "Rejected",
-    time: "30m ago",
-  },
-  {
-    no: "17",
-    profileimage: (
-      <UsersComponent
-        image={user1}
-        style={{ width: "2rem", height: "2rem", padding: "0" }}
-      />
-    ),
-    name: "Danish Shah",
-    email: "Danish.shah@xmail.com",
-    status: "Rejected",
-    time: "30m ago",
-  },
-  {
-    no: "18",
-    profileimage: (
-      <UsersComponent
-        image={user1}
-        style={{ width: "2rem", height: "2rem", padding: "0" }}
-      />
-    ),
-    name: "Danish Shah",
-    email: "Danish.shah@xmail.com",
-    status: "Rejected",
-    time: "30m ago",
-  },
-  {
-    no: "19",
-    profileimage: (
-      <UsersComponent
-        image={user1}
-        style={{ width: "2rem", height: "2rem", padding: "0" }}
-      />
-    ),
-    name: "Danish Shah",
-    email: "Danish.shah@xmail.com",
-    status: "Rejected",
-    time: "30m ago",
-  },
-  {
-    no: "20",
-    profileimage: (
-      <UsersComponent
-        image={user1}
-        style={{ width: "2rem", height: "2rem", padding: "0" }}
-      />
-    ),
-    name: "Danish Shah",
-    email: "Danish.shah@xmail.com",
-    status: "Rejected",
-    time: "30m ago",
-  },
-  {
-    no: "21",
-    profileimage: (
-      <UsersComponent
-        image={user1}
-        style={{ width: "2rem", height: "2rem", padding: "0" }}
-      />
-    ),
-    name: "Danish Shah",
-    email: "Danish.shah@xmail.com",
-    status: "Rejected",
-    time: "30m ago",
-  },
-];
+import { setStats } from "../../../slice/common.slice";
 
 
-
-const JobPostingDetailsPage = () => {
+  const JobPostingDetailsPage = () => {
   const responsive = useResponsiveStyles();
   const navigate = useNavigate();
   const { jobPostId } = useParams();
   const adminId = useSelector((state) => state.auth.adminId);
-
-  console.log(" jobPostId ---> ", jobPostId);
-  // const {data: jobData} = useGetJobInfoQuery(jobPostId)
+  const [open, setOpen] = React.useState(false);
 
   const [getJobInfo, { data: jobInfo }] = useLazyGetJobInfoQuery();
 
@@ -318,57 +48,32 @@ const JobPostingDetailsPage = () => {
   }, []);
 
 
-  // useEffect(() => {
-  //   (async () => {
-  //     if (jobPostId) {
-  //       await getAllInterviewee({ adminId: adminId, jobPostId: jobPostId });
-  //     }
-  //   })();
-  // }, [jobPostId]);
-
-  console.log("intervieweeData", intervieweeData?.length);
-
   const handleClick1 = (intervieweeId) => {
-    // console.log("hello",intervieweeId)
     navigate(`/candidatereview/${intervieweeId}`, {
       state: {
         passingPoint: jobInfo.passingPoint,
+        stats: jobInfo?.stats,
+        jobPostId: jobPostId
       },
     });
   };
 
   var convertedJobDesc = jobInfo?.jobDescription?.replace(/<[^>]+>/g, "");
-  console.log("job-->", intervieweeData);
-
-  const randomColor = generateRandomColor();
-  console.log("hdhdh", randomColor);
-
-  const [randColor, setRandColor] = useState();
-
-
-  useEffect(()=>{
-    setRandColor(randomColor)
-  },[])
+  
+  
 
   const randcolor1 = useMemo(() => generateRandomColor(), [])
   
-
-  //pagination data
-
   const [activePage, setActivePage] = useState(1);
   const [limitPerPage, setLimitPerPage] = useState(10);
   const numOfTotalPages = Math.ceil(intervieweeData ? intervieweeData?.length / limitPerPage : 0);
 
   const indexOfLastData = activePage * limitPerPage;
   const indexOfFirstData = indexOfLastData - limitPerPage;
-
-  const pages = [...Array(numOfTotalPages + 1).keys()].slice(1);
-  console.log("d", numOfTotalPages);
-
+  // const pages = [...Array(numOfTotalPages + 1).keys()].slice(1);
   const visibleData = intervieweeData ? intervieweeData?.slice(indexOfFirstData, indexOfLastData) : [];
 
 
-  const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => {
       setOpen(true);
@@ -379,20 +84,16 @@ const JobPostingDetailsPage = () => {
     };
 
     const handelDeactiveClick = () =>{
-      console.log("hello")
       setOpen(true)
     }
 
     const handelEditClick = () =>{
-      console.log("hello")
       setOpen(true)
     }
 
     const handelPreviewClick = () =>{
-      console.log("hello")
       setOpen(true)
     }
-  
 
   return (
     <CustomContainer>
@@ -464,15 +165,13 @@ const JobPostingDetailsPage = () => {
                     gap: "1.5rem",
                   }}
                 >
-                  <StatusButton name="Activated" />
+                  <StatusButton name={jobInfo?.status==="ACTIVE"?"Activated":"Deactived"} />
                   <CustomAllTypography
                     name={jobInfo?.jobTitle}
-                    // name={"UI/UX Developer / Lead"}
                     variant={"h3"}
                   />
                   <CustomAllTypography
                     name={`Office: ${jobInfo?.hiringLocation}`}
-                    // name={"Office: Remote"}
                     variant={"body2"}
                   />
                   <CustomAllTypography
@@ -490,9 +189,9 @@ const JobPostingDetailsPage = () => {
                   }}
                 >
                   <StatsTopBar
-                    application={jobInfo?.application.length}
-                    shortlisted={jobInfo?.shortlisted.length}
-                    rejected={jobInfo?.rejected.length}
+                    application={jobInfo?.stats.pending}
+                    shortlisted={jobInfo?.stats.shortlisted}
+                    rejected={jobInfo?.stats.rejected}
                   />
                 </div>
               </div>
@@ -511,7 +210,6 @@ const JobPostingDetailsPage = () => {
                 />
                 <CustomAllTypography
                   name={
-                    // "${}Allegis Group, Inc. is an international talent management firm headquartered in Hanover, Maryland, United States. As of 2018, it had US$13.4 billion in revenue, and 19,000 employees. It ranks fourth in the world. More"
                     `${convertedJobDesc}`
                   }
                   variant={"body2"}
@@ -539,7 +237,6 @@ const JobPostingDetailsPage = () => {
                     <CustomInputButton
                       size="small"
                       variant="outlined"
-                      // onClick={() => navigate("/jobposting/basicDaetails")}
                     onClick={handelPreviewClick}
                     >
                       Preview

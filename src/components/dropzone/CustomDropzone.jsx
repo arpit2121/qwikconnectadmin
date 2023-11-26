@@ -38,6 +38,8 @@ const CustomSoundBar = styled(Slider)(({ theme }) => ({
   },
 }));
 
+
+
 const Layout = ({
   input,
   previews,
@@ -46,10 +48,6 @@ const Layout = ({
   files,
   extra: { maxFiles },
 }) => {
-
-
-  console.log("files",files)
-
   return (
     <div>
       {files.length == 0 && (
@@ -74,20 +72,18 @@ const Layout = ({
   );
 };
 
-
-
-const Preview = ({ meta, files }, ...props) => {
+const Preview = ({ meta, files },...props) => {
   const [loaded, setLoaded] = useState(0);
   const [doneLoading, setDoneLoading] = useState(false);
   const responsive = useResponsiveStyles();
   const width = !responsive.isMobile ? "6.87rem" : "5rem";
   const [hovered, setHovered] = useState(false);
 
+
   useEffect(() => {
     setLoaded(meta?.percent);
     if (meta?.percent == 100) {
       setTimeout(() => {
-        console.log("loaed");
         setDoneLoading(true);
       }, 1000);
     }
@@ -105,6 +101,7 @@ const Preview = ({ meta, files }, ...props) => {
                 if (f?.meta?.id == meta?.id) f.remove();
               })
         dispatch(setBrandingLogo(""))
+        // removedUploadedFile();
   }
 
   return (
@@ -254,7 +251,7 @@ const Input = ({ accept, onFiles, files, getFilesFromEvent, message}) => {
   );
 };
 
-const CustomLayout = ({ acceptedTypes,message,setUploadedFiles, dispatch }) => {
+const CustomLayout = ({ acceptedTypes,message, settingUplodedFile, removeUploadedFile }) => {
   console.log("message",message)
 
   const getUploadParams = () => ({ url: "https://httpbin.org/post" });
@@ -271,13 +268,11 @@ const CustomLayout = ({ acceptedTypes,message,setUploadedFiles, dispatch }) => {
   const handleChangeStatus = ({ meta, file }, status) => {
      console.log("uploading",file,"status",status) 
       if(status==="done"){
-        console.log("hiii")
-        setUploadedFiles(file)
-        dispatch(setBrandingLogo(file))
+        settingUplodedFile(file)
+        // setUploadedFiles(file)
+        // dispatch(setBrandingLogo(file))
       }
     }
-
-
 
   const handleSubmit = (files, allFiles) => {
     console.log(files.map((f) => f.meta));
@@ -290,10 +285,12 @@ const CustomLayout = ({ acceptedTypes,message,setUploadedFiles, dispatch }) => {
       getUploadParams={getUploadParams}
       LayoutComponent={Layout}
       onSubmit={handleSubmit}
+      // PreviewComponent={<Preview removeUploadedFile={removeUploadedFile}/>}
       PreviewComponent={Preview}
       onChangeStatus={handleChangeStatus}
       multiple={false}
       maxFiles={5}
+
       disabled={(files) =>
         files.some((f) =>
           ["preparing", "getting_upload_params", "uploading"].includes(
@@ -301,26 +298,21 @@ const CustomLayout = ({ acceptedTypes,message,setUploadedFiles, dispatch }) => {
           )
         )
       }
-      // disabled={true}
-      // accept= "image/*,audio/*,video/*,.pdf"
       accept= {acceptedTypes[0]}
-      //   accept=".pdf,.doc"
       styles={{
         dropzone: {
           border: "1px dotted black",
           minHeight: "10.62rem",
-          // maxHeight: 100,
         },
       }}
       InputComponent={Input}
       getFilesFromEvent={getFilesFromEvent}
-      // uploadedFiles={uploadedFiles}
     />
   );
 };
 
-const CustomDropzone = ({ multiple = false,acceptedTypes,name,setUploadedFiles, dispatch}) => {
-  return <CustomLayout acceptedTypes={acceptedTypes} message={name} setUploadedFiles={setUploadedFiles} dispatch={dispatch}/>;
+const CustomDropzone = ({ multiple = false,acceptedTypes,name,setUploadedFiles, dispatch, setFile, settingUplodedFile, removeUploadedFile}) => {
+  return <CustomLayout acceptedTypes={acceptedTypes} message={name}  settingUplodedFile={settingUplodedFile} removeUploadedFile={removeUploadedFile}/>;
 };
 
 export default CustomDropzone;

@@ -9,7 +9,6 @@ import Checkbox from "../selectedcontrols/CheckBox";
 import CommonTextInput from "../textfield/CommonTextInput";
 import CustomDropzone from "../dropzone/CustomDropzone";
 import { TextField } from "@mui/material";
-import DeleteIcon from "../icons/DeleteIcon";
 import TrashIcon from "../icons/TrashIcon";
 
 
@@ -20,10 +19,9 @@ function QuestionCard({ index, questions,handleChange, deleteQuestion }) {
   const onEdit = () => {
     console.log("Edit Called");
   };
+  console.log("questions ", questions)
 
   const handleChange1 = (name, value, index) => {
-    // const {name, value} = event.target;
-    console.log("hii", name, value, index)
     handleChange(name, value, index)
   }
   
@@ -33,32 +31,15 @@ function QuestionCard({ index, questions,handleChange, deleteQuestion }) {
   }
 
 
-  const convertToSeconds = (selectedValue) => {
-    const secondsMap = {
-      '5s': 5,
-      '10s': 10,
-      '15s': 15,
-      '20s': 20,
-      '25s': 25,
-    };
+  const settingUplodedFile = (file) =>{
+    console.log("setingiuplpada file", file)
+    handleChange1(name="questionVideoKey", file, index=index)
+  }
   
-    return secondsMap[selectedValue] || 0; // Default to 0 if not found
-  };
 
-  const handleChange2 = (event, index, nameCom) => {
-    // Your existing logic for handling changes
-    // ...
-  
-    // Now, add the conversion for 'thinkingTime' if applicable
-    if (nameCom === 'thinkingTime') {
-      const selectedValue = event.target.value;
-      const seconds = convertToSeconds(selectedValue); // Define this function
-      // Use the 'seconds' value as needed
-      // ...
-      handleChange(name, value, index)
-    }
-  };
-  
+  const removeUploadedFile = () =>{
+    console.log("RemoveUploadedFiel")
+  }
 
   return (
     <CustomCard
@@ -82,7 +63,7 @@ function QuestionCard({ index, questions,handleChange, deleteQuestion }) {
           <QuestionCardLines />
         )}
       </div>
-      <CustomDropzone style={{ width: "10.5rem", height: "10.625rem" }} acceptedTypes={['video/*']}/>
+      <CustomDropzone style={{ width: "10.5rem", height: "10.625rem" }} acceptedTypes={['video/*']} settingUplodedFile={settingUplodedFile} removeUploadedFile={removeUploadedFile}/>
       <div
         style={{
           display: "flex",
@@ -178,8 +159,7 @@ function QuestionCard({ index, questions,handleChange, deleteQuestion }) {
               placeholder="30 Sec"
               options={["5s", "10s", "15s", "20s", "25s"]}
               value={questions.thinkingTime}
-              // handleDropChange={handleChange1}
-               handleDropChange={(event) => handleChange2(event, index, "thinkingTime")}
+              handleDropChange={handleChange1}
               index={index}
               nameCom={"thinkingTime"}
             />

@@ -58,7 +58,6 @@ const CustomTabs = () => {
   ];
   // const counter = useSelector((state) => state.common.selectedJobPostingPage);
   const [value, setValue] = React.useState("1");
-  let value1 = urls[parseInt(value) - 1];
   const responsive = useResponsiveStyles();
   const dispatch = useDispatch();
   const { pathname } = useLocation();
@@ -115,9 +114,6 @@ const {jobpost_id} = useParams()
     console.log("nextValue --- > ", nextValue, pathname);
 
     if (nextValue <= 4) {
-      // setValue(nextValue.toString());
-
-      // Check the current pathname and make API calls accordingly
       switch (value) {
         case "1":
           console.log("hoo1", basic_details);
@@ -131,13 +127,11 @@ const {jobpost_id} = useParams()
               }
             }
           );
-          // setValue(nextValue.toString());
           break;
-        case "2":
-          console.log("hoo2", question_setup);
-          
+        case "2":  
           const jobPostId1 = jobpost_id;
           const adminId1 = adminId;
+          
           await updateParameters({
             json_data: question_setup,
             adminId: adminId1,
@@ -149,19 +143,8 @@ const {jobpost_id} = useParams()
               dispatch(setSelectedJobPostingPage(nextValue));
             }
           });
-          // setValue(nextValue.toString());
-          // API call for tab 2
-          // dispatch(setSelectedJobPostingPage(nextValue));
-          // Make API call specific to tab 2
           break;
         case "3":
-          console.log("hoo3");
-          // setValue(nextValue.toString());
-          // dispatch(setSelectedJobPostingPage(nextValue));
-          // setValue(nextValue.toString());
-          // API call for tab 3
-          // dispatch(setSelectedJobPostingPage(nextValue));
-          // Make API call specific to tab 3
           const formData = new FormData();
           formData.append('file', branding.blobFile)
           formData.append('json_data',JSON.stringify(branding.colors))
@@ -185,16 +168,15 @@ const {jobpost_id} = useParams()
   };
 
   const handlePublish = async () => {
-
+    const formData = new FormData();
+    formData.append("key",publish_link.csvFile)
     await publishLink({
-      formData: "",
+      formData: formData,
       adminId: adminId,
       jobPostId: jobpost_id,
     }).then((response) => {
       console.log("response data", response);
       if (response.data) {
-        // setValue(nextValue.toString());
-        // dispatch(setSelectedJobPostingPage(nextValue));
         navigate("/dashboard/home")
       }
     });
@@ -257,8 +239,6 @@ const {jobpost_id} = useParams()
           <TabList
             onChange={handleChange}
             variant="scrollable"
-            //   scrollButtons
-            //   allowScrollButtonsMobile
             aria-label="scrollable force tabs example"
             TabIndicatorProps={{
               style: {
@@ -291,7 +271,6 @@ const {jobpost_id} = useParams()
               value="4"
               component={Link}
               to={`/jobposting/${jobpost_id}/publish-link`}
-              // disabled
             />
           </TabList>
         </Box>
@@ -322,7 +301,7 @@ const {jobpost_id} = useParams()
           gap: "2rem",
           paddingBottom: "3rem",
           width: "100%",
-          // backgroundColor: "red",
+
         }}
       >
         <div

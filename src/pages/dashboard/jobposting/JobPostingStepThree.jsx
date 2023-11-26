@@ -12,23 +12,16 @@ const JobPostingStepThree = () => {
   const [uploadedFiles, setUploadedFiles] = useState(null);
 
   const branding = useSelector((state) => state.job.branding);
-  console.log("file ->>", branding.blobFile, branding.colors);
 
   const dispatch = useDispatch();
 
   const subscribed = false;
 
   const handleInputChange = (event) => {
-    // console.log("hii");
     const { name, value } = event.target;
-    // setJobDetails((prevDetails) => ({
-    //   ...prevDetails,
-    //   [name]: value,
-    // }));
     dispatch(setBrandingColor({name, value}))
   };
 
-  console.log("uploadedFiles", uploadedFiles);
   return (
     <div style={{ padding: responsive.isMobile ? "0 1rem" : "" }}>
       <div style={{ backgroundColor: "", marginTop: "4rem" }}>

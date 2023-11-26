@@ -7,8 +7,6 @@ import Navbar from "../../../components/structure/admin/Navbar";
 
 const JobPostingStepOne = () => {
   const responsive = useResponsiveStyles();
-
-
   return (
     <CustomContainer>
       <div
@@ -18,7 +16,6 @@ const JobPostingStepOne = () => {
           maxHeight: "862px",
         }}
       >
-        {/* <div style={{height:'100%', width:'100%', position:'fixed'}}> */}
         {responsive.isMobile ? "" : <Navbar />}
         <div
           style={{
@@ -31,7 +28,6 @@ const JobPostingStepOne = () => {
           </div>
         </div>
       </div>
-      {/* </div> */}
     </CustomContainer>
   );
 };

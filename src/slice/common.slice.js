@@ -12,7 +12,8 @@ export const initialState = {
     message:  '',
     showMessage: false,
     messageSeverity: ''
-    }
+    },
+    stats: {}
   };
   export const commonSlice = createSlice({
     name: 'common',
@@ -42,6 +43,9 @@ export const initialState = {
           showMessage: false,
           messageSeverity: ''
         };
+      },
+      setStats: (state, action) =>{
+        state.stats = action.payload;
       }
     },
   });
@@ -53,7 +57,8 @@ export const initialState = {
     setApiLoadere,
     setFilesData,
     setShowMessage,
-    setClearMessage
+    setClearMessage,
+    setStats
   } = commonSlice.actions;
 
   export default commonSlice.reducer

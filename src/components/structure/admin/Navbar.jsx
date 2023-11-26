@@ -11,12 +11,12 @@ import Logo from "../../icons/Logo";
 import Loader from "../../loader/Loader";
 import { useAddNewJobMutation } from "../../../services/job";
 import { useSelector } from "react-redux";
-import QwikConnectLogo from "../../icons/QwikConnectLogo";
 
 const Navbar = ({
   showStatsBar = false,
   showTitle = true,
   title = "Dashboard",
+  stats
 }) => {
   const responsive = useResponsiveStyles();
   const navigate = useNavigate();
@@ -25,7 +25,7 @@ const Navbar = ({
   const [addNewJob, {data,isLoading}] = useAddNewJobMutation();
   const {jobpost_id, intervieweeId} = useParams();
   const adminId = useSelector((state)=>state.auth.adminId)
-  console.log(adminId)
+
   
   console.log("pathName -> . ",pathname);
 
@@ -76,7 +76,7 @@ const Navbar = ({
   };
 
   const onIconClick = () => {
-    navigate(`/dashboard/home`);
+    navigate(`/`);
   };
 
   const handelClick = async () => {
@@ -148,7 +148,8 @@ const Navbar = ({
                   {titleMap[pathname]?.button?.title}
                 </CustomInputButton>
               )
-            : !responsive.isMobile && <StasTopbar />}
+            : !responsive.isMobile && <StasTopbar application={stats?.pending}
+            shortlisted={stats?.shortlisted}/>}
         </div>
       </div>
     </div>

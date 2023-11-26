@@ -7,15 +7,17 @@ import { CustomInputButton } from "../../../components/button/CustomButoon";
 import CopyIcon from "../../../components/icons/CopyIcon";
 import CustomDropzone from "../../../components/dropzone/CustomDropzone";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useMemo } from "react";
+import { setCsvFile } from "../../../slice/job.slice";
 
 const JobPostingStepFourA = () => {
   const responsive = useResponsiveStyles();
   const [isToggle, setIsToggle] = useState(false);
   // const [publicUrl, setPulicUrl] = useState('https://qwickconnect.io/interview/JobPostTitle/dateofexpire')
-  const { publicLink } = useSelector((state) => state.job.publish_link);
+  const { publicLink, csvFile } = useSelector((state) => state.job.publish_link);
 
+  console.log("paubslic", csvFile)
   const handleClick = () => {
     // console.log("hii")
     navigator.clipboard.writeText(publicLink);
@@ -73,6 +75,15 @@ const JobPostingStepFourA = () => {
     }
   };
 
+
+  const dispatch = useDispatch();
+
+  const settingUplodedFile = (file) =>{
+    console.log("helleooeooeoeo")
+    console.log("setingiuplpada file", file)
+    dispatch(setCsvFile(file))
+  }
+
   const navigate = useNavigate();
   return (
     <div style={{ padding: responsive.isMobile ? "0 1rem" : "" }}>
@@ -107,6 +118,7 @@ const JobPostingStepFourA = () => {
                 acceptedTypes={[".csv"]}
                 name={"Upload CSV File"}
                 setUploadedFiles={setUploadedFiles}
+                settingUplodedFile={settingUplodedFile}
               />
             </div>
             <div

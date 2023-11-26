@@ -58,6 +58,7 @@ export default function CustomizedTables({ data, hadleClick }) {
   // const handleClick = () =>{
   //   navigate("/candidatereview")
   // }
+  
   console.log("data", data);
   return (
     <TableContainer component={Paper} sx={{ borderRadius: "1.25rem" }}>
@@ -79,7 +80,6 @@ export default function CustomizedTables({ data, hadleClick }) {
               style={{
                 display: "flex",
                 justifyContent: "center",
-                backgroundColor: "red",
               }}
             >
               <CustomAllTypography name={"No Data To Display"} variant={"h3"} />
