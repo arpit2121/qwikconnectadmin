@@ -8,23 +8,20 @@ import { useSelector } from "react-redux";
 import { Link as ScrollLink } from "react-scroll";
 import Hamburger from "../../../components/icons/Hamburger";
 import CustomDrawer from "./CustomDrawer";
-// import { Link } from "react-router-dom/dist";
 
 const MarketingNavbar = () => {
   const responsive = useResponsiveStyles();
-  // const navbars = ["Home", "Key features", "Plans", "Contact us"];
 
   const { hash } = useLocation();
   console.log("state", hash);
 
-  const location = useLocation();
-
   useEffect(() => {
-    const el = document.getElementById('my_element');
-    el && window.scrollTo({
-      behavior: 'smooth',
-      top: el.offsetTop
-    });
+    const el = document.getElementById("home");
+    el &&
+      window.scrollTo({
+        behavior: "smooth",
+        top: el.offsetTop,
+      });
   }, [location]);
 
   const navbars1 = [
@@ -43,6 +40,10 @@ const MarketingNavbar = () => {
     {
       to: "#plans",
       name: "Plans",
+    },
+    {
+      to: "/contact-us",
+      name: "Contact-us",
     },
   ];
 
@@ -101,6 +102,11 @@ const MarketingNavbar = () => {
     navigate("/");
   };
 
+  const handelClickDone = (hash) => {
+    console.log("hasg", hash);
+    navigate(hash);
+  };
+
   return (
     <div
       style={{
@@ -136,7 +142,25 @@ const MarketingNavbar = () => {
               marginRight: "1rem",
             }}
           >
-            {navbars1.map((item, index) => {
+            {/* {navbars1.map((item, index) => {
+              return (
+                <nav>
+                  <ScrollLink
+                    to={item.to}
+                    spy={true}
+                    smooth={true}
+                    duration={500}
+                    className="some-class"
+                    activeClass="some-active-class"
+                    onClick={()=>handelClickDone(item.to)}
+                  >
+                    {item.name}
+                  </ScrollLink>
+                </nav>
+              );
+            })} */}
+            {/* 
+{navbars1.map((item, index) => {
               return (
                 <div key={index}>
                   {item.to === "" ? (
@@ -150,13 +174,39 @@ const MarketingNavbar = () => {
                       duration={1000}
                       style={{fontWeight: '500' , textDecoration: 'none' , color:'#212121' , cursor:'pointer' }}
                       activeClass="active-link" // Specify the class name for the active link
+                      onClick={()=>handelClickDone(item.to)}
                     >
                         {item.name}
                     </ScrollLink>
                   )}
                 </div>
               );
-            })}
+            })} */}
+
+            {navbars1.map((item, index) => (
+              <div key={index}>
+                {item.to === "" ? (
+                  navigate()
+                ) : (
+                  <ScrollLink
+                    to={item.to.substring(1)}
+                    spy={true}
+                    smooth={true}
+                    offset={-100}
+                    duration={1000}
+                    style={{
+                      fontWeight: "500",
+                      textDecoration: "none",
+                      color: "#212121",
+                      cursor: "pointer",
+                    }}
+                    activeClass="active-link"
+                  >
+                    {item.name}
+                  </ScrollLink>
+                )}
+              </div>
+            ))}
           </div>
         )}
       </div>

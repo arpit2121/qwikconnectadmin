@@ -6,6 +6,7 @@ import hero from "../../../assets/hero.svg";
 import { TextDescription } from "../../typography/Fields";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import QwikConnectLogo from "../../icons/QwikConnectLogo";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -47,7 +48,8 @@ const Home = () => {
                 justifyContent: "flex-start",
               }}
             >
-              <img src={header} width={"50%"} height={"50%"}></img>
+              {/* <img src={header} width={"50%"} height={"50%"}></img> */}
+              <QwikConnectLogo onClick={()=>navigate('/')}/>
             </div>
             <div style={{ width: "100%", height: "70%" }}>
               <Outlet />

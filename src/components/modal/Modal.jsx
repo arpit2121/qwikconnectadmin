@@ -6,6 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
+import Plans from '../../pages/marketing/sections/Plans';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -35,7 +36,7 @@ const Modal = ({handleClickOpen, handleClose, open}) => {
           onClose={()=>handleClose()}
           aria-describedby="alert-dialog-slide-description"
         >
-          <DialogTitle>{"Use Google's location service?"}</DialogTitle>
+          {/* <DialogTitle>{"Use Google's location service?"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">
               Let Google help apps determine location. This means sending anonymous
@@ -45,7 +46,8 @@ const Modal = ({handleClickOpen, handleClose, open}) => {
           <DialogActions>
             <Button onClick={handleClose1}>Disagree</Button>
             <Button onClick={handleClose1}>Agree</Button>
-          </DialogActions>
+          </DialogActions> */}
+          <Plans/>
         </Dialog>
       </React.Fragment>
     );

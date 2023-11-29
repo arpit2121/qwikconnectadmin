@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import CommonTextInput from "../../../components/textfield/CommonTextInput";
@@ -14,7 +14,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { setApiLoadere } from "../../../slice/common.slice";
 import EditIcon from "../../../components/icons/EditIcon";
 import { useFormik } from "formik";
-import { useEffect } from "react";
+import { adminsApi } from "../../../services/admin";
+import { useMemo } from "react";
+import { adminDetValidation } from "../../../validations";
+// import TextFieldContainer from "../../../components/textfield/TextFieldContainer";
+
 
 const MyProfile = () => {
   const responsive = useResponsiveStyles();
@@ -31,7 +35,17 @@ const MyProfile = () => {
   } = useGetAdminInfoQuery(adminId);
 
 
+  const [getAdminInfo, {data: adminsData}] = adminsApi.endpoints.getAdminInfo.useLazyQuery()
 
+  useEffect(() => {
+    (async () => {
+      if (adminId) {
+        await getAdminInfo(adminId);
+      }
+    })();
+  }, [dispatch]);
+
+  console.log("HJHJH",adminsData)
 
   const isEdit = () =>{
     console.log("edit called")
@@ -52,18 +66,44 @@ const MyProfile = () => {
 
   const {values,isValid} = useFormik({
     initialValues: {
-      firstName: adminData?.admin?.fullName ? adminData?.admin?.fullName.split(' ')[0] : "",
-      lastName: adminData?.admin?.fullName ? adminData?.admin?.fullName.split(' ')[1] : "", 
-      phone_number: adminData?.admin?.phone_number ? adminData?.admin?.phone_number : "",
-      company_name: adminData?.admin?.company_name ? adminData?.admin?.company_name : "",
-      profession: adminData?.admin?.profession ? adminData?.admin?.profession : ""
+      firstName: adminsData?.admin.fullName ? adminsData?.admin?.fullName.split(' ')[0] : "",
+      lastName: adminsData?.admin.fullName ? adminsData?.admin?.fullName.split(' ')[1] : "", 
+      phone_number: adminsData?.admin.phone_number ? adminsData?.admin?.phone_number : "",
+      company_name: adminsData?.admin.company_name ? adminsData?.admin?.company_name : "",
+      profession: adminsData?.admin.profession ? adminsData?.admin?.profession : "",
+      email: adminsData?.admin?.email ? adminsData?.admin?.email : ""
     },
     validationSchema: '',
     isInitialValid:false,
   }) 
 
+  const adminInitialValues = useMemo(()=>{
+    const admins = adminsData?.admin;
+    return{
+      firstName: admins?.fullName ? admins?.fullName.split(' ')[0] : "",
+      lastName: admins?.fullName ? admins?.fullName.split(' ')[1] : "", 
+      phone_number: admins?.phone_number ? admins?.phone_number : "",
+      company_name: admins?.company_name ? admins?.company_name : "",
+      profession: admins?.profession ? admins?.profession : "",
+      email: admins?.email ? admins?.email: ""
+    }
+  })
 
-  console.log("va",adminData?.admin?.fullName.split(' ')[1])
+
+  const adminFormik = useFormik({
+    validateOnMount: true,
+    initialValues: adminInitialValues,
+    validationSchema: adminDetValidation,
+    enableReinitialize: true,
+    onSubmit: (values) => {
+      return values;
+    },
+  });
+ 
+
+  console.log("adminFormik",adminFormik.values)
+
+
 
   return (
     <div
@@ -98,11 +138,11 @@ const MyProfile = () => {
           >
             <UsersComponent image={user1} />
             <div>
-              <CustomAllTypography name={adminData?.admin?.fullName} variant={"h3"} />
+              {/* <CustomAllTypography name={initialValues?.firstName} variant={"h3"} />
               <CustomAllTypography
-                name={adminData?.admin?.email}
+                name={initialValues?.email}
                 variant={"body2"}
-              />
+              /> */}
             </div>
           </div>
         </div>
@@ -191,6 +231,12 @@ const MyProfile = () => {
           placeholder="Your Profession"
           value={adminData?.admin?.profession}
         />
+        {/* <TextFieldContainer
+              name={"email"}
+              placeholder={"Enter Protocol Number"}
+              label={"Protocol Number"}
+              formik={adminFormik}
+        /> */}
       </div>
       <div
         style={{

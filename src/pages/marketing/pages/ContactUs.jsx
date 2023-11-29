@@ -1,117 +1,203 @@
-import Message from "../../../assets/svg/message.svg";
+// ContactUs.js
+
+import  { useState } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import CommonTextInput from "../../../components/textfield/CommonTextInput";
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import MarketingNavbar from "../components/MarketingNavbar";
+import { CustomInputButton } from "../../../components/button/CustomButoon";
+import Message from "../../../assets/svg/message.svg";
+import CommonTextArea from "../../../components/textfield/CommonTextArea";
+
+const validationSchema = Yup.object().shape({
+  fullName: Yup.string().required("Full Name is required"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  phoneNumber: Yup.string().required("Phone Number is required"),
+  message: Yup.string().required("Message is required"),
+  // Add more validations for other fields if needed
+});
 
 const ContactUs = () => {
-    const responsive = useResponsiveStyles();
-  return (
-<>
-<div
-      style={{
-        display: "flex",
-        padding: responsive.isMobile ? "" : "4rem 6rem",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        gap: "4rem",
-        alignSelf: "center",
-        backgroundColor: "#FFF",
-      }}
-      className="contact-us"
-      id="contact-us"
-    >
+  const responsive = useResponsiveStyles();
+  const [submitted, setSubmitted] = useState(false);
+
+  const formik = useFormik({
+    initialValues: {
+      fullName: "",
+      email: "",
+      phoneNumber: "",
+      message: "",
+      // Add more fields if needed
+    },
+    validationSchema,
+    onSubmit: (values) => {
+      // Set submitted to true when the form is submitted
+      setSubmitted(true);
+
+      // Handle the form submission logic here
+      console.log("Submitted Data:", values);
+
+      // Example: Send data to a server
+      // fetch('https://example.com/submit', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify(values),
+      // })
+      //   .then(response => response.json())
+      //   .then(data => {
+      //     console.log('Success:', data);
+      //     // Handle success, show a success message, etc.
+      //   })
+      //   .catch((error) => {
+      //     console.error('Error:', error);
+      //     // Handle error, show an error message, etc.
+      //   });
+    },
+  });
+  console.log({touched: formik.touched ,})
+
+  return (<>
+     {/* <MarketingNavbar/> */}
       <div
         style={{
           display: "flex",
-          padding: responsive.isMobile ? "" : "0rem 2rem",
+          padding: responsive.isMobile ? "4rem" : "4rem 6rem",
           justifyContent: "center",
           alignItems: "center",
-          gap: responsive.isMobile ? '': "7rem",
-          flex: "1 0 0",
+          gap: "4rem",
+          alignSelf: "center",
+          backgroundColor: "#FFF",
+          width:"full"
         }}
+        // className="contact-us"
+        id="contact-us"
       >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            flex: "1 0 0",
-            alignSelf: "stretch",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-              gap: "3rem",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                gap: "1.25rem",
-                alignSelf: "stretch",
-              }}
-            >
-              <CustomAllTypography name={"Get in touch"} variant={"h3"} />
-              <CustomAllTypography
-                name={"Our friendly team would love to hear from you."}
-                variant={"body2"}
-              />
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                gap: "2rem",
-                alignSelf: "stretch",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  gap: "1.5rem",
-                  alignSelf: "stretch",
-                }}
-              >
-                <CommonTextInput
-                  value=''
-                  title="Full Name"
-                  placeholder="Full Name"
+      
+          
+             
+                <form
+                  onSubmit={formik.handleSubmit}
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                    gap: "1rem",
+                    alignSelf: "stretch",
+                    width: responsive.isMobile ? "100%" :"50%"
+
+                  }}
+                >
+          <CustomAllTypography name={"Get in touch"} variant={"h3"} />
+                <CustomAllTypography
+                  name={"Our friendly team would love to hear from you."}
+                  variant={"body2"}
                 />
-                <CommonTextInput
-                  value=''
-                  title="Email Id"
-                  placeholder="youremail@example.com"
-                />
-                <CommonTextInput
-                  value=''
-                  title="Full Name"
-                  placeholder="Full Name"
-                />
-                <CommonTextInput
-                  value=''
-                  title="Full Name"
-                  placeholder="Full Name"
-                />
-                <CustomAllTypography name={"You agree to our friendly privacy policy."} variant={"body2"} />
-              </div>
-            </div>
-          </div>
-        </div>
-        {responsive.isMobile ? '' : <img src={Message} width="26.75rem" height="26.75rem" />}
+                  <CommonTextInput
+                    title="Full Name"
+                    placeholder="Full Name"
+                    name="fullName"
+                    value={formik.values.fullName}
+                    handleInputChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    message={
+                      (submitted || formik.touched.fullName) &&
+                      Boolean(formik.errors.fullName) &&
+                      formik.errors.fullName
+                    }
+                    helperText={
+                      (submitted || formik.touched.fullName) &&
+                      formik.errors.fullName
+                    }
+                    status={
+                     ( submitted||( formik.touched.fullName &&formik.errors.fullName)) && "error"
+                    }
+                  />
+                  <CommonTextInput
+                    title="Email Id"
+                    placeholder="youremail@example.com"
+                    name="email"
+                    value={formik.values.email}
+                    handleInputChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    message={
+                      (submitted || formik.touched.email) &&
+                      Boolean(formik.errors.email) &&
+                      formik.errors.email
+                    }
+                    helperText={
+                      (submitted || formik.touched.email) && formik.errors.email
+                    }
+                    status={( submitted||( formik.touched.email &&formik.errors.email)) && "error"}
+                  />
+                  <CommonTextInput
+                    title="Phone Number"
+                    placeholder="Phone Number"
+                    name="phoneNumber"
+
+                    value={formik.values.phoneNumber}
+                    handleInputChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    message={
+                      (submitted || formik.touched.phoneNumber) &&
+                      Boolean(formik.errors.phoneNumber) &&
+                      formik.errors.phoneNumber
+                    }
+                    helperText={
+                      (submitted || formik.touched.phoneNumber) &&
+                      formik.errors.phoneNumber
+                    }
+                    status={
+                      ( submitted||( formik.touched.phoneNumber &&formik.errors.phoneNumber)) && "error"
+                    }
+                    
+                  />
+                  <CommonTextArea
+                    title="Message"
+                    placeholder="Your Message"
+                    name="message"
+                    value={formik.values.message}
+                    handleInputChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    message={
+                      (submitted || formik.touched.message) &&
+                      Boolean(formik.errors.message) &&
+                      formik.errors.message
+                    }
+                    helperText={
+                      (submitted || formik.touched.message) &&
+                      formik.errors.message
+                    }
+                    status={
+                      ( submitted||( formik.touched.message &&formik.errors.message)) && "error"
+                    }
+                  />
+                     <CustomAllTypography
+                    name={"You agree to our friendly privacy policy."}
+                    variant={"body2"}
+                  />
+                  <CustomInputButton
+                    variant="contained"
+                    size="large"
+                    responsive
+                    width={"100%"}
+                    type="submit"
+                  >
+                    Send message
+                  </CustomInputButton>
+
+               
+                </form>
+          {responsive.isMobile ? (
+            ""
+          ) : (
+            <img src={Message} width={"20%"} height={'auto'} />
+          )}
       </div>
-    </div>
-</>
+      </>
   );
 };
 

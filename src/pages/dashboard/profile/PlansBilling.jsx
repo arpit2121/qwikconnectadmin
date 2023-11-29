@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useResponsiveStyles from '../../../utils/MediaQuery';
 import CustomAllTypography from '../../../components/typography/CustomTypograpgy';
 import { CustomCard } from '../../../components/card/CustomCard';
@@ -6,10 +6,16 @@ import { Divider } from '@mui/material';
 import LinearWithValueLabel from '../../../components/admin/LinearProgress';
 import { CustomInputButton } from '../../../components/button/CustomButoon';
 import LinkBar from '../jobposting/LinkBar';
+import Modal from '../../../components/modal/Modal';
 
 
 const PlansBilling = () => {
+  const [open, setOpen] = useState(false);
   const responsive = useResponsiveStyles();
+
+  const handelPreviewClick = () =>{
+    setOpen(true)
+  }
   return (
     <div style={{backgroundColor:'',padding:responsive.isMobile ? "0 1rem 0 1rem" : responsive.isTablet? "0 5rem 0 5rem" : "0rem 15rem 0 15rem"}}>
         <div>
@@ -33,7 +39,7 @@ const PlansBilling = () => {
                   <CustomAllTypography name={'Payment'} variant={'body2'}/>
                   <CustomAllTypography name={'Free'} variant={'h4'}/></div>
                 <div>
-                  <CustomInputButton size='small' sx={{backgroundImage:'linear-gradient(180deg, #605DEC 0%, #A5F 100%)'}}>Upgrade subscription</CustomInputButton>
+                  <CustomInputButton size='small' sx={{backgroundImage:'linear-gradient(180deg, #605DEC 0%, #A5F 100%)'}} onClick={handelPreviewClick}>Upgrade subscription</CustomInputButton>
                 </div>
               </div>
               <Divider sx={{color:'#C9C8D3',marginTop:'2.38rem'}}/>
@@ -43,6 +49,7 @@ const PlansBilling = () => {
                   <LinearWithValueLabel/>
               </div>
               </div>
+              <Modal open={open} />
           </CustomCard>
         </div>
     </div>

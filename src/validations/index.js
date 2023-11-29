@@ -41,3 +41,16 @@ export const onBoardingSchema = yup.object().shape({
   // profileImage: "link of profile image"
 });
 
+
+export const adminDetValidation = yup.object().shape({
+  firstName: yup.string().required("Required"),
+  lastName: yup.string().required("Required"),
+  email: yup.string().email("please enter a valid email").required("Required"),
+  profession: yup.string().required("Required"),
+  company_name: yup
+    .string()
+    .required("Required")
+    .min(3, "Too short, minimum length is 3 characters")
+    .max(50, "Too long, maximum length is 50 characters"),
+})
+

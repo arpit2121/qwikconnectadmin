@@ -26,9 +26,6 @@ const Navbar = ({
   const {jobpost_id, intervieweeId} = useParams();
   const adminId = useSelector((state)=>state.auth.adminId)
 
-  
-  console.log("pathName -> . ",pathname);
-
   const titleMap = {
     [`/dashboard/home`]: {
       title: "Dashboard",
@@ -80,7 +77,6 @@ const Navbar = ({
   };
 
   const handelClick = async () => {
-    console.log("hello i'm here",pathname)
     if(pathname===`/dashboard/home` || 'dashboard/myJobPost'){
       await addNewJob(adminId).then((response) => {
         console.log("response data", response.data);

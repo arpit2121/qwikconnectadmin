@@ -165,7 +165,7 @@ const Plans = () => {
           flexWrap: "wrap",
         }}
       >
- {filteredPlans.map((plan) => (
+      {filteredPlans.map((plan) => (
           <PricingCard key={plan.priceId} plan={plan} />
         ))}
       </div>
