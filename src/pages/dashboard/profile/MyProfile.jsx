@@ -3,21 +3,18 @@ import CustomAllTypography from "../../../components/typography/CustomTypograpgy
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import CommonTextInput from "../../../components/textfield/CommonTextInput";
 import { CustomInputButton } from "../../../components/button/CustomButoon";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import UsersComponent from "../../../components/admin/UsersComponent";
 import user1 from "../../../assets//svg/user1.svg";
 import PhoneIcon from "../../../components/icons/PhoneIcon";
 import LinkBar from "../jobposting/LinkBar";
 import KeyIcon from "../../../components/icons/KeyIcon";
-import { useGetAdminInfoQuery } from "../../../services/admin";
+import { useGetAdminInfoQuery, useUpdateAdminProfileMutation } from "../../../services/admin";
 import { useDispatch, useSelector } from "react-redux";
 import { setApiLoadere } from "../../../slice/common.slice";
 import EditIcon from "../../../components/icons/EditIcon";
-import { useFormik } from "formik";
 import { adminsApi } from "../../../services/admin";
-import { useMemo } from "react";
-import { adminDetValidation } from "../../../validations";
-// import TextFieldContainer from "../../../components/textfield/TextFieldContainer";
+import { setAdminProfile } from "../../../slice/admin.slice";
 
 
 const MyProfile = () => {
@@ -29,13 +26,20 @@ const MyProfile = () => {
 
   const adminId = useSelector((state)=>state.auth.adminId);
 
-  const {
-    data:adminData,
-    isLoading,
-  } = useGetAdminInfoQuery(adminId);
+  const [getAdminInfo, {data: adminsData, isLoading}] = adminsApi.endpoints.getAdminInfo.useLazyQuery()
 
+  const [updateAdminProfile, {error}] = useUpdateAdminProfileMutation();
 
-  const [getAdminInfo, {data: adminsData}] = adminsApi.endpoints.getAdminInfo.useLazyQuery()
+  const adminProfile = useSelector((state)=> state.admin.adminProfile)
+  console.log(adminProfile)
+
+  if(isLoading) {
+    dispatch(setApiLoadere(true));
+  }
+  else{
+    dispatch(setApiLoadere(false));
+  }
+
 
   useEffect(() => {
     (async () => {
@@ -45,64 +49,26 @@ const MyProfile = () => {
     })();
   }, [dispatch]);
 
-  console.log("HJHJH",adminsData)
 
   const isEdit = () =>{
-    console.log("edit called")
     setDisabled(false)
   }
 
-  console.log("id --> ",disabled)
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    dispatch(setAdminProfile({name, value}))
+  };
 
 
-  if(isLoading) {
-    dispatch(setApiLoadere(true));
-  }
-  else{
-    dispatch(setApiLoadere(false));
-  }
-
-  console.log("admin data in my profiel --> ",adminData)
-
-  const {values,isValid} = useFormik({
-    initialValues: {
-      firstName: adminsData?.admin.fullName ? adminsData?.admin?.fullName.split(' ')[0] : "",
-      lastName: adminsData?.admin.fullName ? adminsData?.admin?.fullName.split(' ')[1] : "", 
-      phone_number: adminsData?.admin.phone_number ? adminsData?.admin?.phone_number : "",
-      company_name: adminsData?.admin.company_name ? adminsData?.admin?.company_name : "",
-      profession: adminsData?.admin.profession ? adminsData?.admin?.profession : "",
-      email: adminsData?.admin?.email ? adminsData?.admin?.email : ""
-    },
-    validationSchema: '',
-    isInitialValid:false,
-  }) 
-
-  const adminInitialValues = useMemo(()=>{
-    const admins = adminsData?.admin;
-    return{
-      firstName: admins?.fullName ? admins?.fullName.split(' ')[0] : "",
-      lastName: admins?.fullName ? admins?.fullName.split(' ')[1] : "", 
-      phone_number: admins?.phone_number ? admins?.phone_number : "",
-      company_name: admins?.company_name ? admins?.company_name : "",
-      profession: admins?.profession ? admins?.profession : "",
-      email: admins?.email ? admins?.email: ""
+  const handelClick = async () =>{
+    const adminProfileData = {...adminProfile, fullName: `${adminProfile.firstName} ${adminProfile.lastName}`}
+    delete adminProfileData.firstName;
+    delete adminProfileData.lastName;
+    const data = await updateAdminProfile({adminId, adminProfileData});
+    if(!data){
+      console.log("error", error)
     }
-  })
-
-
-  const adminFormik = useFormik({
-    validateOnMount: true,
-    initialValues: adminInitialValues,
-    validationSchema: adminDetValidation,
-    enableReinitialize: true,
-    onSubmit: (values) => {
-      return values;
-    },
-  });
- 
-
-  console.log("adminFormik",adminFormik.values)
-
+  }
 
 
   return (
@@ -138,11 +104,11 @@ const MyProfile = () => {
           >
             <UsersComponent image={user1} />
             <div>
-              {/* <CustomAllTypography name={initialValues?.firstName} variant={"h3"} />
+              <CustomAllTypography name={adminsData?.admin?.fullName.split(" ")[0]} variant={"h3"} />
               <CustomAllTypography
-                name={initialValues?.email}
+                name={adminsData?.admin?.email}
                 variant={"body2"}
-              /> */}
+              />
             </div>
           </div>
         </div>
@@ -170,7 +136,6 @@ const MyProfile = () => {
       <div
         style={{
           marginTop: "3rem",
-          backgroundColor: "",
           display: "flex",
           flexDirection: "column",
           gap: "1.25rem",
@@ -185,25 +150,22 @@ const MyProfile = () => {
           }}
         >
           <CommonTextInput
-          disabled={disabled}
-            value={adminData?.admin?.fullName}
-            // setvalue={setEmail}
+            disabled={disabled}
+            value={adminProfile?.firstName}
             title="First Name"
             placeholder="First Name"
-            searchInput={false}
-            // setValue={setEmail}
-            type1={"email"}
+            name="firstName"
+            handleInputChange={handleInputChange}
           />
           <br />
           <CommonTextInput
           disabled={disabled}
-          value={adminData?.admin?.fullName}
-            // setvalue={setEmail}
+          value={adminProfile?.lastName}
           title="Last Name"
           placeholder="Last Name"
-          searchInput={false}
-            // setValue={setEmail}
-          type1={"email"}
+          name="lastName"
+          handleInputChange={handleInputChange}
+          // type1={"email"}
           />
         </div>
         <CommonTextInput
@@ -212,31 +174,28 @@ const MyProfile = () => {
           startIcon={<PhoneIcon />}
           extraText={"+91"}
           placeholder="Mobile no."
-          value={adminData?.admin?.phone_number}
+          value={adminProfile?.phone_number}
+          handleInputChange={handleInputChange}
+          name="phone_number"
         />
         <CommonTextInput
           disabled={disabled}
-          value={adminData?.admin?.company_name}
-          // setvalue={setEmail}
+          value={adminProfile?.company_name}
           title="Company Name"
           placeholder="Company Name"
           searchInput={false}
-          // setValue={setEmail}
-          type1={"email"}
+          handleInputChange={handleInputChange}
+          name="company_name"
         />
         <CommonTextInput
           disabled={disabled}
           style={{ margin: "1.5rem 0rem" }}
           type="dropdown"
           placeholder="Your Profession"
-          value={adminData?.admin?.profession}
+          value={adminProfile?.profession}
+          handleInputChange={handleInputChange}
+          name="profession"
         />
-        {/* <TextFieldContainer
-              name={"email"}
-              placeholder={"Enter Protocol Number"}
-              label={"Protocol Number"}
-              formik={adminFormik}
-        /> */}
       </div>
       <div
         style={{
@@ -246,7 +205,7 @@ const MyProfile = () => {
           paddingBottom: "4rem",
         }}
       >
-        <CustomInputButton size="medium">Save Changes</CustomInputButton>
+        <CustomInputButton size="medium" onClick={handelClick} disabled={disabled}>Save Changes</CustomInputButton>
       </div>
     </div>
   );

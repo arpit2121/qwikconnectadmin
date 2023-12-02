@@ -264,13 +264,14 @@ const {jobpost_id} = useParams()
               value="3"
               component={Link}
               to={`/jobposting/${jobpost_id}/branding`}
-              disabled= {false ? true : false}
+              disabled= {true ? true : false}
             />
             <StyledTab
               label="Publish link"
               value="4"
               component={Link}
               to={`/jobposting/${jobpost_id}/publish-link`}
+              disabled
             />
           </TabList>
         </Box>

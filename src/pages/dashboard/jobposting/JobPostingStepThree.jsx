@@ -5,6 +5,7 @@ import CustomDropzone from "../../../components/dropzone/CustomDropzone";
 import { useDispatch, useSelector } from "react-redux";
 import CommonTextInput from "../../../components/textfield/CommonTextInput";
 import { setBrandingColor } from "../../../slice/job.slice";
+import EditIcon from "../../../components/icons/EditIcon";
 
 const JobPostingStepThree = () => {
   const responsive = useResponsiveStyles();
@@ -22,17 +23,27 @@ const JobPostingStepThree = () => {
     dispatch(setBrandingColor({name, value}))
   };
 
+  const [disabled, setDisabled] = useState(true);
+  
+  const isEdit = () => {
+    setDisabled(false)
+  }
+
   return (
     <div style={{ padding: responsive.isMobile ? "0 1rem" : "" }}>
       <div style={{ backgroundColor: "", marginTop: "4rem" }}>
+        <div style={{display:'flex', alignItems:'center', gap:'2rem'}}>
         <CustomAllTypography name={"Branding"} variant={"h2"} />
+        <EditIcon onClick={isEdit}/>
+        {/* <div onClick={isEdit} style={{cursor:'pointer'}}><EditIcon/></div> */}
+        </div>
         <div style={{ marginTop: "0.75rem" }}>
           <CustomAllTypography
             name={"This Feature will be Active only for the paid users"}
             variant={"body2"}
           />
         </div>
-        <div style={{ marginTop: "2rem" }}>
+        <div style={{ marginTop: "2rem",  }}>
           <CustomDropzone
             acceptedTypes={["image/*"]}
             name={"Upload csv file"}
@@ -59,7 +70,7 @@ const JobPostingStepThree = () => {
               placeholder="color"
               name={"primary_brand_colour"}
               handleInputChange={handleInputChange}
-              disabled = {subscribed}
+              disabled={disabled}
             />
           </div>
         </div>
@@ -81,7 +92,7 @@ const JobPostingStepThree = () => {
               placeholder="color"
               name={"secondary_brand_colour"}
               handleInputChange={handleInputChange}
-              disabled = {subscribed}
+              disabled={disabled}
             />
           </div>
         </div>

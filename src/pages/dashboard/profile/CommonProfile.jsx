@@ -5,6 +5,7 @@ import user1 from "../../../assets/svg/user1.svg";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import { darkspacetheme } from "../../../theme/theme";
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import GetAvtarImage from "../../../utils/GetAvtar";
 
 function getGreetingByTime() {
   const currentTime = new Date();
@@ -32,6 +33,7 @@ const CommonProfile = ({
   const size = responsive.isMobile ? "2.4rem" : "5.93rem";
   
   const key = useSelector((state) => state.admin.adminInfo?.admin?.avatar)
+  console.log("key   -> ",key)
   const adminId = useSelector((state) => state.auth?.adminId);
 
   return (
@@ -45,12 +47,17 @@ const CommonProfile = ({
       }}
     >
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <UsersComponent
+        {
+          key && <UsersComponent
           style={{ height: size, width: size }}
           s3Key={key}
           adminId={adminId}
           image={user1}
         />
+        }
+        {/* {
+          key && <GetAvtarImage s3Key={key}/>
+        } */}
       </div>
       <div
         style={{

@@ -298,6 +298,7 @@ const CustomLayout = ({ acceptedTypes,message, settingUplodedFile, removeUploade
           )
         )
       }
+      // disabled={disabled}
       accept= {acceptedTypes[0]}
       styles={{
         dropzone: {

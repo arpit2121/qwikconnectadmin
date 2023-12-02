@@ -27,15 +27,15 @@ export const initialState = {
     ratingParameters: [],
     display_questions: "",
     questionsArray: [
-      {
-        questionNo: '',
-        questionTitle: "Question Title here",
-        isMandatory: false,
-        retakes: "",
-        thinkingTime: "",
-        timeToAnswer: "",
-        questionVideoKey: "",    
-      }
+      // {
+      //   questionNo: '',
+      //   questionTitle: "Question Title here",
+      //   isMandatory: false,
+      //   retakes: "",
+      //   thinkingTime: "",
+      //   timeToAnswer: "",
+      //   questionVideoKey: "",    
+      // }
     ],
   },
   
@@ -63,7 +63,6 @@ export const jobSlice = createSlice({
       state.question_setup.display_questions = action.payload;
     },
     updateQuestion: (state, action) => {
-      console.log("action.payload", action.payload)
       const {name, value, index} = action.payload;
       state.question_setup.questionsArray[index][name] = value;
     },
@@ -88,7 +87,7 @@ export const jobSlice = createSlice({
       jobsApi.endpoints.addNewJob.matchFulfilled,
       (state, { payload }) => {
         state.basic_details = {
-          jobDescription: payload?.jobDescription ? payload?.jobDescription: "Enter Job Title here",
+          jobDescription: payload?.jobDescription==="" || null || undefined ? payload?.jobDescription: "Enter Job Title here",
           jobTitle: payload?.jobTitle,
           hiringLocation: payload?.hiringLocation,
           profession: payload?.profession,

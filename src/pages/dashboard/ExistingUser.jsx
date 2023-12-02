@@ -36,7 +36,6 @@ const ExistingUser = ({data}) => {
             endIcon={<ArrowForwardIcon />}
             onClick={() => {
               navigate("/dashboard/myJobPost");
-              // authApi.util.invalidateTags('')
               dispatch(setSelectedJobPostingPage(2));
             }}
           >

@@ -48,8 +48,6 @@ const JobPostingStepTwo = ({adminid, jobpostid}) => {
   const questions_option = questionsArray.map((value, index) => index + 1);
 
   const handleSave = (index) => {
-    // Perform the save action, e.g., update the data in your state or API
-    // After saving, clear the editing state
     console.log("saved called");
     const updateRatingParmeters = [...ratingParameters];
     updateRatingParmeters[editingIndex] = editedData;
@@ -68,17 +66,21 @@ const JobPostingStepTwo = ({adminid, jobpostid}) => {
     try {
       formData.append('file', video_key);
       formData.append('json_data', JSON.stringify(jsonData));
-      // ...
     } catch (error) {
       console.error("Error creating FormData:", error);
     }
 
-
-
     await addNewQuestion({formData:formData, adminId: admin_id, jobPostId:jobpostid}).then((response) => {
-      console.log("response data", response); 
       if (response.data) {
-       console.log("hello")
+        questionsArray.concat({
+          questionNo: "",
+          questionTitle: "Question Title here",
+          isMandatory: false,
+          retakes: "",
+          thinkingTime: "",
+          timeToAnswer: "",
+          questionVideoKey: "",
+        });
       }
     });
   };
@@ -138,6 +140,13 @@ const JobPostingStepTwo = ({adminid, jobpostid}) => {
     //update the actual array
     dispatch(setQuestions(_questions));
   };
+
+  const [state, setState] = useState(true);
+
+  const [isShowNotification, setIsShowNotification]= useState(true);
+  const handelNotificationClick = () => {
+    setIsShowNotification(false)
+  }
 
   return (
     <div
@@ -280,7 +289,8 @@ const JobPostingStepTwo = ({adminid, jobpostid}) => {
           >
             <CustomTooltip
               icon={<Body3>Sample Ratings</Body3>}
-              message={<RatingParameter />}
+              message={<RatingParameter   setState={setState}
+              />}
             />
             <CustomInputButton
               variant="outlined"
@@ -420,7 +430,7 @@ const JobPostingStepTwo = ({adminid, jobpostid}) => {
       >
         <div style={{ width: "100%", backgroundColor: "" }}>
           {/* <Notification/> */}
-          <Notification />
+          {isShowNotification && <Notification handelNotificationClick={handelNotificationClick}/>}
         </div>
       </div>
       <div

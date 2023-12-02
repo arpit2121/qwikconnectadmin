@@ -32,6 +32,7 @@ const CandiatateReview = () => {
   const handleToggleContent = () => {
     setShowMoreContent(!showMoreContent);
   };
+  
   useEffect(() => {
     setShowMoreContent(responsive.isMobile ? false : true);
   }, [responsive.isMobile]);
@@ -112,7 +113,7 @@ const CandiatateReview = () => {
               }}
             >
               <div style={initialContentStyle}>
-                <UsersComponent image={user1} />
+                <UsersComponent image={user1} style={{width:'4rem', height:'4rem'}}/>
                 <div
                   style={{
                     display: "flex",
@@ -134,7 +135,7 @@ const CandiatateReview = () => {
                   </div>
                   <div
                     style={{
-                      marginTop: "0.75rem",
+                      // marginTop: "0.75rem",
                       display: "flex",
                       flexDirection: "column",
                       gap: "0.5rem",
@@ -183,7 +184,7 @@ const CandiatateReview = () => {
                   )}
                   <div
                     style={{
-                      marginTop: responsive.isMobile ? "1.5rem" : "2.50rem",
+                      // marginTop: responsive.isMobile ? "1.5rem" : "2.50rem",
                       display: "flex",
                       gap: responsive.isMobile ? "1rem" : "2rem",
                       alignItems: "center",
@@ -192,7 +193,9 @@ const CandiatateReview = () => {
                     <CustomAllTypography name={"Status"} variant={"body2"} />{" "}
                     <StatusButton name={candidateData?.status === "Shortlisted" ? "Shortlisted" : candidateData?.status === "pending" ? "Pending" : "Rejected"} />{" "}
                     {responsive.isMobile && (
-                      <div style={{ marginLeft: "1.44rem" }}>
+                      <div style={{ 
+                        // marginLeft: "1.44rem" 
+                      }}>
                         <Body3 color={"#8A8894"}>{"1d ago"}</Body3>
                       </div>
                     )}
@@ -215,17 +218,17 @@ const CandiatateReview = () => {
                     <div
                       style={{
                         ...moreContentStyle,
-                        marginTop: responsive.isMobile ? 0 : "1.30rem",
+                        // marginTop: responsive.isMobile ? 0 : "1.30rem",
                         // backgroundColor:"blue"
                       }}
 
                     >
                       <div
                         style={{
-                          marginTop: responsive.isMobile ? "1rem" : "2.50rem",
+                          // marginTop: responsive.isMobile ? "1rem" : "2.50rem",
                           display: "flex",
                           flexDirection: "column",
-                          gap: "0.50rem",
+                          // gap: "0.50rem",
                           // backgroundColor:'red'
                         }}
                       >
@@ -246,7 +249,17 @@ const CandiatateReview = () => {
                           variant={"body2"}
                         />
                       </div>
-                      <div style={{ marginTop: "2.63rem"}}>
+                      {/* <div style={{ 
+                        marginTop: "2.63rem",
+                         backgroundColor:'red'
+                         }}> */}
+                        {/* <CustomInputButton
+                          variant="outlined"
+                          size="small"
+                          width="100%"
+                        >
+                          View Resume
+                        </CustomInputButton> */}
                         <CustomInputButton
                           variant="outlined"
                           size="small"
@@ -254,7 +267,7 @@ const CandiatateReview = () => {
                         >
                           View Resume
                         </CustomInputButton>
-                      </div>
+                      {/* </div> */}
                     </div>
                   )}
                 </div>

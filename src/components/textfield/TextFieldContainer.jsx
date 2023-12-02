@@ -54,3 +54,44 @@
 // };
 
 // export default TextFieldContainer;
+
+
+
+
+
+
+
+
+{/* <TextFieldContainer
+              name={"email"}
+              placeholder={"Enter Protocol Number"}
+              label={"Protocol Number"}
+              formik={adminFormik}
+        /> */}
+
+
+
+
+
+        // const adminInitialValues = useMemo(()=>{
+        //     const admins = adminsData?.admin;
+        //     return{
+        //       firstName: admins?.fullName ? admins?.fullName.split(' ')[0] : "",
+        //       lastName: admins?.fullName ? admins?.fullName.split(' ')[1] : "", 
+        //       phone_number: admins?.phone_number ? admins?.phone_number : "",
+        //       company_name: admins?.company_name ? admins?.company_name : "",
+        //       profession: admins?.profession ? admins?.profession : "",
+        //       email: admins?.email ? admins?.email: ""
+        //     }
+        //   })
+        
+        
+        //   const adminFormik = useFormik({
+        //     validateOnMount: true,
+        //     initialValues: adminInitialValues,
+        //     validationSchema: adminDetValidation,
+        //     enableReinitialize: true,
+        //     onSubmit: (values) => {
+        //       return values;
+        //     },
+        //   });

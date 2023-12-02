@@ -29,7 +29,7 @@ const DashboardHome = () => {
       <CommonProfileBar
         application={adminData?.IntervieweeData?.pending}
         shortlisted={adminData?.IntervieweeData?.shortlisted}
-        userName={adminData?.admin?.fullName}
+        userName={adminData?.admin?.fullName.split(" ")[0]}
       />
       {/* <Outlet /> */}
       {activeJobPost?.length === 0 ? (

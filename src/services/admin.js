@@ -66,19 +66,26 @@ export const adminsApi = createApi({
       }),
       // invalidatesTags: ["Student"],
     }),
-    updateStudent: builder.mutation({
-      query: ({ id, ...student }) => ({
-        url: `students/${id}`,
+    updateAdminProfile: builder.mutation({
+      query: ({ adminId, adminProfileData }) => ({
+        url: `/${adminId}/profile`,
         method: "PUT",
-        body: student,
+        body: adminProfileData,
       }),
-      // invalidatesTags: ["Student"],
     }),
     getAvtar: builder.query({
       query: ({key}) => ({
         url:`/avatar?key=${key}`
       })
-    })
+    }),
+    getAvtars: builder.query({
+      query: ({ key }) => {
+        console.log("kehakjhakkhkhy",key)
+        return ({
+          url:`http://localhost:4546/v1/s3-manager/download-avtar?key=${key}`
+        })
+      }
+    }),
   }),
 });
 
@@ -90,7 +97,9 @@ export const {
   useGetAdminInfoQuery,
   useGetProfessionsQuery,
   useLazyGetProfessionsQuery,
-  useGetAvtarQuery
+  useGetAvtarQuery,
+  useUpdateAdminProfileMutation,
+  useGetAvtarsQuery
 } = adminsApi;
 
 //fetchBaseQuery - similar to axios

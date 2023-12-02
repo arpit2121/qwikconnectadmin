@@ -69,7 +69,6 @@ export const jobsApi = createApi({
     }),
     updateBranding: builder.mutation({
       query: ({ adminId, jobPostId, formData }) => {
-        console.log("hiiii from reducer", formData);
         return {
           url: `branding?adminId=${adminId}&jobPostId=${jobPostId}`,
           method: "PUT",

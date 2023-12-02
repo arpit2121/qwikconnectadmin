@@ -10,6 +10,7 @@ import CommonTextInput from "../textfield/CommonTextInput";
 import CustomDropzone from "../dropzone/CustomDropzone";
 import { TextField } from "@mui/material";
 import TrashIcon from "../icons/TrashIcon";
+import { convertTimeStringToSeconds } from "../../utils/utilsFunctions";
 
 
 function QuestionCard({ index, questions,handleChange, deleteQuestion }) {
@@ -22,7 +23,12 @@ function QuestionCard({ index, questions,handleChange, deleteQuestion }) {
   console.log("questions ", questions)
 
   const handleChange1 = (name, value, index) => {
-    handleChange(name, value, index)
+    // if(name==="thinkingTime"||"timeToAnswer"){
+    //   console.log(value, name)
+    //   value = convertTimeStringToSeconds(value)
+    //   handleChange(name, value, index)
+    // }
+      handleChange(name, value, index)
   }
   
   const deleteQuestion1 = (index) => {

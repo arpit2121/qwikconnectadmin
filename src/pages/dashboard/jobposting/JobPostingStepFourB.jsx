@@ -35,7 +35,6 @@ profession,
 requiredExperience)
 
 useEffect(()=>{
-  console.log("jkbsajdbasjbd",jobDescription)
 },[jobDescription])
 
 
@@ -175,7 +174,7 @@ console.log("professionData",allProfessions)
                 handleInputChange={handleInputChange}
                 name="requiredExperience"
                 options={exp}
-              />
+          />
         </div>
         <div style={{ marginTop: "2.63rem" }}>
           <CommonTextInput

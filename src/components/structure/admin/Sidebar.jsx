@@ -92,9 +92,9 @@ const Sidebar = () => {
   const classes = useStyles({ responsive });
   const {id} = useParams();
 
-  console.log("path -> ",path.pathname)
 
   const direction = { flexDirection: responsive.isMobile ? "row" : "column" };
+  
   return (
     <div className={responsive.isMobile ? classes.main2 : classes.main}>
       <div className={classes.container2} style={direction}>
