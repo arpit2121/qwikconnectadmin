@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./router/AppRoutes";
+import PdfViewer from "./components/pdf-viewer/PdfViewer";
 
 
 const App = () => {

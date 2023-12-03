@@ -117,8 +117,9 @@ const JobPostingStepFourA = () => {
               <CustomDropzone
                 acceptedTypes={[".csv"]}
                 name={"Upload CSV File"}
-                setUploadedFiles={setUploadedFiles}
-                settingUplodedFile={settingUplodedFile}
+                // setUploadedFiles={setUploadedFiles}
+                // settingUplodedFile={settingUplodedFile}
+                settingUplodedFile={setCsvFile}
               />
             </div>
             <div

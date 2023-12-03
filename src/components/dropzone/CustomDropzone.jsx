@@ -94,6 +94,7 @@ const Preview = ({ meta, files },...props) => {
     console.log("hoverr");
     doneLoading && setHovered(true);
   };
+
   const dispatch = useDispatch();
 
   const handelFileRemove = () =>{
@@ -252,10 +253,9 @@ const Input = ({ accept, onFiles, files, getFilesFromEvent, message}) => {
 };
 
 const CustomLayout = ({ acceptedTypes,message, settingUplodedFile, removeUploadedFile }) => {
-  console.log("message",message)
+  const dispatch = useDispatch();
 
   const getUploadParams = () => ({ url: "https://httpbin.org/post" });
-
 
   const getFilesFromEvent = (e) => {
     return new Promise((resolve) => {
@@ -268,9 +268,7 @@ const CustomLayout = ({ acceptedTypes,message, settingUplodedFile, removeUploade
   const handleChangeStatus = ({ meta, file }, status) => {
      console.log("uploading",file,"status",status) 
       if(status==="done"){
-        settingUplodedFile(file)
-        // setUploadedFiles(file)
-        // dispatch(setBrandingLogo(file))
+        dispatch(settingUplodedFile(file))
       }
     }
 

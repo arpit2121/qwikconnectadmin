@@ -4,7 +4,7 @@ import useResponsiveStyles from "../../../utils/MediaQuery";
 import CustomDropzone from "../../../components/dropzone/CustomDropzone";
 import { useDispatch, useSelector } from "react-redux";
 import CommonTextInput from "../../../components/textfield/CommonTextInput";
-import { setBrandingColor } from "../../../slice/job.slice";
+import { setBrandingColor, setBrandingLogo } from "../../../slice/job.slice";
 import EditIcon from "../../../components/icons/EditIcon";
 
 const JobPostingStepThree = () => {
@@ -29,13 +29,17 @@ const JobPostingStepThree = () => {
     setDisabled(false)
   }
 
+  const handelUpload = () =>{
+    dispatch()
+  }
+
+  console.log(branding)
   return (
     <div style={{ padding: responsive.isMobile ? "0 1rem" : "" }}>
       <div style={{ backgroundColor: "", marginTop: "4rem" }}>
         <div style={{display:'flex', alignItems:'center', gap:'2rem'}}>
         <CustomAllTypography name={"Branding"} variant={"h2"} />
         <EditIcon onClick={isEdit}/>
-        {/* <div onClick={isEdit} style={{cursor:'pointer'}}><EditIcon/></div> */}
         </div>
         <div style={{ marginTop: "0.75rem" }}>
           <CustomAllTypography
@@ -46,9 +50,8 @@ const JobPostingStepThree = () => {
         <div style={{ marginTop: "2rem",  }}>
           <CustomDropzone
             acceptedTypes={["image/*"]}
-            name={"Upload csv file"}
-            setUploadedFiles={setUploadedFiles}
-            dispatch={dispatch}
+            name={"Upload Logo Image file"}
+            settingUplodedFile={setBrandingLogo}
           />
         </div>
         <div

@@ -1,5 +1,4 @@
 import React from "react";
-// import { useGetSponsorLogoQuery } from "../../store/slices/apiSlice";
 import { useGetAvtarsQuery } from "../services/admin";
 import { base64ToArrayBuffer } from "./utilsFunctions";
 

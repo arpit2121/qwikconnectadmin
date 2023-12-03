@@ -105,26 +105,8 @@ const Password = () => {
     }
   },[isLoginSuccess, isSignupSuccess])
 
-
-
-  // const forgetPassword = () => {
-  //   navigate("/password/forgetpassword", {
-  //     state: {
-  //       data: "forgetpassword",
-  //       state: {
-  //         newUser: true,
-  //         header: "Forget Password?",
-  //         belowHeader: "Reset your password for youremail@example.com",
-  //         button: "Reset",
-  //         footer: "",
-  //       },
-  //     },
-  //   });
-  // };
   const forgetPassword = () => {
     navigate("/otp", {
-      // state: {
-      //   data: "forgetpassword",
         state: {
           newUser: false,
           header: "Forget Password?",
@@ -133,7 +115,6 @@ const Password = () => {
           footer: "",
           email: state.email
         },
-      // },
     });
   };
 

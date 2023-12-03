@@ -146,6 +146,7 @@ const {jobpost_id} = useParams()
           break;
         case "3":
           const formData = new FormData();
+          console.log("step 3",branding)
           formData.append('file', branding.blobFile)
           formData.append('json_data',JSON.stringify(branding.colors))
           await updatedBranding({
@@ -168,8 +169,9 @@ const {jobpost_id} = useParams()
   };
 
   const handlePublish = async () => {
+    console.log("publish_link.csvFile",publish_link.csvFile)
     const formData = new FormData();
-    formData.append("key",publish_link.csvFile)
+    formData.append("csvFile",publish_link.csvFile)
     await publishLink({
       formData: formData,
       adminId: adminId,
@@ -264,14 +266,14 @@ const {jobpost_id} = useParams()
               value="3"
               component={Link}
               to={`/jobposting/${jobpost_id}/branding`}
-              disabled= {true ? true : false}
+              // disabled= {true ? true : false}
             />
             <StyledTab
               label="Publish link"
               value="4"
               component={Link}
               to={`/jobposting/${jobpost_id}/publish-link`}
-              disabled
+              // disabled
             />
           </TabList>
         </Box>
@@ -350,7 +352,7 @@ const {jobpost_id} = useParams()
             <CustomInputButton
               variant="text"
               size="medium"
-              onClick={() => navigate("/dashboard/home/existinguser")}
+              onClick={() => navigate("/dashboard/home")}
             >
               Close
             </CustomInputButton>

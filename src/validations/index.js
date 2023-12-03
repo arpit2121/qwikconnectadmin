@@ -22,6 +22,28 @@ export const passwrodSchema = yup.object().shape({
 })
 
 
+export const newPasswordSchema = yup.object().shape({
+  oldPassword: yup.string()
+  .min(4, 'Password must be at least 4 characters')
+  .max(15, 'Password must not exceed 15 characters')
+  .matches(
+    /^(?=.*[!@#$%^&*()-=_+[\]{};':"\\|,<>/?])(?!.*\s).*$/,
+    'Password must include at least one special character and not contain spaces'
+  )
+  .required('Password is required'),
+  newPassword: yup.string()
+  .min(4, 'Password must be at least 4 characters')
+  .max(15, 'Password must not exceed 15 characters')
+  .matches(
+    /^(?=.*[!@#$%^&*()-=_+[\]{};':"\\|,<>/?])(?!.*\s).*$/,
+    'Password must include at least one special character and not contain spaces'
+  )
+  .required('Password is required'),
+})
+
+
+
+
 export const onBoardingSchema = yup.object().shape({
   fullName: yup.string().required("Required"),
   phone_number: yup
