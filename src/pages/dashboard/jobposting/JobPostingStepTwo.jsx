@@ -64,8 +64,9 @@ const JobPostingStepTwo = ({adminid, jobpostid}) => {
     console.log(jsonData, video_key)
     const formData = new FormData();
     try {
+      console.log("video key, jsonData")
       formData.append('file', video_key);
-      formData.append('json_data', JSON.stringify(jsonData));
+      formData.append('jsonData', JSON.stringify(jsonData));
     } catch (error) {
       console.error("Error creating FormData:", error);
     }

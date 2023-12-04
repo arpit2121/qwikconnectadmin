@@ -27,11 +27,17 @@ const CardContainerComponent = ({ data,style={} }) => {
   return (
     <div style={{marginTop:'2rem',...style}}>
       <div id="card_container_div" style={responsive?.isMobile ? cardDivStyleMobile : cardDivStyle}>
-      {data?.map((elem, index) => (
-        <div key={index} style={cardStyle}>
-          <JobCard data={elem}/>
-        </div>
-      ))}
+      {
+        data
+        ?
+        data?.map((elem, index) => (
+          <div key={index} style={cardStyle}>
+            <JobCard data={elem}/>
+          </div>
+        ))
+        :
+        ""
+      }
     </div>
     </div>
   );

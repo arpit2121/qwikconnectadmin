@@ -8,7 +8,6 @@ import CardContainerComponent from "./CardContainerComponent";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setSelectedJobPostingPage } from "../../slice/common.slice";
-import { authApi } from "../../services/auth";
 
 const ExistingUser = ({data}) => {
   const responsvie = useResponsiveStyles();
@@ -43,7 +42,7 @@ const ExistingUser = ({data}) => {
           </CustomInputButton>
         </div>
       </div>
-      <CardContainerComponent data={data}/>
+      {data ? <CardContainerComponent data={data}/> : ''}
     </div>
   );
 };

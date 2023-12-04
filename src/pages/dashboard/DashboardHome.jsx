@@ -23,6 +23,7 @@ const DashboardHome = () => {
     dispatch(setApiLoadere(false));
   }
 
+  console.log("activeJobPost", activeJobPost)
 
   return (
     <div style={{ height: "100%", width: "100%" }}>
@@ -32,7 +33,8 @@ const DashboardHome = () => {
         userName={adminData?.admin?.fullName.split(" ")[0]}
       />
       {/* <Outlet /> */}
-      {activeJobPost?.length === 0 ? (
+      {activeJobPost?.activeJobPostData
+?.length === 0 ? (
         <NonExisting />
       ) : (
         <ExistingUser data={activeJobPost} />

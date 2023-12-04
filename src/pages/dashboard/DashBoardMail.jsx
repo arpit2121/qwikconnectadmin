@@ -51,7 +51,8 @@ const DashBoardMail = () => {
       }}
     >
       <CommonProfileBar  title={'Overview'} showProfile={false} rejected={adminData?.IntervieweeData?.rejected} application={adminData?.IntervieweeData?.pending} shortlisted={adminData?.IntervieweeData?.shortlisted}/>
-      { allJobPost?.length === 0 ? <NonExisting/> : <CardContainerComponent style={{padding:responsive.isMobile?'1rem':'3.87rem',marginTop:0}} data={allJobPost}/>}
+      { allJobPost?.jobPosts
+?.length === 0 ? <NonExisting/> : <CardContainerComponent style={{padding:responsive.isMobile?'1rem':'3.87rem',marginTop:0}} data={allJobPost}/>}
     </div>
   );
 };

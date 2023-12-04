@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { authApi } from "../services/auth";
 import { jwtDecode } from "jwt-decode";
+import { adminsApi } from "../services/admin";
 
 console.log("helllo")
 let savedToken = localStorage.getItem("token");
@@ -34,6 +35,13 @@ const authSlice = createSlice({
         localStorage.setItem("token", JSON.stringify(payload));
       }
     );
+    builder.addMatcher(
+      adminsApi.endpoints.addAdmin.matchFulfilled,
+      (state, {payload}) => {
+        console.log("data",payload)
+        state.adminId = payload.adminId
+      }
+    )
   },
 });
 
