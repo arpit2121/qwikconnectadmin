@@ -50,7 +50,14 @@ export const intervieweeApi = createApi({
         getCandidateData: builder.query({
             query: (intervieweeId) => `${intervieweeId}`
         }),
-    })
+        getPresignedUrl: builder.query({
+          query: ({ key }) => {
+            return ({
+              url:`http://localhost:4546/v1/s3-manager/presigned-url?key=${key}`
+            })
+          }
+        }),
+    }),
 });
 
 export const {useLazyGetAllIntervieweeQuery,  useLazyGetCandidateDataQuery} = intervieweeApi;

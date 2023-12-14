@@ -7,7 +7,8 @@ const MarketingPage = () => {
   return (
     <CustomContainer>
     <div
-       style={{width:'100%', overflowX: 'hidden'}}>
+      //  style={{width:'100%', overflowX: 'hidden'}}
+       >
       <MarketingNavbar />
       <Outlet/>
       <Footer/>

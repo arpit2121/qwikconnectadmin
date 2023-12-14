@@ -1,9 +1,12 @@
 import { Box, Drawer } from '@mui/material'
 import React from 'react'
 import QwikConnectLogo from '../../../components/icons/QwikConnectLogo';
-import { ScrollLink, Link } from 'react-scroll';
+// import { Link as ScrollLink } from "react-scroll";
+import { Link } from "react-scroll";
 import { useNavigate } from 'react-router-dom';
 import { CustomInputButton } from '../../../components/button/CustomButoon';
+// import { Link } from 'react-router-dom';
+import CustomAllTypography from '../../../components/typography/CustomTypograpgy';
 
 
 const CustomDrawer = ({navbarArray, handelClose, isDrawerOpen,hash1, handelLoginClick, handelSignupClick, handelLoggedInClick, user}) => {
@@ -23,21 +26,7 @@ const CustomDrawer = ({navbarArray, handelClose, isDrawerOpen,hash1, handelLogin
                          ?
                           navigate()
                          :
-                      //    <ScrollLink
-                      //   to={item.to.substring(1)} // Remove the "#" from the beginning of the 'to' prop
-                      //   spy={true}
-                      //   smooth={true}
-                      //   offset={-100} // You may need to adjust the offset based on your layout
-                      //   duration={1000}
-                      //   activeClass="active-link" // Specify the class name for the active link
-                      // >
-                      //   <CustomAllTypography
-                      //     name={item.name}
-                      //     variant={"body2"}
-                      //     textcolor={(item.to === hash1) ?'#605DEC' : ''}
-                      //   />
-                      //  </ScrollLink>
-                      <Link to={{pathname:item.to.substring(1)}}>{item.name}</Link>
+                      <Link to={item.title}>{item.title}</Link>
                       }
                     </div>
                     )
@@ -48,20 +37,12 @@ const CustomDrawer = ({navbarArray, handelClose, isDrawerOpen,hash1, handelLogin
           {!user ? (
             <>
               <CustomInputButton
-                variant="text"
+                variant="contained"
                 size="medium"
                 responsive
                 onClick={()=>handelLoginClick()}
               >
-                Login
-              </CustomInputButton>
-              <CustomInputButton
-                variant="contained"
-                size="medium"
-                responsive
-                onClick={()=>handelSignupClick()}
-              >
-                Sign up
+                Login/Signup
               </CustomInputButton>
             </>
           ) : (

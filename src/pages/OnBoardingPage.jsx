@@ -18,13 +18,15 @@ import { onBoardingSchema } from "../validations";
 import { useFormik } from "formik";
 import { useGetProfessionsQuery } from "../services/admin";
 import { isFulfilled } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const OnBoardingPage = () => {
   const responsive = useResponsiveStyles();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isOther, setIsOther] = useState(false)
+
+  const emailId = useSelector((state)=>state.auth.emailId)
   
   const [addAdmin, { data: profileData, isLoading, isSuccess, isError, error }] =
     useAddAdminMutation();
@@ -39,9 +41,7 @@ const OnBoardingPage = () => {
 
 
   const handelOnBoard = async () =>{
-    // isLoading(true)
-    const res = await addAdmin(values);
-    console.log("res",res)
+    await addAdmin(values);
     if(error){
       alert(error);
     }
@@ -61,7 +61,7 @@ const OnBoardingPage = () => {
     // isValidating,
   } = useFormik({
     initialValues: {
-      email: state.email,
+      email: state.email ? state.email : emailId,
       fullName: "",
       phone_number: "",
       company_name: "",
@@ -72,7 +72,6 @@ const OnBoardingPage = () => {
     handelOnBoard,
   });
 
-  console.log(values)
 
   return (
     <CustomContainer>

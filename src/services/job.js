@@ -61,7 +61,7 @@ export const jobsApi = createApi({
       query: ({ json_data, adminId, jobPostId }) => {
         console.log("reducer -> ", json_data);
         return {
-          url: `parameters?jobPostId=${jobPostId}`,
+          url: `parameters?adminId=${adminId}&jobPostId=${jobPostId}`,
           method: "PUT",
           body: json_data,
         };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import user1 from "../../../assets/svg/user1.svg";
 import thumbnail from "../../../assets/videoThumbnail.png";
 import UsersComponent from "../../../components/admin/UsersComponent";
@@ -28,7 +28,6 @@ const CandiatateReview = () => {
   const responsive = useResponsiveStyles();
   const [showMoreContent, setShowMoreContent] = useState(false);
   const {state} = useLocation();
-  const [pdfData, setPdfData] = useState(null);
   const handleToggleContent = () => {
     setShowMoreContent(!showMoreContent);
   };
@@ -69,18 +68,21 @@ const CandiatateReview = () => {
   const statusStyle = {
     display: "flex",
   };
+
   const dispatch = useDispatch();
   const { intervieweeId } = useParams();
 
-  const [getCandidateData, { data: candidateData }] =
-    useLazyGetCandidateDataQuery();
+  const [getCandidateData, { data: candidateData }] = useLazyGetCandidateDataQuery();
 
   useEffect(() => {
     getCandidateData(intervieweeId, true);
   }, []);
 
-  console.log("state", state)
-
+  const handelViewResume = () =>{
+    //after clicking on handelViewResume start the loader of a button then after getting response save the url in redux then get
+    
+    window.open("https://qwik-connect.s3.ap-south-1.amazonaws.com/admins/656cc394e271a453a63709bc/jobpost/656f8cf0cb1654b6eba392bb/interviewees/6574a0aa5470a0d3973d0166/resume/Arpit_Resume.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2MBJCQ6UG67QLSF5%2F20231211%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20231211T181648Z&X-Amz-Expires=900&X-Amz-Signature=afee6e9220a202d60931ce54e6b20f902d631283dc681b01aca948e0c883ba0f&X-Amz-SignedHeaders=host&x-id=GetObject","_blank");
+  }
 
   return (
     <CustomContainer>
@@ -264,6 +266,7 @@ const CandiatateReview = () => {
                           variant="outlined"
                           size="small"
                           width="100%"
+                          onClick={handelViewResume}
                         >
                           View Resume
                         </CustomInputButton>
@@ -307,9 +310,7 @@ const CandiatateReview = () => {
                     variant={"h5"}
                     sx={{ marginBottom: "0.5rem" }}
                   />
-
                   <VideoPlayer />
-
                   <div
                     id={"card_container_div"}
                     style={{

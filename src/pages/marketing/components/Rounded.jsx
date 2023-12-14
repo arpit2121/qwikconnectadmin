@@ -14,7 +14,8 @@ const Rounded = () => {
         background: `url(${rounded})`,
         backgroundSize: 'cover', // Ensure the background image is fully visible
         backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center center',        padding: responsive.isMobile ? '1rem' : '2.3rem 0',
+        backgroundPosition: 'center center',        
+        padding: responsive.isMobile ? '1rem' : '2.3rem 0',
         display: 'flex',
         rounded: '50%',
         flexDirection: 'column',

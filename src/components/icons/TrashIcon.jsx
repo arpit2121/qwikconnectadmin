@@ -1,7 +1,7 @@
 import React from "react";
 
 const TrashIcon = ({
-  onClick = () => {},
+  hadelDeleteClick,
   height = 24,
   width = 24,
   className,
@@ -9,7 +9,7 @@ const TrashIcon = ({
 }) => {
   return (
     <svg
-    onClick={onClick}
+    onClick={()=>hadelDeleteClick()}
     className={className}
     width={width}
     height={height}

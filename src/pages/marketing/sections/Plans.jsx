@@ -11,6 +11,7 @@ const Plans = () => {
     setSelectedPlan(plan);
   };
 
+
   const plans = [
     {
       priceId: "aa1232da",
@@ -91,7 +92,7 @@ const Plans = () => {
     : plan.planDuration === "yearly"
 );
   return (
-    <div id="plans" className="plans">
+    <div className="plans-container" id="plans">
       <div style={{ marginTop: "5.5rem" }}>
         <CustomAllTypography
           name={"Limitless Interviews, Affordable Plans: Get Started Today!"}
@@ -161,6 +162,7 @@ const Plans = () => {
           flexDirection: responsive.isMobile ? "column" : "row",
           gap: "3rem",
           justifyContent: "center",
+          alignItems:responsive.isMobile ? 'center' : '',
           width: responsive.isMobile ? "100%" : "auto",
           flexWrap: "wrap",
         }}

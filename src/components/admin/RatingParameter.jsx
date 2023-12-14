@@ -24,13 +24,12 @@ function RatingParameter(props) {
     Aptitude: -1,
   });
 
-  const [selectedSmileyIndex, setSelectedSmileyIndex] = useState(-1);
-  const [selectedOuterIndex, setSelectedOuterIndex] = useState(-1);
-
   useEffect(() => {
+    //passing point -> passing point is something 
+    //rating parameter -> minimum parameter to get
     const passProperties = Object.keys(state).filter((key) => state[key] >= 2);
     console.log("-->", passProperties);
-    if (passProperties.length >= 2) {
+    if (passProperties.length >= 3) {
       props.setState(true);
     } else {
       props.setState(false);
@@ -41,8 +40,8 @@ function RatingParameter(props) {
   const handleClick = (innerIndex, outerIndex, item1) => {
     console.log("1", innerIndex, "2", outerIndex);
     console.log("selected parameter ==>", item1);
-    setSelectedSmileyIndex(innerIndex);
-    setSelectedOuterIndex(outerIndex);
+    // setSelectedSmileyIndex(innerIndex);
+    // setSelectedOuterIndex(outerIndex);
 
     const parameterKey = item1;
     setState((prevState) => ({

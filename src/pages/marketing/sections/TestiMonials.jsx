@@ -4,7 +4,7 @@ import TestimonialCard from "../components/TestimonialCard";
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import vector1 from '../../../assets/marketing/Vector3.svg'
 
-const data = [1, 2, 3, 4, 5, 6];
+const data = [1, 2, 3];
 
 // eslint-disable-next-line react/prop-types
 const TestiMonials = ({ style }) => {
@@ -12,10 +12,11 @@ const TestiMonials = ({ style }) => {
 
   const cardContainerStyle = {
     display: "grid",
-    gridTemplateColumns: responsive.isMobile ? "1fr" : "repeat(auto-fill, minmax(300px, 1fr))",
+    gridTemplateColumns: responsive.isMobile ? "1fr" : "repeat(auto-fill, minmax(360px, 1fr))",
     gap: "2rem",
     justifyContent: 'center',
     padding: "2rem", // Add padding for better spacing
+    alignItem:'center'
   };
 
 
@@ -37,8 +38,8 @@ const TestiMonials = ({ style }) => {
         position:"relative",
         overflow: 'hidden'
       }}
+      className="testimonials-container"
       id="testimonials"
-      className="testimonials"
     >
       <div
         style={{

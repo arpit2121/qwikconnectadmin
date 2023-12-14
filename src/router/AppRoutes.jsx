@@ -56,9 +56,9 @@ const AppRoutes = () => {
       <Route path="/home/privacy-policy" element={<PrivacyPolicy />} />
       <Route path="/home/term-condition" element={<TermCondition />} />
       <Route element={<Home />}>
-        <Route path=":name" element={<Login />} />
+        <Route path="/login" element={<Login />} />
         <Route element={<IsEmailId email={"arpitsingh@gmail.com"}/>}> 
-        <Route path="otp" element={<OtpVerification />} />
+        <Route path="/otp" element={<OtpVerification />} />
         <Route path="password/:name" element={<Password />} />
         </Route>
       </Route>

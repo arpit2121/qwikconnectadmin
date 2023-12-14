@@ -26,17 +26,7 @@ export const initialState = {
     minimum_passing_parameter: "",
     ratingParameters: [],
     display_questions: "",
-    questionsArray: [
-      // {
-      //   questionNo: '',
-      //   questionTitle: "Question Title here",
-      //   isMandatory: false,
-      //   retakes: "",
-      //   thinkingTime: "",
-      //   timeToAnswer: "",
-      //   questionVideoKey: "",    
-      // }
-    ],
+    questionsArray: [],
   },
   
 };
@@ -59,6 +49,9 @@ export const jobSlice = createSlice({
     setMinimumPassingParameter: (state, action) => {
       state.question_setup.passingPoint = action.payload;
     },
+    setAddEmptyQuestion: (state,action) => {
+      state.question_setup.questionsArray = state.question_setup.questionsArray.concat(action.payload);
+    },
     setDisplayQuestions: (state, action) => {
       state.question_setup.display_questions = action.payload;
     },
@@ -72,14 +65,21 @@ export const jobSlice = createSlice({
     },
     setBrandingLogo: (state, action) => {
       console.log("setting branding logo",action.payload)
-      state.branding.blobFile = action.payload; 
+      const {file,index} = action.payload;
+      state.branding.blobFile = file; 
+    },
+    setAddQuestionVideoKey: (state,action) => {
+      console.log("set added video",action.payload)
+      const {file,index} = action.payload;
+      state.question_setup.questionsArray[index].questionVideoKey = file;
     },
     setBrandingColor: (state, action) => {
-      state.branding.colors[action.payload.name] = action.payload.value;
+      state.branding.colors[action.payload.name] = action.payload.file;
     },
     setCsvFile: (state, action) => {
       console.log("ac",action.payload)
-      state.publish_link.csvFile = action.payload;
+      const {file,index} = action.payload;
+      state.publish_link.csvFile = file;
     }
   },
   extraReducers: (builder) => {
@@ -87,8 +87,9 @@ export const jobSlice = createSlice({
       jobsApi.endpoints.addNewJob.matchFulfilled,
       (state, { payload }) => {
         state.basic_details = {
-          jobDescription: payload?.jobDescription==="" || null || undefined ? payload?.jobDescription: "Enter Job Title here",
-          jobTitle: payload?.jobTitle,
+          jobDescription: payload?.jobDescription,
+          // ==="" || null || undefined ? payload?.jobDescription: "Enter Job Title here",
+          jobTitle: payload?.jobTitle =="" || null || undefined ? "Enter Job Title here" : payload?.jobTitle,
           hiringLocation: payload?.hiringLocation,
           profession: payload?.profession,
           requiredExperience: payload?.requiredExperience
@@ -115,6 +116,6 @@ export const jobSlice = createSlice({
   },
 });
 
-export const { setJobData, setBasicDetails, setParameter, setQuestions, updateQuestion, deleteQuestion, setMinimumPassingParameter, setDisplayQuestions, setBrandingLogo, setBrandingColor, setCsvFile} = jobSlice.actions;
+export const { setJobData, setBasicDetails, setParameter, setQuestions, updateQuestion, deleteQuestion, setMinimumPassingParameter, setDisplayQuestions, setBrandingLogo, setBrandingColor, setCsvFile, setAddEmptyQuestion, setAddQuestionVideoKey} = jobSlice.actions;
 
 export default jobSlice.reducer;

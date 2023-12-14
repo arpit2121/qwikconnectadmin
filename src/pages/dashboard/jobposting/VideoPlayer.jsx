@@ -95,6 +95,7 @@ const VideoPlayer = () => {
 
   const { videoLink } = useSelector((state) => state.common);
 
+
   const revert = () => {
     if (exitTimeOut) clearTimeout(exitTimeOut);
     setShowBackArrow(true);
@@ -117,11 +118,13 @@ const VideoPlayer = () => {
     }
   };
 
-  // const interval = setInterval(function () {
-  //   console.log('running')
-  //   if (videoRef.current?.currentTime == videoTime) clearInterval(interval);
-  //   setCurrentTime(videoRef.current?.currentTime);
-  // }, 1000);
+  
+
+  const interval = setInterval(function () {
+    // console.log('running')
+    if (videoRef.current?.currentTime == videoTime) clearInterval(interval);
+    setCurrentTime(videoRef.current?.currentTime);
+  }, 1000);
 
   useEffect(() => {
     !drag && setProgress((videoRef.current?.currentTime / videoTime) * 100);
@@ -175,9 +178,9 @@ const VideoPlayer = () => {
   };
 
   function myFunction1() {
-    // const vid = document.getElementById("video1");
-    //  videoRef.current.play()
-    //  setVideoTime(vid?.duration);  
+    const vid = document.getElementById("video1");
+     videoRef.current.play()
+     setVideoTime(vid?.duration);  
   }
 
   useEffect(() => {
@@ -198,22 +201,14 @@ const VideoPlayer = () => {
       className="outerDiv"
       style={{ height: responsive.isMobile ? "11.06rem" : "21.28rem" }}
     >
-      {/* <video
+      <video
         id="video1"
         // style={{ objectFit: responsive.isMobile ? "contain" : "cover" }}
         ref={videoRef}
         poster={thumbnail}
         className="video"
         src={videoLink}
-      ></video> */}
-
-      <video
-        id="video1"
-        ref={videoRef}
-        poster={thumbnail}
-        className="video"
       ></video>
-
       <div
         className="controlsContainer"
         style={{ opacity: showControlers ? 1 : 0 }}
@@ -270,7 +265,7 @@ const VideoPlayer = () => {
         </div>
       </div>
 
-      {volume > 0 && isVolumeHovered && (
+      {volume > -1 && isVolumeHovered && (
       <div
         className="volumeController"
         style={{
@@ -292,7 +287,7 @@ const VideoPlayer = () => {
           width={responsive.isMobile ? 12 : 15}
         /> */}
          {/* {volume > 0 && isVolumeHovered && ( */}
-            <>
+           <>
               <CustomSoundBar
                 sx={{ height: "70%", padding: "0px !important", width: "60%" }}
                 orientation="vertical"
@@ -307,6 +302,7 @@ const VideoPlayer = () => {
                 width={responsive.isMobile ? 12 : 15}
               />
             </>
+         {/* )} */}
       </div>
           )}
       <div className={"timeForwardBackwardDiv"}>

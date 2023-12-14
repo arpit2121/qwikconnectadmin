@@ -9,12 +9,15 @@ import RatingPara from '../../../assets/marketing/RatingPara.png';
 import ReviewRating from '../../../assets/marketing/ReviewRating.png';
 import QuestionCardImage from '../../../assets/marketing/QuestionCardImage.png';
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
-import { Typography } from "@mui/material";
+
+
+
 
 const KeyFeatures = () => {
   const responsive = useResponsiveStyles();
-  const [showAnimation, setShowAnimation] = useState(false);
+  const [showAnimation, setShowAnimation] = useState(true);
   const [currentItemIndex, setCurrentItemIndex] = useState(0);
+
 
   const data = [
     {
@@ -52,9 +55,9 @@ const KeyFeatures = () => {
         setCurrentItemIndex((prevIndex) =>
           prevIndex < data.length - 1 ? prevIndex + 1 : 0
         );
-        if (currentItemIndex === data.length - 1) {
-          setShowAnimation(false);
-        }
+        // if (currentItemIndex === data.length - 1) {
+        //   setShowAnimation(false);
+        // }
       }, 2000); // Adjust the delay as needed
     }
 
@@ -65,7 +68,7 @@ const KeyFeatures = () => {
 
   const handleSectionClick = () => {
     setCurrentItemIndex(1);
-    setShowAnimation(true);
+    // setShowAnimation(true);
   };
 
   return (
@@ -81,8 +84,8 @@ const KeyFeatures = () => {
           flexDirection: responsive.isMobile ? "column" : "row",
           gap: '20px'
         }}
-        id="key-features"
-        className="key-features"
+        className="keyfatures-container"
+        name="keyfeatures"
       >
         <div
           style={{
@@ -92,8 +95,7 @@ const KeyFeatures = () => {
             width: responsive.isMobile ? "100%" : "40%",
           }}
         >
-          <CustomAllTypography variant="h3"textcolor = "#36BF76" name = {'Introducing'} >
-            
+          <CustomAllTypography variant="h3"textcolor = "#36BF76" name = {'Introducing'}>    
           </CustomAllTypography>
           <CustomAllTypography variant="h1" textcolor = "white" name= "QwikConnect Platform">
           </CustomAllTypography>
@@ -166,7 +168,11 @@ const KeyFeatures = () => {
             </div>
             <div style={{ width: responsive.isMobile ? '90%' : '100%',  margin: 'auto' }}>
             <div style={{ width: '100%', maxWidth: '400px',display: "flex", flexDirection: "column", gap: "1rem", }}>
-                <CustomAllTypography variant="h2"textcolor= "#CE1E25" name={'Key Features'}>
+                <CustomAllTypography variant="h2"textcolor= "#CE1E25" name={'Key Features'}  sx={{
+                  opacity: showAnimation ? 1 : 0,
+                  visibility: showAnimation ? "visible" : "hidden",
+                  transition: "opacity 2s ease-in-out",
+                }}>
                   
                 </CustomAllTypography>
                 <CustomAllTypography variant="h1" sx={{

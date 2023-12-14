@@ -82,7 +82,7 @@ export const adminsApi = createApi({
       query: ({ key }) => {
         console.log("kehakjhakkhkhy",key)
         return ({
-          url:`http://localhost:4546/v1/s3-manager/download-avtar?key=${key}`
+          url:`http://localhost:4546/v1/s3-manager/download-avatar?key=${key}`
         })
       }
     }),

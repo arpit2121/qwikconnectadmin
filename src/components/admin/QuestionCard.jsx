@@ -10,24 +10,17 @@ import CommonTextInput from "../textfield/CommonTextInput";
 import CustomDropzone from "../dropzone/CustomDropzone";
 import { TextField } from "@mui/material";
 import TrashIcon from "../icons/TrashIcon";
-import { convertTimeStringToSeconds } from "../../utils/utilsFunctions";
+import { setAddQuestionVideoKey } from "../../slice/job.slice";
 
 
-function QuestionCard({ index, questions,handleChange, deleteQuestion }) {
+
+function QuestionCard({ index, questions, handleChange, deleteQuestion }) {
+
   const responsive = useResponsiveStyles();
   const [isEditing, setIsEditing] = useState(false);
 
-  const onEdit = () => {
-    console.log("Edit Called");
-  };
-  console.log("questions ", questions)
 
   const handleChange1 = (name, value, index) => {
-    // if(name==="thinkingTime"||"timeToAnswer"){
-    //   console.log(value, name)
-    //   value = convertTimeStringToSeconds(value)
-    //   handleChange(name, value, index)
-    // }
       handleChange(name, value, index)
   }
   
@@ -39,12 +32,16 @@ function QuestionCard({ index, questions,handleChange, deleteQuestion }) {
 
   const settingUplodedFile = (file) =>{
     console.log("setingiuplpada file", file)
-    handleChange1(name="questionVideoKey", file, index=index)
+    handleChange1("questionVideoKey", file, index=index)
   }
   
 
   const removeUploadedFile = () =>{
     console.log("RemoveUploadedFiel")
+  }
+
+  const handelSaveVideoKey = () => {
+
   }
 
   return (
@@ -69,7 +66,7 @@ function QuestionCard({ index, questions,handleChange, deleteQuestion }) {
           <QuestionCardLines />
         )}
       </div>
-      <CustomDropzone style={{ width: "10.5rem", height: "10.625rem" }} acceptedTypes={['video/*']} settingUplodedFile={settingUplodedFile} removeUploadedFile={removeUploadedFile}/>
+      <CustomDropzone style={{ width: "10.5rem", height: "10.625rem" }} acceptedTypes={['video/*']} settingUplodedFile={setAddQuestionVideoKey} handelSaveVideoKey={settingUplodedFile} index={index}/>
       <div
         style={{
           display: "flex",

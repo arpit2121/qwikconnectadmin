@@ -5,54 +5,39 @@ import useResponsiveStyles from "../../../utils/MediaQuery";
 import { CustomInputButton } from "../../../components/button/CustomButoon";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Link as ScrollLink } from "react-scroll";
 import Hamburger from "../../../components/icons/Hamburger";
 import CustomDrawer from "./CustomDrawer";
+import { Link } from "react-scroll";
+import "./Navbar.css";
 
 const MarketingNavbar = () => {
   const responsive = useResponsiveStyles();
 
   const { hash } = useLocation();
-  console.log("state", hash);
-
-  useEffect(() => {
-    const el = document.getElementById("home");
-    el &&
-      window.scrollTo({
-        behavior: "smooth",
-        top: el.offsetTop,
-      });
-  }, [location]);
-
-  const navbars1 = [
-    {
-      to: "#home",
-      name: "Home",
-    },
-    {
-      to: "#key-features",
-      name: "Key features",
-    },
-    {
-      to: "#testimonials",
-      name: "Testimonials",
-    },
-    {
-      to: "#plans",
-      name: "Plans",
-    },
-    {
-      to: "/contact-us",
-      name: "Contact-us",
-    },
-  ];
 
   const navigate = useNavigate();
 
   const user = useSelector((state) => state.auth.user);
   const adminId = useSelector((state) => state.auth.adminId);
 
-  // const login = true;
+  const menuItems = [
+    {
+      id: 1,
+      title: "home",
+    },
+    {
+      id: 2,
+      title: "keyfeatures",
+    },
+    {
+      id: 3,
+      title: "testimonials",
+    },
+    {
+      id: 4,
+      title: "plans",
+    },
+  ];
 
   const handelLoginClick = () => {
     if (user) {
@@ -85,6 +70,9 @@ const MarketingNavbar = () => {
       navigate("/on-boarding");
     }
   };
+  const [click, setClick] = useState(true);
+
+  const closeMenu = () => setClick(false);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -102,27 +90,123 @@ const MarketingNavbar = () => {
     navigate("/");
   };
 
-  const handelClickDone = (hash) => {
-    console.log("hasg", hash);
-    navigate(hash);
+  const handleClose = () => {
+    console.log("hello");
   };
 
   return (
+    // <div
+    //   style={{
+    //     boxShadow: "0px 4px 4px 0px rgba(142, 141, 208, 0.16)",
+    //     backgroundColor: "#fff",
+    //     padding: responsive.isMobile ? "1rem" : "1.5rem 2.5rem",
+    //     display: "flex",
+    //     justifyContent: "space-between",
+    //     alignItems: "center",
+    //     zIndex: 1,
+    //     position: "sticky",
+    //     scrollBehavior: "smooth",
+    //     top: 0,
+    //   }}
+    // >
+    //   <div style={{ display: "flex", justifyContent: "space-between" }}>
+    //     <div>
+    //       {responsive.isMobile ? (
+    //         <Logo onClick={handelLogoClick} />
+    //       ) : (
+    //         <QwikConnectLogo onClick={handelLogoClick} />
+    //       )}
+    //     </div>
+    //     {responsive.isMobile || responsive.isRandom ? (
+    //       ""
+    //     ) : (
+    //       <div
+    //         style={{
+    //           display: "flex",
+    //           alignItems: "center",
+    //           gap: "2.5rem",
+    //           marginLeft: "4rem",
+    //           marginRight: "1rem",
+    //         }}
+    //       >
+    //         <nav>
+    //           <ul>
+    //             {
+    //               menuItems.map((menu)=>{
+    //                 return(
+    //                   <li>
+    //                     {/* <a href={(`#${menu.title}`)}>{menu.title}</a> */}
+    //                     <a href="/"><Link onClick={handelClick} activeClass="active" to={menu.title} spy={true} smooth={true} duration={500}>{menu.title}</Link></a>
+    //                     </li>
+    //                 )
+    //               })
+    //             }
+    //           </ul>
+    //         </nav>
+    //       </div>
+    //     )}
+    //   </div>
+    //   {responsive.isMobile || responsive.isRandom ? (
+    //     <div>
+    //       <Hamburger handelClick={handelDrawerOpen} />
+    //       {isDrawerOpen && (
+    //         <CustomDrawer
+    //           isDrawerOpen={isDrawerOpen}
+    //           handelClose={handelDrawerClose}
+    //           navbarArray={navbars1}
+    //           hash={hash}
+    //           handelLoginClick={handelLoginClick}
+    //           handelSignupClick={handelSignupClick}
+    //           handelLoggedInClick={handelLoggedInClick}
+    //           user={user}
+    //         />
+    //       )}
+    //     </div>
+    //   ) : (
+    //     <div style={{ display: "flex" }}>
+    //       {!user ? (
+    //         <>
+    //           <CustomInputButton
+    //             variant="contained"
+    //             size="medium"
+    //             responsive
+    //             onClick={handelLoginClick}
+    //           >
+    //             Login/Signup
+    //           </CustomInputButton>
+    //         </>
+    //       ) : (
+    //         <CustomInputButton
+    //           variant="outlined"
+    //           size="medium"
+    //           responsive
+    //           onClick={handelLoggedInClick}
+    //         >
+    //           Logged In
+    //         </CustomInputButton>
+    //       )}
+    //     </div>
+    //   )}
+    // </div>
     <div
       style={{
+        width: "100%",
+        position: "fixed",
+        zIndex: 5,
         boxShadow: "0px 4px 4px 0px rgba(142, 141, 208, 0.16)",
         backgroundColor: "#fff",
-        padding: responsive.isMobile ? "1rem" : "1.5rem 2.5rem",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        zIndex: 1,
-        position: "sticky",
-        scrollBehavior: "smooth",
-        top: 0,
       }}
     >
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div
+        className="container"
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: responsive.isMobile ? "0.5rem" : "1rem 1.5rem",
+        }}
+      >
+        {" "}
         <div>
           {responsive.isMobile ? (
             <Logo onClick={handelLogoClick} />
@@ -130,94 +214,16 @@ const MarketingNavbar = () => {
             <QwikConnectLogo onClick={handelLogoClick} />
           )}
         </div>
-        {responsive.isMobile || responsive.isRandom ? (
-          ""
-        ) : (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "2.5rem",
-              marginLeft: "4rem",
-              marginRight: "1rem",
-            }}
-          >
-            {/* {navbars1.map((item, index) => {
-              return (
-                <nav>
-                  <ScrollLink
-                    to={item.to}
-                    spy={true}
-                    smooth={true}
-                    duration={500}
-                    className="some-class"
-                    activeClass="some-active-class"
-                    onClick={()=>handelClickDone(item.to)}
-                  >
-                    {item.name}
-                  </ScrollLink>
-                </nav>
-              );
-            })} */}
-            {/* 
-{navbars1.map((item, index) => {
-              return (
-                <div key={index}>
-                  {item.to === "" ? (
-                    navigate()
-                  ) : (
-                       <ScrollLink
-                      to={item.to.substring(1)} // Remove the "#" from the beginning of the 'to' prop
-                      spy={true}
-                      smooth={true}
-                      offset={-100} // You may need to adjust the offset based on your layout
-                      duration={1000}
-                      style={{fontWeight: '500' , textDecoration: 'none' , color:'#212121' , cursor:'pointer' }}
-                      activeClass="active-link" // Specify the class name for the active link
-                      onClick={()=>handelClickDone(item.to)}
-                    >
-                        {item.name}
-                    </ScrollLink>
-                  )}
-                </div>
-              );
-            })} */}
-
-            {navbars1.map((item, index) => (
-              <div key={index}>
-                {item.to === "" ? (
-                  navigate()
-                ) : (
-                  <ScrollLink
-                    to={item.to.substring(1)}
-                    spy={true}
-                    smooth={true}
-                    offset={-100}
-                    duration={1000}
-                    style={{
-                      fontWeight: "500",
-                      textDecoration: "none",
-                      color: "#212121",
-                      cursor: "pointer",
-                    }}
-                    activeClass="active-link"
-                  >
-                    {item.name}
-                  </ScrollLink>
-                )}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-      {responsive.isMobile || responsive.isRandom ? (
-        <div>
+       {
+        responsive.isMobile || responsive.isRandom 
+        ?
+            <div>
           <Hamburger handelClick={handelDrawerOpen} />
           {isDrawerOpen && (
             <CustomDrawer
               isDrawerOpen={isDrawerOpen}
               handelClose={handelDrawerClose}
-              navbarArray={navbars1}
+              navbarArray={menuItems}
               hash={hash}
               handelLoginClick={handelLoginClick}
               handelSignupClick={handelSignupClick}
@@ -226,39 +232,57 @@ const MarketingNavbar = () => {
             />
           )}
         </div>
-      ) : (
-        <div style={{ display: "flex" }}>
-          {!user ? (
-            <>
-              <CustomInputButton
-                variant="text"
-                size="medium"
-                responsive
-                onClick={handelLoginClick}
-              >
-                Login
-              </CustomInputButton>
-              <CustomInputButton
-                variant="contained"
-                size="medium"
-                responsive
-                onClick={handelSignupClick}
-              >
-                Sign up
-              </CustomInputButton>
-            </>
-          ) : (
+        :
+        <ul className={false ? "nav-menu active" : "nav-menu"}>
+        {menuItems.map((menu) => {
+          return (
+            <li>
+              <a href="/">
+                <Link
+                  onClick={handleClose}
+                  activeClass="active"
+                  to={menu.title}
+                  spy={true}
+                  smooth={true}
+                  duration={500}
+                >
+                  {menu.title}
+                </Link>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+       }
+       {
+        responsive.isMobile || responsive.isRandom?
+        ""
+        :
+        <>
+        {!user ? (
+          <>
             <CustomInputButton
-              variant="outlined"
+              variant="contained"
               size="medium"
               responsive
-              onClick={handelLoggedInClick}
+              onClick={handelLoginClick}
             >
-              Logged In
+              Login/Signup
             </CustomInputButton>
-          )}
-        </div>
-      )}
+          </>
+        ) : (
+          <CustomInputButton
+            variant="outlined"
+            size="medium"
+            responsive
+            onClick={handelLoggedInClick}
+          >
+            Logged In
+          </CustomInputButton>
+        )}
+        </>
+       }
+      </div>
     </div>
   );
 };

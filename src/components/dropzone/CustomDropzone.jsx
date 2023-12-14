@@ -252,8 +252,11 @@ const Input = ({ accept, onFiles, files, getFilesFromEvent, message}) => {
   );
 };
 
-const CustomLayout = ({ acceptedTypes,message, settingUplodedFile, removeUploadedFile }) => {
+const CustomLayout = ({ acceptedTypes,message, settingUplodedFile, removeUploadedFile, handelSaveVideoKey,  index}) => {
+
   const dispatch = useDispatch();
+
+  console.log("index", index)
 
   const getUploadParams = () => ({ url: "https://httpbin.org/post" });
 
@@ -268,7 +271,7 @@ const CustomLayout = ({ acceptedTypes,message, settingUplodedFile, removeUploade
   const handleChangeStatus = ({ meta, file }, status) => {
      console.log("uploading",file,"status",status) 
       if(status==="done"){
-        dispatch(settingUplodedFile(file))
+        dispatch(settingUplodedFile({file,index}))
       }
     }
 
@@ -310,8 +313,8 @@ const CustomLayout = ({ acceptedTypes,message, settingUplodedFile, removeUploade
   );
 };
 
-const CustomDropzone = ({ multiple = false,acceptedTypes,name,setUploadedFiles, dispatch, setFile, settingUplodedFile, removeUploadedFile}) => {
-  return <CustomLayout acceptedTypes={acceptedTypes} message={name}  settingUplodedFile={settingUplodedFile} removeUploadedFile={removeUploadedFile}/>;
+const CustomDropzone = ({ multiple = false,acceptedTypes,name,setUploadedFiles, dispatch, setFile, settingUplodedFile, removeUploadedFile, handelSaveVideoKey, index}) => {
+  return <CustomLayout acceptedTypes={acceptedTypes} message={name}  settingUplodedFile={settingUplodedFile} removeUploadedFile={removeUploadedFile} handelSaveVideoKey={handelSaveVideoKey} index={index}/>;
 };
 
 export default CustomDropzone;

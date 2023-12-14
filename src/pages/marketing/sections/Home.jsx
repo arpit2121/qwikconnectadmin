@@ -9,16 +9,15 @@ const Home = () => {
   const responsive = useResponsiveStyles();
   return (
     <div
+    id='home'
       style={{
         flexShrink: 0,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-
         position: "relative",
       }}
-      id="home"
-      className="home"
+      className="home-container"
     >
       <div
         style={{

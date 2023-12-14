@@ -6,14 +6,17 @@ import ThumbsDownIcon from "../../../components/icons/ThumbsDownIcon";
 import ThumbsIcon from '../../../components/icons/ThumbsIcon'
 import { Body3 } from "../../../components/typography/Fields";
 import { CustomInputButton } from "../../../components/button/CustomButoon";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const RatingSection = ({status}) => {
   const responsive = useResponsiveStyles();
 
   const [state, setState] = useState(true);
 
-  const handelClickNext = () =>{
+  const navigate = useNavigate()
 
+  const handelClickNext = () =>{
+    navigate('/jobpostingdetailspage/656f8cf0cb1654b6eba392bb')
   }
 
   return (
@@ -46,6 +49,7 @@ const RatingSection = ({status}) => {
       >
         {/* {status==="rejected" ? <ThumbsDownIcon/> : status==="shortlisted" ? <ThumbsIcon/> : "" } */}
         {state ? <ThumbsIcon/> : <ThumbsDownIcon/>}
+        
         <CustomAllTypography
           name={state ? "Shortlisted" :"Rejected"}
           // name={status==="pending"? "Pending" : status=="shortlisted" ? "Shortlisted": status=="rejected"?"Rejected":""}

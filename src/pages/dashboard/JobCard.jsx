@@ -41,6 +41,9 @@ const JobCard = ({data}) => {
     //  navigate("/jobpostingdetailspage")
      navigate(`/jobpostingdetailspage/${data._id}`)
   }
+  const hadelDeleteClick = () => {
+    console.log("delete an job post and all related data to this job post with cron job");
+  }
 
   return (
     <CustomCard
@@ -76,12 +79,12 @@ const JobCard = ({data}) => {
         }}
       >
         <CustomAllTypography
-          name={`${data.application.length} Applied • ${data.shortlisted.length} Shortlisted • ${data.rejected.length} Closed`}
+          name={`${data.rejected} Applied • ${data.shortlisted} Shortlisted • ${data.pending} Closed`}
           variant={"body2"}
           color={"#36BF76"}
           textcolor={"#36BF76"}
         />
-         <TrashIcon className={"trash-icon"}/> 
+         <TrashIcon className={"trash-icon"} hadelDeleteClick={hadelDeleteClick}/> 
       </div>
     </CustomCard>
   );

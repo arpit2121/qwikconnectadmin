@@ -128,14 +128,11 @@ const {jobpost_id} = useParams()
             }
           );
           break;
-        case "2":  
-          const jobPostId1 = jobpost_id;
-          const adminId1 = adminId;
-          
+        case "2":            
           await updateParameters({
             json_data: question_setup,
-            adminId: adminId1,
-            jobPostId: jobPostId1,
+            adminId: adminId,
+            jobPostId: jobpost_id,
           }).then((response) => {
             console.log("response data", response);
             if (response.data) {

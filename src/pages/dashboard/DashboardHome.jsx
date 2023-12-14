@@ -33,8 +33,7 @@ const DashboardHome = () => {
         userName={adminData?.admin?.fullName.split(" ")[0]}
       />
       {/* <Outlet /> */}
-      {activeJobPost?.activeJobPostData
-?.length === 0 ? (
+      {activeJobPost?.length === 0 ? (
         <NonExisting />
       ) : (
         <ExistingUser data={activeJobPost} />

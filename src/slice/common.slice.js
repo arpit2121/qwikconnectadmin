@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const initialState = {
    selectedJobPostingPage:"1",
   //  videoLink:"http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-   videoLink:"videos/651137f89cbfd5858dc871a5/651154effdc5ba161f0b15b0/6518733927d3da47e2b5887c/6517ba75173d9d1d74d60b38/ans",
+   videoLink:"https://qwik-connect.s3.ap-south-1.amazonaws.com/admins/656cc394e271a453a63709bc/jobpost/656f8cf0cb1654b6eba392bb/interviewees/6574a0aa5470a0d3973d0166/videos/65746ad0cf74b903352ec6de?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2MBJCQ6UG67QLSF5%2F20231211%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20231211T164336Z&X-Amz-Expires=900&X-Amz-Signature=2f8a2f78bdfa09d5350de9d20e1413e4767cfd5d93c5181bd792640a0b7ebdbd&X-Amz-SignedHeaders=host&x-id=GetObject",
    navbarTitle:'Dashboard',
    apiLoader: false,
    files: {},

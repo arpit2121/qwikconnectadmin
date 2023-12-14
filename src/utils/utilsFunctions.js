@@ -71,3 +71,14 @@ export const convertTimeStringToSeconds = (timeString) => {
     }
     return bytes;
   };
+
+
+
+  //get days
+
+  //get total application =  pending + rejected + shortlisted
+
+  //get total closed application =  shortliste + rejected
+
+
+  //

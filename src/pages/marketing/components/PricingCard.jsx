@@ -12,7 +12,7 @@ const PricingCard = ({ plan }) => {
   const navigate = useNavigate();
 
   const checkout = async () => {
-    if(false){
+    if (false) {
       try {
         const response = await axios.post(
           "http://localhost:4546/v1/subscription/create-subscription-checkout-session",
@@ -28,13 +28,13 @@ const PricingCard = ({ plan }) => {
             },
           }
         );
-  
+
         window.location = response.data.url;
       } catch (error) {
         console.error(error);
       }
-    }else{
-      navigate('/login')  
+    } else {
+      navigate('/login')
     }
   };
 
@@ -46,7 +46,7 @@ const PricingCard = ({ plan }) => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        gap: "44px",
+        gap: "2.75rem",
         flexShrink: 0,
         width: "full",
         cursor: "pointer",
@@ -71,6 +71,21 @@ const PricingCard = ({ plan }) => {
         e.currentTarget.style.color = "black";
       }}
     >
+      <div style={{display: "flex",
+          flexDirection: "column",
+          alignItems: "center",}}>
+      <CustomAllTypography name={plan.planType} variant={'h4'} />
+        <CustomAllTypography
+          name={
+            plan.planType === "Starter Pack"
+              ? "Free trial plan for companies."
+              : plan.planType === "Essential"
+                ? "For small companies."
+                : "Default Text for other cases."
+          }
+          variant={'body1'}
+        />
+      </div>
 
       <div
         style={{
@@ -79,8 +94,8 @@ const PricingCard = ({ plan }) => {
           alignItems: "center",
         }}
       >
-        <CustomAllTypography name={`${plan.planPrice === 'Free' ?  '' : '$'} ${plan.planPrice}`} variant={"h2"} />
-        <CustomAllTypography name={plan.planPrice==='Free' ? 'forever': plan.planDuration  } variant={"body2"} sx={{ textTransform:'capitalize'}}/>
+        <CustomAllTypography name={`${plan.planPrice === 'Free' ? '' : '$'}${plan.planPrice}`} variant={"h2"} />
+        <CustomAllTypography name={plan.planPrice === 'Free' ? 'forever' : plan.planDuration} variant={"body2"} sx={{ textTransform: 'capitalize' }} />
 
       </div>
       <div

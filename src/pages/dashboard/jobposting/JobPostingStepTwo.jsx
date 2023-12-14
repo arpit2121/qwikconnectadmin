@@ -18,9 +18,20 @@ import RatingParameter from "../../../components/admin/RatingParameter";
 import { current } from "@reduxjs/toolkit";
 import SaveIcon from "../../../components/icons/InfoIcon";
 import { useDispatch, useSelector } from "react-redux";
-import { setParameter, setQuestions, setMinimumPassingParameter, setDisplayQuestions, updateQuestion } from "../../../slice/job.slice";
+import { setParameter, setQuestions, setMinimumPassingParameter, setDisplayQuestions, updateQuestion, setAddEmptyQuestion } from "../../../slice/job.slice";
 import { useAddNewQuestionMutation } from "../../../services/job";
 import FormData from "form-data";
+
+
+const newQuestion = {
+      questionNo: "",
+      questionTitle: "Question Title here",
+      isMandatory: false,
+      retakes: "",
+      thinkingTime: "",
+      timeToAnswer: "",
+      questionVideoKey: "",
+    };
 
 const JobPostingStepTwo = ({adminid, jobpostid}) => {
   const responsive = useResponsiveStyles();
@@ -40,7 +51,7 @@ const JobPostingStepTwo = ({adminid, jobpostid}) => {
 
   const [editingIndex, setEditingIndex] = useState(null);
   const [editedData, setEditedData] = useState("Parameter");
-  const admin_id = useSelector((state)=> state.auth.adminId)
+  const adminId = useSelector((state)=> state.auth.adminId)
 
 
   console.log("questionsArrayminimum_passing_parameter,display_questions", questionsArray,display_questions);
@@ -60,28 +71,19 @@ const JobPostingStepTwo = ({adminid, jobpostid}) => {
   const dragOverItem = useRef(null);
 
   const handleAddQuestion = async () => {
-    const { video_key, ...jsonData } = questionsArray[questionsArray.length - 1];
-    console.log(jsonData, video_key)
+    const { questionVideoKey, ...jsonData } = questionsArray[questionsArray.length - 1];
     const formData = new FormData();
     try {
-      console.log("video key, jsonData")
-      formData.append('file', video_key);
+      console.log("questionVie",questionVideoKey)
+      formData.append('file', questionVideoKey);
       formData.append('jsonData', JSON.stringify(jsonData));
     } catch (error) {
       console.error("Error creating FormData:", error);
     }
 
-    await addNewQuestion({formData:formData, adminId: admin_id, jobPostId:jobpostid}).then((response) => {
+    await addNewQuestion({formData:formData, adminId: adminId, jobPostId:jobpostid}).then((response) => {
       if (response.data) {
-        questionsArray.concat({
-          questionNo: "",
-          questionTitle: "Question Title here",
-          isMandatory: false,
-          retakes: "",
-          thinkingTime: "",
-          timeToAnswer: "",
-          questionVideoKey: "",
-        });
+        dispatch(setAddEmptyQuestion(newQuestion))
       }
     });
   };
