@@ -23,7 +23,7 @@ export const initialState = {
     csvFile: null,
   },
   question_setup: {
-    minimum_passing_parameter: "",
+    requiredRatingParameter: "",
     ratingParameters: [],
     display_questions: "",
     questionsArray: [],
@@ -47,7 +47,7 @@ export const jobSlice = createSlice({
       state.question_setup.questionsArray = action.payload;
     },
     setMinimumPassingParameter: (state, action) => {
-      state.question_setup.passingPoint = action.payload;
+      state.question_setup.requiredRatingParameter = action.payload;
     },
     setAddEmptyQuestion: (state,action) => {
       state.question_setup.questionsArray = state.question_setup.questionsArray.concat(action.payload);
@@ -98,6 +98,7 @@ export const jobSlice = createSlice({
           passingPoint: payload?.passingPoint ? payload?.passingPoint : "",
           display_questions: payload?.displayQuestions ? payload?.displayQuestions : "",
           ratingParameters: payload?.ratingParameters,
+          requiredRatingParameter: payload?.requiredRatingParameter? payload?.requiredRatingParameter : "",
           questionsArray:  payload?.questionBank.concat({
             questionNo: "",
             questionTitle: "Question Title here",

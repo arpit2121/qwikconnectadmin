@@ -44,7 +44,7 @@ const JobPostingStepTwo = ({adminid, jobpostid}) => {
   const [addNewQuestion] = useAddNewQuestionMutation();
 
 
-  const { questionsArray,passingPoint,display_questions, ratingParameters } = useSelector((state) => state.job.question_setup);
+  const { questionsArray, display_questions, ratingParameters, requiredRatingParameter } = useSelector((state) => state.job.question_setup);
 
   // Step 1: Create an array of options
   const options = ratingParameters.map((item, index) => index + 1);
@@ -54,7 +54,7 @@ const JobPostingStepTwo = ({adminid, jobpostid}) => {
   const adminId = useSelector((state)=> state.auth.adminId)
 
 
-  console.log("questionsArrayminimum_passing_parameter,display_questions", questionsArray,display_questions);
+  console.log("questionsArrayminimum_passing_parameter,display_questionsdisplay_questions", questionsArray,display_questions);
 
   const questions_option = questionsArray.map((value, index) => index + 1);
 
@@ -218,7 +218,7 @@ const JobPostingStepTwo = ({adminid, jobpostid}) => {
                 type="dropdown"
                 placeholder="All"
                 options={options}
-                value={passingPoint}
+                value={requiredRatingParameter}
                 handleDropChange={minimumPassingParameter}
                 index={""}
                 nameCom={""}

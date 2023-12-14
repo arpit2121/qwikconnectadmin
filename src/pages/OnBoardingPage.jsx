@@ -19,6 +19,7 @@ import { useFormik } from "formik";
 import { useGetProfessionsQuery } from "../services/admin";
 import { isFulfilled } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
+import CircularIndeterminate from "../components/loader/CircularLoader";
 
 const OnBoardingPage = () => {
   const responsive = useResponsiveStyles();
@@ -26,7 +27,7 @@ const OnBoardingPage = () => {
   const dispatch = useDispatch();
   const [isOther, setIsOther] = useState(false)
 
-  const emailId = useSelector((state)=>state.auth.emailId)
+  const {emailId, adminId} = useSelector((state)=>state.auth)
   
   const [addAdmin, { data: profileData, isLoading, isSuccess, isError, error }] =
     useAddAdminMutation();
@@ -41,11 +42,13 @@ const OnBoardingPage = () => {
 
 
   const handelOnBoard = async () =>{
-    await addAdmin(values);
-    if(error){
-      alert(error);
+    await addAdmin(values)
+    if(isSuccess){
+      navigate(`/dashboard/home`);
     }
-    navigate(`/dashboard/home`);
+    else{
+      console.log("prinitn error", error)
+    }
   }
   
 
@@ -61,6 +64,7 @@ const OnBoardingPage = () => {
     // isValidating,
   } = useFormik({
     initialValues: {
+      _id: adminId,
       email: state.email ? state.email : emailId,
       fullName: "",
       phone_number: "",
@@ -221,8 +225,15 @@ const OnBoardingPage = () => {
                   // onClick={() => navigate("/dashboard/home/existinguser")}
                   onClick={handelOnBoard}
                   disabled={!isValid}
+
                 >
-                  Proceed
+                   {
+          isLoading
+          ?
+          <CircularIndeterminate/>
+          :
+          "Proceed"
+        }
                 </CustomInputButton>
               </div>
             </div>
