@@ -80,9 +80,8 @@ export const adminsApi = createApi({
     }),
     getAvtars: builder.query({
       query: ({ key }) => {
-        console.log("kehakjhakkhkhy",key)
         return ({
-          url:`http://localhost:4546/v1/s3-manager/download-avatar?key=${key}`
+          url:`${import.meta.env.VITE_API_KEY}/v1/s3-manager/download-avatar?key=${key}`
         })
       }
     }),

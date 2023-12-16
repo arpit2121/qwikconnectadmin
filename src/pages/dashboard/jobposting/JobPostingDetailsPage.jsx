@@ -27,6 +27,7 @@ import { useSelector } from "react-redux";
 import { useMemo } from "react";
 import Modal from "../../../components/modal/Modal";
 import { setStats } from "../../../slice/common.slice";
+import { formatTimeDifference } from "../../../utils/utilsFunctions";
 
 
   const JobPostingDetailsPage = () => {
@@ -51,9 +52,10 @@ import { setStats } from "../../../slice/common.slice";
   const handleClick1 = (intervieweeId) => {
     navigate(`/candidatereview/${intervieweeId}`, {
       state: {
-        passingPoint: jobInfo.passingPoint,
+        passingPoint: jobInfo?.passingPoint,
         stats: jobInfo?.stats,
-        jobPostId: jobPostId
+        jobPostId: jobPostId,
+        requiredRatingParameter: jobInfo?.requiredRatingParameter,
       },
     });
   };
@@ -178,7 +180,7 @@ import { setStats } from "../../../slice/common.slice";
                     name={`Exp.: ${jobInfo?.requiredExperience}`}
                     variant={"body2"}
                   />
-                  <Body3 color={"#8A8894"}>{"1d Ago"}</Body3>
+                  <Body3 color={"#8A8894"}>{formatTimeDifference(jobInfo?.publishAt)+" ago"}</Body3>
                 </div>
                 <div
                   style={{
@@ -189,7 +191,7 @@ import { setStats } from "../../../slice/common.slice";
                   }}
                 >
                   <StatsTopBar
-                    application={jobInfo?.stats.pending}
+                    application={jobInfo?.stats.pending+jobInfo?.stats.shortlisted+jobInfo?.stats.rejected}
                     shortlisted={jobInfo?.stats.shortlisted}
                     rejected={jobInfo?.stats.rejected}
                   />
@@ -308,18 +310,19 @@ import { setStats } from "../../../slice/common.slice";
                         }
                         Name={users.fullName}
                         email={users.email}
-                        time={"1d ago"}
+                        time={formatTimeDifference(users.registration_date)+" ago"}
                         status={
-                          users.status === "Shortlisted" ? "Shortlisted" : users.status === "Pending" ? "Pending" : "Rejected"
+                          users.status === "shortlisted" ? "Shortlisted" : users.status === "pending" ? "Pending" : "Rejected"
                         }
                         system={false}
                         id={users._id}
+                        handleClick={handleClick1}
                       />
                     );
                   })
                 )
               ) : (
-                <CustomizedTables data={visibleData} hadleClick={handleClick1}/>
+                <CustomizedTables data={visibleData} handleClick={handleClick1}/>
               )}
             </div>
             <div

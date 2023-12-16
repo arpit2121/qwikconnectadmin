@@ -1,9 +1,18 @@
 import React from 'react'
+import {Link} from '@mui/material';
 
-const Link = () => {
+const CustomLink = ({name, handelReviewClick}) => {
   return (
-    <div>Link</div>
+    <Link
+    underline="none"
+    variant="body2"
+    onClick={() => {
+      handelReviewClick()
+    }}
+  >
+    {name}
+  </Link>
   )
 }
 
-export default Link
+export default CustomLink;

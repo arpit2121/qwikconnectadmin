@@ -7,7 +7,9 @@ import UsersData from '../components/UsersData'
 
 const HeroSection = () => {
   return (
-    <div style={{width:'100%', overflowX: 'hidden'}}>
+    <div style={{width:'100%',
+    //  overflowX: 'hidden'
+     }}>
         <Home />
         <KeyFeatures/>
         <TestiMonials/>

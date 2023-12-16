@@ -5,6 +5,7 @@ import TrashIcon from "../../components/icons/TrashIcon";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { Body3 } from "../../components/typography/Fields";
+import { formatTimeDifference } from "../../utils/utilsFunctions";
 
 const useStyles = makeStyles({
   card: {
@@ -59,7 +60,9 @@ const JobCard = ({data}) => {
       onClick={handleClick}
     >
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <Body3  color="#8A8894">1d ago</Body3>
+        <Body3  color="#8A8894">
+          {formatTimeDifference(data.publishAt)+" ago"}
+        </Body3>
       </div>
       <div style={{ marginTop: "1.26rem" }}>
         <CustomAllTypography name={data.jobTitle} variant={"h4"} />
@@ -79,7 +82,7 @@ const JobCard = ({data}) => {
         }}
       >
         <CustomAllTypography
-          name={`${data.rejected} Applied • ${data.shortlisted} Shortlisted • ${data.pending} Closed`}
+          name={`${data?.rejected+data?.pending+data?.shortlisted} Applied • ${data?.shortlisted} Shortlisted • ${data?.rejected + data?.shortlisted} Closed`}
           variant={"body2"}
           color={"#36BF76"}
           textcolor={"#36BF76"}

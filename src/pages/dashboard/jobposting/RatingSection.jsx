@@ -6,18 +6,41 @@ import ThumbsDownIcon from "../../../components/icons/ThumbsDownIcon";
 import ThumbsIcon from '../../../components/icons/ThumbsIcon'
 import { Body3 } from "../../../components/typography/Fields";
 import { CustomInputButton } from "../../../components/button/CustomButoon";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useSetIntervieweeStatusAndParameterMutation } from "../../../services/interviewee";
+import CircularIndeterminate from "../../../components/loader/CircularLoader";
 
-const RatingSection = ({status}) => {
+const RatingSection = ({stateData, intervieweeId}) => {
   const responsive = useResponsiveStyles();
 
   const [state, setState] = useState(true);
+  // const adminId = useSelector((state)=>state.auth.adminId)
+  const {status, parameters } = useSelector((state)=>state.interviewee?.intervieweeParaAndStatus)
+
+  const [setIntervieweeStatusAndParameter, {isLoading, isError, error, isSuccess}] = useSetIntervieweeStatusAndParameterMutation();
 
   const navigate = useNavigate()
 
-  const handelClickNext = () =>{
-    navigate('/jobpostingdetailspage/656f8cf0cb1654b6eba392bb')
+  const handelClickNext = async () => {
+
+    const intervieweeData = await setIntervieweeStatusAndParameter({body:{
+      status,parameters
+    },intervieweeId,jobPostId:stateData.jobPostId})
+      // if(isSuccess){
+      //   navigate(`/jobpostingdetailspage/${stateData.jobPostId}`)
+      // }
+      // else{
+      //   console.log("error", error, intervieweeData)
+      // }
+      if(error){
+        console.log("err", error)
+      }else{
+        navigate(`/jobpostingdetailspage/${stateData.jobPostId}`)
+      }
   }
+
+  console.log("intevieweeData",stateData)
 
   return (
     <div
@@ -27,7 +50,6 @@ const RatingSection = ({status}) => {
         borderTop: "none",
         padding: responsive.isMobile ? "2rem 4rem" : "0 3rem 3rem 3rem",
         boxSizing: "border-box",
-        // zIndex: responsive.isMobile ? "" : "-1",
         overflow:'scroll'
       }}
     >
@@ -47,16 +69,12 @@ const RatingSection = ({status}) => {
           gap: "0.8rem",
         }}
       >
-        {/* {status==="rejected" ? <ThumbsDownIcon/> : status==="shortlisted" ? <ThumbsIcon/> : "" } */}
-        {state ? <ThumbsIcon/> : <ThumbsDownIcon/>}
-        
+        {status==="shortlisted" ? <ThumbsIcon/> : status==="rejected" ?  <ThumbsDownIcon/> : "" }
         <CustomAllTypography
-          name={state ? "Shortlisted" :"Rejected"}
-          // name={status==="pending"? "Pending" : status=="shortlisted" ? "Shortlisted": status=="rejected"?"Rejected":""}
+          name={status? status.charAt(0).toUpperCase()+status.slice(1): ""}
           sx={{ fontSize: "1.125rem !important" }}
           variant={"h4"}
-          textcolor={state ? "#A5F" :"#F93232"}
-          // textcolor={status=="rejected" ? "#F93232" : status=="pending" ? "orange" : status=="shortlisted" ? "#A5F":""}
+          textcolor={status==="shortlisted" ? "#A5F" : status==="rejected" ?  "#F93232" : "#FFA500" }
         />
       </div>
       <div
@@ -67,11 +85,17 @@ const RatingSection = ({status}) => {
           gap: "1.50rem",
         }}
       >
-        <RatingParameter setState={setState}/>
+        <RatingParameter setState={stateData}/>
       </div>
       <div style={{ marginTop: "2.50rem" }}>
         <CustomInputButton size="small" width="100%" onClick={handelClickNext}>
-          Confirm Result & Next
+        {
+          isLoading
+          ?
+          <CircularIndeterminate/>
+          :
+          "Confirm Result & Next"
+        }
         </CustomInputButton>
       </div>
       <div
@@ -81,7 +105,7 @@ const RatingSection = ({status}) => {
           justifyContent: "center",
         }}
       >
-        <Body3 color={"#C9C8D3"}>27 reviews pending</Body3>
+        <Body3 color={"#C9C8D3"}>{stateData?.stats?.pending} reviews pending</Body3>
       </div>
     </div>
   );

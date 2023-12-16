@@ -144,7 +144,7 @@ const Navbar = ({
                   {titleMap[pathname]?.button?.title}
                 </CustomInputButton>
               )
-            : !responsive.isMobile && <StasTopbar application={stats?.pending}
+            : !responsive.isMobile && <StasTopbar application={stats?.pending+stats?.rejected+stats?.shortlisted}
             shortlisted={stats?.shortlisted}/>}
         </div>
       </div>

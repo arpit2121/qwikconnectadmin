@@ -93,7 +93,8 @@ const VideoPlayer = () => {
     }, 1000);
   };
 
-  const { videoLink } = useSelector((state) => state.common);
+  // const { videoLink } = useSelector((state) => state.common);
+  const {videoLink, currQuestion} = useSelector((state)=> state.interviewee)
 
 
   const revert = () => {

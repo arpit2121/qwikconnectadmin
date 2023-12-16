@@ -1,3 +1,5 @@
+import moment from "moment/moment";
+
 export const convertTimeStringToSeconds = (timeString) => {
     const regex = /(\d+)([smhr])/; // Regular expression to capture digits followed by "s", "m", or "hr"
     const match = timeString.match(regex);
@@ -76,9 +78,39 @@ export const convertTimeStringToSeconds = (timeString) => {
 
   //get days
 
+  export function formatTimeDifference(timestamp) {
+    const currentTime = moment();
+    const inputTime = moment(timestamp);
+    const duration = moment.duration(currentTime.diff(inputTime));
+
+    const years = Math.floor(duration.asYears());
+    const months = Math.floor(duration.asMonths());
+    const days = Math.floor(duration.asDays());
+    const hours = Math.floor(duration.asHours());
+    const minutes = Math.floor(duration.asMinutes());
+    const seconds = Math.floor(duration.asSeconds());
+
+    if (years > 0) {
+        return `${years}yr`;
+    } else if (months > 0) {
+        return `${months}m`;
+    } else if (days > 0) {
+        return `${days}d`;
+    } else if (hours > 0) {
+        return `${hours}h`;
+    } else if (minutes > 0) {
+        return `${minutes}m`;
+    } else {
+        return `${seconds}s`;
+    }
+}
+
+
   //get total application =  pending + rejected + shortlisted
 
   //get total closed application =  shortliste + rejected
 
 
   //
+
+

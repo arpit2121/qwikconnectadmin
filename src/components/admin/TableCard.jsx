@@ -5,11 +5,14 @@ import StatusButton from "../button/StatusButton";
 import { useNavigate } from "react-router-dom";
 import SystemRecommended from "../icons/SystemRecommended";
 
-const TableCard = ({image, Name, email, id, status, time,system}) => {
+const TableCard = ({image, Name, email, id, status, time,system, handleClick}) => {
     const navigate = useNavigate();
-    const handleClick = () =>{
-      navigate("/candidatereview")
+
+    const handelClick1 = () => {
+      console.log("hello")
+      handleClick(id)
     }
+
   return (
     <div
       style={{
@@ -22,7 +25,7 @@ const TableCard = ({image, Name, email, id, status, time,system}) => {
         paddingRight:'1rem',
         alignItems:'center'
       }}
-      onClick={handleClick}
+      onClick={handelClick1}
       key={id}
     >
       <div style={{display:'flex'}}>

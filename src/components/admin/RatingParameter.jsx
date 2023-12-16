@@ -1,54 +1,39 @@
 import React, { useEffect, useState } from "react";
-import { CustomCard } from "../card/CustomCard";
 import CustomAllTypography from "../typography/CustomTypograpgy";
 import SmileIcon from "../icons/SmileIcon";
 import useResponsiveStyles from "../../utils/MediaQuery";
-import { object } from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { setIntervieweeParamenter, setInterviewewStatus } from "../../slice/intervieweeSlice";
 
-function RatingParameter(props) {
+function RatingParameter({setState}) {
 
-  const data = [
-    "Concentration",
-    "Flexible",
-    "Competency",
-    "Skills",
-    "Aptitude",
-  ];
+  const {parameters, status} = useSelector((state)=>state.interviewee.intervieweeParaAndStatus)
+
+  const data1 = Object.keys(parameters);
 
 
-  const [state, setState] = useState({
-    Concentration: -1,
-    Flexible: -1,
-    Competency: -1,
-    Skills: -1,
-    Aptitude: -1,
-  });
+  const responsive = useResponsiveStyles();
+  const dispatch = useDispatch();
+  
+  console.log("setState",setState)
+
 
   useEffect(() => {
     //passing point -> passing point is something 
     //rating parameter -> minimum parameter to get
-    const passProperties = Object.keys(state).filter((key) => state[key] >= 2);
-    console.log("-->", passProperties);
-    if (passProperties.length >= 3) {
-      props.setState(true);
+    const passProperties = Object.keys(parameters).filter((key) => parameters[key] >= setState?.passingPoint - 1);//here my passingpoint will come
+    if (passProperties.length >= setState?.requiredRatingParameter) {//reequired rating paramneter ther minu
+      dispatch(setInterviewewStatus('shortlisted'))
     } else {
-      props.setState(false);
+      dispatch(setInterviewewStatus('rejected'))
     }
-  }, [state]);
+  }, [parameters]);
 
-  const responsive = useResponsiveStyles();
+
   const handleClick = (innerIndex, outerIndex, item1) => {
-    console.log("1", innerIndex, "2", outerIndex);
-    console.log("selected parameter ==>", item1);
-    // setSelectedSmileyIndex(innerIndex);
-    // setSelectedOuterIndex(outerIndex);
-
     const parameterKey = item1;
-    setState((prevState) => ({
-      ...prevState,
-      [parameterKey]: innerIndex,
-    }));
-  };
+    dispatch(setIntervieweeParamenter({parameterKey, innerIndex}));
+  }
 
   return (
     <div
@@ -66,69 +51,70 @@ function RatingParameter(props) {
             justifyContent: "center",
           }}
         >
-          {data.map((item1, outerIndex) => {
-            console.log(item1);
-            return (
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  flexDirection: responsive.isTablet ? "column" : "row",
-                  justifyContent: responsive.isTablet ? "center" : "",
-                }}
-                key={outerIndex}
-              >
-                <div
-                  style={{
-                    width: "fit-content",
-                    padding: "0.2rem 0.5rem",
-                  }}
-                >
-                  {item1}
-                </div>
+          {
+            parameters
+            ?
+            data1.map((item1, outerIndex) => {
+              console.log(item1);
+              return (
                 <div
                   style={{
                     display: "flex",
                     alignItems: "center",
-                    padding: "0.2rem",
-                    marginLeft: responsive.isTablet ? "" : "auto",
-                    gap: "0.75rem",
+                    flexDirection: responsive.isTablet ? "column" : "row",
+                    justifyContent: responsive.isTablet ? "center" : "",
                   }}
+                  key={outerIndex}
                 >
-                  {[0, 1, 2, 3, 4].map((item, innerIndex) => {
-                    console.log("item", item);
-                    console.log("data object", state[item1]);
-                    let smileyColor = "#AAAAAA"; // Default grey color
-
-                    if (state[item1] >= 0) {
-                      smileyColor =
-                        state[item1] === 0
-                          ? "#F93232"
-                          : state[item1] === 1
-                          ? "#FFB82E"
-                          : "#605DEC";
-                    }
-
-                    if (innerIndex > state[item1]) {
-                      smileyColor = "#AAAAAA"; // Grey color for smileys after the selected index
-                    }
-
-                    return (
-                      <div
-                        onClick={() =>
-                          handleClick(innerIndex, outerIndex, item1)
-                        }
-                        style={{ display: "flex" }}
-                        key={innerIndex}
-                      >
-                        <SmileIcon color={smileyColor} />
-                      </div>
-                    );
-                  })}
+                  <div
+                    style={{
+                      width: "fit-content",
+                      padding: "0.2rem 0.5rem",
+                    }}
+                  >
+                    {item1}
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      padding: "0.2rem",
+                      marginLeft: responsive.isTablet ? "" : "auto",
+                      gap: "0.75rem",
+                    }}
+                  >
+                    {[0, 1, 2, 3, 4].map((item, innerIndex) => {
+                      let smileyColor = "#AAAAAA"; // Default grey color  
+                      if (parameters[item1] >= 0) {
+                        smileyColor =
+                        parameters[item1] === 0
+                            ? "#F93232"
+                            : parameters[item1] === 1
+                            ? "#FFB82E"
+                            : "#605DEC";
+                      }
+                      if (innerIndex > parameters[item1]) {
+                        smileyColor = "#AAAAAA"; // Grey color for smileys after the selected index
+                      }
+                      return (
+                        <div
+                          onClick={() =>
+                            handleClick(innerIndex, outerIndex, item1)
+                          }
+                          style={{ display: "flex" }}
+                          key={innerIndex}
+                        >
+                          <SmileIcon color={smileyColor} />
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+            :
+            ""
+          }
         </div>
       </div>
     </div>

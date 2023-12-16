@@ -13,6 +13,8 @@ import { CustomInputButton } from "../button/CustomButoon";
 import CustomAllTypography from "../typography/CustomTypograpgy";
 import UsersComponent from "./UsersComponent";
 import GetAvtarImage from "../../utils/GetAvtar";
+import { formatTimeDifference } from "../../utils/utilsFunctions";
+import CustomLink from "../link/Link";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -52,15 +54,11 @@ const ReviewButtonWrapper = styled("div")({
   transform: "translate(-50%, -50%)", // Center both horizontally and vertically
 });
 
-export default function CustomizedTables({ data, hadleClick }) {
-  const navigate = useNavigate();
+export default function CustomizedTables({ data, handleClick }) {
+
   const [hoveredRow, setHoveredRow] = React.useState(null);
 
-  // const handleClick = () =>{
-  //   navigate("/candidatereview")
-  // }
 
-  console.log("data", data);
   return (
     <TableContainer component={Paper} sx={{ borderRadius: "1.25rem" }}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -109,14 +107,14 @@ export default function CustomizedTables({ data, hadleClick }) {
                   </div>
                 </StyledTableCell>
                 <StyledTableCell align="left">{row.email}</StyledTableCell>
-                <StyledTableCell align="left">{"1d ago"}</StyledTableCell>
+                <StyledTableCell align="left">{formatTimeDifference(row?.registration_date)+" ago"}</StyledTableCell>
                 <StyledTableCell align="left">
                   {
                     <StatusButton
                       name={
-                        row.status === "Shortlisted"
+                        row.status === "shortlisted"
                           ? "Shortlisted"
-                          : row.status === "Pending"
+                          : row.status === "pending"
                           ? "Pending"
                           : "Rejected"
                       }
@@ -127,11 +125,13 @@ export default function CustomizedTables({ data, hadleClick }) {
                   {hoveredRow === index ? (
                     <ReviewButtonWrapper>
                       <CustomInputButton
+                      component="Link"
                         variant="text"
-                        onClick={() => hadleClick(row?._id)}
+                        onClick={() => handleClick(row?._id)}
                       >
                         Review
                       </CustomInputButton>
+                      {/* <CustomLink name={"Review"} handelReviewClick={handleClick(row?._id)}/> */}
                     </ReviewButtonWrapper>
                   ) : (
                     ""

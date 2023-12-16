@@ -52,7 +52,7 @@ export const initialState = {
   
   export const {
     setSelectedJobPostingPage,
-    setVideoLink,
+    // setVideoLink,
     setNavbarTitle,
     setApiLoadere,
     setFilesData,

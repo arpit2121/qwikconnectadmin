@@ -12,22 +12,25 @@ import CustomContainer from "../../../components/structure/CustomContainer";
 import Navbar from "../../../components/structure/admin/Navbar";
 import CustomAllTypography from "../../../components/typography/CustomTypograpgy";
 import { Body3, TextDescription } from "../../../components/typography/Fields";
-import { setVideoLink } from "../../../slice/common.slice";
 import { darkspacetheme } from "../../../theme/theme";
 import useResponsiveStyles from "../../../utils/MediaQuery";
 import CommentSection from "./CommentSection";
 import LinkBar from "./LinkBar";
 import RatingSection from "./RatingSection";
-import SampleVideos from "./SampleVideos.json";
 import VideoPlayer from "./VideoPlayer";
 import { useParams, useLocation } from "react-router-dom";
-import { useLazyGetCandidateDataQuery } from "../../../services/interviewee";
+import {  useLazyGetCandidateDataQuery } from "../../../services/interviewee";
+import axios from "axios";
+import { setCurrIndex, setCurrQuestion, setVideoLink } from "../../../slice/intervieweeSlice";
 
 
 const CandiatateReview = () => {
   const responsive = useResponsiveStyles();
   const [showMoreContent, setShowMoreContent] = useState(false);
   const {state} = useLocation();
+
+
+console.log("response  ", state)
   const handleToggleContent = () => {
     setShowMoreContent(!showMoreContent);
   };
@@ -74,15 +77,40 @@ const CandiatateReview = () => {
 
   const [getCandidateData, { data: candidateData }] = useLazyGetCandidateDataQuery();
 
+
   useEffect(() => {
     getCandidateData(intervieweeId, true);
   }, []);
 
-  const handelViewResume = () =>{
-    //after clicking on handelViewResume start the loader of a button then after getting response save the url in redux then get
-    
-    window.open("https://qwik-connect.s3.ap-south-1.amazonaws.com/admins/656cc394e271a453a63709bc/jobpost/656f8cf0cb1654b6eba392bb/interviewees/6574a0aa5470a0d3973d0166/resume/Arpit_Resume.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2MBJCQ6UG67QLSF5%2F20231211%2Fap-south-1%2Fs3%2Faws4_request&X-Amz-Date=20231211T181648Z&X-Amz-Expires=900&X-Amz-Signature=afee6e9220a202d60931ce54e6b20f902d631283dc681b01aca948e0c883ba0f&X-Amz-SignedHeaders=host&x-id=GetObject","_blank");
+  const handelViewResume = async (key) =>{
+      try{
+        const response = await axios.get(`${import.meta.env.VITE_API_KEY}/v1/s3-manager/presigned-url?key=${key}`)
+        if(response){
+          window.open(response?.data);
+        }
+      }catch(error){
+        console.log("error", error)
+      }
   }
+
+  const handelCurrQuestionAndVideoLink = async (questionObject, index)=>{
+    console.log("questionObject", questionObject?.ansVideoKey)
+    try{
+      //give ansVideoKey to call the api whiche return the video link i will set in the currquestion also
+      const response = await axios.get(`${import.meta.env.VITE_API_KEY}/v1/s3-manager/presigned-url?key=${questionObject?.ansVideoKey}`)
+      if(response){
+        //dispatch the current question -> set the current question in reducer
+        dispatch(setCurrQuestion(questionObject));
+        dispatch(setCurrIndex(index))
+        //dispatch the video link in reducer
+        dispatch(setVideoLink(response.data))//set video link in reducer
+      }
+    }catch(error){
+      console.log("error", error)
+    }
+  }
+
+  const {currQuestion, currIndex} = useSelector((state)=>state.interviewee)
 
   return (
     <CustomContainer>
@@ -193,7 +221,7 @@ const CandiatateReview = () => {
                     }}
                   >
                     <CustomAllTypography name={"Status"} variant={"body2"} />{" "}
-                    <StatusButton name={candidateData?.status === "Shortlisted" ? "Shortlisted" : candidateData?.status === "pending" ? "Pending" : "Rejected"} />{" "}
+                    <StatusButton name={candidateData?.status === "shortlisted" ? "Shortlisted" : candidateData?.status === "pending" ? "Pending" : "Rejected"} />{" "}
                     {responsive.isMobile && (
                       <div style={{ 
                         // marginLeft: "1.44rem" 
@@ -266,7 +294,7 @@ const CandiatateReview = () => {
                           variant="outlined"
                           size="small"
                           width="100%"
-                          onClick={handelViewResume}
+                          onClick={()=>handelViewResume(candidateData?.cv_path)}
                         >
                           View Resume
                         </CustomInputButton>
@@ -306,7 +334,7 @@ const CandiatateReview = () => {
                   }}
                 >
                   <CustomAllTypography
-                    name={"Q1. What are your hobbies?"}
+                    name={`Q${currIndex} `+currQuestion?.questionTitle}
                     variant={"h5"}
                     sx={{ marginBottom: "0.5rem" }}
                   />
@@ -324,62 +352,67 @@ const CandiatateReview = () => {
                       scrollbarWidth: "none",
                     }}
                   >
-                    {SampleVideos?.map((data, index) => {
-                      return (
-                        <div
-                          key={index}
-                          onClick={
-                            () => dispatch(setVideoLink(data?.sources?.[0])) //here we will set the video link
-                          }
-                          style={{
-                            height: responsive.isMobile
-                              ? "5.43rem"
-                              : "6.5625rem",
-                            display: "flex",
-                            border: "1px solid #DCDCDC",
-                            borderRadius: "0.625rem",
-                            flexDirection: responsive.isMobile
-                              ? "row"
-                              : "column",
-                            alignItems: "center",
-                            justifyContent: responsive.isMobile
-                              ? "space-around"
-                              : "",
-                            width: responsive.isMobile ? "100%" : "9.25rem",
-                            marginTop: responsive.isMobile ? 5 : 0,
-                          }}
-                        >
+                    {
+                      candidateData
+                      ?
+                      candidateData.alloted_questions?.map((data, index) => {
+                        return (
                           <div
+                            key={index}
+                            onClick={()=>handelCurrQuestionAndVideoLink(data, index+1)}
+                            //set current video by default 1st one
                             style={{
+                              height: responsive.isMobile
+                                ? "5.43rem"
+                                : "6.5625rem",
+                              display: "flex",
                               border: "1px solid #DCDCDC",
                               borderRadius: "0.625rem",
-                              background: `url(${thumbnail})`,
-                              backgroundSize: "cover",
-                              width: responsive.isMobile ? "32%" : "100%",
-                              height: responsive.isMobile ? "70%" : "56%",
-                              backgroundPositionY: !responsive.isMobile
-                                ? -5
+                              flexDirection: responsive.isMobile
+                                ? "row"
+                                : "column",
+                              alignItems: "center",
+                              justifyContent: responsive.isMobile
+                                ? "space-around"
                                 : "",
-                            }}
-                          ></div>
-                          <div
-                            style={{
-                              width: "9.25rem",
-                              height: "40%",
-                              backgroundColor: "#ffff",
-                              fontSize: "0.75rem",
-                              padding: !responsive.isMobile ? "0.5rem" : "",
-                              boxSizing: "border-box",
-                              borderRadius: "0.625rem",
+                              width: responsive.isMobile ? "100%" : "9.25rem",
+                              marginTop: responsive.isMobile ? 5 : 0,
                             }}
                           >
-                            <TextDescription>
-                              Q{index + 1}. {data?.subtitle}?
-                            </TextDescription>
+                            <div
+                              style={{
+                                border: "1px solid #DCDCDC",
+                                borderRadius: "0.625rem",
+                                background: `url(${thumbnail})`,
+                                backgroundSize: "cover",
+                                width: responsive.isMobile ? "32%" : "100%",
+                                height: responsive.isMobile ? "70%" : "56%",
+                                backgroundPositionY: !responsive.isMobile
+                                  ? -5
+                                  : "",
+                              }}
+                            ></div>
+                            <div
+                              style={{
+                                width: "9.25rem",
+                                height: "40%",
+                                backgroundColor: "#ffff",
+                                fontSize: "0.75rem",
+                                padding: !responsive.isMobile ? "0.5rem" : "",
+                                boxSizing: "border-box",
+                                borderRadius: "0.625rem",
+                              }}
+                            >
+                              <TextDescription>
+                                Q{index + 1}. {data?.questionTitle}
+                              </TextDescription>
+                            </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })
+                      :
+                      ""
+                    }
                   </div>
                 </CustomCard>
               </div>
@@ -398,9 +431,9 @@ const CandiatateReview = () => {
                   Download Interviews
                 </CustomInputButton>
               </div>
-              {responsive.isMobile ? <RatingSection status={candidateData?.status}/> : <CommentSection />}
+              {responsive.isMobile ? <RatingSection status={candidateData?.status} stateData={state} intervieweeId={candidateData?._id}/> : <CommentSection />}
             </div>
-            {responsive.isMobile ? <CommentSection /> : <RatingSection status={candidateData?.status}/>}
+            {responsive.isMobile ? <CommentSection /> : <RatingSection status={candidateData?.status} stateData={state} intervieweeId={candidateData?._id}/>}
           </div>
         </div>
       </div>

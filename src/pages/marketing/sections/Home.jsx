@@ -8,14 +8,15 @@ import left from "../../../assets/marketing/Group 18.png";
 const Home = () => {
   const responsive = useResponsiveStyles();
   return (
-    <div
-    id='home'
+    // <div>
+      <div
+        id='home'
       style={{
         flexShrink: 0,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        position: "relative",
+        position: "relative",        
       }}
       className="home-container"
     >
@@ -90,6 +91,7 @@ const Home = () => {
         }}
       ></img>
     </div>
+    // </div>
   );
 };
 

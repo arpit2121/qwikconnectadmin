@@ -28,7 +28,7 @@ const DashboardHome = () => {
   return (
     <div style={{ height: "100%", width: "100%" }}>
       <CommonProfileBar
-        application={adminData?.IntervieweeData?.pending}
+        application={adminData?.IntervieweeData?.pending + adminData?.IntervieweeData?.shortlisted + adminData?.IntervieweeData?.rejected}
         shortlisted={adminData?.IntervieweeData?.shortlisted}
         userName={adminData?.admin?.fullName.split(" ")[0]}
       />

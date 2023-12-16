@@ -7,6 +7,7 @@ import commonReducer from './slice/common.slice';
 import adminRducer from './slice/admin.slice';
 import jobReducer from './slice/job.slice';
 import authReducer from './slice/auth.slice';
+import intervieweeReducer from './slice/intervieweeSlice'
 
 
 
@@ -20,7 +21,8 @@ const store = configureStore({
         common: commonReducer,
         admin: adminRducer,
         job: jobReducer,
-        auth: authReducer
+        auth: authReducer,
+        interviewee: intervieweeReducer
     },
     middleware: (gDM) => gDM({
         serializableCheck:false

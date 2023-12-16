@@ -1,5 +1,13 @@
-ul{
-    /* display: flex; */
+
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+} */
+
+.nav-menu {
+    display: flex;
     align-items: center;
     justify-content: space-around;
     width: 50%;
@@ -8,21 +16,18 @@ ul{
     gap: 2rem;
 }
 
-li {
-    cursor: pointer;
-}
 
-
-
-a {
+.nav-menu li a {
+    color: black;
+    font-size: 1rem;
+    font-weight: 600;
     text-decoration: none;
-    color: #212121;
-    text-transform: capitalize;
 }
 
 
-.active {
-    background-color: #605DEC;
+.nav-menu li a .active {
+    color: #605DEC;
+    transition: 0.2s;
 }
 
 
@@ -70,11 +75,7 @@ a {
     padding: 1rem;
 }
 
-.nav-menu li a {
-    color: black;
-    font-size: 1rem;
-    font-weight: 600;
-}
+
 
 @media screen and (max-width: 940px) {
     .hamburger {
@@ -161,3 +162,39 @@ a {
         margin-left: 30%;
     }
 }
+
+
+/* nav {
+    height: 90px;
+    background: #111;
+    transition: 0.3s;
+} */
+
+/* .nav-inner{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1300px;
+    width: 100%;
+    margin: auto;
+} */
+
+/* .logo{
+    color: #fff;
+    font-size: 30px;
+} */
+
+/* .links a{
+    color: #fff;
+    font-size: 20px;
+    margin-right: 30px;
+    cursor: pointer;
+} */
+
+/* nav .sticky {
+    box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.6);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+} */

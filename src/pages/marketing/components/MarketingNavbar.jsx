@@ -94,104 +94,22 @@ const MarketingNavbar = () => {
     console.log("hello");
   };
 
+  const [sticky, setSticky] = useState(false)
+
+  useEffect(()=>{
+    const handelScroll = () => {
+      setSticky(window.scrollY > 200);
+    };
+    window.addEventListener("scroll", handelScroll);
+    return () => window.removeEventListener("scroll", handelScroll);
+  });
+
   return (
-    // <div
-    //   style={{
-    //     boxShadow: "0px 4px 4px 0px rgba(142, 141, 208, 0.16)",
-    //     backgroundColor: "#fff",
-    //     padding: responsive.isMobile ? "1rem" : "1.5rem 2.5rem",
-    //     display: "flex",
-    //     justifyContent: "space-between",
-    //     alignItems: "center",
-    //     zIndex: 1,
-    //     position: "sticky",
-    //     scrollBehavior: "smooth",
-    //     top: 0,
-    //   }}
-    // >
-    //   <div style={{ display: "flex", justifyContent: "space-between" }}>
-    //     <div>
-    //       {responsive.isMobile ? (
-    //         <Logo onClick={handelLogoClick} />
-    //       ) : (
-    //         <QwikConnectLogo onClick={handelLogoClick} />
-    //       )}
-    //     </div>
-    //     {responsive.isMobile || responsive.isRandom ? (
-    //       ""
-    //     ) : (
-    //       <div
-    //         style={{
-    //           display: "flex",
-    //           alignItems: "center",
-    //           gap: "2.5rem",
-    //           marginLeft: "4rem",
-    //           marginRight: "1rem",
-    //         }}
-    //       >
-    //         <nav>
-    //           <ul>
-    //             {
-    //               menuItems.map((menu)=>{
-    //                 return(
-    //                   <li>
-    //                     {/* <a href={(`#${menu.title}`)}>{menu.title}</a> */}
-    //                     <a href="/"><Link onClick={handelClick} activeClass="active" to={menu.title} spy={true} smooth={true} duration={500}>{menu.title}</Link></a>
-    //                     </li>
-    //                 )
-    //               })
-    //             }
-    //           </ul>
-    //         </nav>
-    //       </div>
-    //     )}
-    //   </div>
-    //   {responsive.isMobile || responsive.isRandom ? (
-    //     <div>
-    //       <Hamburger handelClick={handelDrawerOpen} />
-    //       {isDrawerOpen && (
-    //         <CustomDrawer
-    //           isDrawerOpen={isDrawerOpen}
-    //           handelClose={handelDrawerClose}
-    //           navbarArray={navbars1}
-    //           hash={hash}
-    //           handelLoginClick={handelLoginClick}
-    //           handelSignupClick={handelSignupClick}
-    //           handelLoggedInClick={handelLoggedInClick}
-    //           user={user}
-    //         />
-    //       )}
-    //     </div>
-    //   ) : (
-    //     <div style={{ display: "flex" }}>
-    //       {!user ? (
-    //         <>
-    //           <CustomInputButton
-    //             variant="contained"
-    //             size="medium"
-    //             responsive
-    //             onClick={handelLoginClick}
-    //           >
-    //             Login/Signup
-    //           </CustomInputButton>
-    //         </>
-    //       ) : (
-    //         <CustomInputButton
-    //           variant="outlined"
-    //           size="medium"
-    //           responsive
-    //           onClick={handelLoggedInClick}
-    //         >
-    //           Logged In
-    //         </CustomInputButton>
-    //       )}
-    //     </div>
-    //   )}
-    // </div>
     <div
       style={{
         width: "100%",
         position: "fixed",
+        top: 0,
         zIndex: 5,
         boxShadow: "0px 4px 4px 0px rgba(142, 141, 208, 0.16)",
         backgroundColor: "#fff",
@@ -284,6 +202,18 @@ const MarketingNavbar = () => {
        }
       </div>
     </div>
+    // <nav className={`${sticky ? "sticky" : ""}`}>
+    //   <div className="nav-inner">
+    //     <span className="logo">
+    //       logo
+    //     </span>
+    //     <div className="links">
+    //         <a>
+
+    //         </a>
+    //     </div>
+    //   </div>
+    // </nav>
   );
 };
 

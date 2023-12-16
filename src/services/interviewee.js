@@ -24,7 +24,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   };
   
   const baseQuery = fetchBaseQuery({
-  //   baseUrl: process.env.QWIKCONNECT_BACKEDN_API_URL,
   baseUrl: `${import.meta.env.VITE_API_KEY}/v1/interviewee`,
     prepareHeaders: (headers, { getState, endpoint }) => {
       const token = getState().auth.token?.access_token;
@@ -53,11 +52,18 @@ export const intervieweeApi = createApi({
         getPresignedUrl: builder.query({
           query: ({ key }) => {
             return ({
-              url:`http://localhost:4546/v1/s3-manager/presigned-url?key=${key}`
+              url:`${import.meta.env.VITE_API_KEY}/v1/s3-manager/presigned-url?key=${key}`
             })
           }
+        }),
+        setIntervieweeStatusAndParameter: builder.mutation({
+          query: ({ body, intervieweeId, jobPostId }) => ({
+            url: `parameters?jobPostId=${jobPostId}&intervieweeId=${intervieweeId}`,
+            method: "PATCH",
+            body: body,
+          }),
         }),
     }),
 });
 
-export const {useLazyGetAllIntervieweeQuery,  useLazyGetCandidateDataQuery} = intervieweeApi;
+export const {useLazyGetAllIntervieweeQuery,  useLazyGetCandidateDataQuery, useLazyGetPresignedUrlQuery, useSetIntervieweeStatusAndParameterMutation} = intervieweeApi;
